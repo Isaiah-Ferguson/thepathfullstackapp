@@ -1,0 +1,147 @@
+@font-face {
+    font-family: Heebo;
+    src: url(../../fonts/Heebo-VariableFont_wght.ttf);
+}
+
+.NavContent{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Heebo;
+}
+
+.NavHeader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.navigation a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.NotificationBadge{
+    position:sticky;
+}
+.NotificationDiv2{
+    height: 120px;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    margin-bottom: 10px;
+}
+
+.NotificationImg{
+    margin-top: 20px;
+    height: 75px;
+    width: 100%;
+    border-radius: 40px;
+}
+
+.NavLogo{
+    height: 5em;
+    cursor: pointer;
+}
+
+.bgcolor{
+    background-color: #979BF2;
+  }
+
+.btnSignOut{
+    width: 120px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.btnSignOut:hover{
+    background-color: #fff;
+    color: #162938;
+}
+
+.search-img {
+height: 100%;
+}
+
+.Bell{
+    width: 40px;
+    height: 100%;
+    background: transparent;
+    margin-left: 50px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.Bell img{
+    width: 40px;
+    height: 100%;
+    background: transparent;
+}
+
+.NotificationDiv{
+    border: 2px solid;
+    top: 55px;
+    background-color: rgb(221, 210, 210);
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    z-index: 2;
+}
+
+@media screen and (max-width: 989px) {
+    .navigation{
+        display: flex;
+        justify-content: end;
+    }
+
+    .btnSignOut {
+        margin-top: 10px;
+    }
+    .searchbar{
+        margin-left: 40px;
+        width: 50%;
+    }
+    .NotificationBadge{
+        position: absolute;
+    }
+  }

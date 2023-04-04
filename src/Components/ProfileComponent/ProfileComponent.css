@@ -1,0 +1,154 @@
+.topProfileBG{
+    background-color: #979BF2;
+}
+
+.bottomProfileBG{
+    background-color: #FFDCD1;
+}
+
+.ensoBG{
+    background-image: url('../../assets/Logo.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 400px;
+}
+
+.aboutMeText{
+    color: white;
+    font-size: 52px;
+    font-weight: 700
+}
+
+.profileHeaderText{
+    font-size: 32px;
+}
+
+.discText{
+    font-size: 24px;
+}
+
+.profileIMG{
+    margin-top: 50px;
+    border-radius: 150px;
+    height: 275px;
+    width: 275px;
+}
+
+.Logo{
+    height: 400px;
+}
+
+.eventButton{
+    height: 40px;
+}
+
+.profilePostButton{
+   background-color: white;
+   border-radius: 10px;
+   border-width: 1px;
+}
+
+.textArea{
+    border-radius: 5px;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+}
+
+.scrollDiv{
+    height: 265px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.profileFontPadding{
+    padding-left: 20px;
+}
+
+.eventScrollDiv{
+    height: 400px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.eventTextArea{
+    border-radius: 5px;
+    height: 100px;
+    width: 100%;
+    background-color: #9AFAB5;
+}
+
+.friendProfile{
+    margin-top: 10px;
+    border-radius: 150px;
+    height: 95px;
+    width: 95px;
+}
+
+.test {
+    display: flex!important;
+}
+
+.friendDiv{
+    background-color: white;
+    border-radius: 15px;
+    width: 125px;
+    height: 175px;
+    margin-top: 15px;
+}
+
+.ensoBGFriend{
+    background-image: url('../../assets/Logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.friendName{
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.Mobile{
+    color: #979BF2;
+}
+
+.smallProfileIMG{
+    border-radius: 50px;
+    height: 100px;
+    width: 100px;
+}
+
+.post, .event, .friend {
+    display: block;
+  }
+
+@media screen and (max-width: 770px) {
+    .profileIMG{
+        left: 250px;
+    }
+
+    
+.Mobile{
+    color: #000000;
+}
+  }
+
+@media screen and (max-width: 425px) {
+    .profileIMG{
+        left: 75px;
+    }
+    .smallProfileIMG{
+        height: 75px;
+        width: 75px;
+    }
+  }

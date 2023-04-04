@@ -1,0 +1,10 @@
+.mainFeedImg{
+    width: 100px;
+}
+
+.eventMainPageDiv{
+    border: 2px, solid;
+    height: 50px;
+    width: 100%;
+    background-color: bisque;
+}

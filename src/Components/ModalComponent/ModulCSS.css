@@ -1,0 +1,28 @@
+.moduleBG{
+    background-color: #C1FED2;
+}
+
+.editProfileImg{
+    height: 350px;
+}
+
+.mobileMargin{
+    margin-top: 10px;
+}
+
+.hideUpload{
+    display: none;
+}
+
+.uploadText{
+    font-size: 20px;
+}
+.uploadText:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.editPostButton{
+    height: 15px;
+    width: 15px;
+}

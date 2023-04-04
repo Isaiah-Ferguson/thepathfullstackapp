@@ -7,14 +7,16 @@ import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 // import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent.tsx"
+import React from 'react';
+
 
 // import { browserRouter } from ''
 function App() {
   return (
     <div>
-{/* <NavBar/>
+<NavBar/>
 <ProfileComponent/>
-<MainFeedComponent/> */}
+{/* <MainFeedComponent/> */}
     </div>
   );
 }
