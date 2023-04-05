@@ -8,12 +8,14 @@ import "./Components/MainFeedComponent/MainFeedComponent.css";
 // import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent.tsx"
 import React from 'react';
+import Login from './Components/LoginPage/Loginpage.tsx'
 
 
 // import { browserRouter } from ''
 function App() {
   return (
     <div>
+      <Login/>
 <NavBar/>
 <ProfileComponent/>
 {/* <MainFeedComponent/> */}
