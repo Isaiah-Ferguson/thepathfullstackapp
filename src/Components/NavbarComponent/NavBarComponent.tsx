@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function NavbarComponent() {
@@ -15,13 +15,13 @@ export default function NavbarComponent() {
   const bell = require('../../assets/Bell.png');
 
 
-//   let navigate = useNavigate();
+  let navigate = useNavigate();
 
   function ProfileNavigate() {
-    // navigate("/");
+    navigate("/");
   };
   function MainFeedNavigate() {
-    // navigate("/MainFeedComponent");
+    navigate("/MainFeedComponent");
   };
 
 

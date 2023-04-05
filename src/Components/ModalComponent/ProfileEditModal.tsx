@@ -13,19 +13,19 @@ export default function ProfileEditModal() {
     const [picture, setPicture] = useState(profile);
     const handleClose = () => setLgShow(false);
 
-//     const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//       let reader = new FileReader();
+    const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      let reader = new FileReader();
   
-//       const file = e.target.files?.[0]; // using optional chaining
+      const file = e.target.files?.[0]; // using optional chaining
   
-//       if (file) {
-//           reader.onload = (event) => {
-//               setPicture(event.target?.result);
-//           }
+      if (file) {
+          reader.onload = (event) => {
+              setPicture(event.target?.result);
+          }
   
-//           reader.readAsDataURL(file);
-//       }
-//   }
+          reader.readAsDataURL(file);
+      }
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -57,7 +57,7 @@ export default function ProfileEditModal() {
             <Form onSubmit={handleSubmit}>
             <Form.Group controlId="pictureUpload">
                 <Form.Label className='uploadText'>Upload a picture:</Form.Label>
-                <Form.Control className='hideUpload' type="file" accept='image/png, image/jpeg, image/jpg, image/jpe' placeholder="Enter Image"    />
+                <Form.Control className='hideUpload' type="file" accept='image/png, image/jpeg, image/jpg, image/jpe' placeholder="Enter Image" onChange={handlePictureChange} />
             </Form.Group>
         </Form>
             </Col>

@@ -5,7 +5,7 @@ import "./Components/ModalComponent/ModulCSS.css";
 import NavBar from "./Components/NavbarComponent/NavBarComponent.tsx"
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
-// import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent.tsx"
 import React from 'react';
 
@@ -13,12 +13,19 @@ import React from 'react';
 // import { browserRouter } from ''
 function App() {
   return (
-    <div>
+    <BrowserRouter>
+    <div className='bgcolor'>
 <NavBar/>
-<ProfileComponent/>
-{/* <MainFeedComponent/> */}
     </div>
+
+    <Routes>
+<Route path='/' element={<ProfileComponent />}/>
+<Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
+{/* <Route path='/Dashboard' element={<Dashboard />}/> */}
+</Routes>
+    </BrowserRouter>
   );
+
 }
 
 export default App;

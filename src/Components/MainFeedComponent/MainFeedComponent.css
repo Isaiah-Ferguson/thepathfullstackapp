@@ -1,10 +1,44 @@
 .mainFeedImg{
-    width: 100px;
+    margin-top: 10px;
+    width: 85%;
+    border-radius: 100%;
 }
 
 .eventMainPageDiv{
     border: 2px, solid;
-    height: 50px;
+    height: 100px;
     width: 100%;
     background-color: bisque;
+    border: 2px solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.eventDateDiv{
+    border-right: 2px solid;
+}
+
+.locationPNG{
+    height: 30px;
+}
+.eventmainPageBg{
+    background-color: rgb(0, 0, 0, 0.6);
+    height: 800px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.mainPostDiv{
+    border: 2px, solid;
+    width: 100%;
+    background-color: rgb(233, 233, 250);
+    border: 2px solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.beltImg{
+    height: 40px;
+    width: 75%;
 }
