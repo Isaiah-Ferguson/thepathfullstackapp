@@ -22,14 +22,12 @@ export default function ProfileEditModal() {
           reader.onload = (event) => {
               setPicture(event.target?.result);
           }
-  
           reader.readAsDataURL(file);
       }
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
- 
+        e.preventDefault();
     }
 
   return (
@@ -50,7 +48,7 @@ export default function ProfileEditModal() {
     </Modal.Header>
     <Modal.Body>
         <Row>
-            <Col lg={12} className='d-flex justify-content-center'>
+            <Col lg={12} sm={12} className='d-flex justify-content-center'>
             <img className='editProfileImg img-fluid' src={picture} alt="Profile Picture"/>
             </Col>
             <Col className='d-flex justify-content-center'>

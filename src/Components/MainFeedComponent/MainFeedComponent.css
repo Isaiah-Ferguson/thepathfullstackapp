@@ -42,3 +42,25 @@
     height: 40px;
     width: 75%;
 }
+
+.mainPostEventDiv{
+    border: 2px, solid;
+    width: 100%;
+    background-color: bisque;
+    border: 2px solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 425px) {
+    .mainFeedImg{
+        height: 75px;
+        width: 85%;
+        border-radius: 100%;
+    }
+
+    .beltImg{
+        height: 50%;
+        width: 100%;
+    }
+  }
