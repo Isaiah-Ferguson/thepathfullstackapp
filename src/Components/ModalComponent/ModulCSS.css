@@ -26,3 +26,10 @@
     height: 15px;
     width: 15px;
 }
+
+
+@media screen and (max-width: 425px)  {
+    .editProfileImg{
+        height: 250px;
+    }
+}

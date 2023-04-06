@@ -18,7 +18,7 @@ export default function ModalComponent() {
   return (
     <>
 
-      <Button variant="warning" onClick={handleShow}><img className="eventButton" src={Event}/> </Button>
+      <Button variant="warning" onClick={handleShow}><img className="eventButton" src={Event}/></Button>
 
       <Modal  show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton className='moduleBG'>
