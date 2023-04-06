@@ -15,7 +15,7 @@ import Login from './Components/LoginPage/Loginpage.tsx'
 function App() {
   return (
     <div>
-      <Login/>
+      {/* <Login/> */}
 <NavBar/>
 <ProfileComponent/>
 {/* <MainFeedComponent/> */}
