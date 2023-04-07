@@ -3,6 +3,7 @@ import ProfileComponent from './Components/ProfileComponent/ProfileComponent';
 import "./Components/ProfileComponent/ProfileComponent.css";
 import "./Components/ModalComponent/ModulCSS.css";
 import NavBar from "./Components/NavbarComponent/NavBarComponent"
+import LoginComponent from './Components/Login/LoginComponent';
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ function App() {
     <Routes>
 <Route path='/' element={<ProfileComponent />}/>
 <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
-{/* <Route path='/Dashboard' element={<Dashboard />}/> */}
+<Route path='/Login' element={<LoginComponent />}/>
 </Routes>
     </BrowserRouter>
   );

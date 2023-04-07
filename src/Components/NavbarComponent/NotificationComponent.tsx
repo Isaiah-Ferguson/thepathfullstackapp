@@ -2,6 +2,8 @@ import React from 'react';
 import { Row, Col, Button } from "react-bootstrap";
 
 export default function NotificationComponent() {
+  const profile = require('../../assets/DefaultProfilePicture.png');
+
   return (
     <Row className="NotificationDiv2">
                   <Col lg={4} xs={4}>

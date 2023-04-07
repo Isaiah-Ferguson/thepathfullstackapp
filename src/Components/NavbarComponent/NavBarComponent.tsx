@@ -24,6 +24,12 @@ export default function NavbarComponent() {
     navigate("/MainFeedComponent");
   };
 
+  function LoginNavigate() {
+    navigate("/Login");
+  };
+
+  // /Login
+
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
@@ -80,7 +86,7 @@ export default function NavbarComponent() {
               aria-label="Search"
             />
           </Form>
-          <button className="btnSignOut">Logout</button>
+          <button onClick={LoginNavigate} className="btnSignOut">Logout</button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
