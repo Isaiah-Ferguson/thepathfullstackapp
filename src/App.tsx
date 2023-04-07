@@ -7,6 +7,8 @@ import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
+import Login from './Components/LoginComponent/LoginPage'
+import './Components/LoginComponent/LoginPage'
 import React from 'react';
 
 
@@ -14,13 +16,14 @@ import React from 'react';
 function App() {
   return (
     <BrowserRouter>
-    <div className='bgcolor'>
+    {/* <Login/> */}
+    {/* <div className='bgcolor'>
 <NavBar/>
-    </div>
+    </div> */}
 
     <Routes>
-<Route path='/' element={<ProfileComponent />}/>
-<Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
+    <Route path='/' element={<Login/>}/>
+{/* <Route path='/MainFeedComponent' element={<MainFeedComponent />}/> */}
 {/* <Route path='/Dashboard' element={<Dashboard />}/> */}
 </Routes>
     </BrowserRouter>

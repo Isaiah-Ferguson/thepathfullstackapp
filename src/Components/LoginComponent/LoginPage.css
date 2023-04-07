@@ -1,0 +1,117 @@
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    background: linear-gradient(180deg, #E9E9FF 0%, rgba(233, 233, 255, 0) 100%);
+
+   
+    
+    /* position: relative; */
+  }
+
+  form {
+    background-color: grey;
+    padding: 20px;
+    width: 55vw;
+    /* opacity: 0.5; */
+    height: 35vw;
+    position: absolute;
+    text-align: center;
+   
+    border-top-color: red;
+  }
+  form2 {
+    background-color: red;
+  
+    width: 40vw;
+    opacity: 0.5;
+    height: 30vw;
+    position: absolute;
+  }
+  label {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+  }
+
+  blue-border {
+
+
+    position: absolute;
+    width: 100px;
+    height: 120px;
+    /* left: 482px;
+    top: 190px; */
+
+  }
+
+  #container {
+    display: flex;
+    /* flex-direction: column; */
+
+    /* border: 1px solid black; */
+  }
+
+  form input {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background: #FFFFFF;
+    order: 1px solid #000000;
+    border-radius: 10px;
+    padding: 20px 0 20px 20px;
+    width: 300px;
+  }
+
+  form input::placeholder {
+    font-weight: 400;
+font-size: 32px;
+line-height: 60px;
+color: #7F84AD;
+  }
+
+  input[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 1em;
+  }
+
+  #alert {
+    width: 100%;
+    background-color: yellow;
+    text-align: center;
+    padding: 4px 0;
+    margin-bottom: 10px;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 322px;
+    margin-bottom: 41px;
+  }
+
+  .form-buttons a {
+    color: #000;
+    display: block;
+    text-decoration: none;
+  }
+
+  .form-buttons a span {
+    text-decoration: underline;
+  }
+
+  button.btn-pri{
+    width: 297px;
+  background: rgba(220, 219, 252, 0.99);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 11px 0;
+  height: 71px;
+  font-size: 45px;
+  }
+
+
+
+   

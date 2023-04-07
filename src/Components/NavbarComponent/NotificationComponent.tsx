@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Button } from "react-bootstrap";
+const profile= require("../assets/DefaultProfilePage");
 
 export default function NotificationComponent() {
   return (
