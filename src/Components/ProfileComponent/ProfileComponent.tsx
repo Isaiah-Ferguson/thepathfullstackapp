@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ModalComponent  from '../ModalComponent/ModelComponent';
 import ProfileEditModal from '../ModalComponent/ProfileEditModal';
 import EditPostModal from "../ModalComponent/EditPostModal";
+import ProfilePost from "../ProfileComponent/ProfilePost"
 
 export default function ProfileComponent() {
   const blackbelt = require('../../assets/BJJBlack.png');
@@ -95,24 +96,8 @@ export default function ProfileComponent() {
           </Row>
           <Row className="d-flex justify-content-end"><Col lg={2} xs={2}><button className='profilePostButton'>Post</button></Col></Row>
           <div className="scrollDiv">
-
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={1} xs={1} style={{height: 40}} className='d-flex justify-content-evenly'><EditPostModal/></Col>
-            <Col lg={8} xs={8}> <div className="textArea">Test</div> </Col>
-          </Row>
-
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={1} xs={1} style={{height: 40}} className='d-flex justify-content-evenly'><EditPostModal/></Col>
-            <Col lg={8} xs={8}> <div className="textArea">Test</div> </Col>
-          </Row>
-
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={1} xs={1} style={{height: 40}} className='d-flex justify-content-evenly'><EditPostModal/></Col>
-            <Col lg={8} xs={8}> <div className="textArea">Test</div> </Col>
-          </Row>
+            {/*------------------- Profile Post Div------------------------ */}
+          <ProfilePost/>
 
           </div>
           </Container>

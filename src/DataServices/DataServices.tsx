@@ -54,4 +54,4 @@ async function GetPublishedBlogItem() {
     return data;
 }
 
-export { createAccount, login,GetLoggedInUserData }
+export { createAccount, login, GetPublishedBlogItem }
