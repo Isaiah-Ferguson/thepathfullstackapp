@@ -1,6 +1,6 @@
 import  React from 'react';
 import { useState } from 'react'
-import './login.css';
+import '../LoginPage/Login.css';
 import { Form, NavLink, Col, Row, ThemeProvider } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 // import Signup from '../components/Signup';

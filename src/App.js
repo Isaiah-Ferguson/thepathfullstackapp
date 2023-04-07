@@ -14,6 +14,8 @@ import Login from './Components/LoginPage/Loginpage.tsx'
 // import { browserRouter } from ''
 function App() {
   return (
+
+    <BrowserRouter>
     <div>
       {/* <Login/> */}
 <NavBar/>
