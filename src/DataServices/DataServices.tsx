@@ -1,4 +1,8 @@
 let userData = {};
+interface userData {
+    userId: number;
+    publishName: string;
+  }
 
 
   async function createAccount(CreatedUser : object) {
@@ -45,8 +49,9 @@ let userData = {};
   }
   
   async function GetPublishedBlogItem() {
-      let res = await fetch(`https://thepathapi.azurewebsites.net/Blog/GetPublishedItems/`)
+      let res = await fetch(`https://thepathapi.azurewebsites.net/Blog/getblogitems/`)
       let data = await res.json();
+      console.log(data);
       return data;
   }
   
@@ -60,6 +65,7 @@ let userData = {};
   }
   
   function loggedInData() {
+    console.log(userData);
       return userData;
       //this will consist of user ID and their Name.
   }
@@ -80,9 +86,9 @@ let userData = {};
       return data;
   }
   
-  async function getBlogItemsByUserId(userId: string) {
+  async function getBlogItemsByUserId(userId: number) {
       console.log(userId);
-      let res = await fetch(`https://thepathapi.azurewebsites.net/blog/GetItemsByUserId/${userId}`)
+      let res = await fetch(`https://thepathapi.azurewebsites.net/blog/GetBlogItemById/${userId}`)
       let data = await res.json();
       return data;
   }
@@ -102,4 +108,21 @@ let userData = {};
       const data = await res.json();
       return data;
   }
-  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem }
+
+  async function updateUserInfo(userInfo : object) {
+    const res = await fetch('https://thepathapi.azurewebsites.net/User/UpdateUser',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(userInfo)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    console.log(data)
+    return data;
+}
+  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo }

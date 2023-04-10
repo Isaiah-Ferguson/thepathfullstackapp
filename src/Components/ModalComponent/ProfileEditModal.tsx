@@ -1,23 +1,44 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
-// import { File } from 'react-bootstrap-icons';
-
-
-import { useState } from 'react';
+import { updateUserInfo } from '../../DataServices/DataServices';
+import { useState, ChangeEvent } from 'react';
 
 export default function ProfileEditModal() {
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
 
+    const [academy, setAcademy] = useState<string>("");
+    const [belt, setBelt] = useState<string>("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [editBool, setEdit] = useState(false);
+
+
+
     const [lgShow, setLgShow] = useState(false);
     const [picture, setPicture] = useState(profile);
     const handleClose = () => setLgShow(false);
 
+    const handleFirstname = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFirstName(e.target.value);
+    };
+
+    const handleLastname = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLastName(e.target.value);
+    }
+
+    const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setAcademy(e.target.value);
+    };
+
+    const handleBelt = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setBelt(e.target.value);
+    };
+
     const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let reader = new FileReader();
-  
       const file = e.target.files?.[0]; // using optional chaining
-  
       if (file) {
           reader.onload = (event) => {
               setPicture(event.target?.result);
@@ -25,14 +46,35 @@ export default function ProfileEditModal() {
           reader.readAsDataURL(file);
       }
   }
+function handleDecription(e: React.ChangeEvent<HTMLTextAreaElement>) {
+  setDescription(e.target.value)
+}
+
+function handleEditProfile() {
+
+  const item = {
+    id: 1,
+    username: "test1",
+    hash: null,
+    salt: null,
+    firstName: firstName,
+    lastName: lastName,
+    aboutMe: description,
+    image: picture
+  };
+
+updateUserInfo(item);
+  handleClose();
+}
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
 
   return (
+    
     <div>
-
   <Button  onClick={() => setLgShow(true)}>Edit <img className="eventButton" src={EditProfile} alt="Edit Profile Icon"/></Button>
   <Modal
     size="lg"
@@ -65,6 +107,7 @@ export default function ProfileEditModal() {
         controlId="floatingTextarea"
         label="Enter Frist Name"
         className="mb-3"
+        onChange={handleFirstname}
       >
         <Form.Control as="textarea" placeholder="First Name" />
       </FloatingLabel></Col>
@@ -72,6 +115,8 @@ export default function ProfileEditModal() {
         controlId="floatingTextarea"
         label="Enter Last Name"
         className="mb-3"
+        onChange={handleLastname}
+
       >
         <Form.Control as="textarea" placeholder="Last Name" />
       </FloatingLabel></Col>
@@ -81,8 +126,8 @@ export default function ProfileEditModal() {
           controlId="floatingSelectGrid"
           label="Academy Name"
         >
-          <Form.Select aria-label="Floating label select example">
-            <option>Select Your Academy</option>
+          <Form.Select aria-label="Floating label select example" onChange={handleAcademy} value={academy}>
+            <option value="">Select Your Academy</option>
             <option value="Andre de Freitas Brazilian Jiu-Jitsu">Andre de Freitas Brazilian Jiu-Jitsu</option>
             <option value="Ares BJJ Stockton - Buffalo Black Brotherhood">Ares BJJ Stockton - Buffalo Black Brotherhood</option>
             <option value="VALOR Training Center">VALOR Training Center</option>
@@ -104,8 +149,8 @@ export default function ProfileEditModal() {
           controlId="floatingSelectGrid"
           label="Belt Rank"
         >
-          <Form.Select aria-label="Floating label select example">
-            <option>Select Your Belt Rank</option>
+          <Form.Select aria-label="Floating label select example" value={belt} onChange={handleBelt}>
+            <option value="">Select Your Belt Rank</option>
             <option value="1">White Belt</option>
             <option value="2">Blue Belt</option>
             <option value="3">Purple Belt</option>
@@ -116,8 +161,8 @@ export default function ProfileEditModal() {
         </FloatingLabel></Col>
         </Row>
         <br/>
-        <Row><Col><textarea  style={{ width: '100%', height: '200px' }}></textarea></Col></Row>
-        <Button variant="info" onClick={handleClose}>Submit</Button>
+        <Row><Col><textarea  style={{ width: '100%', height: '200px' }} onChange={handleDecription}/></Col></Row>
+        <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
   </Modal>
   </div>

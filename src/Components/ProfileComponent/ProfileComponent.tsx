@@ -5,10 +5,13 @@ import ModalComponent  from '../ModalComponent/ModelComponent';
 import ProfileEditModal from '../ModalComponent/ProfileEditModal';
 import EditPostModal from "../ModalComponent/EditPostModal";
 import ProfilePost from "../ProfileComponent/ProfilePost"
+import { useContext } from 'react'
+import UserContext from '../../UserContext/UserContext';
 
 export default function ProfileComponent() {
   const blackbelt = require('../../assets/BJJBlack.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
+  let userData = useContext(UserContext);
 
     const [selectedSection, setSelectedSection] = useState('post');
     const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
@@ -34,7 +37,7 @@ export default function ProfileComponent() {
           </Container>
           <Row>
             <Col>
-              <div className="text-center profileHeaderText">Isaiah</div>
+              <div className="text-center profileHeaderText">Isaiah Ferguson</div>
             </Col>
           </Row>
 <Row>
