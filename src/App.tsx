@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 // import './Components/LoginComponent/LoginPage'
 import React from 'react';
 import LoginComponent from './Components/LoginComponent/LoginPage';
+import CreatePage from './Components/LoginComponent/CreatePage';
 
 
 // import { browserRouter } from ''
@@ -24,6 +25,7 @@ function App() {
 
     <Routes>
     <Route path='/' element={<LoginComponent/>}/>
+    <Route path='/CreatePage' element={<CreatePage/>}/>
 {/* <Route path='/MainFeedComponent' element={<MainFeedComponent />}/> */}
 {/* <Route path='/Dashboard' element={<Dashboard />}/> */}
 </Routes>
