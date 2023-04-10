@@ -8,6 +8,7 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button, NavLink} from 'react-bootstrap'
 import { useState } from 'react'
+import '../LoginComponent/LoginPage.css'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 
