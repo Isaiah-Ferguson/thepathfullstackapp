@@ -6,10 +6,11 @@ import NavBar from "./Components/NavbarComponent/NavBarComponent"
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
-import Login from './Components/LoginComponent/LoginPage'
-import './Components/LoginComponent/LoginPage'
+// import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
+// import Login from './Components/LoginComponent/LoginPage'
+// import './Components/LoginComponent/LoginPage'
 import React from 'react';
+import LoginComponent from './Components/LoginComponent/LoginPage';
 
 
 // import { browserRouter } from ''
@@ -22,7 +23,7 @@ function App() {
     </div> */}
 
     <Routes>
-    <Route path='/' element={<Login/>}/>
+    <Route path='/' element={<LoginComponent/>}/>
 {/* <Route path='/MainFeedComponent' element={<MainFeedComponent />}/> */}
 {/* <Route path='/Dashboard' element={<Dashboard />}/> */}
 </Routes>
