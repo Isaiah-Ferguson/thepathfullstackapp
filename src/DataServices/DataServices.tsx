@@ -1,8 +1,15 @@
 let userData = {};
-interface User {
-    name: string;
-    email: string;
-    password: string;
+
+
+// interface User {
+//     name: string;
+//     email: string;
+//     password: string;
+//   }
+
+interface userData {
+    userId: number;
+    publishName: string;
   }
 
 async function createAccount(CreatedUser: string) {
@@ -23,7 +30,7 @@ async function createAccount(CreatedUser: string) {
     //We are not writeing a return because this is a POST.
 }
 
-async function login(loginUser: string) {
+async function login(loginUser: object) {
     const res = await fetch('https://thepathapi.azurewebsites.net/User/Login',{
         method:"POST",
         headers:{
@@ -54,4 +61,4 @@ async function GetPublishedBlogItem() {
     return data;
 }
 
-export { createAccount, login, GetPublishedBlogItem }
+export { createAccount, login, GetPublishedBlogItem, GetLoggedInUserData}

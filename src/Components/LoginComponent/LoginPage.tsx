@@ -3,7 +3,9 @@ import { useState } from 'react'
 import '../LoginComponent/LoginPage.css'
 import { Form, NavLink, Col, Row, ThemeProvider } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
-import { createAccount, login, GetPublishedBlogItem } from '../../DataServices/DataServices'
+import { createAccount, login, GetPublishedBlogItem, GetLoggedInUserData } from '../../DataServices/DataServices'
+
+
 // import Signup from '../components/Signup';
 // import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
@@ -20,26 +22,34 @@ const background = require("../../assets/jiujitsu.png");
 
 
 function Login() {
+
+
+    let navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     
-    const [Username, setUsername] = useState('');
-    const [Password, setPassword] = useState('');
-
-  //   let userData : object;
-
-  // const handleSubmit = async () => {
+    // Make function for button
+    const handleSubmit = async () => {
+        // We want our function to gather there username and password and with that data make api call
+        // first we'll make an object then console log it
+        let userData = {
+          // structuring an object(opposite of destructuring) only works when they have the same variable
+          username,
+          password
+      }
+        
     
-  //   userData = {
-  //       Username : Username,
-  //       Password: Password
-  //   }
-    // console.log(userData);
-    // let token = await login(userData);
-    // if(token.token != null){
-    //   localStorage.setItem("Token", token.token);
-    //   // GetLoggedInUserData(username);
-    //   navigate("/Dashboard");
-    // }
+        console.log(userData);
 
+        let token =  await login(userData);
+        console.log(token)
+        if(token.token != null){
+            localStorage.setItem("Token", token.token);
+           await GetLoggedInUserData(username);
+           navigate("/MainFeedComponent/MainFeedComponent");
+        }
+        
+    }
 
 //   async function login(loginUser : string) {
 //     console.log(loginUser);
@@ -116,10 +126,11 @@ function Login() {
         <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
         <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px" }}>A community driven Brazilian Jiu-Jitsu App</p>
 
-        <Form.Control id='input' type="text" placeholder="Username" />
+        <Form.Control  onChange={({target: {value}}) => setUsername(value)} id='input' type="text" placeholder="Username" />
 
 
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control onChange={({target : {value}}) => setPassword(value)} type="password" placeholder="Password" />
+
         <div className='form-group form-buttons'>
           <NavLink >Forgot <span> password?</span></NavLink>
           <NavLink >Signup <span>here</span></NavLink>
@@ -127,7 +138,8 @@ function Login() {
         </div>
 
         <div className='form-group'>
-          <button onClick={Login} className='btn-pri'>Login</button>
+
+          <button onClick={handleSubmit} className='btn-pri'>Login</button>
 
 
 
