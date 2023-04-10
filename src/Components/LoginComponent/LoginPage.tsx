@@ -1,8 +1,9 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button, NavLink, ThemeProvider } from 'react-bootstrap'
 import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
+const background = require("../../assets/jiujitsu.png");
 
 export default function LoginComponent() {
   let navigate = useNavigate();
@@ -19,51 +20,71 @@ export default function LoginComponent() {
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
-          navigate("/");
+          navigate("/CreatePage");
         }
     }
 
 
   return (
-    <Container>
-        <Row>
-            <Col className='mt-5' style={{backgroundColor: 'grey', borderRadius: 5, padding:50}}>
-            <h1>Login :3</h1>
-            <Form>
-      <Form.Group className="mb-3" controlId="Userame">
-        <Form.Label>Username</Form.Label>
-        <Form.Control 
-            type="text" 
-            placeholder="Enter Username"
-            onChange={({ target: { value } }) =>  setUsername(value)}/>
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="Password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-         type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-           />
-      </Form.Group>
-      <Button
-       variant="primary"
-        // type="submit"
-        onClick={handleSubmit}
-        >
-        Login
-      </Button>
-      
-    </Form>
-    <h4>Don't have an account?</h4>
-    <Button
-       variant="primary"
-        onClick={() => navigate("/CreateAccount")}
-        >
-        Create Account
-      </Button>
-            </Col>
-        </Row>
-    </Container>
+    <div id="container"
+    className='blue-border'
+    style={{
+      backgroundImage: `url(${background})`,
+      backgroundPosition: 'center',
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      minWidth: "1145px",
+      minHeight: "700px",
+      borderTop: "10px solid rgba(220, 219, 252, 0.99)",
+      borderLeft: "10px solid rgba(220, 219, 252, 0.99)",
+      borderRight: "10px solid rgba(220, 219, 252, 0.99)",
+
+    }}>
+
+
+    <ThemeProvider
+      breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+      maxBreakpoint="md">
+
+
+
+      <Form style={{ position: 'relative', width: '503px', height: '579px', background: "rgba(255, 255, 255, 0.4)", display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "54px auto 68px" }}>
+        <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
+        <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px" }}>A community driven Brazilian Jiu-Jitsu App</p>
+
+        <Form.Control   onChange={({ target: { value } }) =>  setUsername(value)} id='input' type="text" placeholder="Username" />
+
+
+        <Form.Control onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+        <div className='form-group form-buttons'>
+          <NavLink >Forgot <span> password?</span></NavLink>
+          <NavLink >Signup <span>here</span></NavLink>
+          {/* <Link path "/Signup"/> */}
+        </div>
+
+        <div className='form-group'>
+          <button onClick={handleSubmit} className='btn-pri'>Login</button>
+
+
+
+          {/* <Route path="/Route.tsx" element={<Route />} /> */}
+          {/* <Route path="/" element={<Home />} /> */}
+
+
+
+          {/* <li><Link to="/components/Signup">React</Link></li> */}
+        </div>
+      </Form>
+
+
+
+
+    </ThemeProvider>
+
+  </div>
+
+
+    
   )
 }

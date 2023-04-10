@@ -24,9 +24,12 @@ function App() {
     </div> */}
 
     <Routes>
-    <Route path='/' element={<LoginComponent/>}/>
+    {/* <Route path='/CreatePage' element={<CreatePage/>}/> */}
+    {/* <Route path='/' element={<ProfileComponent />}/> */}
+    
+    <Route path='/' element={<LoginComponent />}/>
     <Route path='/CreatePage' element={<CreatePage/>}/>
-{/* <Route path='/MainFeedComponent' element={<MainFeedComponent />}/> */}
+  {/* <Route path='/MainFeedComponent' element={<MainFeedComponent />}/> */}
 {/* <Route path='/Dashboard' element={<Dashboard />}/> */}
 </Routes>
     </BrowserRouter>
