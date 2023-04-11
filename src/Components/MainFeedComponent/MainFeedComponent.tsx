@@ -24,6 +24,17 @@ export default function MainFeedComponent() {
     setSelectedSection(sectionName);
   }
 
+  
+
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     let res = await GetPublishedBlogItem();
+    //     setBlogItems(res);
+    //   };
+    //   fetchData();
+    //   console.log(blogItems)
+    // }, []);
+
 
   function Joined(e: any) {
     e.target.value = "Joined";

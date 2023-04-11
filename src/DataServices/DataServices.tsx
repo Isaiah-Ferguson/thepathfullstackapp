@@ -19,7 +19,6 @@ interface userData {
           throw new Error(message);
       }
       const data = await res.json();
-      console.log(data);
       //We are not writeing a return because this is a POST.
   }
   
@@ -36,7 +35,6 @@ interface userData {
           throw new Error(message);
       }
       const data = await res.json();
-      console.log(data);
       //We are not writeing a return because this is a POST.
       return data;
   }
@@ -64,9 +62,8 @@ interface userData {
       return result;
   }
   
-  function loggedInData() {
-    console.log(userData);
-      return userData;
+  function loggedInData(){
+      return userData as userData;
       //this will consist of user ID and their Name.
   }
   
@@ -87,7 +84,6 @@ interface userData {
   }
   
   async function getBlogItemsByUserId(userId: number) {
-      console.log(userId);
       let res = await fetch(`https://thepathapi.azurewebsites.net/blog/GetBlogItemById/${userId}`)
       let data = await res.json();
       return data;
@@ -122,7 +118,6 @@ interface userData {
         throw new Error(message);
     }
     const data = await res.json();
-    console.log(data)
     return data;
 }
   export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo }

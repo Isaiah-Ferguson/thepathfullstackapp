@@ -25,6 +25,10 @@ export default function NavbarComponent() {
   };
 
   function LoginNavigate() {
+    console.log(localStorage)
+    localStorage.removeItem('Token');
+    console.log(localStorage)
+
     navigate("/Login");
   };
 

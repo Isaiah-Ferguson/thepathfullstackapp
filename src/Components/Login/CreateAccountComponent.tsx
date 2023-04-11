@@ -1,25 +1,23 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button } from 'react-bootstrap'
 import { useState } from 'react'
-import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
-import { useNavigate } from 'react-router-dom';
+import { createAccount } from '../../DataServices/DataServices';
 
-export default function LoginComponent() {
-  let navigate = useNavigate();
+
+export default function CreateAccountComponent() {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         let userData = {
+            id: 0,
             Username : username,
             Password: password
         }
-        let token = await login(userData);
-        if(token.token != null){
-          localStorage.setItem("Token", token.token);
-          await GetLoggedInUserData(username);
-          navigate("/");
-        }
+        console.log(userData);
+        createAccount(userData);
+        
     }
 
 
@@ -27,7 +25,7 @@ export default function LoginComponent() {
     <Container>
         <Row>
             <Col className='mt-5' style={{backgroundColor: 'grey', borderRadius: 5, padding:50}}>
-            <h1>Login :3</h1>
+            <h1>Create Account :3</h1>
             <Form>
       <Form.Group className="mb-3" controlId="Userame">
         <Form.Label>Username</Form.Label>
@@ -50,19 +48,12 @@ export default function LoginComponent() {
         // type="submit"
         onClick={handleSubmit}
         >
-        Login
+        Submit
       </Button>
-      
     </Form>
-    <h4>Don't have an account?</h4>
-    <Button
-       variant="primary"
-        onClick={() => navigate("/Create")}
-        >
-        Create Account
-      </Button>
             </Col>
         </Row>
     </Container>
   )
+  
 }

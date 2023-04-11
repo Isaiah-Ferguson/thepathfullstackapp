@@ -9,6 +9,7 @@ import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
 import React from 'react';
+import CreateAccountComponent from './Components/Login/CreateAccountComponent';
 
 
 // import { browserRouter } from ''
@@ -23,6 +24,8 @@ function App() {
 <Route path='/' element={<ProfileComponent />}/>
 <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
 <Route path='/Login' element={<LoginComponent />}/>
+<Route path='/Create' element={<CreateAccountComponent />}/>
+
 </Routes>
     </BrowserRouter>
   );
