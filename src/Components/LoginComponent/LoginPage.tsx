@@ -1,12 +1,15 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button, NavLink, ThemeProvider } from 'react-bootstrap'
+import { Form, Button, NavLink, ThemeProvider } from 'react-bootstrap'
 import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
+import './LoginPage.css'
 const background = require("../../assets/jiujitsu.png");
 
 export default function LoginComponent() {
   let navigate = useNavigate();
+
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -53,7 +56,7 @@ export default function LoginComponent() {
         <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
         <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px" }}>A community driven Brazilian Jiu-Jitsu App</p>
 
-        <Form.Control   onChange={({ target: { value } }) =>  setUsername(value)} id='input' type="text" placeholder="Username" />
+        <Form.Control  onChange={({ target: { value } }) =>  setUsername(value)} id='input' type="text" placeholder="Username" />
 
 
         <Form.Control onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
@@ -64,7 +67,7 @@ export default function LoginComponent() {
         </div>
 
         <div className='form-group'>
-          <button onClick={handleSubmit} className='btn-pri'>Login</button>
+          <Button variant="info" onClick={handleSubmit} className='btn-pri'>Login</Button>
 
 
 
@@ -83,6 +86,8 @@ export default function LoginComponent() {
     </ThemeProvider>
 
   </div>
+
+
 
 
     
