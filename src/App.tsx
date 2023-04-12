@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Components/ProfileComponent/ProfileComponent.css";
 import "./Components/ModalComponent/ModulCSS.css";
 import NavBar from "./Components/NavbarComponent/NavBarComponent"
-import LoginComponent from './Components/Login/LoginComponent';
+// import LoginComponent from './Components/Login/LoginComponent';
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ import CreateAccount from './Components/CreateComponent/CreateAccount';
 import ProfileEditModal from './Components/ModalComponent/ProfileEditModal';
 
 
+
 // import { browserRouter } from ''
 function App() {
 
@@ -37,12 +38,12 @@ function App() {
     </div> */}
 
     <Routes>
-<Route path='/' element={<ProfileComponent />}/>
+{/* <Route path='/' element={<ProfileComponent />}/>
 <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
 <Route path='/Login' element={<LoginComponent />}/>
 <Route path='/Create' element={<CreateAccountComponent />}/>
 
-</Routes>
+</Routes> */}
     {/* <Route path='/CreatePage' element={<CreatePage/>}/> */}
     {/* <Route path='/' element={<ProfileComponent />}/> */}
     
