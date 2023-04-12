@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css'
+import CreatePage2 from './CreatePage';
+
+
 const background = require("../../assets/jiujitsu.png");
 
 export default function LoginComponent() {
@@ -23,7 +26,7 @@ export default function LoginComponent() {
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
-          navigate("/CreatePage");
+          navigate("/ProfilePage");
         }
     }
 
@@ -61,8 +64,8 @@ export default function LoginComponent() {
 
         <Form.Control onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
         <div className='form-group form-buttons'>
-          <NavLink >Forgot <span> password?</span></NavLink>
-          <NavLink >Signup <span>here</span></NavLink>
+          <NavLink href="/ForgotPass">Forgot <span> password?</span></NavLink>
+          <NavLink href="/CreatePage2">Signup <span>here</span></NavLink>
           {/* <Link path "/Signup"/> */}
         </div>
 

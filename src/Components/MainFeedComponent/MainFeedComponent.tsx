@@ -35,6 +35,7 @@ export default function MainFeedComponent() {
       <br />
       <br />
       <Container>
+        
       {(isMobile) && (
             <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>

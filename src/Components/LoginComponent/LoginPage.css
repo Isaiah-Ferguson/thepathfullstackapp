@@ -6,15 +6,15 @@
 
     background: linear-gradient(180deg, #E9E9FF 0%, rgba(233, 233, 255, 0) 100%);
 
-   
-    
-    /* position: relative; */
-
 }
+    
+    /* position: relative;
+
+/* } */ 
  
 
   form {
-    background-color: grey;
+    /* background-color: grey; */
     padding: 20px;
     width: 55vw;
     /* opacity: 0.5; */
