@@ -10,11 +10,16 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
 import React from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
-
+import UserHooks from './Hooks/UserHooks'
+import UserContext from "./UserContext/UserContext";
 
 // import { browserRouter } from ''
 function App() {
+
+  const userHooks = UserHooks();
+
   return (
+    <UserContext.Provider value={userHooks}>
     <BrowserRouter>
     <div className='bgcolor'>
 <NavBar/>
@@ -28,6 +33,7 @@ function App() {
 
 </Routes>
     </BrowserRouter>
+    </UserContext.Provider>
   );
 
 }

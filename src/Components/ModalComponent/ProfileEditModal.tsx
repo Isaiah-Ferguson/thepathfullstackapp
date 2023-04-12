@@ -54,14 +54,18 @@ function handleEditProfile() {
 
   const item = {
     id: 1,
-    username: "test1",
-    hash: null,
     salt: null,
+    hash: null,
+    username: "Jessie123",
     firstName: firstName,
     lastName: lastName,
     aboutMe: description,
-    image: picture
+    image: picture,
+    academyName: academy,
+    belt: belt
   };
+
+
 
 updateUserInfo(item);
   handleClose();

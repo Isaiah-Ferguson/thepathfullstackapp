@@ -4,6 +4,19 @@ interface userData {
     publishName: string;
   }
 
+  interface eventData{
+    Id: number,
+    UserId: number,
+    Date: number,
+    PublisherName: string,
+    Title: string,
+    Address: string,
+    Description: string,
+    isPublish: true,
+    isDeleted: boolean,
+    image: string
+  }
+
 
   async function createAccount(CreatedUser : object) {
       //We want to target our User Controller
@@ -36,6 +49,7 @@ interface userData {
       }
       const data = await res.json();
       //We are not writeing a return because this is a POST.
+      console.log(data)
       return data;
   }
   
@@ -52,6 +66,13 @@ interface userData {
       console.log(data);
       return data;
   }
+
+  async function GetAcademyList(academyname: string) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/AcademyList/${academyname}`)
+    let data = await res.json();
+    console.log(data);
+    return data;
+}
   
   function checkToken() {
       let result = false;
@@ -120,4 +141,28 @@ interface userData {
     const data = await res.json();
     return data;
 }
-  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo }
+
+
+async function eventBlogItem(blogItem: object) {
+    const res = await fetch('https://thepathapi.azurewebsites.net/AcademyEvents/CreateEvent',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const eventData = await res.json();
+    return eventData;
+}
+
+async function getEventItemsByUserId(userId: number) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/AcademyEvents/GetEventItems/`)
+    let eventData = await res.json();
+    return eventData;
+}
+
+  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList }
