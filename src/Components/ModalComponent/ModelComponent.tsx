@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import DateDropdown from '../DropdownComponent/DropdownComponent';
-import TimeDropdown from '../DropdownComponent/TimeDropdownComponent';
-import PrivacyComponent from '../DropdownComponent/PrivacyComponent';
 import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
