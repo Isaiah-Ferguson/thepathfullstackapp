@@ -29,9 +29,7 @@ export default function TimeSelector(props: TimeSelectorProps) {
         {hours.map((hour) => (
           <option
             key={hour}
-            value={
-              (hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM')
-            }
+            value={ (hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM') }
           >
             {(hour % 12 || 12)}:00 {hour < 12 ? 'AM' : 'PM'}
           </option>

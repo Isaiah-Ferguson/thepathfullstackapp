@@ -7,6 +7,8 @@ import EditPostModal from "../ModalComponent/EditPostModal";
 import ProfilePost from "../ProfileComponent/ProfilePost"
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
+import ProfileFriendComponent from "./ProfileFriendComponent";
+import ProfileEventPost from "./ProfileEventPost";
 
 export default function ProfileComponent() {
   const blackbelt = require('../../assets/BJJBlack.png');
@@ -26,6 +28,8 @@ export default function ProfileComponent() {
     
         return () => window.removeEventListener('resize', handleResize);
       }, []);
+
+      
 
 
   return (
@@ -110,61 +114,11 @@ export default function ProfileComponent() {
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
           <Container className="eventScrollDiv">
 
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={9} xs={9}> 
-            <div className="eventTextArea">
+         <ProfileEventPost/>
+         <ProfileEventPost/>
+         <ProfileEventPost/>
+         <ProfileEventPost/>
 
-                <Row >
-                <Col lg={12} className="d-flex justify-content-start"> <p  className="profileFontPadding">Created an Open mat</p> </Col>
-                    <Col className="d-flex justify-content-start"> <p  className="profileFontPadding">3/4/2023 at 6PM</p></Col>
-                </Row>
-
-                <Row className="text-center"> <p>Concepcion Academy of Martial Arts</p> </Row>
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={9} xs={9}>
-              <div className="eventTextArea">
-                <Row >
-                <Col lg={12} className="d-flex justify-content-start"> <p className="profileFontPadding">Created an Open mat</p> </Col>
-                    <Col className="d-flex justify-content-start"> <p className="profileFontPadding">3/4/2023 at 6PM</p></Col>
-                </Row>
-                <Row className="text-center"> <p>Concepcion Academy of Martial Arts</p></Row>
-              </div>
-            </Col>
-          </Row>
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img  className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={9} xs={9}>
-              <div className="eventTextArea">
-                <Row >
-                <Col lg={12} className="d-flex justify-content-start"> <p className="profileFontPadding">Created an Open mat</p> </Col>
-                    <Col className="d-flex justify-content-start"> <p className="profileFontPadding">3/4/2023 at 6PM</p></Col>
-                </Row>
-                <Row className="text-center">
-                    <p>Concepcion Academy of Martial Arts</p>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={9} xs={9}>
-              <div className="eventTextArea">
-                <Row >
-                <Col lg={12} className="d-flex justify-content-start"> <p className="profileFontPadding">Created an Open mat</p> </Col>
-                    <Col className="d-flex justify-content-start"> <p className="profileFontPadding" >3/4/2023 at 6PM</p></Col>
-                </Row>
-                <Row className="text-center">
-                    <p>Concepcion Academy of Martial Arts</p>
-                </Row>
-              </div>
-            </Col>
-          </Row>
           </Container>
 
 
@@ -174,12 +128,12 @@ export default function ProfileComponent() {
           <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
           <Container className="eventScrollDiv"> 
           <Row>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile img-fluid" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
-            <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
+            <ProfileFriendComponent/>
+            <ProfileFriendComponent/>
+            <ProfileFriendComponent/>
+            <ProfileFriendComponent/>
+            <ProfileFriendComponent/>
+            <ProfileFriendComponent/>
           </Row>
           </Container>
         </Col>)}

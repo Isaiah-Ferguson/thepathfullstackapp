@@ -49,7 +49,6 @@ interface userData {
       }
       const data = await res.json();
       //We are not writeing a return because this is a POST.
-      console.log(data)
       return data;
   }
   
@@ -84,7 +83,9 @@ interface userData {
   }
   
   function loggedInData(){
+    console.log(userData);
       return userData as userData;
+
       //this will consist of user ID and their Name.
   }
   
@@ -126,9 +127,9 @@ interface userData {
       return data;
   }
 
-  async function updateUserInfo(userInfo : object) {
-    const res = await fetch('https://thepathapi.azurewebsites.net/User/UpdateUser',{
-        method:"POST",
+  async function updateUserInfo(userInfo : object, UserNumber: number) {
+    const res = await fetch(`https://thepathapi.azurewebsites.net/User/UpdateUser/${UserNumber}`,{
+        method:"put",
         headers:{
             'Content-Type':"application/json"
         },

@@ -10,11 +10,7 @@ interface DateDropdownProps {
 
 export default function DateSelector(props: DateDropdownProps) {
   const { selectedDate, setSelectedDate } = props;
-
-
-
   let timeData = useContext(UserContext);
-
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const days = Array.from({length: 31}, (_, i) => i + 1);
 
@@ -33,14 +29,10 @@ export default function DateSelector(props: DateDropdownProps) {
         <Form.Label>Select a date:</Form.Label>
         <div className="d-flex">
         <Form.Select className="px-2" value={timeData?.selectedMonth} onChange={handleMonthSelect}>
-  {months.map((month) => (
-    <option key={month} value={month}>{month}</option>
-  ))}
+  {months.map((month) => ( <option key={month} value={month}>{month}</option> ))}
 </Form.Select>
           <Form.Select value={timeData.selectedDay} onChange={handleDaySelect}>
-            {days.map((day) => (
-              <option key={day} value={day.toString()}>{day}</option>
-            ))}
+            {days.map((day) => ( <option key={day} value={day.toString()}>{day}</option> ))}
           </Form.Select>
         </div>
       </Form.Group>

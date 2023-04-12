@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
 import { updateUserInfo } from '../../DataServices/DataServices';
 import { useState, ChangeEvent } from 'react';
+import { loggedInData } from '../../DataServices/DataServices';
 
 export default function ProfileEditModal() {
   const EditProfile = require('../../assets/EditProfile.png');
@@ -12,6 +13,7 @@ export default function ProfileEditModal() {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [userID, setUserID ] = useState<number>(0);
     const [editBool, setEdit] = useState(false);
 
 
@@ -19,6 +21,8 @@ export default function ProfileEditModal() {
     const [lgShow, setLgShow] = useState(false);
     const [picture, setPicture] = useState(profile);
     const handleClose = () => setLgShow(false);
+
+    //----------------HANDLE FUNCTIONS-------------------------//
 
     const handleFirstname = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFirstName(e.target.value);
@@ -36,6 +40,10 @@ export default function ProfileEditModal() {
       setBelt(e.target.value);
     };
 
+    function handleDecription(e: React.ChangeEvent<HTMLTextAreaElement>) {
+      setDescription(e.target.value)
+    }
+
     const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let reader = new FileReader();
       const file = e.target.files?.[0]; // using optional chaining
@@ -46,28 +54,24 @@ export default function ProfileEditModal() {
           reader.readAsDataURL(file);
       }
   }
-function handleDecription(e: React.ChangeEvent<HTMLTextAreaElement>) {
-  setDescription(e.target.value)
-}
+ //---------------------------------------------------------------//
 
 function handleEditProfile() {
-
+  const loggedIn = loggedInData();
+  setUserID(loggedIn.userId);
   const item = {
-    id: 1,
-    salt: null,
-    hash: null,
-    username: "Jessie123",
-    firstName: firstName,
-    lastName: lastName,
-    aboutMe: description,
+    Username: "Chandler",
+    FirstName: firstName,
+    LastName: lastName,
+    AboutMe: description,
     image: picture,
-    academyName: academy,
+    AcademyName: academy,
     belt: belt
   };
 
 
-
-updateUserInfo(item);
+console.log(userID);
+updateUserInfo(item, userID);
   handleClose();
 }
 
@@ -107,29 +111,24 @@ updateUserInfo(item);
             </Col>
         </Row>
         <Row>
-            <Col md xs={6}> <FloatingLabel
-        controlId="floatingTextarea"
-        label="Enter Frist Name"
-        className="mb-3"
-        onChange={handleFirstname}
-      >
+          {/* -----------------FIRST NAME LABEL--------------------------- */}
+            <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Frist Name" className="mb-3" onChange={handleFirstname}>
         <Form.Control as="textarea" placeholder="First Name" />
       </FloatingLabel></Col>
-      <Col md xs={6}> <FloatingLabel
-        controlId="floatingTextarea"
-        label="Enter Last Name"
-        className="mb-3"
-        onChange={handleLastname}
+      {/* ----------------------------------------------------------------------- */}
 
-      >
+                {/* -----------------LAST NAME LABEL--------------------------- */}
+
+      <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Last Name" className="mb-3" onChange={handleLastname} >
         <Form.Control as="textarea" placeholder="Last Name" />
       </FloatingLabel></Col>
+            {/* ----------------------------------------------------------------------- */}
+
         </Row>
         <Row>
-            <Col md xs={12}  className="mobileMargin"> <FloatingLabel
-          controlId="floatingSelectGrid"
-          label="Academy Name"
-        >
+            <Col md xs={12}  className="mobileMargin">
+         <FloatingLabel controlId="floatingSelectGrid" label="Academy Name">
+
           <Form.Select aria-label="Floating label select example" onChange={handleAcademy} value={academy}>
             <option value="">Select Your Academy</option>
             <option value="Andre de Freitas Brazilian Jiu-Jitsu">Andre de Freitas Brazilian Jiu-Jitsu</option>
@@ -148,11 +147,10 @@ updateUserInfo(item);
             <option value="JG ACADEMY - LODI">JG ACADEMY - LODI</option>
             <option value="Cortez Full Circle Martial Arts">Cortez Full Circle Martial Arts</option>
           </Form.Select>
+
         </FloatingLabel></Col>
-        <Col md xs={12} className="mobileMargin"> <FloatingLabel
-          controlId="floatingSelectGrid"
-          label="Belt Rank"
-        >
+        <Col md xs={12} className="mobileMargin"> <FloatingLabel controlId="floatingSelectGrid" label="Belt Rank">
+
           <Form.Select aria-label="Floating label select example" value={belt} onChange={handleBelt}>
             <option value="">Select Your Belt Rank</option>
             <option value="1">White Belt</option>
@@ -160,8 +158,8 @@ updateUserInfo(item);
             <option value="3">Purple Belt</option>
             <option value="4">Brown Belt</option>
             <option value="5">Black Belt</option>
-
           </Form.Select>
+
         </FloatingLabel></Col>
         </Row>
         <br/>

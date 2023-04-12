@@ -45,8 +45,6 @@ export default function ProfilePost() {
       }
     }, []);
 
-    console.log(blogItems)
-
     return (
       <>
       {blogItems.length > 0 ?
