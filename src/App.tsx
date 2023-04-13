@@ -7,10 +7,10 @@ import LoginComponent from './Components/Login/LoginComponent';
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent"
+import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent";
 import React from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
-import UserHooks from './Hooks/UserHooks'
+import UserHooks from './Hooks/UserHooks';
 import UserContext from "./UserContext/UserContext";
 
 // import { browserRouter } from ''

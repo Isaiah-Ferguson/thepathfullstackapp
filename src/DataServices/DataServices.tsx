@@ -19,9 +19,6 @@ interface userData {
 
   let userInfoData = {}
 
-
-
-
   async function createAccount(CreatedUser : object) {
       //We want to target our User Controller
       const res = await fetch('https://thepathapi.azurewebsites.net/User/AddUser',{
@@ -70,8 +67,8 @@ interface userData {
       return data;
   }
 
-  async function GetAcademyList(academyname: string) {
-    let res = await fetch(`https://thepathapi.azurewebsites.net/AcademyList/${academyname}`)
+  async function GetAcademyList(academyname: number) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/${academyname}`)
     let data = await res.json();
     console.log(data);
     return data;
@@ -175,5 +172,7 @@ async function getEventItemsByUserId(userId: number) {
     let eventData = await res.json();
     return eventData;
 }
+
+
 
   export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID }
