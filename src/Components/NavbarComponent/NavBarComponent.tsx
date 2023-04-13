@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
+import './NavBarComponent.css';
 
 
 export default function NavbarComponent() {
@@ -23,6 +24,12 @@ export default function NavbarComponent() {
   function MainFeedNavigate() {
     navigate("/MainFeedComponent");
   };
+
+  function LoginNavigate() {
+    navigate("/Login");
+  };
+
+  // /Login
 
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -80,7 +87,7 @@ export default function NavbarComponent() {
               aria-label="Search"
             />
           </Form>
-          <button className="btnSignOut">Logout</button>
+          <button onClick={LoginNavigate} className="btnSignOut">Logout</button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
