@@ -1,16 +1,62 @@
 import React from 'react'
+import { useState } from 'react';
 import { Container } from 'react-bootstrap'
+
+import { createAccount } from '../../DataServices/DataServices';
+
 
 
 
 import { Form, NavLink } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+
 const background = require("../../assets/jiujitsu.png");
 
 export default function CreatePage2() {
+  // let userData = {};
+
+
+// interface User {
+//     name: string;
+//     email: string;
+//     password: string;
+//   }
+
+  // interface userData {
+  //   userId: number;
+  //   publishName: string;
+  // }
 
   let navigate = useNavigate();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Make function for button
+  interface UserData {
+    Id: number;
+    username: string;
+    password: string;
+  }
+  
+  const handleSubmit = (): void => {
+    // We want our function to gather the username and password and use that data to make an API call.
+    // First, we'll create an object with the user data and log it to the console.
+    let userData: UserData = {
+      Id: 0,
+      username,
+      password,
+    };
+
+    console.log(userData);
+
+    createAccount(typeof userData);
+    navigate("/CreateAccount");
+
+  };
+
+
   return (
 
 
@@ -41,10 +87,10 @@ export default function CreatePage2() {
           <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0"}}> The Path </h1>
       <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px"}}>A community driven Brazilian Jiu-Jitsu App</p>
         
-        <Form.Control id='input' type="text" placeholder="Username" />
+        <Form.Control id='input' type="text" placeholder="Username"  onChange={({target: {value}}) => setUsername(value)} />
 
-        <Form.Control type="password" placeholder="Password" />
-        <Form.Control type="password" placeholder="Confirm Password" />
+        <Form.Control type="password" placeholder="Password" onChange={({target : {value}}) => setPassword(value)} />
+        {/* <Form.Control type="password" placeholder="Confirm Password" /> */}
           
         <div className='form-group form-buttons'>
           <NavLink href="#">Forgot <span> password?</span></NavLink>
@@ -53,7 +99,7 @@ export default function CreatePage2() {
         </div>
 
         <div className='form-group'>
-          <button onClick={()=> navigate("/CreateAccount")}  className='btn-pri'>Login</button>
+          <button onClick={handleSubmit}  className='btn-pri'>Login</button>
           
       
           {/* <Route path="/Route.tsx" element={<Route />} /> */}

@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
+import './NavBarComponent.css';
 
 
 export default function NavbarComponent() {
@@ -25,10 +26,6 @@ export default function NavbarComponent() {
   };
 
   function LoginNavigate() {
-    console.log(localStorage)
-    localStorage.removeItem('Token');
-    console.log(localStorage)
-
     navigate("/Login");
   };
 

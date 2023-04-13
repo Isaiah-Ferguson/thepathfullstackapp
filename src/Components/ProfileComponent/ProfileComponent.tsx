@@ -11,6 +11,8 @@ import ProfileFriendComponent from "./ProfileFriendComponent";
 import ProfileEventPost from "./ProfileEventPost";
 import { loggedInData } from "../../DataServices/DataServices";
 import { getUserInfoByID } from "../../DataServices/DataServices";
+import NavbarComponent from "../NavbarComponent/NavBarComponent";
+
 
 interface UserInfo{
   aboutMe: string;
@@ -28,7 +30,9 @@ interface PicProps {
   picture: string,
 }
 export default function ProfileComponent() {
+
   const blackbelt = require('../../assets/BJJBlack.png');
+  
   const profile = require('../../assets/DefaultProfilePicture.png');
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
@@ -86,8 +90,15 @@ export default function ProfileComponent() {
 
 
   return (
+
+
+
+
+    
+    
     <div className="container-fuild">
       <Row className="topProfileBG">
+      
         <Col lg={4}>
           <Container className="text-center ensoBG">
             <img className="profileIMG" src={userInfo.image} />
@@ -128,7 +139,7 @@ export default function ProfileComponent() {
         <Col>
         {/* Mobile Text */}
         {(isMobile) && (
-            <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
+        <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('friends')}>- Friends -</Col>

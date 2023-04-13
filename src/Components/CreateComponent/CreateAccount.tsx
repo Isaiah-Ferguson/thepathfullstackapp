@@ -7,6 +7,8 @@ import './CreateAccount.css'
 import { useState } from 'react';
 
 export default function ProfileEditModal() {
+
+  
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
 

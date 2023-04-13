@@ -23,7 +23,6 @@ import CreateAccount from './Components/CreateComponent/CreateAccount';
 import ProfileEditModal from './Components/ModalComponent/ProfileEditModal';
 
 
-
 // import { browserRouter } from ''
 function App() {
 
@@ -32,7 +31,6 @@ function App() {
   return (
     <UserContext.Provider value={userHooks}>
     <BrowserRouter>
-    
     {/* <Login/> */}
     {/* <div className='bgcolor'>
 <NavBar/>
@@ -47,13 +45,12 @@ function App() {
 </Routes> */}
     {/* <Route path='/CreatePage' element={<CreatePage/>}/> */}
     {/* <Route path='/' element={<ProfileComponent />}/> */}
-    
-    <Route path='/' element={<LoginComponent />}/>
-    <Route path='/ProfilePage' element={<ProfileComponent/>}/>
+    {/* <Route path = '/' element={<NavbarComponent/>}/> */}
+    <Route path ='/' element={<LoginComponent />}/>
+    <Route path ='/profileme' element={<ProfileComponent/>}/>
     <Route path ='/CreatePage2' element={<CreatePage2/>}/>
     <Route path ='/ForgotPass' element={<ForgotPass/>}/>
     <Route path ='/CreateAccount' element={<CreateAccount/>}/>
-    
     <Route path ='/ProfileModal' element={<ProfileEditModal/>}/>
 
   
