@@ -50,7 +50,7 @@ export default function ProfileEventPost() {
   return (
     <>
       {myEventItems.length > 0 ? (
-        // myEventItems.filter((item) => item.UserId === blogUserId, console.log(blogUserId))
+        myEventItems.filter((item) => item.UserId === blogUserId, console.log(blogUserId))
           .map((item: EventItem, idx: number) => (
             <Row style={{ marginTop: 10 }} key={idx}>
               <Col lg={3} xs={3}>
