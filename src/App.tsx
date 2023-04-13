@@ -31,6 +31,9 @@ function App() {
   return (
     <UserContext.Provider value={userHooks}>
     <BrowserRouter>
+    <div className="bgcolor">
+    <NavBar/>
+    </div>
     {/* <Login/> */}
     {/* <div className='bgcolor'>
 <NavBar/>

@@ -26,7 +26,7 @@ export default function NavbarComponent() {
   };
 
   function LoginNavigate() {
-    navigate("/Login");
+    navigate("/");
   };
 
   // /Login
