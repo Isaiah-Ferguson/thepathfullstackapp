@@ -4,16 +4,16 @@ import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css'
-import CreatePage2 from './CreatePage';
+// import CreatePage2 from './CreatePage';
 
-
-const background = require("../../assets/jiujitsu.png");
 
 export default function LoginComponent() {
   let navigate = useNavigate();
+  const background = require("../../assets/jiujitsu.png");
 
 
     const [username, setUsername] = useState('');
+
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
@@ -82,17 +82,9 @@ export default function LoginComponent() {
           {/* <li><Link to="/components/Signup">React</Link></li> */}
         </div>
       </Form>
-
-
-
-
     </ThemeProvider>
 
   </div>
 
-
-
-
-    
   )
 }

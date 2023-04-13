@@ -83,7 +83,7 @@ export default function ProfileComponent() {
         <Col>
         {/* Mobile Text */}
         {(isMobile) && (
-            <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
+        <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
         <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('friends')}>- Friends -</Col>
