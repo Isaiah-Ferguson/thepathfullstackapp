@@ -5,9 +5,13 @@ import ModalComponent  from '../ModalComponent/ModelComponent';
 import ProfileEditModal from '../ModalComponent/ProfileEditModal';
 import EditPostModal from "../ModalComponent/EditPostModal";
 import ProfilePost from "../ProfileComponent/ProfilePost"
+import NavbarComponent from "../NavbarComponent/NavBarComponent";
+
 
 export default function ProfileComponent() {
+
   const blackbelt = require('../../assets/BJJBlack.png');
+  
   const profile = require('../../assets/DefaultProfilePicture.png');
 
     const [selectedSection, setSelectedSection] = useState('post');
@@ -26,8 +30,15 @@ export default function ProfileComponent() {
 
 
   return (
+
+
+
+
+    
+    
     <div className="container-fuild">
       <Row className="topProfileBG">
+      
         <Col lg={4}>
           <Container className="text-center ensoBG">
             <img className="profileIMG" src={profile} />

@@ -17,12 +17,18 @@ import CreatePage2 from './Components/LoginComponent/CreatePage';
 import ForgotPass from './Components/LoginComponent/ForgotPass';
 import CreateAccount from './Components/CreateComponent/CreateAccount';
 import ProfileEditModal from './Components/ModalComponent/ProfileEditModal';
+import NavbarComponent from './Components/NavbarComponent/NavBarComponent';
+
 
 
 // import { browserRouter } from ''
 function App() {
-  return (
+  return ( 
+   
+    
+    
     <BrowserRouter>
+  
     {/* <Login/> */}
     {/* <div className='bgcolor'>
 <NavBar/>
