@@ -83,7 +83,7 @@ export default function ProfileComponent() {
         getLoggedInData();
       },[]);
       // ----------------------------------------------------------------------------
-console.log(userInfo)
+
 
   return (
     <div className="container-fuild">
@@ -164,10 +164,6 @@ console.log(userInfo)
           <Container className="eventScrollDiv">
 
          <ProfileEventPost/>
-         <ProfileEventPost/>
-         <ProfileEventPost/>
-         <ProfileEventPost/>
-
           </Container>
 
 

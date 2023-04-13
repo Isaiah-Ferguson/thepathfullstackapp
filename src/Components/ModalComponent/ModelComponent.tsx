@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
-import { GetAcademyList } from '../../DataServices/DataServices';
+import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
 import { Dropdown, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 
@@ -45,28 +45,31 @@ export default function ModalComponent() {
 
 
   const handleOpenMat = () => {
+    const testing = async () => {
+      const academyQ = await GetAcademyList(academy);
 
+  
+      const userNames =  loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
     const eventData = {
       Id: blogId,
-      UserId: blogUserId,
+      UserId: userNames.userId,
       Date: new Date,
-      PublisherName: blogPublisherName,
-      academyName: academy,
+      publishedName: userNames.publisherName,
+      academyName: academyQ.name,
       time: selectedHour,
       eventDate: selectedDate,
-      address: eventAddress,
+      address: academyQ.address,
       description: blogDiscription,
       type: viewable,
       isPublish: true,
       isDeleted: false,
-      image: null
+      image: userInfoItems.image
     }
-    const testing = async () => {
-      const academyQ = await GetAcademyList(1);
-      console.log(academyQ);
-    }
+
     setSelectedDate(selectedDay + ", " + selectedMonth)
     createOpenEvent(eventData);
+  }
     testing();
     handleClose();
   }

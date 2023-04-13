@@ -67,8 +67,8 @@ interface userData {
       return data;
   }
 
-  async function GetAcademyList(academyname: number) {
-    let res = await fetch(`https://thepathapi.azurewebsites.net/${academyname}`)
+  async function GetAcademyList(academyname: string) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/AcademyList/${academyname}`)
     let data = await res.json();
     console.log(data);
     return data;
