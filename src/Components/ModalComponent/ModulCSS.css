@@ -27,6 +27,14 @@
     width: 15px;
 }
 
+.scrollDiv{
+    height: 265px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+}
+
 
 @media screen and (max-width: 425px)  {
     .editProfileImg{

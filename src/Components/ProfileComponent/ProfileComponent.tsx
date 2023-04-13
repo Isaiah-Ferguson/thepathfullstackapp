@@ -9,14 +9,54 @@ import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
 import ProfileFriendComponent from "./ProfileFriendComponent";
 import ProfileEventPost from "./ProfileEventPost";
+import { loggedInData } from "../../DataServices/DataServices";
+import { getUserInfoByID } from "../../DataServices/DataServices";
 
+interface UserInfo{
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
+
+interface PicProps {
+  picture: string,
+}
 export default function ProfileComponent() {
   const blackbelt = require('../../assets/BJJBlack.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
-  let userData = useContext(UserContext);
+  const blackBelt = require('../../assets/BJJBlack.png');
+  const whiteBelt = require('../../assets/BJJWhite.png');
+  const blueBelt = require('../../assets/BJJBlue.png')
+  const purpleBelt = require('../../assets/BJJPURPLE.png')
+  const brownBelt = require('../../assets/BJJBrown.png')
 
     const [selectedSection, setSelectedSection] = useState('post');
     const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
+    const [userNum, setUserNum] = useState(0);
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+      aboutMe: "",
+      id: 0,
+      image: "",
+      academyName: "",
+      firstName: "",
+      lastName: "",
+      publishedName: "",
+      username: "",
+      belt: ""
+    });
+    const imgSrc = userInfo.belt === "White Belt" ? whiteBelt :
+    userInfo.belt === "Blue Belt" ? blueBelt :
+    userInfo.belt === "Purple Belt" ? purpleBelt :
+    userInfo.belt === "Brown Belt" ? brownBelt :
+    userInfo.belt === "Black Belt" ? blackBelt :
+    "";
+    const [username, setUsername] = useState('');
 
     function handleButtonClick(sectionName: string) {
       setSelectedSection(sectionName);
@@ -29,7 +69,20 @@ export default function ProfileComponent() {
         return () => window.removeEventListener('resize', handleResize);
       }, []);
 
-      
+      // -------------------GETS USER INFO FOR PROFILE PAGE--------------------------
+
+      useEffect(() => {
+        const getLoggedInData = async () => {
+          const loggedIn = loggedInData();
+          setUserNum(loggedIn.userId);
+          setUsername(loggedIn.publisherName);
+          let userInfoItems = await getUserInfoByID(loggedIn.userId);
+          console.log(userInfoItems);
+          setUserInfo(userInfoItems);
+        };
+        getLoggedInData();
+      },[]);
+      // ----------------------------------------------------------------------------
 
 
   return (
@@ -37,11 +90,11 @@ export default function ProfileComponent() {
       <Row className="topProfileBG">
         <Col lg={4}>
           <Container className="text-center ensoBG">
-            <img className="profileIMG" src={profile} />
+            <img className="profileIMG" src={userInfo.image} />
           </Container>
           <Row>
             <Col>
-              <div className="text-center profileHeaderText">Isaiah Ferguson</div>
+              <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
             </Col>
           </Row>
 <Row>
@@ -57,21 +110,17 @@ export default function ProfileComponent() {
             <p>About Me</p>
           </Row>
           <Row>
-            <p className="profileHeaderText">Academy - Team Cama</p>
+  <p className="profileHeaderText">Academy - {userInfo.academyName}</p>
           </Row>
-
           <Row>
             <p className="profileHeaderText">
-              Rank - <img style={{ height: 40 }} src={blackbelt} title="BlackBelt" alt="Belt Rank"/>
+              Rank - <img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank"/>
             </p>
           </Row>
           <Row>
             <Col lg={7}>
               <p className="discText">
-                Hello! I am Isaiah I've been training Brazilian Jiu-Jitsu for
-                the better part of 13 years. i received my black belt in 2022
-                under Louie Concepcion. I train and Teach at Team Cama in
-                Stockton CA.
+              {userInfo.aboutMe}
               </p>
             </Col>
           </Row>
@@ -115,10 +164,6 @@ export default function ProfileComponent() {
           <Container className="eventScrollDiv">
 
          <ProfileEventPost/>
-         <ProfileEventPost/>
-         <ProfileEventPost/>
-         <ProfileEventPost/>
-
           </Container>
 
 

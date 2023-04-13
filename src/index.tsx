@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <>
+  
     <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 
     <App />

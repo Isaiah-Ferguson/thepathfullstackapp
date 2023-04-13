@@ -12,7 +12,7 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 // import './Components/LoginComponent/LoginPage'
 import React from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
-import UserHooks from './Hooks/UserHooks'
+import UserHooks from './Hooks/UserHooks';
 import UserContext from "./UserContext/UserContext";
 import LoginComponent from './Components/LoginComponent/LoginPage';
 import CreatePage from './Components/LoginComponent/CreatePage';

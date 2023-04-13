@@ -4,16 +4,18 @@ import { updateUserInfo } from '../../DataServices/DataServices';
 import { useState, ChangeEvent } from 'react';
 import { loggedInData } from '../../DataServices/DataServices';
 
+
 export default function ProfileEditModal() {
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
-
     const [academy, setAcademy] = useState<string>("");
     const [belt, setBelt] = useState<string>("");
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [userID, setUserID ] = useState<number>(0);
+    const [username, setUsername ] = useState<string>("");
+
     const [editBool, setEdit] = useState(false);
 
 
@@ -58,9 +60,15 @@ export default function ProfileEditModal() {
 
 function handleEditProfile() {
   const loggedIn = loggedInData();
+  const testID = loggedIn.userId;
+  const testName = loggedIn.publisherName;
   setUserID(loggedIn.userId);
+  setUsername(loggedIn.publisherName);
+  console.log(loggedIn.userId);
+  console.log(loggedIn.publisherName);
+
   const item = {
-    Username: "Chandler",
+    username: testName,
     FirstName: firstName,
     LastName: lastName,
     AboutMe: description,
@@ -70,8 +78,9 @@ function handleEditProfile() {
   };
 
 
-console.log(userID);
-updateUserInfo(item, userID);
+console.log(testID);
+updateUserInfo(item, testID);
+
   handleClose();
 }
 
@@ -153,11 +162,11 @@ updateUserInfo(item, userID);
 
           <Form.Select aria-label="Floating label select example" value={belt} onChange={handleBelt}>
             <option value="">Select Your Belt Rank</option>
-            <option value="1">White Belt</option>
-            <option value="2">Blue Belt</option>
-            <option value="3">Purple Belt</option>
-            <option value="4">Brown Belt</option>
-            <option value="5">Black Belt</option>
+            <option value="White Belt">White Belt</option>
+            <option value="Blue Belt">Blue Belt</option>
+            <option value="Purple Belt">Purple Belt</option>
+            <option value="Brown Belt">Brown Belt</option>
+            <option value="Black Belt">Black Belt</option>
           </Form.Select>
 
         </FloatingLabel></Col>

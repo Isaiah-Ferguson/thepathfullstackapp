@@ -19,6 +19,7 @@ interface BlogItem {
   // Other properties of a BlogItem
 }
 
+
 export default function ProfilePost() {
     const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
     const profile = require('../../assets/DefaultProfilePicture.png');
@@ -31,7 +32,7 @@ export default function ProfilePost() {
       const getLoggedInData = async () => {
         const loggedIn = loggedInData();
         setBlogUserId(loggedIn.userId);
-        setBlogPublisherName(loggedIn.publishName);
+        setBlogPublisherName(loggedIn.publisherName);
         let userBlogItems = await getBlogItemsByUserId(loggedIn.userId);
         console.log(userBlogItems);
         setBlogItems(userBlogItems);
@@ -45,9 +46,10 @@ export default function ProfilePost() {
       }
     }, []);
 
+
     return (
       <>
-      {blogItems.length > 0 ?
+      {blogItems.length >= 0 ?
         blogItems.map((item: BlogItem, idx: number) => (
           <Row key={idx} style={{marginTop: 10}}>
             <Col lg={3} xs={3}>
