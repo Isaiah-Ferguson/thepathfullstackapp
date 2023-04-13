@@ -1,7 +1,7 @@
 let userData = {};
 interface userData {
     userId: number;
-    publishName: string;
+    publisherName: string;
   }
 
   interface eventData{
@@ -16,6 +16,10 @@ interface userData {
     isDeleted: boolean,
     image: string
   }
+
+  let userInfoData = {}
+
+
 
 
   async function createAccount(CreatedUser : object) {
@@ -143,6 +147,12 @@ interface userData {
     return data;
 }
 
+async function getUserInfoByID(userId: number) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/user/getuserbyid/${userId}`)
+    let userInfoData = await res.json();
+    return userInfoData;
+}
+
 
 async function eventBlogItem(blogItem: object) {
     const res = await fetch('https://thepathapi.azurewebsites.net/AcademyEvents/CreateEvent',{
@@ -166,4 +176,4 @@ async function getEventItemsByUserId(userId: number) {
     return eventData;
 }
 
-  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList }
+  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID }
