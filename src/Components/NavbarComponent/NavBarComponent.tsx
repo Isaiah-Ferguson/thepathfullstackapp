@@ -29,7 +29,7 @@ export default function NavbarComponent() {
     localStorage.removeItem('Token');
     console.log(localStorage)
 
-    navigate("/Login");
+    navigate("/");
   };
 
   // /Login

@@ -26,9 +26,9 @@ function App() {
     </div>
 
     <Routes>
-<Route path='/' element={<ProfileComponent />}/>
+<Route path='/profile' element={<ProfileComponent />}/>
 <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
-<Route path='/Login' element={<LoginComponent />}/>
+<Route path='/' element={<LoginComponent />}/>
 <Route path='/Create' element={<CreateAccountComponent />}/>
 
 </Routes>
