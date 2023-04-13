@@ -2,11 +2,11 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { loggedInData, getEventItemsByUserId, checkToken, eventBlogItem } from '../../DataServices/DataServices';
+import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
 
 interface EventItem {
   Id: number,
-  UserId: number,
+  userId: number,
   Date: string,
   publishedName: string,
   academyName: string,
@@ -37,6 +37,7 @@ export default function ProfileEventPost() {
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       console.log(userEventItems);
       setMyEventItems(userEventItems);
+  
     };
 
     if (!checkToken()) {
@@ -44,13 +45,13 @@ export default function ProfileEventPost() {
     } else {
       // Get user Data and blog Items
       getLoggedInData();
+
     }
   }, []);
-  // console.log(myEventItems)
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItems.filter((item) => item.UserId === blogUserId, console.log(blogUserId))
+        myEventItems.filter((item) => item.userId === blogUserId)
           .map((item: EventItem, idx: number) => (
             <Row style={{ marginTop: 10 }} key={idx}>
               <Col lg={3} xs={3}>
