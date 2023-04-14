@@ -7,33 +7,45 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
+import { searchUser } from "../../DataServices/DataServices";
+import { useContext } from "react";
+import UserContext from "../../UserContext/UserContext";
+
+
 
 
 export default function NavbarComponent() {
   const logo = require("../../assets/Logo.png");
   const profile = require('../../assets/DefaultProfilePicture.png');
-  const bell = require('../../assets/Bell.png');
-
+  const [search, setSearch] = useState('');
+  const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
 
-  function ProfileNavigate() {
-    navigate("/");
-  };
-  function MainFeedNavigate() {
-    navigate("/MainFeedComponent");
-  };
+  
+
+  function ProfileNavigate() { navigate("/profile"); };
+  function MainFeedNavigate() { navigate("/MainFeedComponent"); };
 
   function LoginNavigate() {
     console.log(localStorage)
     localStorage.removeItem('Token');
     console.log(localStorage)
-
     navigate("/");
   };
 
-  // /Login
 
+  const handleSearch = async () => {
+    const searchName = await searchUser(search);
+    console.log(data);
+    data.setName(searchName);
+    console.log(searchName);
+    console.log(data.name);
+
+      navigate("/friends");
+
+    
+  }
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
@@ -88,7 +100,9 @@ export default function NavbarComponent() {
               placeholder="Search..."
               className="me-2 searchbar"
               aria-label="Search"
+              onChange={({ target: { value } }) =>  setSearch(value)}
             />
+            <Button onClick={handleSearch}>Search</Button>
           </Form>
           <button onClick={LoginNavigate} className="btnSignOut">Logout</button>
         </Navbar.Collapse>

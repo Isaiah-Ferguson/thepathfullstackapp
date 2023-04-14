@@ -12,14 +12,15 @@ import React from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
 import UserHooks from './Hooks/UserHooks';
 import UserContext from "./UserContext/UserContext";
+import ProfileFriend from './Components/ProfileComponent/ProfileFriend';
 
 // import { browserRouter } from ''
 function App() {
 
-  const userHooks = UserHooks();
+  // const userHooks = UserHooks();
 
   return (
-    <UserContext.Provider value={userHooks}>
+    <UserContext.Provider value={UserHooks()}>
     <BrowserRouter>
     <div className='bgcolor'>
 <NavBar/>
@@ -30,6 +31,7 @@ function App() {
 <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
 <Route path='/' element={<LoginComponent />}/>
 <Route path='/Create' element={<CreateAccountComponent />}/>
+<Route path='/friends' element={<ProfileFriend />}/>
 
 </Routes>
     </BrowserRouter>

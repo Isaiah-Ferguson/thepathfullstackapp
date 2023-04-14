@@ -35,7 +35,6 @@ export default function ProfileEventPost() {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      console.log(userEventItems);
       setMyEventItems(userEventItems);
   
     };

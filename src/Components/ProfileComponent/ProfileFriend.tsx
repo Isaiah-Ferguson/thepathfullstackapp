@@ -11,6 +11,8 @@ import ProfileFriendComponent from "./ProfileFriendComponent";
 import ProfileEventPost from "./ProfileEventPost";
 import { loggedInData } from "../../DataServices/DataServices";
 import { getUserInfoByID } from "../../DataServices/DataServices";
+import FriendEvent from "./FriendEvent";
+
 
 interface UserInfo{
   aboutMe: string;
@@ -27,14 +29,18 @@ interface UserInfo{
 interface PicProps {
   picture: string,
 }
-export default function ProfileComponent() {
+export default function ProfileFriend() {
   const blackbelt = require('../../assets/BJJBlack.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
-  const blueBelt = require('../../assets/BJJBlue.png')
-  const purpleBelt = require('../../assets/BJJPURPLE.png')
-  const brownBelt = require('../../assets/BJJBrown.png')
+  const blueBelt = require('../../assets/BJJBlue.png');
+  const purpleBelt = require('../../assets/BJJPURPLE.png');
+  const brownBelt = require('../../assets/BJJBrown.png');
+
+  const data = useContext<any>(UserContext);
+
+
 
     const [selectedSection, setSelectedSection] = useState('post');
     const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
@@ -73,14 +79,15 @@ export default function ProfileComponent() {
 
       useEffect(() => {
         const getLoggedInData = async () => {
-          const loggedIn = loggedInData();
-          setUserNum(loggedIn.userId);
-          setUsername(loggedIn.publisherName);
-          let userInfoItems = await getUserInfoByID(loggedIn.userId);
+            
+          setUserNum(data.name.userId);
+          setUsername(data.name.publisherName);
+          let userInfoItems = await getUserInfoByID(data.name.userId);
+          console.log(userInfoItems);
           setUserInfo(userInfoItems);
         };
         getLoggedInData();
-      },[]);
+      },[data.name]);
       // ----------------------------------------------------------------------------
 
 
@@ -162,7 +169,7 @@ export default function ProfileComponent() {
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
           <Container className="eventScrollDiv">
 
-         <ProfileEventPost/>
+         <FriendEvent/>
           </Container>
 
 

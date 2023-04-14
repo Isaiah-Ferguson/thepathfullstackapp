@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import MainFeedEventComponent from "./MainFeedEventComponent";
+import { useNavigate } from 'react-router-dom';
+import { loggedInData, getEventItemsByUserId, checkToken, GetAcademyList, getUserInfoByID, addBlogItem } from '../../DataServices/DataServices';
 
 export default function MainFeedComponent() {
   const [selectedSection, setSelectedSection] = useState('post');
@@ -11,6 +14,52 @@ export default function MainFeedComponent() {
   const locationIMG = require("../../assets/Location.png");
   const BJJWhite = require("../../assets/WhiteBeltIcon.png");
 
+  const [academy, setAcademy ] = useState('');
+  const [blogDiscription, setBlogDescription ] = useState('');
+  const [blogId, setBlogImage ] = useState('')
+  const [blogItems, setBlogItems ] = useState('')
+  const [blogUserId, setBlogUserId ] = useState(0)
+
+  
+  const handleCreatePost = () => {
+    const testing = async () => {
+      const academyQ = await GetAcademyList(academy);
+
+  
+      const userNames =  loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      const eventData = {
+      Id: blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      PublishedName: userNames.publisherName,
+      Title: academyQ.name,
+      Description: blogDiscription,
+      isPublish: true,
+      isDeleted: false,
+      Image: userInfoItems.image
+    }
+
+    createPost(eventData);
+  }
+    testing();
+ 
+  }
+
+  const createPost = async (event: object) => {
+    let result = await addBlogItem(event);
+
+
+    if (result) {
+      let userBlogItems = await getEventItemsByUserId(blogUserId);
+      console.log(userBlogItems);
+      setBlogItems(userBlogItems);
+    } else {
+      alert(`Blog item was not not updated`)
+    }
+
+
+  }
 
 
   useEffect(() => {
@@ -126,23 +175,7 @@ export default function MainFeedComponent() {
               <Row className="text-center">
                 <h1>Event Calander</h1>
               </Row>
-              <Row className="eventMainPageDiv ">
-                <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
-                  <h5>SUN</h5>
-                  <h5>8th</h5>
-                  <h5>Aug</h5>
-                </Col>
-                <Col md={8} sm={8} xs={8}>
-                  <h6>Chandler Ocapan</h6>
-                  <h5>
-                    <b>
-                      <u>Sunnyvale Bjj</u>
-                    </b>
-                    <img className="locationPNG" src={locationIMG} />
-                  </h5>
-                  <h5>Time</h5>
-                </Col>
-              </Row>
+              <MainFeedEventComponent/>
 
               <Row className="eventMainPageDiv">
                 <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
