@@ -27,7 +27,7 @@
     width: 15px;
 }
 
-.scrollDiv{
+.scrollDivtest{
     height: 265px;
     width: 100%;
     overflow-x: hidden;
@@ -35,6 +35,13 @@
     text-align: center;
 }
 
+.addFriend{
+    width: 50px;
+}
+
+.editProfileText{
+    font-size: 20px;
+}
 
 @media screen and (max-width: 425px)  {
     .editProfileImg{

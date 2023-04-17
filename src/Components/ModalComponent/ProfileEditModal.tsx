@@ -92,7 +92,7 @@ updateUserInfo(item, testID);
   return (
     
     <div>
-  <Button  onClick={() => setLgShow(true)}>Edit <img className="eventButton" src={EditProfile} alt="Edit Profile Icon"/></Button>
+  <Button className='editProfileText' onClick={() => setLgShow(true)}>Edit Profile<img className="eventButton" src={EditProfile} alt="Edit Profile Icon"/></Button>
   <Modal
     size="lg"
     show={lgShow}

@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
@@ -31,11 +31,11 @@ export default function ModalComponent() {
   const [blogIsDeleted, setBlogIsDeleted] = useState(false);
   const [blogIsPublish, setBlogIsPublished] = useState(false);
 
-// ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
+  // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const hours = Array.from({ length: 24 }, (_, i) => i);
- 
+
 
 
 
@@ -48,28 +48,30 @@ export default function ModalComponent() {
     const testing = async () => {
       const academyQ = await GetAcademyList(academy);
 
-  
-      const userNames =  loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-    const eventData = {
-      Id: blogId,
-      UserId: userNames.userId,
-      Date: new Date,
-      publishedName: userNames.publisherName,
-      academyName: academyQ.name,
-      time: selectedHour,
-      eventDate: selectedDate,
-      address: academyQ.address,
-      description: blogDiscription,
-      type: viewable,
-      isPublish: true,
-      isDeleted: false,
-      image: userInfoItems.image
-    }
 
-    setSelectedDate(selectedDay + ", " + selectedMonth)
-    createOpenEvent(eventData);
-  }
+      const userNames = loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      setSelectedDate(selectedDay + ", " + selectedMonth);
+      console.log(selectedDay, selectedMonth)
+      const eventData = {
+        Id: blogId,
+        UserId: userNames.userId,
+        Date: new Date,
+        publishedName: userNames.publisherName,
+        academyName: academyQ.name,
+        time: selectedHour,
+        eventDate: selectedDate,
+        address: academyQ.address,
+        description: blogDiscription,
+        type: viewable,
+        isPublish: true,
+        isDeleted: false,
+        image: userInfoItems.image
+      }
+
+      
+      createOpenEvent(eventData);
+    }
     testing();
     handleClose();
   }
@@ -144,7 +146,7 @@ export default function ModalComponent() {
               </div>
             </Form.Group></Col>
 
-              {/*------------------ TIME DROPDOWN-------------- */}
+            {/*------------------ TIME DROPDOWN-------------- */}
 
             <Col lg={6}><Form.Label>Select Time:</Form.Label>
               <Form.Select value={selectedHour} onChange={handleHourChange}>
@@ -156,13 +158,13 @@ export default function ModalComponent() {
               </Form.Select></Col>
           </Row>
           <Row>
-          <Form>
-            <Form.Label>Select Privacy</Form.Label>
-            <Form.Select value={viewable} onChange={handleChange}>
+            <Form>
+              <Form.Label>Select Privacy</Form.Label>
+              <Form.Select value={viewable} onChange={handleChange}>
                 <option value="In House Open Mat">In House Open Mat</option>
                 <option value="public">Public Open Mat</option>
-            </Form.Select>
-        </Form>
+              </Form.Select>
+            </Form>
           </Row>
           <textarea style={{ marginTop: '15px' }} className='textArea' placeholder='Enter Event Description' onChange={handleDecription}></textarea>
 

@@ -6,6 +6,6 @@ export default function ProfileFriendComponent() {
 
   return (
 
-        <Col lg={4} md={4} xs={6}><Container className="friendDiv ensoBGFriend"><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
+        <Col><Container className="friendDiv "><img className="friendProfile" src={profile}/><p className="friendName">Friend Name 1</p></Container></Col>
   )
 }

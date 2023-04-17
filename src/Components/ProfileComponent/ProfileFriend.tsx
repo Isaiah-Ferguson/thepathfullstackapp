@@ -12,6 +12,7 @@ import ProfileEventPost from "./ProfileEventPost";
 import { loggedInData } from "../../DataServices/DataServices";
 import { getUserInfoByID } from "../../DataServices/DataServices";
 import FriendEvent from "./FriendEvent";
+import AddFriendModal from "../ModalComponent/AddFriendModal";
 
 
 interface UserInfo{
@@ -104,8 +105,7 @@ export default function ProfileFriend() {
             </Col>
           </Row>
 <Row>
-    <Col className="text-center" lg={6} xs={6}><ProfileEditModal/></Col>
-    <Col className="text-center" lg={6} xs={6}><ModalComponent></ModalComponent></Col>
+    <Col className="text-center" lg={6} xs={6}><AddFriendModal/></Col>
 
 </Row>
           <div className="text-center">
@@ -156,8 +156,10 @@ export default function ProfileFriend() {
             <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
             <Col lg={9} xs={9}> <textarea placeholder="What are your thoughts?" style={{ borderRadius: 5, height: 100, width: '100%' }}></textarea> </Col>
           </Row>
-          <Row className="d-flex justify-content-end"><Col lg={2} xs={2}><button className='profilePostButton'>Post</button></Col></Row>
-          <div className="scrollDiv">
+          <Row className="d-flex justify-content-end">
+            <Col lg={2} xs={2}><button className='profilePostButton'>Post</button></Col>
+            </Row>
+          <div className="">
             {/*------------------- Profile Post Div------------------------ */}
           <ProfilePost/>
 
@@ -178,7 +180,7 @@ export default function ProfileFriend() {
        (!isMobile || selectedSection === 'friends') &&  (<Col lg={4} className='friends'>
           <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
           <Container className="eventScrollDiv"> 
-          <Row>
+          <Row className="rowFriendsDiv">
             <ProfileFriendComponent/>
             <ProfileFriendComponent/>
             <ProfileFriendComponent/>

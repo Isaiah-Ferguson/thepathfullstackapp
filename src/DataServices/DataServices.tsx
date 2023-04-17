@@ -95,31 +95,33 @@ interface userData {
       //this will consist of user ID and their Name.
   }
   
-  async function addBlogItem(blogItem: object) {
-      const res = await fetch('https://thepathapi.azurewebsites.net/blog/AddBlogItem',{
-          method:"POST",
-          headers:{
-              'Content-Type':"application/json"
-          },
-          body:JSON.stringify(blogItem)
-      });
-      if(!res.ok){
-          const message = `An Error has Occured  ${res.status}`;
-          throw new Error(message);
-      }
-      const data = await res.json();
-      return data;
-  }
+
   
   async function getBlogItemsByUserId(userId: number) {
       let res = await fetch(`https://thepathapi.azurewebsites.net/blog/GetBlogItemById/${userId}`)
       let data = await res.json();
       return data;
   }
+
+  async function addBlogItem(blogItem: object) {
+    const res = await fetch('https://thepathapi.azurewebsites.net/blog/AddBlogItem',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+}
   
   async function updateBlogItem(blogItem : object) {
       const res = await fetch('https://thepathapi.azurewebsites.net/blog/UpdateBlogitem',{
-          method:"POST",
+          method:"PUT",
           headers:{
               'Content-Type':"application/json"
           },

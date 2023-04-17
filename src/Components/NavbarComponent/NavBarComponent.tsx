@@ -28,29 +28,21 @@ export default function NavbarComponent() {
   function MainFeedNavigate() { navigate("/MainFeedComponent"); };
 
   function LoginNavigate() {
-    console.log(localStorage)
     localStorage.removeItem('Token');
-    console.log(localStorage)
     navigate("/");
   };
 
 
   const handleSearch = async () => {
     const searchName = await searchUser(search);
-    console.log(data);
     data.setName(searchName);
-    console.log(searchName);
-    console.log(data.name);
-
-      navigate("/friends");
-
-    
+    navigate("/friends");
   }
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
   return (
-    <Navbar  expand="lg">
+    <Navbar expand="lg" className="navBarTest">
       <Container fluid>
         <img className="NavLogo" src={logo} />
 

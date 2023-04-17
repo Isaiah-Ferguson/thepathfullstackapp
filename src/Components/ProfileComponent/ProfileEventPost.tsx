@@ -36,7 +36,6 @@ export default function ProfileEventPost() {
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       setMyEventItems(userEventItems);
-  
     };
 
     if (!checkToken()) {
@@ -51,10 +50,17 @@ export default function ProfileEventPost() {
     <>
       {myEventItems.length > 0 ? (
         myEventItems.filter((item) => item.userId === blogUserId)
-          .map((item: EventItem, idx: number) => (
+          .map((item: EventItem, idx: number) => {
+            console.log(item.Date)
+            const date = new Date(item.Date);
+          const formattedDate = date.toLocaleDateString();
+          return(
+            
+         
             <Row style={{ marginTop: 10 }} key={idx}>
               <Col lg={3} xs={3}>
                 <img className="smallProfileIMG" src={item.image} alt={item.publishedName} />
+                {formattedDate}
               </Col>
               <Col lg={9} xs={9}>
                 <div className="eventTextArea">
@@ -69,13 +75,14 @@ export default function ProfileEventPost() {
                     </Col>
                   </Row>
                   <Row className="text-center">
-                    <p>{item.academyName}</p>
-                    <p>{item.address}</p>
+                    <p title={item.address}>{item.academyName}</p>
+                    <p></p>
                   </Row>
                 </div>
               </Col>
             </Row>
-          ))
+          )
+          })
       ) : (
         <div>Loading...</div>
       )}
