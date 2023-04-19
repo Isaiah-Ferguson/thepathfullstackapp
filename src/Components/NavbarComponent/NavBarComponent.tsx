@@ -42,9 +42,37 @@ export default function NavbarComponent() {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
   return (
+    <>
+    <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">
+          {" "}
+          99+
+        </span>
     <Navbar expand="lg" className="navBarTest">
+      
       <Container fluid>
-        <img className="NavLogo" src={logo} />
+        <img className="NavLogo" onClick={(e) => { setIsNotificationVisible(!isNotificationVisible); }} src={logo} />
+        
+          
+          {isNotificationVisible && <div className="NotificationDiv container-fluid">
+          <Row className="NotificationDiv2">
+            <Col lg={4} xs={4}>
+              <img className="NotificationImg" src={profile}/>
+            </Col>
+            <Col lg={8} xs={8}>
+              <p>Busby has sent a Friends request</p>
+              <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
+            </Col>
+          </Row>
+          <Row className="NotificationDiv2">
+            <Col lg={4} xs={4}>
+              <img className="NotificationImg" src={profile}/>
+            </Col>
+            <Col lg={8} xs={8}>
+              <p>Busby has sent a Friends request</p>
+              <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
+            </Col>
+          </Row>
+          </div>}
 
         
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -56,35 +84,7 @@ export default function NavbarComponent() {
           >
             <Nav.Link onClick={ProfileNavigate}>Profile</Nav.Link>
             <Nav.Link onClick={MainFeedNavigate}>Main Feed</Nav.Link>
-            <Nav.Link href="" onClick={(e) => {
-            setIsNotificationVisible(!isNotificationVisible);
-          }}>
-              Notifications{" "}
-              <span className="translate-middle badge rounded-pill bg-danger NotificationBadge">
-                {" "}
-                99+
-              </span>
-              {isNotificationVisible && <div className="NotificationDiv container-fluid">
-                <Row className="NotificationDiv2">
-                  <Col lg={4} xs={4}>
-                    <img className="NotificationImg" src={profile}/>
-                  </Col>
-                  <Col lg={8} xs={8}>
-                    <p>Busby has sent a Friends request</p>
-                    <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
-                  </Col>
-                </Row>
-                <Row className="NotificationDiv2">
-                  <Col lg={4} xs={4}>
-                    <img className="NotificationImg" src={profile}/>
-                  </Col>
-                  <Col lg={8} xs={8}>
-                    <p>Busby has sent a Friends request</p>
-                    <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
-                  </Col>
-                </Row>
-                </div>}
-            </Nav.Link>
+          
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -100,5 +100,6 @@ export default function NavbarComponent() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </>
   );
 }

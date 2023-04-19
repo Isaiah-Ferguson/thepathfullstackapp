@@ -70,14 +70,12 @@ interface userData {
   async function GetPublishedBlogItem() {
       let res = await fetch(`https://thepathapi.azurewebsites.net/Blog/getblogitems/`)
       let data = await res.json();
-      console.log(data);
       return data;
   }
 
   async function GetAcademyList(academyname: string) {
     let res = await fetch(`https://thepathapi.azurewebsites.net/AcademyList/${academyname}`)
     let data = await res.json();
-    console.log(data);
     return data;
 }
   

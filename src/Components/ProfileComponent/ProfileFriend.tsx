@@ -161,7 +161,7 @@ export default function ProfileFriend() {
             </Row>
           <div className="">
             {/*------------------- Profile Post Div------------------------ */}
-          <ProfilePost/>
+          {/* <ProfilePost/> */}
 
           </div>
           </Container>

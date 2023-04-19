@@ -82,7 +82,7 @@ type ChildProps = {
   return (
     <>
       <Button  variant="light" onClick={handleShow}>
-      <img className='editPostButton' src={edit}/>
+      ...
       </Button>
 
       <Modal show={show} onHide={handleClose}>

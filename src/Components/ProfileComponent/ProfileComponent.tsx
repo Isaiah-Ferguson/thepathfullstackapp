@@ -13,6 +13,7 @@ import { getUserInfoByID, addBlogItem, loggedInData } from "../../DataServices/D
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import ProfilePostModule from "../ModalComponent/ProfilePostModule";
+import NavBar from "../NavbarComponent/NavBarComponent"
 
 
 interface UserInfo {
@@ -27,9 +28,7 @@ interface UserInfo {
   belt: string;
 }
 
-interface PicProps {
-  picture: string,
-}
+
 export default function ProfileComponent() {
   const blackbelt = require('../../assets/BJJBlack.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
@@ -87,44 +86,20 @@ export default function ProfileComponent() {
     };
     getLoggedInData();
   }, []);
-  // ----------------------------------------------------------------------------
-  const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPostDescription(e.target.value)
-  }
 
-  const createPost = () => {
-    const testing = async () => {
-
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const blogData = {
-        Id: blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        title: userNames.publisherName,
-        publishedName: userNames.publisherName,
-        description: postDescription,
-        isPublish: true,
-        isDeleted: false,
-        image: userInfoItems.image
-      }
-      addBlogItem(blogData);
-    }
-    testing();
-  }
 
   return (
     <div className="container-fluid topProfileBG">
-      
+      <NavBar/>
       <Row className="  d-flex justify-content-center">
-        <Col lg={3} sm={12} className="profileCard">
+        <Col lg={3} md={12} sm={12} className="profileCard">
           <Container className="text-center ensoBG">
             <img className="profileIMG" src={userInfo.image} />
           </Container>
           <Row>
             <Col>
               <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
-              <p style={{padding: 10}} className="profileHeaderText">Academy - {userInfo.academyName}</p>
+              <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
               
             </Col>
             <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
@@ -133,45 +108,41 @@ export default function ProfileComponent() {
           </Row>
           
           <Row style={{marginBottom: 25}}>
-            <Col className="text-center" lg={6} xs={6}><ProfileEditModal /></Col>
-            <Col className="text-center" lg={6} xs={6}><ModalComponent></ModalComponent></Col>
+            <Col className="text-center" lg={6} xs={7}><ProfileEditModal /></Col>
+            <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>
           </Row>
         </Col>
        
-          {/* Mobile Text */}
+          {/*------------------------------------- Mobile Text---------------------------------------------- */}
           {(isMobile) && (
              <Col lg={12}>
-            <Row className=" justify-content-around" style={{ flexWrap: "nowrap" }}>
+            <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
               <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
               <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('friends')}>- Friends -</Col>
             </Row>  </Col>
           )}
 
       
         {(!isMobile || selectedSection === 'post') && (
-          <Col lg={5} sm={12} className='post'>
+          <Col lg={4} md={12} sm={12} className='post'>
             <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
-            <Container>
+            <div>
 
               <Row style={{ marginTop: 10, marginBottom: 30 }}>
-                <Col lg={12} xs={12} style={{ display: "inline-block" }}>  <img className="smallProfileIMGPost" src={userInfo.image} /><ProfilePostModule/> </Col>
+                <Col lg={12} xs={12} style={{ display: "inline-block" }}><ProfilePostModule picture={userInfo.image}/> </Col>
               </Row>
-              
-              <div className="scrollDiv">
-                {/*------------------- Profile Post Div------------------------ */}
-                <ProfilePost />
 
-              </div>
-            </Container>
+              {/*--------------------------------- Profile Post Div--------------------------------------------- */}
+              <div className="scrollDiv">  <ProfilePost picture={userInfo.image}/> </div>
 
+            </div>
           </Col>)}
 
-          {(!isMobile || selectedSection === 'event') && (<Col lg={4} sm={12} className='event'>
+          {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
           <Container className="eventScrollDiv">
 
-            <ProfileEventPost />
+            <ProfileEventPost  picture={userInfo.image}/>
           </Container>
 
 

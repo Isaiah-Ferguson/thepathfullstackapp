@@ -43,6 +43,11 @@
     font-size: 20px;
 }
 
+.postTextDiv{
+    display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 425px)  {
     .editProfileImg{
         height: 250px;

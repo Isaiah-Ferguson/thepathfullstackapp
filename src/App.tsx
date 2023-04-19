@@ -23,9 +23,7 @@ function App() {
   return (
     <UserContext.Provider value={UserHooks()}>
     <BrowserRouter>
-    <div className='bgcolor'>
-<NavBar/>
-    </div>
+
 
     <Routes>
 <Route path='/profile' element={<ProfileComponent />}/>

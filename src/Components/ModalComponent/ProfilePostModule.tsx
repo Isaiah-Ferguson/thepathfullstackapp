@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { loggedInData, getUserInfoByID, updateBlogItem, addBlogItem } from '../../DataServices/DataServices';
-import { Form } from 'react-bootstrap';
-type ChildProps = {
-  blogId: number;
-}
+import { Form, Row } from 'react-bootstrap';
+
+
 
 interface UserInfo {
     aboutMe: string;
@@ -19,7 +18,11 @@ interface UserInfo {
     username: string;
     belt: string;
   }
- function ProfilePostModule() {
+
+  type pictureprops = {
+  picture: string;
+}
+ function ProfilePostModule(props: pictureprops) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,14 +59,18 @@ interface UserInfo {
       addBlogItem(blogData);
     }
     testing();
+    handleClose();
   }
 
 
   return (
     <>
-  
-      <Form.Control   onClick={handleShow} type="text" placeholder="What is on your mind?" />
 
+<div className="postTextDiv">
+      <img className="smallProfileIMGPost" src={props.picture} />
+      <Form.Control onClick={handleShow} type="text" placeholder="What is on your mind?" />
+    </div>
+  
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Post</Modal.Title>

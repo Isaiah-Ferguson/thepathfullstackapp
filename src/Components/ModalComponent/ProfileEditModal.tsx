@@ -77,8 +77,6 @@ function handleEditProfile() {
     belt: belt
   };
 
-
-console.log(testID);
 updateUserInfo(item, testID);
 
   handleClose();

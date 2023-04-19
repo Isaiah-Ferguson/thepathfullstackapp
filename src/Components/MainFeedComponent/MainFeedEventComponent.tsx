@@ -24,7 +24,7 @@ interface EventItem {
 export default function MainFeedEventComponent() {
     const locationIMG = require("../../assets/Location.png");
 
-    
+  const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
@@ -52,16 +52,20 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
+  function Joined(e: any) {
+    e.target.value = "Joined";
+    setJoin(e.target.value);
+  }
 
+const myEventItemsOrder = myEventItems.reverse();
   return (
     <>
     {myEventItems.length > 0 ? (
-        myEventItems.map((item: EventItem, idx: number ) => (
+        myEventItemsOrder.map((item: EventItem, idx: number ) => (
             <Row className="eventMainPageDiv"  key={idx}>
             <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
             <h6>{item.eventDate}</h6>
             <h6>{item.time}</h6>
-            
             </Col>
             <Col md={9} sm={9} xs={9}>
               <h6>{item.publishedName}</h6>
@@ -69,9 +73,7 @@ export default function MainFeedEventComponent() {
                 <b>
                   <u title={item.address}>{item.academyName}</u>
                 </b>
-                
               </h6>
-              
             </Col>
           </Row>
         ))) : (  <div>Loading...</div>)

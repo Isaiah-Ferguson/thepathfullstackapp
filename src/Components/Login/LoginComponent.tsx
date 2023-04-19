@@ -8,6 +8,7 @@ export default function LoginComponent() {
   let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    
 
     const handleSubmit = async () => {
         let userData = {
@@ -15,7 +16,7 @@ export default function LoginComponent() {
             Password: password
         }
         let token = await login(userData);
-        console.log(token)
+
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
@@ -30,7 +31,7 @@ export default function LoginComponent() {
         <Row className='wrapper' >
             <Col className='form-box'>
             <h1 className='d-flex justify-content-center'>The Path</h1>
-            <h4 className='d-flex justify-content-center'>A Community Driven Brazilian Jiu-Jitsu App</h4>
+            <h4 className='text-center'>A Community Driven Brazilian Jiu-Jitsu App</h4>
             <Form>
       <Form.Group className="mb-3 input-box" controlId="Userame">
         <Form.Label className='pColor'>Username</Form.Label>
@@ -46,7 +47,10 @@ export default function LoginComponent() {
       <Button className='Buttons' onClick={handleSubmit} >
         Login
       </Button>
-      <p style={{ display: "inline-block", marginTop: 40 }}>Not a member? <span className='register' onClick={() => navigate("/Create")} >Register</span></p>
+      <p style={{ display: "inline-block", marginTop: 20 }}>Not a member? <span className='register' onClick={() => navigate("/Create")} >Register</span></p>
+      <div className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
+      
+
     </Form>
     
       
