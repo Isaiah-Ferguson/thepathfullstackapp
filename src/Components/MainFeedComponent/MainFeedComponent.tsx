@@ -48,7 +48,7 @@ export default function MainFeedComponent() {
   }
 
   return (
-    <div className="topProfileBG">
+    <div className="container-fluid topProfileBG">
       <NavBar/>
       <br />
       <br />

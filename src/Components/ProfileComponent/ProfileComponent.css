@@ -81,6 +81,11 @@
     border-radius: 15px;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 .eventTextArea{
     border-radius: 5px;
     width: 100%;
@@ -169,9 +174,14 @@
         padding: 40px;
         text-align: center;
         width: 75%;
-        height: 210px;
+        height: 235px;
         overflow: scroll;
+        scrollbar-width: none;
   }
+
+  .friendScrollDiv::-webkit-scrollbar {
+    display: none;
+}
 
   .profileCard{
     position: relative;
