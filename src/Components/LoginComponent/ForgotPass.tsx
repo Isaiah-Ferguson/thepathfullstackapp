@@ -19,6 +19,7 @@ function Forgotpass() {
 
 function MainFeedNavigate3() {
     navigate("/Signup");
+    
   };
   
   // const navigater = Navigate();

@@ -98,6 +98,8 @@ export default function ProfileComponent() {
         {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
         {(!isMobile || selectedSection === 'post') && (
         <Col lg={4} className='post'>
+          { /* I have a feeling that theres something wrong with our end points, and that's the reason why We couldn't post */}
+          {/* Firing a new folder to test and Add new Dependency to test!  */}
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
           <Container>
 

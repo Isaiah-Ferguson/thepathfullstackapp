@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, NavLink, ThemeProvider } from 'react-bootstrap'
+import { Form, Button, NavLink, ThemeProvider, Container } from 'react-bootstrap'
 import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +32,10 @@ export default function LoginComponent() {
 
 
   return (
+
+    <Container>
+
+
 
     <div id="container"
     className='blue-border'
@@ -86,5 +90,6 @@ export default function LoginComponent() {
 
   </div>
 
+    </Container>
   )
 }
