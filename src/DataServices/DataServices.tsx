@@ -78,6 +78,12 @@ interface userData {
     let data = await res.json();
     return data;
 }
+
+async function GetAllUsers() {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/User/GetAllUsers/`)
+    let data = await res.json();
+    return data;
+}
   
   function checkToken() {
       let result = false;
@@ -180,4 +186,4 @@ async function getEventItemsByUserId(userId: number) {
 
 
 
-  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser }
+  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

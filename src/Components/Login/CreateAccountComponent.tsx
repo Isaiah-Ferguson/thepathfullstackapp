@@ -10,11 +10,13 @@ export default function CreateAccountComponent() {
     const [password, setPassword] = useState('');
     const backBTN = require('../../assets/Back.png')
     const handleSubmit = () => {
+      
         let userData = {
             id: 0,
             Username : username,
             Password: password
         }
+        console.log(userData);
         if(!userData.Username === null && !userData.Password === null){
           console.log(userData);
         createAccount(userData);

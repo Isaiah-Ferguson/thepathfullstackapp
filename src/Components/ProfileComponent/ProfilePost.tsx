@@ -45,8 +45,6 @@ export default function ProfilePost(props: pictureprops) {
       getLoggedInData();
     }
   }, []);
-  const numbertest = 0;
-
 
   return (
     <>

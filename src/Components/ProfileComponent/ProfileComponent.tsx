@@ -117,8 +117,8 @@ export default function ProfileComponent() {
           {(isMobile) && (
              <Col lg={12}>
             <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">Post</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">Events</Button></Col>
             </Row>  </Col>
           )}
 
@@ -161,23 +161,6 @@ export default function ProfileComponent() {
             <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
             <div style={{marginTop: -55}}>
               <div className="friendScrollDiv d-flex">
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
-                <ProfileFriendComponent />
                 <ProfileFriendComponent />
               </div>
             </div>
