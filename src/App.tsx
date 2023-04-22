@@ -26,10 +26,10 @@ import ProfileEditModal from './Components/ModalComponent/ProfileEditModal';
 // import { browserRouter } from ''
 function App() {
 
-  const userHooks = UserHooks();
+  // const userHooks = UserHooks();
 
   return (
-    <UserContext.Provider value={userHooks}>
+    <UserContext.Provider value={UserHooks()}>
     <BrowserRouter>
 
     <Routes>
