@@ -10,7 +10,7 @@ interface BlogItem {
   id: number;
   image: string;
   isDeleted: false;
-  isPublished: false;
+  isPublish: false;
   publishedName: string;
   description: string;
   title: string;
@@ -53,7 +53,7 @@ export default function MainFeedPostComponent() {
     <>
       {blogItems.length > 0 ?
       
-      blogItemsOrder.map((item: BlogItem, idx: number) => {
+      blogItemsOrder.filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
           return (

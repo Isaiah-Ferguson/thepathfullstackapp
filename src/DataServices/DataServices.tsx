@@ -192,6 +192,30 @@ async function getEventItemsByUserId(userId: number) {
     return eventData;
 }
 
+async function getFriendsList(userId: number) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/friends/getfriendslist/`)
+    let eventData = await res.json();
+    return eventData;
+}
+
+async function AddFriend(blogItem: object) {
+    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/{userId}/{friendUserId}`,{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const eventData = await res.json();
+    return eventData;
+}
 
 
-  export { createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+
+
+
+  export { getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

@@ -10,7 +10,7 @@ interface BlogItem {
   id: number;
   image: string;
   isDeleted: false;
-  isPublished: false;
+  isPublish: false;
   publishedName: string;
   description: string;
   title: string;
@@ -49,9 +49,10 @@ export default function ProfilePost(props: pictureprops) {
   return (
     <>
       {blogItems.length > 0 ?
-        blogItems.filter((item) => item.userid === blogUserId).map((item: BlogItem, idx: number) => {
+        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
+          console.log(item)
           return (
             <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
               <Col lg={4} sm={3} xs={5}>

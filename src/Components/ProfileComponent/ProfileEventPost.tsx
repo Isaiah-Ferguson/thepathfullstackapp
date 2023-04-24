@@ -3,7 +3,6 @@ import { Row, Col, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
-
 interface EventItem {
   Id: number,
   userId: number,
