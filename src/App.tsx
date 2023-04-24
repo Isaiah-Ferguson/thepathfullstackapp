@@ -22,6 +22,7 @@ import ForgotPass from './Components/LoginComponent/ForgotPass';
 import CreateAccount from './Components/CreateComponent/CreateAccount';
 import ProfileEditModal from './Components/ModalComponent/ProfileEditModal';
 import ProfileFriend from './Components/ProfileComponent/ProfileFriend';
+import MainFeedComponent from './Components/MainFeedComponent/MainFeedComponent';
 
 // import { browserRouter } from ''
 function App() {
@@ -40,6 +41,8 @@ function App() {
     <Route path ='/CreateAccount' element={<CreateAccount/>}/>
     <Route path ='/ProfileModal' element={<ProfileEditModal/>}/>
     <Route path='/friends' element={<ProfileFriend />}/>
+    <Route path='/MainFeedComponent' element={<MainFeedComponent />}/>
+
     </Routes>
     
     </BrowserRouter>
