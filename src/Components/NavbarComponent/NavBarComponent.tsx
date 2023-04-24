@@ -24,7 +24,7 @@ export default function NavbarComponent() {
 
   
 
-  function ProfileNavigate() { navigate("/profile"); };
+  function ProfileNavigate() { navigate("/profileme"); };
   function MainFeedNavigate() { navigate("/MainFeedComponent"); };
 
   function LoginNavigate() {
