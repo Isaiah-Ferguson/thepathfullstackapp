@@ -97,8 +97,8 @@ color: #7F84AD;
     flex-direction: column;
   }
 
-  @media screen and (max-width: 735px)  {
+  /* @media screen and (max-width: 735px)  {
     .blue-border{
         height: 50px;
     }
-}
+} */

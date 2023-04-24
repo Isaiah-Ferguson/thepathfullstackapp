@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Button, NavLink, ThemeProvider, Container, Row,Col } from 'react-bootstrap'
+import { Form, Button, NavLink, ThemeProvider, Row,Col } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
 import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -33,18 +34,20 @@ export default function LoginComponent() {
 
   return (
     
-    
-    
-    <Row className='easy'>
-    
+    <Container>
 
-    <Col 
-     className='blue-border'
+
+    
+    <Row  className='easy'>
+    
+    {/* Responsiveness continue! */}
+    <Col lg={2} md={2} xs={2}
+    className='blue-border'
      style={{
-      backgroundImage: `url(${background})`,
-      backgroundPosition: 'center',
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
+       backgroundImage: `url(${background})`,
+       backgroundPosition: 'center',
+       backgroundSize: "cover",
+       backgroundRepeat: "no-repeat",
       minWidth: "1145px",
       minHeight: "700px",
       borderTop: "10px solid rgba(220, 219, 252, 0.99)",
@@ -53,6 +56,8 @@ export default function LoginComponent() {
 
     }}>
 
+      
+      
       <Form style={{ position: 'relative', width: '503px', height: '579px', background: "rgba(255, 255, 255, 0.4)", display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "54px auto 68px" }}>
         <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
         <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px" }}>A community driven Brazilian Jiu-Jitsu App</p>
@@ -81,6 +86,8 @@ export default function LoginComponent() {
         </div>
       </Form>
    
+    
+
 
 
 </Col>
@@ -88,7 +95,9 @@ export default function LoginComponent() {
 
     </Row>
     
+ 
 
+       </Container>
 
 
   )
