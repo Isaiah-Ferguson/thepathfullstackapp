@@ -9,6 +9,8 @@ export default function CreateAccountComponent() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const backBTN = require('../../assets/Back.png')
+
+
     const handleSubmit = () => {
       
         let userData = {
@@ -16,13 +18,9 @@ export default function CreateAccountComponent() {
             Username : username,
             Password: password
         }
-        console.log(userData);
-        if(!userData.Username === null && !userData.Password === null){
-          console.log(userData);
+
         createAccount(userData);
-        navigate("/");
-        }
-        
+        navigate("/");  
     }
 
 
@@ -43,7 +41,7 @@ export default function CreateAccountComponent() {
   
         <Form.Group className="mb-3 input-box" controlId="Password">
           <Form.Label className='pColor'>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+          <Form.Control type="password" placeholder="Password" onChange={({target : {value}}) => setPassword(value)} />
         </Form.Group>
 
         <Button className='Buttons' style={{marginTop: 20}} onClick={handleSubmit} >
