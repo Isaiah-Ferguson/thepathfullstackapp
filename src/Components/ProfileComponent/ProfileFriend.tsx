@@ -13,6 +13,8 @@ import { loggedInData } from "../../DataServices/DataServices";
 import { getUserInfoByID } from "../../DataServices/DataServices";
 import FriendEvent from "./FriendEvent";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
+import FriendPost from './FriendPost';
+import NavbarComponent from "../NavbarComponent/NavBarComponent";
 
 
 interface UserInfo{
@@ -92,106 +94,78 @@ export default function ProfileFriend() {
       // ----------------------------------------------------------------------------
 
 
-  return (
-    <div className="container-fuild">
-      <Row className="topProfileBG">
-        <Col lg={4}>
-          <Container className="text-center ensoBG">
-            <img className="profileIMG" src={userInfo.image} />
-          </Container>
-          <Row>
-            <Col>
-              <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
-            </Col>
-          </Row>
-<Row>
-    <Col className="text-center" lg={6} xs={6}><AddFriendModal/></Col>
-
-</Row>
-          <div className="text-center">
-          </div>
-        </Col>
-        <Col lg={8}>
-          <Row className="aboutMeText">
-            <p>About Me</p>
-          </Row>
-          <Row>
-  <p className="profileHeaderText">Academy - {userInfo.academyName}</p>
-          </Row>
-          <Row>
-            <p className="profileHeaderText">
-              Rank - <img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank"/>
-            </p>
-          </Row>
-          <Row>
-            <Col lg={7}>
-              <p className="discText">
-              {userInfo.aboutMe}
-              </p>
-            </Col>
-          </Row>
-        </Col>
-        <Col>
-        {/* Mobile Text */}
-        {(isMobile) && (
-            <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
-        <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
-        <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
-        <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('friends')}>- Friends -</Col>
-      </Row>
-        )}
-        
-        </Col>
-      </Row>
-      
-      <Row className={`bottomProfileBG ${isMobile ? 'mobileDiv' : ''}`}>
-        
-        {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
-        {(!isMobile || selectedSection === 'post') && (
-        <Col lg={4} className='post'>
-          <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
-          <Container>
-
-          <Row style={{marginTop: 10}}>
-            <Col lg={3} xs={3}> <img className="smallProfileIMG"  src={profile} /> </Col>
-            <Col lg={9} xs={9}> <textarea placeholder="What are your thoughts?" style={{ borderRadius: 5, height: 100, width: '100%' }}></textarea> </Col>
-          </Row>
-          <Row className="d-flex justify-content-end">
-            <Col lg={2} xs={2}><button className='profilePostButton'>Post</button></Col>
-            </Row>
-          <div className="">
-            {/*------------------- Profile Post Div------------------------ */}
-          {/* <ProfilePost/> */}
-
-          </div>
-          </Container>
+      return (
+        <div className="container-fluid topProfileBG">
+          <NavbarComponent/>
+          <Row className="  d-flex justify-content-center">
+            <Col lg={3} md={12} sm={12} className="profileCard">
+              <Container className="text-center ensoBG">
+                <img className="profileIMG" src={userInfo.image} />
+              </Container>
+              <Row>
+                <Col>
+                  <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
+                  <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
+                  
+                </Col>
+                <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
+                <p className="discText">About Me</p>
+                <p> {userInfo.aboutMe} </p>
+              </Row>
+              
+         
+<AddFriendModal username={userInfo.firstName}/>
           
-        </Col>)}
-        {(!isMobile || selectedSection === 'event') &&  (<Col lg={4} className='event'>
-          <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
-          <Container className="eventScrollDiv">
-
-         <FriendEvent/>
-          </Container>
-
-
-        </Col>)}
-        {
-       (!isMobile || selectedSection === 'friends') &&  (<Col lg={4} className='friends'>
-          <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
-          <Container className="eventScrollDiv"> 
-          <Row className="rowFriendsDiv">
-            <ProfileFriendComponent/>
-            <ProfileFriendComponent/>
-            <ProfileFriendComponent/>
-            <ProfileFriendComponent/>
-            <ProfileFriendComponent/>
-            <ProfileFriendComponent/>
+            </Col>
+           
+              {/*------------------------------------- Mobile Text---------------------------------------------- */}
+              {(isMobile) && (
+                 <Col lg={12}>
+                <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
+                  <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">Post</Button></Col>
+                  <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">Events</Button></Col>
+                </Row>  </Col>
+              )}
+    
+          
+            {(!isMobile || selectedSection === 'post') && (
+              <Col lg={4} md={12} sm={12} className='post'>
+                <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
+                <div>
+    
+                  {/*--------------------------------- Profile Post Div--------------------------------------------- */}
+                  <div className="scrollDiv">  <FriendPost picture={userInfo.image}/> </div>
+    
+                </div>
+              </Col>)}
+    
+              {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
+              <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
+              <Container className="eventScrollDiv">
+    
+                <ProfileEventPost  picture={userInfo.image}/>
+              </Container>
+    
+    
+            </Col>)}
+    
           </Row>
-          </Container>
-        </Col>)}
-        
-      </Row>
-    </div>
-  );
+    
+          <Row className={`bottomProfileBG ${isMobile ? 'mobileDiv' : ''}`}>
+    
+            {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
+    
+            
+    
+          </Row>
+          <Col lg={12} xs={12} className='friends'>
+                <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
+                <div style={{marginTop: -55}}>
+                  <div className="friendScrollDiv d-flex">
+                    <ProfileFriendComponent />
+                  </div>
+                </div>
+              </Col>
+        </div>
+      );
 }

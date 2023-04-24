@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function AddFriendModal() {
+
+type username = {
+  username: string;
+}
+export default function AddFriendModal(props: username) {
   const [show, setShow] = useState(false);
   const add = require('../../assets/Add.png')
 
@@ -17,15 +21,14 @@ export default function AddFriendModal() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Would you like to add {props.username}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Confirm Friend Request
           </Button>
         </Modal.Footer>
       </Modal>
