@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, NavLink, ThemeProvider, Container } from 'react-bootstrap'
+import { Form, Button, NavLink, ThemeProvider, Container, Row,Col } from 'react-bootstrap'
 import { useState } from 'react'
 import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -32,14 +32,15 @@ export default function LoginComponent() {
 
 
   return (
+    
+    
+    
+    <Row className='easy'>
+    
 
-    <Container>
-
-
-
-    <div id="container"
-    className='blue-border'
-    style={{
+    <Col 
+     className='blue-border'
+     style={{
       backgroundImage: `url(${background})`,
       backgroundPosition: 'center',
       backgroundSize: "cover",
@@ -51,13 +52,6 @@ export default function LoginComponent() {
       borderRight: "10px solid rgba(220, 219, 252, 0.99)",
 
     }}>
-
-
-    <ThemeProvider
-      breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
-      maxBreakpoint="md">
-
-
 
       <Form style={{ position: 'relative', width: '503px', height: '579px', background: "rgba(255, 255, 255, 0.4)", display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "54px auto 68px" }}>
         <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
@@ -86,10 +80,20 @@ export default function LoginComponent() {
           {/* <li><Link to="/components/Signup">React</Link></li> */}
         </div>
       </Form>
-    </ThemeProvider>
+   
 
-  </div>
 
-    </Container>
+</Col>
+
+
+    </Row>
+    
+
+
+
   )
+  
+
+   
+  
 }

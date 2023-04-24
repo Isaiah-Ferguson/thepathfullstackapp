@@ -1,0 +1,104 @@
+.easy {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    /* background: linear-gradient(180deg, #E9E9FF 0%, rgba(233, 233, 255, 0) 100%); */
+}
+
+#Container {
+
+    display: flex;
+}
+
+
+.blue-border {
+
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 322px;
+    margin-bottom: 41px;
+  }
+
+  .form-buttons a {
+    color: #000;
+    display: block;
+    text-decoration: none;
+  }
+
+  .form-buttons a span {
+    text-decoration: underline;
+  }
+
+  button.btn-pri{
+    width: 285px;
+background: rgba(220, 219, 252, 0.99);
+border: 1px solid #000000;
+border-radius: 16px;
+padding: 1px 0;
+height: 65px;
+font-size: 42px;
+  }
+
+  form input {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 10px;
+    padding: 20px 0 20px 20px;
+    width: 300px;
+  }
+
+  form input::placeholder {
+    font-weight: 400;
+font-size: 32px;
+line-height: 40px;
+color: #7F84AD;
+  }
+
+  input[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 1em;
+  }
+
+  form {
+    background-color: grey;
+    padding: 20px;
+    width: 55vw;
+    /* opacity: 0.5; */
+    height: 35vw;
+    position: absolute;
+    text-align: center;
+   
+    border-top-color: red;
+  }
+  form2 {
+    background-color: red;
+  
+    width: 40vw;
+    opacity: 0.5;
+    height: 30vw;
+    position: absolute;
+  }
+  label {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 735px)  {
+    .blue-border{
+        height: 50px;
+    }
+}
