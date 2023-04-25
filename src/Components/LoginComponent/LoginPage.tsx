@@ -41,7 +41,7 @@ export default function LoginComponent() {
     <Row  className='easy'>
     
     {/* Responsiveness continue! */}
-    <Col lg={2} md={2} xs={2}
+    <Col lg={2} md={2}
     className='blue-border'
      style={{
        backgroundImage: `url(${background})`,
