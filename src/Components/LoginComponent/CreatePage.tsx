@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { Container } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 import { createAccount } from '../../DataServices/DataServices';
 
@@ -63,8 +63,12 @@ export default function CreatePage2() {
 
     
     <Container> 
+
+      <Row className='easy'>
+
+
        
-       <div  id="container" 
+       <div
         className='blue-border'
         style={{ 
           backgroundImage: `url(${background})`,
@@ -92,14 +96,14 @@ export default function CreatePage2() {
         <Form.Control type="password" placeholder="Password" onChange={({target : {value}}) => setPassword(value)} />
         {/* <Form.Control type="password" placeholder="Confirm Password" /> */}
           
-        <div className='form-group form-buttons'>
+        {/* <div className='form-group form-buttons'>
           <NavLink href="#">Forgot <span> password?</span></NavLink>
           <NavLink href="#">Signup <span>here</span></NavLink>
-          {/* <Link path "/Signup"/> */}
-        </div>
+          <Link path "/Signup"/>
+        </div> */}
 
         <div className='form-group'>
-          <button onClick={handleSubmit}  className='btn-pri'>Login</button>
+          <button onClick={handleSubmit}  className='btn-pri'> Submit </button>
           
       
           {/* <Route path="/Route.tsx" element={<Route />} /> */}
@@ -112,6 +116,7 @@ export default function CreatePage2() {
         </Form>
       
     </div>
+          </Row>
       
     </Container>
   )

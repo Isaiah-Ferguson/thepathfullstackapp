@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginPage.css';
-import {  Form, NavLink} from 'react-bootstrap';
+import {  Form, NavLink, Container, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 // import Signup from '../components/Signup';
 // import { Link } from 'react-router-dom';
@@ -39,10 +39,13 @@ function MainFeedNavigate3() {
         
         
         // <Container className='form2'>
+        <Container> 
+
+          <Row className='easy'>
+
         
         
-        
-        <div id="container" 
+        <div
         className='blue-border'
         style={{ 
           backgroundImage: `url(${background})`,
@@ -67,14 +70,14 @@ function MainFeedNavigate3() {
 
         {/* <Form.Control type="password" placeholder="Password" />
         <Form.Control type="password" placeholder="Confirm Password" /> */}
-        <div className='form-group form-buttons'>
+        {/* <div className='form-group form-buttons'>
           <NavLink >Forgot <span> password?</span></NavLink>
           <NavLink href="#">Signup <span>here</span></NavLink>
-          {/* <Link path "/Signup"/> */}
-        </div>
+          <Link path "/Signup"/>
+        </div> */}
 
         <div className='form-group'>
-          <button onClick={MainFeedNavigate3} className='btn-pri'>Login</button>
+          <button onClick={MainFeedNavigate3} className='btn-pri'>Submit</button>
           
       
           {/* <Route path="/Route.tsx" element={<Route />} /> */}
@@ -87,7 +90,9 @@ function MainFeedNavigate3() {
         </Form>
       
     </div>
-    // </Container>
+        
+                  </Row>
+     </Container>
     );
   }
   export default Forgotpass;
