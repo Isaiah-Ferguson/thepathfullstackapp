@@ -33,6 +33,9 @@ interface userData {
           throw new Error(message);
       }
       const data = await res.json();
+      console.log(data)
+
+      return data;
       //We are not writeing a return because this is a POST.
   }
   
