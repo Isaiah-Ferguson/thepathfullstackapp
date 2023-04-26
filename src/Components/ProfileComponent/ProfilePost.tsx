@@ -52,30 +52,23 @@ export default function ProfilePost(props: pictureprops) {
         blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
-          console.log(item)
           return (
             <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
-              <Col lg={4} sm={3} xs={5}>
+              <Col lg={3} sm={3} xs={5}>
+                <div className="d-flex justify-content-end"><EditPostModal blogId={item.id} /></div>
                 <Row >
-                  <Col sm={8} xs={6}>
+                  <Col sm={12} xs={6}>
                     <img className="smallProfileIMG" src={props.picture} alt="profile" />
                     <div style={{fontWeight: 600}}>{item.publishedName}</div>
                   <div>{formattedDate}</div>
                     </Col>
-                    <Col lg={1} sm={2} xs={2} style={{ height: 40 }} >
-                  
-                <EditPostModal blogId={item.id} />
-              </Col>
                 </Row>
               </Col>
-
               <Col lg={8} sm={9} xs={7}><Row>
               <Col  lg={12} xs={12} className="d-flex justify-content-end">
                 <div className="textArea ">{item.description}</div>
               </Col>
               </Row></Col>
-              
-              
             </Row>
           )
         }) : <div>Loading...</div>

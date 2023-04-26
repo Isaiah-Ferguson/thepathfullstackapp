@@ -139,6 +139,22 @@ async function GetAllUsers() {
       return data;
   }
 
+  async function updateEventItem(blogItem : object) {
+    const res = await fetch('https://thepathapi.azurewebsites.net/AcademyEvents/UpdateEvent',{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+}
+
   async function updateUserInfo(userInfo : object, UserNumber: number) {
     const res = await fetch(`https://thepathapi.azurewebsites.net/User/UpdateUser/${UserNumber}`,{
         method:"put",
@@ -184,19 +200,19 @@ async function getEventItemsByUserId(userId: number) {
     return eventData;
 }
 
-async function getFriendsList(userId: number) {
+async function getFriendsList() {
     let res = await fetch(`https://thepathapi.azurewebsites.net/friends/getfriendslist/`)
     let eventData = await res.json();
     return eventData;
 }
 
-async function AddFriend(blogItem: object) {
-    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/{userId}/{friendUserId}`,{
+async function AddFriend(myId: number, OtherId: any) {
+    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}`,{
         method:"POST",
         headers:{
             'Content-Type':"application/json"
         },
-        body:JSON.stringify(blogItem)
+        body:JSON.stringify(myId, OtherId)
     });
     if(!res.ok){
         const message = `An Error has Occured  ${res.status}`;
@@ -206,8 +222,4 @@ async function AddFriend(blogItem: object) {
     return eventData;
 }
 
-
-
-
-
-  export { getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+  export { updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

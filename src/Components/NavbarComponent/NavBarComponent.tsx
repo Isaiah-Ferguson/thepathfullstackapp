@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { searchUser } from "../../DataServices/DataServices";
 import { useContext } from "react";
 import UserContext from "../../UserContext/UserContext";
+import NotificationComponent from "./NotificationComponent";
 
 
 
 
 export default function NavbarComponent() {
   const logo = require("../../assets/Logo.png");
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const [search, setSearch] = useState('');
   const data = useContext<any>(UserContext);
 
@@ -54,24 +54,7 @@ export default function NavbarComponent() {
         
           
           {isNotificationVisible && <div className="NotificationDiv container-fluid">
-          <Row className="NotificationDiv2">
-            <Col lg={4} xs={4}>
-              <img className="NotificationImg" src={profile}/>
-            </Col>
-            <Col lg={8} xs={8}>
-              <p>Busby has sent a Friends request</p>
-              <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
-            </Col>
-          </Row>
-          <Row className="NotificationDiv2">
-            <Col lg={4} xs={4}>
-              <img className="NotificationImg" src={profile}/>
-            </Col>
-            <Col lg={8} xs={8}>
-              <p>Busby has sent a Friends request</p>
-              <Button style={{marginRight: 20}}>Accept</Button><Button variant="danger">Decline</Button>
-            </Col>
-          </Row>
+    <NotificationComponent/>
           </div>}
 
         

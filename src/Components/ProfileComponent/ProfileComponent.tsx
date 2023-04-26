@@ -42,6 +42,7 @@ export default function ProfileComponent() {
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
   const [userNum, setUserNum] = useState(0);
+  const data = useContext<any>(UserContext);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
     id: 0,
@@ -79,6 +80,7 @@ export default function ProfileComponent() {
   useEffect(() => {
     const getLoggedInData = async () => {
       const loggedIn = loggedInData();
+      data.setUserId(loggedIn.userId)
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
@@ -141,7 +143,6 @@ export default function ProfileComponent() {
           {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
           <Container className="eventScrollDiv">
-
             <ProfileEventPost  picture={userInfo.image}/>
           </Container>
 

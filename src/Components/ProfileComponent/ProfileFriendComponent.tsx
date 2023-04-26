@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Col, Container } from 'react-bootstrap'
-import { GetAllUsers } from '../../DataServices/DataServices';
+import React, { useEffect, useState, useContext } from 'react'
+import { Col, Container } from 'react-bootstrap'
+import { getFriendsList, getUserInfoByID } from '../../DataServices/DataServices';
+import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
   aboutMe: string;
@@ -14,24 +15,46 @@ interface UserInfo {
   belt: string;
 }
 
+interface FriendInfo {
+  id: number,
+  userId: number,
+  friendUserId: number
+}
+
 export default function ProfileFriendComponent() {
-  const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([])
-    const profile = require('../../assets/DefaultProfilePicture.png');
-useEffect( () => {
-  const getAllUserData =async () => {
-    const allUserData = await GetAllUsers();
-    setAllUserInfo(allUserData)
-  }
-  getAllUserData()
-},[])
+  const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
+  const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
+
+  const data = useContext<any>(UserContext);
+
+  useEffect(() => {
+    const getAllUserData = async () => {
+      const allUserData = await getFriendsList();
+      setFriendInfo(allUserData)
+    }
+    getAllUserData()
+  }, [])
+
+  useEffect(() => {
+    async function fetchUserInfo(id: number) {
+      const userInfo = await getUserInfoByID(id);
+      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
+    }
+    friendInfo.filter((item) => item.userId === data.userId).forEach((item: FriendInfo) => {
+      fetchUserInfo(item.friendUserId);
+    });
+  }, [data.userId, friendInfo]);
+
   return (
     <>
-    {allUserInfo.map((item: UserInfo, key: number) => {
-      return(
-        <Col><Container className="friendDiv "><img className="friendProfile" src={item.image}/><p className="friendName">{item.publishedName}</p></Container></Col>
-
-      )
-    })}
+      {allUserInfo.map((userInfo: UserInfo, key: number) => (
+        <Col key={key}>
+          <Container className="friendDiv">
+            <img className="friendProfile" src={userInfo.image} />
+            <p className="friendName">{userInfo.publishedName}</p>
+          </Container>
+        </Col>
+      ))}
     </>
   )
 }

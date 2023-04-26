@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import MainFeedEventComponent from "./MainFeedEventComponent";
@@ -55,11 +55,12 @@ export default function MainFeedComponent() {
       
       <Container>
       {(isMobile) && (
-            <Row className=" justify-content-around"  style={{ flexWrap: "nowrap" }}>
-        <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}>- Posts -</Col>
-        <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}>- Events -</Col>
-      </Row>
-        )}
+             <Col lg={12}>
+            <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">Post</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">Events</Button></Col>
+            </Row>  </Col>
+          )}
         
         <Row>
         {(!isMobile || selectedSection === 'post') && (

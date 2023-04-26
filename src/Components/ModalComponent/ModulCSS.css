@@ -53,3 +53,8 @@
         height: 250px;
     }
 }
+
+.postEditDev{
+    cursor: pointer;
+    margin-bottom: -15px;
+}
