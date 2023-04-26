@@ -37,7 +37,7 @@ export default function ProfileEditModal() {
     <div>
 
   
-    <Modal.Body>
+    <Modal.Body style={{ width : '650',}}>
         <Row>
             <Col lg={12} sm={12} className='d-flex justify-content-center'>
             <img className='editProfileImg img-fluid' src={picture} alt="Profile Picture"/>
@@ -53,9 +53,10 @@ export default function ProfileEditModal() {
         </Row>
         <Row>
             <Col md xs={6}> <FloatingLabel
+            style={{ background: 'red'}}
         controlId="floatingTextarea"
-        label="Enter Frist Name"
-        className="mb-3"
+        label="Enter First Name"
+        className="mb-3 newBg"
       >
         <Form.Control as="textarea" placeholder="First Name" />
       </FloatingLabel></Col>
