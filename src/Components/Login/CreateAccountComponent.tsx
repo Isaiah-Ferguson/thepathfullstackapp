@@ -16,13 +16,8 @@ export default function CreateAccountComponent() {
             Username : username,
             Password: password
         }
-        console.log(userData);
-        if(!userData.Username === null && !userData.Password === null){
-          console.log(userData);
         createAccount(userData);
         navigate("/");
-        }
-        
     }
 
 
@@ -51,8 +46,6 @@ export default function CreateAccountComponent() {
         </Button>
         <div style={{marginTop: 45 }} className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
       </Form>
-      
-        
               </Col>
           </Row>
       </Container>
