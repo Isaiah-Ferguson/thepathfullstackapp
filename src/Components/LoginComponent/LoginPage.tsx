@@ -58,14 +58,18 @@ export default function LoginComponent() {
 
       
       
-      <Form style={{ position: 'relative', width: '503px', height: '579px', background: "rgba(255, 255, 255, 0.4)", display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "54px auto 68px" }}>
+      <Form className='formMe' style={{ position: 'relative', width: '503px', height: '579px', background: "rgba(255, 255, 255, 0.4)", display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "54px auto 68px" }}>
         <h1 style={{ fontWeight: "700", fontSize: "96px", lineHeight: "116px", margin: "0" }}> The Path </h1>
         <p style={{ fontWeight: "700", fontSize: "32px", lineHeight: "39px" }}>A community driven Brazilian Jiu-Jitsu App</p>
 
-        <Form.Control  onChange={({ target: { value } }) =>  setUsername(value)} id='input' type="text" placeholder="Username" />
+        <Form.Control  
+        style={{marginBottom: '10px', marginTop:'5px', background: 'FFFFFF', border: '1px solid #000000', borderRadius : '10px',  width: '432px'}}
+        onChange={({ target: { value } }) =>  setUsername(value)} className='gugu' type="text" placeholder="Username" />
 
 
-        <Form.Control onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+        <Form.Control 
+        style={{marginBottom: '10px', marginTop:'5px', background: 'FFFFFF', border: '1px solid #000000', borderRadius : '10px',  width: '432px'}}
+        onChange={(e) => setPassword(e.target.value)} className='gugu' type="password" placeholder="Password" />
         <div className='form-group form-buttons'>
           <NavLink href="/ForgotPass">Forgot <span> password?</span></NavLink>
           <NavLink href="/CreatePage2">Signup <span>here</span></NavLink>

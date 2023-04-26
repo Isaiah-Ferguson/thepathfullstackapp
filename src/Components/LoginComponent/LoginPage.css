@@ -8,10 +8,10 @@
     /* background: linear-gradient(180deg, #E9E9FF 0%, rgba(233, 233, 255, 0) 100%); */
 }
 
-#Container {
+/* #Container {
 
     display: flex;
-}
+} */
 
 
 .blue-border {
@@ -49,7 +49,7 @@ height: 65px;
 font-size: 42px;
   }
 
-  form input {
+  /* .form-input {
     margin-bottom: 10px;
     margin-top: 5px;
     background: #FFFFFF;
@@ -57,45 +57,45 @@ border: 1px solid #000000;
 border-radius: 10px;
     padding: 20px 0 20px 20px;
     width: 300px;
-  }
+  } */
 
-  form input::placeholder {
+  .gugu {
     font-weight: 400;
 font-size: 32px;
 line-height: 40px;
 color: #7F84AD;
   }
 
-  input[type="submit"] {
+  /* input[type="submit"] {
     background-color: black;
     color: white;
     padding: 1em;
-  }
+  } */
 
-  form {
+  .formMe {
     background-color: grey;
     padding: 20px;
     width: 55vw;
-    /* opacity: 0.5; */
     height: 35vw;
     position: absolute;
     text-align: center;
-   
+    
     border-top-color: red;
   }
-  form2 {
+  /* opacity: 0.5; */
+  /* form2 {
     background-color: red;
   
     width: 40vw;
     opacity: 0.5;
     height: 30vw;
     position: absolute;
-  }
-  label {
+  } */
+  
     /* border: 1px solid black; */
-    display: flex;
-    flex-direction: column;
-  }
+    /* display: flex;
+    flex-direction: column; */
+  
 
   /* @media screen and (max-width: 735px)  {
     .blue-border{
