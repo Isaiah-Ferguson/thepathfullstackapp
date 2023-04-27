@@ -53,6 +53,11 @@
     margin-bottom: 15px;
 }
 
+.newBgColor {
+
+    background-color: #EFC9AF;
+}
+
 @media screen and (max-width: 425px) {
     .mainFeedImg{
         height: 75px;
