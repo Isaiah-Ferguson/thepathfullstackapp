@@ -86,7 +86,6 @@ export default function ProfileFriend() {
           setUserNum(data.name.userId);
           setUsername(data.name.publisherName);
           let userInfoItems = await getUserInfoByID(data.name.userId);
-          console.log(userInfoItems);
           setUserInfo(userInfoItems);
         };
         getLoggedInData();
@@ -114,7 +113,7 @@ export default function ProfileFriend() {
               </Row>
               
          
-<AddFriendModal username={userInfo.firstName}/>
+<AddFriendModal username={userInfo.firstName} myID={1} theirID={data.name.userId}/>
           
             </Col>
            

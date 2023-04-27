@@ -45,7 +45,6 @@ type ChildProps = {
 
   const handleDelete = () => {
     const testing = async () => {
-
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       const blogData = {
@@ -73,17 +72,15 @@ type ChildProps = {
       deletePost(blogData)
     }
     testing();
-    
   }
-
 
 
 
   return (
     <>
-      <Button  variant="light" onClick={handleShow}>
+      <div className='postEditDev' onClick={handleShow}>
       ...
-      </Button>
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

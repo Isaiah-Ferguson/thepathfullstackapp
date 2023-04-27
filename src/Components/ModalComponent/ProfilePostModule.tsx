@@ -78,7 +78,7 @@ interface UserInfo {
         <Modal.Body><textarea placeholder="What are your thoughts?" style={{ borderRadius: 5, height: 100, width: '100%' }} onChange={handlePost}></textarea>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={createPost}> Post  </Button>
+          <Button variant="primary" onClick={createPost}> Post </Button>
         </Modal.Footer>
       </Modal>
     </>

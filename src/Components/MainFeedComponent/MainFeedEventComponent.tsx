@@ -1,28 +1,27 @@
 import React from "react";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import  { checkToken, loggedInData, getEventItemsByUserId} from "../../DataServices/DataServices";
+import { checkToken, loggedInData, getEventItemsByUserId } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
-import { UserInfo } from "os";
 
 interface EventItem {
-    Id: number,
-    userId: number,
-    Date: string,
-    publishedName: string,
-    academyName: string,
-    time: string,
-    eventDate: string,
-    address: string,
-    description: string,
-    type: string,
-    isPublish: true,
-    isDeleted: false,
-    image: string
-  }
+  Id: number,
+  userId: number,
+  Date: string,
+  publishedName: string,
+  academyName: string,
+  time: string,
+  eventDate: string,
+  address: string,
+  description: string,
+  type: string,
+  isPublish: true,
+  isDeleted: false,
+  image: string
+}
 
 export default function MainFeedEventComponent() {
-    const locationIMG = require("../../assets/Location.png");
+  const locationIMG = require("../../assets/Location.png");
 
   const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
@@ -38,34 +37,34 @@ export default function MainFeedEventComponent() {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      console.log(userEventItems);
       setMyEventItems(userEventItems);
-  
+
     };
 
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
-
     }
   }, []);
 
   function Joined(e: any) {
-    e.target.value = "Joined";
-    setJoin(e.target.value);
+    if (e.target.value === "Joined") {
+      setJoin("join");
+    } else {
+      setJoin("Joined");
+    }
   }
 
-const myEventItemsOrder = myEventItems.reverse();
+  const myEventItemsOrder = myEventItems.reverse();
   return (
     <>
-    {myEventItems.length > 0 ? (
-        myEventItemsOrder.map((item: EventItem, idx: number ) => (
-            <Row className="eventMainPageDiv"  key={idx}>
+      {myEventItems.length > 0 ? (
+        myEventItemsOrder.map((item: EventItem, idx: number) => (
+          <Row className="eventMainPageDiv" key={idx}>
             <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
-            <h6>{item.eventDate}</h6>
-            <h6>{item.time}</h6>
+              <h6>{item.eventDate}</h6>
+              <h6>{item.time}</h6>
             </Col>
             <Col md={9} sm={9} xs={9}>
               <h6>{item.publishedName}</h6>
@@ -76,9 +75,8 @@ const myEventItemsOrder = myEventItems.reverse();
               </h6>
             </Col>
           </Row>
-        ))) : (  <div>Loading...</div>)
-    }
-
-              </>
+        ))) : (<div>Loading...</div>)
+      }
+    </>
   );
 }

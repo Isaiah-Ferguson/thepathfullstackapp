@@ -34,13 +34,10 @@ export default function FriendPost(props: pictureprops) {
     useEffect(() => {
       const getLoggedInData = async () => {
         const loggedIn = data;
-        console.log(data);
-        console.log(loggedIn.name)
         setBlogUserId(loggedIn.name.userId);
         setBlogPublisherName(loggedIn.publisherName);
         let userBlogItems = await GetPublishedBlogItem();
         setBlogItems(userBlogItems);
-        console.log(userBlogItems);
       };
 
         // Get user Data and blog Items
@@ -53,7 +50,6 @@ export default function FriendPost(props: pictureprops) {
           blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
-            console.log(item)
             return (
               <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
                 <Col lg={4} sm={3} xs={5}>

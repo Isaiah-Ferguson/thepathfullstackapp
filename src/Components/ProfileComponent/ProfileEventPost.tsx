@@ -3,8 +3,9 @@ import { Row, Col, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
+import EditEventModal from '../ModalComponent/EditEventModal';
 interface EventItem {
-  Id: number,
+  id: number,
   userId: number,
   date: string,
   publishedName: string,
@@ -38,7 +39,6 @@ export default function ProfileEventPost(props: pictureprops) {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      console.log(userEventItems)
       setMyEventItems(userEventItems);
     };
 
@@ -65,13 +65,15 @@ export default function ProfileEventPost(props: pictureprops) {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
             return (
-
-
               <Row style={{ marginTop: 10 }} key={idx}>
                 <Col lg={3} xs={3}>
+                <div className='d-flex justify-content-end'>
+                  <EditEventModal blogId={item.id}/>
+                  </div>
                   <img className="smallProfileIMG" src={props.picture} alt={item.publishedName} />
                   {formattedDate}
                 </Col>
+               
                 <Col lg={9} xs={9}>
                   <div className="eventTextArea">
                     <Row>

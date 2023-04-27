@@ -43,9 +43,7 @@ export default function FriendEvent() {
         console.log(userEventItems);
       };
 
-        // Get user Data and blog Items
         getLoggedInData();
-
     }, []);
     return (
       <>
