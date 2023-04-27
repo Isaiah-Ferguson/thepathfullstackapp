@@ -45,7 +45,7 @@ export default function NavbarComponent() {
     <>
     <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">
           {" "}
-          99+
+          {data.NotificationCount}
         </span>
     <Navbar expand="lg" className="navBarTest">
       

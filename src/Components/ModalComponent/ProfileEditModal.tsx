@@ -64,9 +64,6 @@ function handleEditProfile() {
   const testName = loggedIn.publisherName;
   setUserID(loggedIn.userId);
   setUsername(loggedIn.publisherName);
-  console.log(loggedIn.userId);
-  console.log(loggedIn.publisherName);
-
   const item = {
     username: testName,
     FirstName: firstName,

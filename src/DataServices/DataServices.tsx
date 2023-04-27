@@ -33,7 +33,6 @@ interface userData {
           throw new Error(message);
       }
       const data = await res.json();
-      console.log(data)
 
       return data;
       //We are not writeing a return because this is a POST.
@@ -209,7 +208,7 @@ async function getFriendsList() {
     return eventData;
 }
 
-async function AddFriend(myId: number, OtherId: any) {
+async function AddFriend(myId: number, OtherId: (number | string)[] ) {
     const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}`,{
         method:"POST",
         headers:{
@@ -225,4 +224,36 @@ async function AddFriend(myId: number, OtherId: any) {
     return eventData;
 }
 
-  export { updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+// async function AddFriend(myId: number, OtherId: (number | string)[], isAccepted: boolean, isDeleted: boolean ) {
+//     const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}/${isAccepted}/${isDeleted}`,{
+//         method:"POST",
+//         headers:{
+//             'Content-Type':"application/json"
+//         },
+//         body:JSON.stringify(myId, OtherId, isAccepted, isDeleted)
+//     });
+//     if(!res.ok){
+//         const message = `An Error has Occured  ${res.status}`;
+//         throw new Error(message);
+//     }
+//     const eventData = await res.json();
+//     return eventData;
+// }
+
+async function AddFriendResponse(myId: number, OtherId: (number | string)[], isAccepted: any) {
+    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}/${isAccepted}`,{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(myId, OtherId, isAccepted)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const eventData = await res.json();
+    return eventData;
+}
+
+  export { AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

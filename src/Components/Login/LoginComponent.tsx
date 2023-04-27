@@ -50,7 +50,6 @@ export default function LoginComponent() {
       <p style={{ display: "inline-block", marginTop: 20 }}>Not a member? <span className='register' onClick={() => navigate("/Create")} >Register</span></p>
       <div className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
       
-
     </Form>
     
       

@@ -33,6 +33,17 @@ console.log(data.userId, data.name.userId)
     testing();
   } 
 
+  // const handleFriendRequest  = () =>{
+  //   console.log(data.userId, data.name.userId)
+  //      const testing = async () => {
+    // const isAccepted = false;
+    // const isDeleted = false;
+  //         AddFriend(data.userId, data.name.userId, isAccepted, isDeleted);
+  //         handleClose();
+  //       }
+  //       testing();
+  //     } 
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
