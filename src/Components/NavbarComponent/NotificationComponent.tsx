@@ -38,15 +38,25 @@ export default function NotificationComponent() {
 
 
 
+  // useEffect(() => {
+  //   async function fetchUserInfo(id: number) {
+  //     const userInfo = await getUserInfoByID(id);
+  //     setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
+  //   }
+  //   const friendInfoFiltered = friendInfo.filter((item) => item.userId === data.userId && item.isAccepted === true);
+  //   const friendIds = friendInfoFiltered.map((item) => ({ id: item.id, userId: item.friendUserId }));
+  //   friendIds.forEach((friend: { id: number, userId: number }) => {
+  //     fetchUserInfo(friend.userId);
+  //   });
+  // }, [data.userId, friendInfo]);
+
   useEffect(() => {
     async function fetchUserInfo(id: number) {
       const userInfo = await getUserInfoByID(id);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
     }
-    const friendInfoFiltered = friendInfo.filter((item) => item.userId === data.userId && item.isAccepted === true);
-    const friendIds = friendInfoFiltered.map((item) => ({ id: item.id, userId: item.friendUserId }));
-    friendIds.forEach((friend: { id: number, userId: number }) => {
-      fetchUserInfo(friend.userId);
+    friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+      fetchUserInfo(item.userId);
     });
   }, [data.userId, friendInfo]);
 
