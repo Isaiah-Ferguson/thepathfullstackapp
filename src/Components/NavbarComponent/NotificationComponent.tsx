@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Row, Col, Button } from "react-bootstrap";
-import { AddFriend, getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 interface UserInfo {
   aboutMe: string;
@@ -21,70 +21,60 @@ interface FriendInfo {
   isAccepted: boolean
 }
 
+
+
 export default function NotificationComponent() {
 
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
+  const [friendlistID, setfriendlistID ] = useState(0);
 
   const data = useContext<any>(UserContext);
 
   useEffect(() => {
     const getAllUserData = async () => {
       const allUserData = await getFriendsList();
+      console.log(allUserData);
       setFriendInfo(allUserData)
     }
     getAllUserData()
   }, [])
 
 
-
-  // useEffect(() => {
-  //   async function fetchUserInfo(id: number) {
-  //     const userInfo = await getUserInfoByID(id);
-  //     setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-  //   }
-  //   const friendInfoFiltered = friendInfo.filter((item) => item.userId === data.userId && item.isAccepted === true);
-  //   const friendIds = friendInfoFiltered.map((item) => ({ id: item.id, userId: item.friendUserId }));
-  //   friendIds.forEach((friend: { id: number, userId: number }) => {
-  //     fetchUserInfo(friend.userId);
-  //   });
-  // }, [data.userId, friendInfo]);
-
   useEffect(() => {
-    async function fetchUserInfo(id: number) {
-      const userInfo = await getUserInfoByID(id);
+    async function fetchUserInfo(userId: number) {
+      console.log(userId);
+      const userInfo = await getUserInfoByID(userId);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
     }
-    friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+    async function fetchfriendlistId( id: number) {
+
+      setfriendlistID(id);
+    }
+
+
+ friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+  fetchfriendlistId(item.id);
+    });
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
       fetchUserInfo(item.userId);
     });
   }, [data.userId, friendInfo]);
 
 
-  // const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, friendId: any, userId: number, id: number) => {
-  //   const isAccepted = true;
-  //   const isDeleted = false;
-  //   AddFriend(userId, friendId);
-  //   AddFriendResponse(id, userId, friendId, isAccepted, isDeleted);
-  // }
-
-  const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-    const isAccepted = false;
-    const isDeleted = true;
-
-  // AddFriendResponse(value, data.userId, isAccepted, isDeleted);
+  const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
+    AddFriendResponse(friendlistID, value, data.userId);
   }
 
-  
-  const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-    AddFriend(value, data.userId);
+  const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
+ AddFriendResponse(friendlistID, value, data.userId);
   }
 
   return (
 
     <>
-      {allUserInfo.map((userInfo: UserInfo, key: number) => (
-        
+      {allUserInfo.map((userInfo: UserInfo, key: number) => 
+        (
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
             <img className="NotificationImg" src={userInfo.image} />
@@ -95,7 +85,8 @@ export default function NotificationComponent() {
             <Button onClick={(e) => handleDenie(e, userInfo.id)} variant="danger">Decline</Button>
           </Col>
         </Row>
-      ))}
+      )
+      )}
     </>
   )
 }

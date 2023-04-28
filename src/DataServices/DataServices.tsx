@@ -208,6 +208,12 @@ async function getFriendsList() {
     return eventData;
 }
 
+async function getMyFriendsList(id: number) {
+    let res = await fetch(`https://thepathapi.azurewebsites.net/friends/getuserfriends/${id}`)
+    let eventData = await res.json();
+    return eventData;
+}
+
 async function AddFriend(myId: number, OtherId: (number | string)[] ) {
     const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}`,{
         method:"POST",
@@ -240,13 +246,15 @@ async function AddFriend(myId: number, OtherId: (number | string)[] ) {
 //     return eventData;
 // }
 
-async function AddFriendResponse(myId: number, OtherId: (number | string)[], isAccepted: any) {
-    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${myId}/${OtherId}/${isAccepted}`,{
+async function AddFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
+    const iAccepted = true;
+    const isDeleted = false;
+    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
         },
-        body:JSON.stringify(myId, OtherId, isAccepted)
+        body:JSON.stringify(myId, OtherId)
     });
     if(!res.ok){
         const message = `An Error has Occured  ${res.status}`;
@@ -256,4 +264,22 @@ async function AddFriendResponse(myId: number, OtherId: (number | string)[], isA
     return eventData;
 }
 
-  export { AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+async function denyFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
+    const iAccepted = false;
+    const isDeleted = true;
+    const res = await fetch(`https://thepathapi.azurewebsites.net/friends/addafriend/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(myId, OtherId)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const eventData = await res.json();
+    return eventData;
+}
+
+  export { getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

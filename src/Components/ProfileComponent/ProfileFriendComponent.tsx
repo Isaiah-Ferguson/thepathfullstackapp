@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getFriendsList, getUserInfoByID } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
@@ -15,22 +15,24 @@ interface UserInfo {
   belt: string;
 }
 
-interface FriendInfo {
-  id: number,
-  userId: number,
-  friendUserId: number
-}
+// interface FriendInfo {
+//   id: number,
+//   userId: number,
+//   friendUserId: number,
+//   isAccepted: boolean
+// }
 
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
-  const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
+  const [friendInfo, setFriendInfo] = useState([]);
 
   const data = useContext<any>(UserContext);
 
   useEffect(() => {
     const getAllUserData = async () => {
-      const allUserData = await getFriendsList();
-      setFriendInfo(allUserData)
+      const allUserData = await getMyFriendsList(data.userId);
+      console.log(allUserData);
+      setFriendInfo(allUserData);
     }
     getAllUserData()
   }, [])
@@ -40,8 +42,9 @@ export default function ProfileFriendComponent() {
       const userInfo = await getUserInfoByID(id);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
     }
-    friendInfo.filter((item) => item.userId === data.userId).forEach((item: FriendInfo) => {
-      fetchUserInfo(item.friendUserId);
+    friendInfo.forEach((item: number) => {
+      console.log(item)
+      fetchUserInfo(item);
     });
   }, [data.userId, friendInfo]);
 
