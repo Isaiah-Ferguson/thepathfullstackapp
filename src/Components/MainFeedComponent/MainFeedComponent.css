@@ -54,8 +54,8 @@
 }
 
 .newBgColor {
-
-    background-color: #EFC9AF;
+    /* trying to figure out which color combination looks good! */
+    background-color: #C5FAD5 ;
 }
 
 @media screen and (max-width: 425px) {

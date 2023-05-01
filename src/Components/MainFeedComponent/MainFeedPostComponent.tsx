@@ -59,7 +59,7 @@ export default function MainFeedPostComponent() {
           return (
             <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
               <Col lg={12} className="mainPostDiv">
-                <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge rgb(105,105,105)'}}>
+                <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #AA96DA'}}>
                   <Col md={3} sm={3} xs={3} className=" eventDateDiv">
                     <Row>
                       <img className="mainFeedImg" src={item.image} />
@@ -70,7 +70,7 @@ export default function MainFeedPostComponent() {
                     </Row>
                     <p>{formattedDate}</p>
                   </Col>
-                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#1f8ac0'}}>
+                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#FFFFD2'}}>
                     <p>{item.description}</p>
                   </Col>
                 </Row>
