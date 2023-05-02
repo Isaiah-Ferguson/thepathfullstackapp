@@ -5,7 +5,7 @@ import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataSer
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
-import { Dropdown, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
+import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 
 export default function ModalComponent() {
@@ -16,20 +16,15 @@ export default function ModalComponent() {
   const [selectedMonth, setSelectedMonth] = useState("");
 
   const [blogTitle, setBlogTitle] = useState('');
-  const [blogImage, setBlogImage] = useState('');
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogItems, setBlogItems] = useState([]);
   const [blogId, setBlogId] = useState(0);
   const [blogUserId, setBlogUserId] = useState(0);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
   const [eventAddress, setEventAddress] = useState("");
   const [academy, setAcademy] = useState("");
   const [viewable, setViewable] = useState("Select Privacy");
 
   const [show, setShow] = useState(false);
-  const [editBool, setEdit] = useState(false);
-  const [blogIsDeleted, setBlogIsDeleted] = useState(false);
-  const [blogIsPublish, setBlogIsPublished] = useState(false);
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

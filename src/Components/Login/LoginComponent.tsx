@@ -1,14 +1,16 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button } from 'react-bootstrap'
-import { useState } from 'react'
-import { login, GetLoggedInUserData } from '../../DataServices/DataServices';
+import { useState, useContext } from 'react'
+import { login, GetLoggedInUserData, loggedInData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../UserContext/UserContext';
 
 export default function LoginComponent() {
   let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
+      const data = useContext<any>(UserContext);
+
 
     const handleSubmit = async () => {
         let userData = {
@@ -20,6 +22,8 @@ export default function LoginComponent() {
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
+          const loggedIn = loggedInData();
+          data.setUserId(loggedIn.userId);
           navigate("/profile");
         }
     }
@@ -42,7 +46,7 @@ export default function LoginComponent() {
         <Form.Label className='pColor'>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       </Form.Group>
-      <p className='pColor' >Forgot <span className='register' onClick={() => navigate("/Create")} >Password?</span></p>
+      <p className='pColor' >Forgot <span className='register' onClick={() => navigate("/ForgotPasswordComponent")} >Password?</span></p>
      
       <Button className='Buttons' onClick={handleSubmit} >
         Login

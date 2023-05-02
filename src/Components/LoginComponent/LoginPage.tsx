@@ -12,9 +12,7 @@ export default function LoginComponent() {
   let navigate = useNavigate();
   const background = require("../../assets/jiujitsu.png");
 
-
     const [username, setUsername] = useState('');
-
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
@@ -27,7 +25,7 @@ export default function LoginComponent() {
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
-          navigate("/MainFeedComponent");
+          navigate("/profileme");
         }
     }
 

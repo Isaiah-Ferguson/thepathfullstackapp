@@ -13,7 +13,6 @@ type ChildProps = {
   const edit = require('../../assets/draw.png')
   const [postDescription, setPostDescription] = useState("");
   const [blogUserId, setBlogUserId] = useState(0);
-  const [isDeleted, setIsDeleted] = useState(false);
   const [BlogItems, setBlogItems] = useState(false);
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -1,17 +1,11 @@
 import React from "react";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import ModalComponent  from '../ModalComponent/ModelComponent';
-import ProfileEditModal from '../ModalComponent/ProfileEditModal';
-import EditPostModal from "../ModalComponent/EditPostModal";
-import ProfilePost from "../ProfileComponent/ProfilePost"
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
 import ProfileFriendComponent from "./ProfileFriendComponent";
 import ProfileEventPost from "./ProfileEventPost";
-import { loggedInData } from "../../DataServices/DataServices";
 import { getUserInfoByID } from "../../DataServices/DataServices";
-import FriendEvent from "./FriendEvent";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
 import NavbarComponent from "../NavbarComponent/NavBarComponent";
@@ -29,12 +23,7 @@ interface UserInfo{
   belt: string;
 }
 
-interface PicProps {
-  picture: string,
-}
 export default function ProfileFriend() {
-  const blackbelt = require('../../assets/BJJBlack.png');
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
   const blueBelt = require('../../assets/BJJBlue.png');

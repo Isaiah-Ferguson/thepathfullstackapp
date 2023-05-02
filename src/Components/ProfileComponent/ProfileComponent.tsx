@@ -3,15 +3,12 @@ import { Col, Row, Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import ModalComponent from '../ModalComponent/ModelComponent';
 import ProfileEditModal from '../ModalComponent/ProfileEditModal';
-import EditPostModal from "../ModalComponent/EditPostModal";
 import ProfilePost from "../ProfileComponent/ProfilePost"
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
 import ProfileFriendComponent from "./ProfileFriendComponent";
 import ProfileEventPost from "./ProfileEventPost";
-import { getUserInfoByID, addBlogItem, loggedInData } from "../../DataServices/DataServices";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { getUserInfoByID, loggedInData } from "../../DataServices/DataServices";
 import ProfilePostModule from "../ModalComponent/ProfilePostModule";
 import NavBar from "../NavbarComponent/NavBarComponent"
 
@@ -30,8 +27,6 @@ interface UserInfo {
 
 
 export default function ProfileComponent() {
-  const blackbelt = require('../../assets/BJJBlack.png');
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
   const blueBelt = require('../../assets/BJJBlue.png')
@@ -80,7 +75,6 @@ export default function ProfileComponent() {
   useEffect(() => {
     const getLoggedInData = async () => {
       const loggedIn = loggedInData();
-      data.setUserId(loggedIn.userId)
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);

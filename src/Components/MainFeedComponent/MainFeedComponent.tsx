@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import MainFeedEventComponent from "./MainFeedEventComponent";
-import { useNavigate } from 'react-router-dom';
-import { loggedInData, getEventItemsByUserId, checkToken, GetAcademyList, getUserInfoByID, addBlogItem } from '../../DataServices/DataServices';
+import { getEventItemsByUserId, addBlogItem } from '../../DataServices/DataServices';
 import NavBar from "../NavbarComponent/NavBarComponent"
 import MainFeedPostComponent from "./MainFeedPostComponent";
-import ProfilePostModule from "../ModalComponent/ProfilePostModule";
+
 
 export default function MainFeedComponent() {
   const [selectedSection, setSelectedSection] = useState('post');
@@ -17,8 +14,6 @@ export default function MainFeedComponent() {
   const BJJWhite = require("../../assets/WhiteBeltIcon.png");
 
   const [academy, setAcademy ] = useState('');
-  const [blogDiscription, setBlogDescription ] = useState('');
-  const [blogId, setBlogImage ] = useState('')
   const [blogItems, setBlogItems ] = useState('')
   const [blogUserId, setBlogUserId ] = useState(0)
 

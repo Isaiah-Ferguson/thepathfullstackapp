@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
 import { updateUserInfo } from '../../DataServices/DataServices';
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { loggedInData } from '../../DataServices/DataServices';
 
 
@@ -15,8 +15,6 @@ export default function ProfileEditModal() {
     const [description, setDescription] = useState<string>("");
     const [userID, setUserID ] = useState<number>(0);
     const [username, setUsername ] = useState<string>("");
-
-    const [editBool, setEdit] = useState(false);
 
 
 

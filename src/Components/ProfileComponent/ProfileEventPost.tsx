@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';

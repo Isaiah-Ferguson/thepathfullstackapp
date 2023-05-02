@@ -24,7 +24,6 @@ type pictureprops = {
 
 export default function ProfilePost(props: pictureprops) {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
 

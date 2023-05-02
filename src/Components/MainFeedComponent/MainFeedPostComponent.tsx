@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { checkToken, loggedInData, GetPublishedBlogItem } from "../../DataServices/DataServices";
-import EditPostModal from "../ModalComponent/EditPostModal";
 import { useNavigate, } from 'react-router-dom';
 
 interface BlogItem {

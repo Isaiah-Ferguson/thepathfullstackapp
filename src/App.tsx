@@ -14,6 +14,7 @@ import UserHooks from './Hooks/UserHooks';
 import UserContext from "./UserContext/UserContext";
 import ProfileFriend from './Components/ProfileComponent/ProfileFriend';
 import './Components/Login/LoginComponent.css';
+import ForgotPasswordComponent from './Components/Login/ForgotPasswordComponent';
 
 // import { browserRouter } from ''
 function App() {
@@ -31,7 +32,7 @@ function App() {
 <Route path='/' element={<LoginComponent />}/>
 <Route path='/Create' element={<CreateAccountComponent />}/>
 <Route path='/friends' element={<ProfileFriend />}/>
-
+<Route path='/ForgotPasswordComponent' element={<ForgotPasswordComponent/>}/>
 </Routes>
     </BrowserRouter>
     </UserContext.Provider>

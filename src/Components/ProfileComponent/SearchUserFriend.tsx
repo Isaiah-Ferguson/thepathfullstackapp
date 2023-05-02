@@ -16,7 +16,7 @@ interface UserInfo {
 }
 
 
-export default function ProfileFriendComponent() {
+export default function SearchUserFriend() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
 
@@ -36,7 +36,7 @@ export default function ProfileFriendComponent() {
 
   useEffect(() => {
     const getAllUserData = async () => {
-      const allUserData = await getMyFriendsList(data.userId);
+      const allUserData = await getMyFriendsList(data.name.userId);
       setFriendInfo(allUserData);
     }
     getAllUserData()

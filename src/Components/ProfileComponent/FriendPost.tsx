@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from "react";
-import { loggedInData, getEventItemsByUserId, GetPublishedBlogItem } from '../../DataServices/DataServices';
+import { GetPublishedBlogItem } from '../../DataServices/DataServices';
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
 

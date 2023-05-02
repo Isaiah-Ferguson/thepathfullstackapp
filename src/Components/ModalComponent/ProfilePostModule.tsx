@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { loggedInData, getUserInfoByID, updateBlogItem, addBlogItem } from '../../DataServices/DataServices';
-import { Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 
 
@@ -26,13 +26,9 @@ interface UserInfo {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const edit = require('../../assets/draw.png')
-  const [blogUserId, setBlogUserId] = useState(0);
-  const [isDeleted, setIsDeleted] = useState(false);
-  const [BlogItems, setBlogItems] = useState(false);
   const [blogId, setBlogId] = useState(0);
   const [postDescription, setPostDescription] = useState("");
-  const [selectedSection, setSelectedSection] = useState('post');
+
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)

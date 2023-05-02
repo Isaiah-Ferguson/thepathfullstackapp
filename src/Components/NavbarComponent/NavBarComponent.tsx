@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";

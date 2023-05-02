@@ -21,8 +21,6 @@ interface FriendInfo {
   isAccepted: boolean
 }
 
-
-
 export default function NotificationComponent() {
 
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
@@ -34,7 +32,6 @@ export default function NotificationComponent() {
   useEffect(() => {
     const getAllUserData = async () => {
       const allUserData = await getFriendsList();
-      console.log(allUserData);
       setFriendInfo(allUserData)
     }
     getAllUserData()
@@ -43,7 +40,6 @@ export default function NotificationComponent() {
 
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
-      console.log(userId);
       const userInfo = await getUserInfoByID(userId);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
     }
