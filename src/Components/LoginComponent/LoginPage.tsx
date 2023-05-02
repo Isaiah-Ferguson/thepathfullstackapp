@@ -27,7 +27,7 @@ export default function LoginComponent() {
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
-          navigate("/profileme");
+          navigate("/MainFeedComponent");
         }
     }
 
