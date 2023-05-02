@@ -1,7 +1,7 @@
 .mainFeedImg{
     margin-top: 10px;
     height: 100px;
-    width: 100px;
+    width: 135px;
     
 }
 
@@ -61,7 +61,7 @@
 @media screen and (max-width: 425px) {
     .mainFeedImg{
         height: 75px;
-        width: 85%;
+        width: 98%;
         border-radius: 100%;
     }
 
