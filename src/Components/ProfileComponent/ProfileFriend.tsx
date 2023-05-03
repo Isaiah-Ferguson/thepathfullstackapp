@@ -72,7 +72,7 @@ export default function ProfileFriend() {
 
       useEffect(() => {
         const getLoggedInData = async () => {
-            
+            console.log(data.name.userId)
           setUserNum(data.name.userId);
           setUsername(data.name.publisherName);
           let userInfoItems = await getUserInfoByID(data.name.userId);
@@ -145,7 +145,6 @@ export default function ProfileFriend() {
             {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
     
             
-    
           </Row>
           <Col lg={12} xs={12} className='friends'>
                 <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>

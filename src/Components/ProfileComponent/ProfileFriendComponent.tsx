@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, loggedInData } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
@@ -36,7 +36,9 @@ export default function ProfileFriendComponent() {
 
   useEffect(() => {
     const getAllUserData = async () => {
-      const allUserData = await getMyFriendsList(data.userId);
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
     }
     getAllUserData()

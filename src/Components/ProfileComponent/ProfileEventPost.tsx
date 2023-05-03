@@ -35,7 +35,8 @@ export default function ProfileEventPost(props: pictureprops) {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);

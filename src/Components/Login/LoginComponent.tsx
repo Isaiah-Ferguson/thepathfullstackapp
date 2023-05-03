@@ -18,11 +18,13 @@ export default function LoginComponent() {
             Password: password
         }
         let token = await login(userData);
-
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
           const loggedIn = loggedInData();
+          console.log(loggedIn);
+          sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
+
           data.setUserId(loggedIn.userId);
           navigate("/profile");
         }

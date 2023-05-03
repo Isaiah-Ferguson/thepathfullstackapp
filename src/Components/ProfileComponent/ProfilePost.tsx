@@ -31,7 +31,8 @@ export default function ProfilePost(props: pictureprops) {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
@@ -48,7 +49,7 @@ export default function ProfilePost(props: pictureprops) {
   return (
     <>
       {blogItems.length > 0 ?
-        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
+        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).reverse().map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
           return (
