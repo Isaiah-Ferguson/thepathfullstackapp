@@ -27,9 +27,34 @@
     width: 15px;
 }
 
+.scrollDivtest{
+    height: 265px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.addFriend{
+    width: 50px;
+}
+
+.editProfileText{
+    font-size: 20px;
+}
+
+.postTextDiv{
+    display: flex;
+  align-items: center;
+}
 
 @media screen and (max-width: 425px)  {
     .editProfileImg{
         height: 250px;
     }
+}
+
+.postEditDev{
+    cursor: pointer;
+    margin-bottom: -15px;
 }

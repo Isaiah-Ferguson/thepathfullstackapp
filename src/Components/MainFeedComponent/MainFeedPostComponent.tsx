@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { checkToken, loggedInData, GetPublishedBlogItem } from "../../DataServices/DataServices";
 import EditPostModal from "../ModalComponent/EditPostModal";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, } from 'react-router-dom';
 
 interface BlogItem {
   date: string;
@@ -22,12 +22,14 @@ type pictureprops = {
   picture: string;
 }
 
-export default function ProfilePost(props: pictureprops) {
+export default function MainFeedPostComponent() {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
-
+  const profileIMG = require("../../assets/DefaultProfilePicture.png");
+  const locationIMG = require("../../assets/Location.png");
+  const BJJWhite = require("../../assets/WhiteBeltIcon.png");
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -46,34 +48,37 @@ export default function ProfilePost(props: pictureprops) {
     }
   }, []);
 
+  const blogItemsOrder = blogItems.reverse();
   return (
     <>
       {blogItems.length > 0 ?
-        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
+      
+      blogItemsOrder.filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
           return (
-            <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
-              <Col lg={3} sm={3} xs={5}>
-                <div className="d-flex justify-content-end"><EditPostModal blogId={item.id} /></div>
-                <Row >
-                  <Col sm={12} xs={6}>
-                    <img className="smallProfileIMG" src={props.picture} alt="profile" />
-                    <div style={{fontWeight: 600}}>{item.publishedName}</div>
-                  <div>{formattedDate}</div>
-                    </Col>
+            <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
+              <Col lg={12} className="mainPostDiv">
+                <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
+                  <Col md={3} sm={3} xs={3} className=" eventDateDiv">
+                    <Row>
+                      <img className="mainFeedImg" src={item.image} />
+                    </Row>
+                    <p style={{ marginLeft:'25px 0 2px',}}>{item.publishedName}</p>
+                    <Row>
+                      <img className="beltImg" src={BJJWhite} />
+                    </Row>
+                    <p>{formattedDate}</p>
+                  </Col>
+                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#b79ced'}}>
+                    <p>{item.description}</p>
+                  </Col>
                 </Row>
               </Col>
-              <Col lg={8} sm={9} xs={7}><Row>
-              <Col  lg={12} xs={12} className="d-flex justify-content-end">
-                <div className="textArea ">{item.description}</div>
-              </Col>
-              </Row></Col>
             </Row>
           )
         }) : <div>Loading...</div>
       }
-
 
     </>
   );

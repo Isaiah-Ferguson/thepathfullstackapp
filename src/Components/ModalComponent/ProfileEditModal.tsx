@@ -1,23 +1,54 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
-// import { File } from 'react-bootstrap-icons';
+import { updateUserInfo } from '../../DataServices/DataServices';
+import { useState, ChangeEvent } from 'react';
+import { loggedInData } from '../../DataServices/DataServices';
 
-
-import { useState } from 'react';
 
 export default function ProfileEditModal() {
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
+    const [academy, setAcademy] = useState<string>("");
+    const [belt, setBelt] = useState<string>("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [userID, setUserID ] = useState<number>(0);
+    const [username, setUsername ] = useState<string>("");
+
+    const [editBool, setEdit] = useState(false);
+
+
 
     const [lgShow, setLgShow] = useState(false);
     const [picture, setPicture] = useState(profile);
     const handleClose = () => setLgShow(false);
 
+    //----------------HANDLE FUNCTIONS-------------------------//
+
+    const handleFirstname = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFirstName(e.target.value);
+    };
+
+    const handleLastname = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLastName(e.target.value);
+    }
+
+    const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setAcademy(e.target.value);
+    };
+
+    const handleBelt = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setBelt(e.target.value);
+    };
+
+    function handleDecription(e: React.ChangeEvent<HTMLTextAreaElement>) {
+      setDescription(e.target.value)
+    }
+
     const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let reader = new FileReader();
-  
       const file = e.target.files?.[0]; // using optional chaining
-  
       if (file) {
           reader.onload = (event) => {
               setPicture(event.target?.result);
@@ -25,15 +56,38 @@ export default function ProfileEditModal() {
           reader.readAsDataURL(file);
       }
   }
+ //---------------------------------------------------------------//
+
+function handleEditProfile() {
+  const loggedIn = loggedInData();
+  const testID = loggedIn.userId;
+  const testName = loggedIn.publisherName;
+  setUserID(loggedIn.userId);
+  setUsername(loggedIn.publisherName);
+  const item = {
+    username: testName,
+    FirstName: firstName,
+    LastName: lastName,
+    AboutMe: description,
+    image: picture,
+    AcademyName: academy,
+    belt: belt
+  };
+
+updateUserInfo(item, testID);
+
+  handleClose();
+}
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
 
   return (
+    
     <div>
-
-  <Button  onClick={() => setLgShow(true)}>Edit <img className="eventButton" src={EditProfile} alt="Edit Profile Icon"/></Button>
+  <Button className='editProfileText' onClick={() => setLgShow(true)}>Edit Profile<img className="eventButton" src={EditProfile} alt="Edit Profile Icon"/></Button>
   <Modal
     size="lg"
     show={lgShow}
@@ -61,28 +115,26 @@ export default function ProfileEditModal() {
             </Col>
         </Row>
         <Row>
-            <Col md xs={6}> <FloatingLabel
-        controlId="floatingTextarea"
-        label="Enter Frist Name"
-        className="mb-3"
-      >
+          {/* -----------------FIRST NAME LABEL--------------------------- */}
+            <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Frist Name" className="mb-3" onChange={handleFirstname}>
         <Form.Control as="textarea" placeholder="First Name" />
       </FloatingLabel></Col>
-      <Col md xs={6}> <FloatingLabel
-        controlId="floatingTextarea"
-        label="Enter Last Name"
-        className="mb-3"
-      >
+      {/* ----------------------------------------------------------------------- */}
+
+                {/* -----------------LAST NAME LABEL--------------------------- */}
+
+      <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Last Name" className="mb-3" onChange={handleLastname} >
         <Form.Control as="textarea" placeholder="Last Name" />
       </FloatingLabel></Col>
+            {/* ----------------------------------------------------------------------- */}
+
         </Row>
         <Row>
-            <Col md xs={12}  className="mobileMargin"> <FloatingLabel
-          controlId="floatingSelectGrid"
-          label="Academy Name"
-        >
-          <Form.Select aria-label="Floating label select example">
-            <option>Select Your Academy</option>
+            <Col md xs={12}  className="mobileMargin">
+         <FloatingLabel controlId="floatingSelectGrid" label="Academy Name">
+
+          <Form.Select aria-label="Floating label select example" onChange={handleAcademy} value={academy}>
+            <option value="">Select Your Academy</option>
             <option value="Andre de Freitas Brazilian Jiu-Jitsu">Andre de Freitas Brazilian Jiu-Jitsu</option>
             <option value="Ares BJJ Stockton - Buffalo Black Brotherhood">Ares BJJ Stockton - Buffalo Black Brotherhood</option>
             <option value="VALOR Training Center">VALOR Training Center</option>
@@ -99,25 +151,24 @@ export default function ProfileEditModal() {
             <option value="JG ACADEMY - LODI">JG ACADEMY - LODI</option>
             <option value="Cortez Full Circle Martial Arts">Cortez Full Circle Martial Arts</option>
           </Form.Select>
-        </FloatingLabel></Col>
-        <Col md xs={12} className="mobileMargin"> <FloatingLabel
-          controlId="floatingSelectGrid"
-          label="Belt Rank"
-        >
-          <Form.Select aria-label="Floating label select example">
-            <option>Select Your Belt Rank</option>
-            <option value="1">White Belt</option>
-            <option value="2">Blue Belt</option>
-            <option value="3">Purple Belt</option>
-            <option value="4">Brown Belt</option>
-            <option value="5">Black Belt</option>
 
+        </FloatingLabel></Col>
+        <Col md xs={12} className="mobileMargin"> <FloatingLabel controlId="floatingSelectGrid" label="Belt Rank">
+
+          <Form.Select aria-label="Floating label select example" value={belt} onChange={handleBelt}>
+            <option value="">Select Your Belt Rank</option>
+            <option value="White Belt">White Belt</option>
+            <option value="Blue Belt">Blue Belt</option>
+            <option value="Purple Belt">Purple Belt</option>
+            <option value="Brown Belt">Brown Belt</option>
+            <option value="Black Belt">Black Belt</option>
           </Form.Select>
+
         </FloatingLabel></Col>
         </Row>
         <br/>
-        <Row><Col><textarea  style={{ width: '100%', height: '200px' }}></textarea></Col></Row>
-        <Button variant="info" onClick={handleClose}>Submit</Button>
+        <Row><Col><textarea  style={{ width: '100%', height: '200px' }} onChange={handleDecription}/></Col></Row>
+        <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
   </Modal>
   </div>

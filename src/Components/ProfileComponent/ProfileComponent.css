@@ -1,5 +1,5 @@
 .topProfileBG{
-    background-color: #979BF2;
+    background-color: #e4e5f9;
 }
 
 .bottomProfileBG{
@@ -12,7 +12,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
-    height: 400px;
+    height: 330px;
 }
 
 .aboutMeText{
@@ -22,7 +22,7 @@
 }
 
 .profileHeaderText{
-    font-size: 32px;
+    font-size: 26px;
 }
 
 .discText{
@@ -32,8 +32,8 @@
 .profileIMG{
     margin-top: 50px;
     border-radius: 150px;
-    height: 275px;
-    width: 275px;
+    height: 225px;
+    width: 225px;
 }
 
 .Logo{
@@ -52,18 +52,20 @@
 
 .textArea{
     border-radius: 5px;
-    height: 100px;
+    min-height: 100px;
     width: 100%;
     background-color: white;
 }
 
 .scrollDiv{
-    height: 265px;
+    height: 500px;
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: center;
-    border-radius: 15px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(130, 126, 207, 0.5);
 }
 
 .profileFontPadding{
@@ -71,7 +73,7 @@
 }
 
 .eventScrollDiv{
-    height: 400px;
+    height: 625px;
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -79,11 +81,16 @@
     border-radius: 15px;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 .eventTextArea{
     border-radius: 5px;
-    height: 100px;
     width: 100%;
     background-color: #9AFAB5;
+    box-shadow: inset;
 }
 
 .friendProfile{
@@ -93,24 +100,7 @@
     width: 95px;
 }
 
-.test {
-    display: flex!important;
-}
 
-.friendDiv{
-    background-color: white;
-    border-radius: 15px;
-    width: 125px;
-    height: 175px;
-    margin-top: 15px;
-}
-
-.ensoBGFriend{
-    background-image: url('../../assets/Logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-}
 
 .friendName{
     margin-top: 15px;
@@ -123,9 +113,35 @@
 }
 
 .smallProfileIMG{
+
     border-radius: 50px;
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: 70px;
+}
+
+.smallProfileIMGPost{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+}
+
+.containerStyle  {
+    max-width: 1200px;
+    padding-left:  20px;
+    padding-right:  20px;
+    margin-left:  auto;
+    margin-right:  auto;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+  };
+
+.postBG{
+    background-color: aliceblue;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+
 }
 
 .post, .event, .friend {
@@ -151,4 +167,29 @@
         height: 75px;
         width: 75px;
     }
+  }
+
+  .friendScrollDiv{
+        margin: 0 auto;
+        padding: 40px;
+        text-align: center;
+        width: 75%;
+        height: 235px;
+        overflow: scroll;
+        scrollbar-width: none;
+  }
+
+  .friendScrollDiv::-webkit-scrollbar {
+    display: none;
+}
+
+  .profileCard{
+    position: relative;
+    width: 400px;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 225, 225, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
   }

@@ -51,7 +51,7 @@ export default function CreatePage2() {
 
     console.log(userData);
 
-    createAccount(typeof userData);
+    createAccount(userData);
     navigate("/CreateAccount");
 
   };

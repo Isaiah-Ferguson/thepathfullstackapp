@@ -4,11 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
-import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
+import { GetAcademyList, loggedInData, getUserInfoByID, updateEventItem } from '../../DataServices/DataServices';
 import { Dropdown, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
+type ChildProps = {
+    blogId: number;
+  }
 
-export default function ModalComponent() {
+export default function EditEventModal(props: ChildProps) {
   const picture = useContext(UserContext);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState<string>('');
@@ -37,24 +40,20 @@ export default function ModalComponent() {
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
 
-
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const Event = require("../../assets/EventIcon.png");
-
 
   const handleOpenMat = () => {
+
     const testing = async () => {
       const academyQ = await GetAcademyList(academy);
-
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       setSelectedDate(selectedDay + ", " + selectedMonth);
-      console.log(selectedDay, selectedMonth)
+      console.log(selectedDay, selectedMonth);
       const eventData = {
-        Id: blogId,
+        Id: props.blogId,
         UserId: userNames.userId,
         Date: new Date,
         publishedName: userNames.publisherName,
@@ -68,9 +67,7 @@ export default function ModalComponent() {
         isDeleted: false,
         image: userInfoItems.image
       }
-
-      
-      createOpenEvent(eventData);
+      updateEventItem(eventData);
     }
     testing();
     handleClose();
@@ -78,7 +75,6 @@ export default function ModalComponent() {
 
   const createOpenEvent = async (event: object) => {
     let result = await eventBlogItem(event);
-
 
     if (result) {
       let userBlogItems = await getEventItemsByUserId(blogUserId);
@@ -102,7 +98,7 @@ export default function ModalComponent() {
   return (
 
     <>
-      <Button variant="warning" onClick={handleShow}><img className="eventButton" src={Event} /></Button>
+      <div className='postEditDev' onClick={handleShow}>...</div>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton className='moduleBG'>
