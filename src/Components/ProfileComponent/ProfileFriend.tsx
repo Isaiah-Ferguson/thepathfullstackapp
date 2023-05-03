@@ -9,6 +9,7 @@ import { getUserInfoByID } from "../../DataServices/DataServices";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
 import NavbarComponent from "../NavbarComponent/NavBarComponent";
+import SearchUserFriend from "./SearchUserFriend";
 
 
 interface UserInfo{
@@ -150,7 +151,7 @@ export default function ProfileFriend() {
                 <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
                 <div style={{marginTop: -55}}>
                   <div className="friendScrollDiv d-flex">
-                    <ProfileFriendComponent />
+                   <SearchUserFriend/>
                   </div>
                 </div>
               </Col>
