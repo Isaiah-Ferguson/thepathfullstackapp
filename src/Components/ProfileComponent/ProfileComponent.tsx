@@ -141,7 +141,7 @@ export default function ProfileComponent() {
               {/*--------------------------------- Profile Post Div--------------------------------------------- */}
               <div className="scrollDiv">  <ProfilePost picture={userInfo.image}/> </div>
 
-            </div>
+            </Container>
           </Col>)}
 
           {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
