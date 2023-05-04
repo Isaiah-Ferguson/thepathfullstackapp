@@ -45,6 +45,42 @@
     width: 15px;
 }
 
+.newBg { 
+
+    background-color: purple;
+    
+}
+
+.modal-dialog {
+ 
+    width: 650px;
+
+    
+
+  }
+
+.modal-content {
+
+/* 80% of window height */
+
+height: 60%;
+
+background-color:#BBD6EC;
+
+}       
+
+.modal-header {
+
+background-color: #337AB7;
+
+padding:16px 16px;
+
+color:#FFF;
+
+border-bottom:2px dashed #337AB7;
+
+}
+
 
 @media screen and (max-width: 425px)  {
     .editProfileImg{

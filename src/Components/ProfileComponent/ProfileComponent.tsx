@@ -120,9 +120,11 @@ export default function ProfileComponent() {
 
       
         {(!isMobile || selectedSection === 'post') && (
-          <Col lg={4} md={12} sm={12} className='post'>
-            <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
-            <div>
+        <Col lg={4} className='post'>
+          { /* I have a feeling that theres something wrong with our end points, and that's the reason why We couldn't post */}
+          {/* Firing a new folder to test and Add new Dependency to test!  */}
+          <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
+          <Container>
 
               <Row style={{ marginTop: 10, marginBottom: 30 }}>
                 <Col lg={12} xs={12} style={{ display: "inline-block" }}><ProfilePostModule picture={userInfo.image}/> </Col>
@@ -131,7 +133,7 @@ export default function ProfileComponent() {
               {/*--------------------------------- Profile Post Div--------------------------------------------- */}
               <div className="scrollDiv">  <ProfilePost picture={userInfo.image}/> </div>
 
-            </div>
+            </Container>
           </Col>)}
 
           {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>

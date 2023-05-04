@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap'
+// import { Container } from 'react-bootstrap'
 
 import { createAccount } from '../../DataServices/DataServices';
 
 
 
 
-import { Form, NavLink } from 'react-bootstrap';
+import { Form, NavLink, Row, Container, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -114,10 +115,15 @@ export default function CreatePage2() {
           {/* <li><Link to="/components/Signup">React</Link></li> */}
         </div>
         </Form>
+       
       
     </div>
           </Row>
       
+
+      </Row>
     </Container>
+
+
   )
 }
