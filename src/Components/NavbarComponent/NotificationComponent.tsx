@@ -64,9 +64,9 @@ export default function NotificationComponent() {
   }, [data.userId, friendInfo]);
 
 
-  const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-    AddFriendResponse(friendlistID, value, data.userId);
-  }
+  // const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
+  //   AddFriendResponse(friendlistID, value, data.userId);
+  // }
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
