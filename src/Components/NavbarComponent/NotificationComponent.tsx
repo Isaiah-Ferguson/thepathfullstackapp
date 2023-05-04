@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, ToastContainer} from "react-bootstrap";
+import Toast from 'react-bootstrap/Toast';
 import { AddFriend, getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 interface UserInfo {
@@ -25,8 +26,13 @@ export default function NotificationComponent() {
 
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
 
   const data = useContext<any>(UserContext);
+  // const toggleShowA = () => setShowA(!showA);
+  // const toggleShowB = () => setShowB(!showB);
 
   useEffect(() => {
     const getAllUserData = async () => {
@@ -69,22 +75,23 @@ export default function NotificationComponent() {
   // }
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-    const isAccepted = false;
-    const isDeleted = true;
-
-  // AddFriendResponse(value, data.userId, isAccepted, isDeleted);
+    const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
+    setAllUserInfo(updatedUserInfo);
+    setShowToast(true);
+    setToastMessage('Friend request declined!');
   }
-
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     AddFriend(value, data.userId);
+    const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
+    setAllUserInfo(updatedUserInfo);
+    setShowToast(true);
+    setToastMessage('Friend request accepted!');
   }
-
+  
   return (
-
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
-        
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
             <img className="NotificationImg" src={userInfo.image} />
@@ -96,6 +103,12 @@ export default function NotificationComponent() {
           </Col>
         </Row>
       ))}
+      <ToastContainer>
+        <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
+          <Toast.Body style={{ justifyContent: 'center'}}>{toastMessage}</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </>
-  )
-}
+  );
+
+      }
