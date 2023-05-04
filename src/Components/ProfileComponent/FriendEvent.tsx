@@ -23,7 +23,6 @@ interface EventItem {
 
 
 export default function FriendEvent() {
-
     const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
     const profile = require('../../assets/DefaultProfilePicture.png');
     const [blogUserId, setBlogUserId] = useState<number | null>(null);
@@ -34,15 +33,11 @@ export default function FriendEvent() {
     useEffect(() => {
       const getLoggedInData = async () => {
         const loggedIn = data;
-        console.log(data);
-        console.log(loggedIn.name)
         setBlogUserId(loggedIn.name.userId);
         setBlogPublisherName(loggedIn.publisherName);
         let userEventItems = await getEventItemsByUserId(loggedIn.userId);
         setMyEventItems(userEventItems);
-        console.log(userEventItems);
       };
-
         getLoggedInData();
     }, []);
     return (

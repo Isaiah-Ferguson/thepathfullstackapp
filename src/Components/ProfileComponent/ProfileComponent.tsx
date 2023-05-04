@@ -74,7 +74,10 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      // const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);

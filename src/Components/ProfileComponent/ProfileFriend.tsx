@@ -9,6 +9,8 @@ import { getUserInfoByID } from "../../DataServices/DataServices";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
 import NavbarComponent from "../NavbarComponent/NavBarComponent";
+import SearchUserFriend from "./SearchUserFriend";
+import FriendEvent from "./FriendEvent";
 
 
 interface UserInfo{
@@ -71,7 +73,7 @@ export default function ProfileFriend() {
 
       useEffect(() => {
         const getLoggedInData = async () => {
-            
+            console.log(data.name.userId)
           setUserNum(data.name.userId);
           setUsername(data.name.publisherName);
           let userInfoItems = await getUserInfoByID(data.name.userId);
@@ -131,7 +133,7 @@ export default function ProfileFriend() {
               <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
               <Container className="eventScrollDiv">
     
-                <ProfileEventPost  picture={userInfo.image}/>
+                <FriendEvent/>
               </Container>
     
     
@@ -144,13 +146,12 @@ export default function ProfileFriend() {
             {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
     
             
-    
           </Row>
           <Col lg={12} xs={12} className='friends'>
                 <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
                 <div style={{marginTop: -55}}>
                   <div className="friendScrollDiv d-flex">
-                    <ProfileFriendComponent />
+                   <SearchUserFriend/>
                   </div>
                 </div>
               </Col>

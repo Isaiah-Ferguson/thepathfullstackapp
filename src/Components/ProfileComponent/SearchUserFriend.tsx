@@ -39,7 +39,7 @@ export default function SearchUserFriend() {
       const allUserData = await getMyFriendsList(data.name.userId);
       setFriendInfo(allUserData);
     }
-    getAllUserData()
+    getAllUserData();
   }, [])
 
 
