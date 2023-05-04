@@ -76,7 +76,7 @@ export default function NotificationComponent() {
   }
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-    AddFriend(value, data.userId);
+    AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);

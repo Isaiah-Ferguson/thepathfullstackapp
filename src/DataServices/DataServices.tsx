@@ -261,6 +261,7 @@ async function AddFriendResponse( id:number, myId: number, OtherId: (number | st
         throw new Error(message);
     }
     const eventData = await res.json();
+    console.log(eventData)
     return eventData;
 }
 
