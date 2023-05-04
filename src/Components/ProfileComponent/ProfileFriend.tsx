@@ -10,6 +10,7 @@ import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
 import NavbarComponent from "../NavbarComponent/NavBarComponent";
 import SearchUserFriend from "./SearchUserFriend";
+import FriendEvent from "./FriendEvent";
 
 
 interface UserInfo{
@@ -132,7 +133,7 @@ export default function ProfileFriend() {
               <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
               <Container className="eventScrollDiv">
     
-                <ProfileEventPost  picture={userInfo.image}/>
+                <FriendEvent/>
               </Container>
     
     
