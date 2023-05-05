@@ -1,38 +1,28 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID, updateEventItem } from '../../DataServices/DataServices';
-import { Dropdown, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
+import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 type ChildProps = {
     blogId: number;
   }
 
 export default function EditEventModal(props: ChildProps) {
-  const picture = useContext(UserContext);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
+  const data = useContext<any>(UserContext);
 
-  const [blogTitle, setBlogTitle] = useState('');
-  const [blogImage, setBlogImage] = useState('');
+  const [blogTitle, setBlogTitle] = useState('');;
   const [blogDiscription, setBlogDescription] = useState('');
-  const [blogItems, setBlogItems] = useState([]);
-  const [blogId, setBlogId] = useState(0);
-  const [blogUserId, setBlogUserId] = useState(0);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
-  const [eventAddress, setEventAddress] = useState("");
   const [academy, setAcademy] = useState("");
   const [viewable, setViewable] = useState("Select Privacy");
 
   const [show, setShow] = useState(false);
-  const [editBool, setEdit] = useState(false);
-  const [blogIsDeleted, setBlogIsDeleted] = useState(false);
-  const [blogIsPublish, setBlogIsPublished] = useState(false);
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -43,9 +33,8 @@ export default function EditEventModal(props: ChildProps) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleOpenMat = () => {
-
-    const testing = async () => {
+ 
+    const handleOpenMat = async () => {
       const academyQ = await GetAcademyList(academy);
 
       const userNames = loggedInData();
@@ -68,24 +57,11 @@ export default function EditEventModal(props: ChildProps) {
         image: userInfoItems.image
       }
       updateEventItem(eventData);
-    }
-    testing();
-    handleClose();
-  }
-
-  const createOpenEvent = async (event: object) => {
-    let result = await eventBlogItem(event);
-
-    if (result) {
-      let userBlogItems = await getEventItemsByUserId(blogUserId);
-      console.log(userBlogItems);
-      setBlogItems(userBlogItems);
-    } else {
-      alert(`Blog item was not not updated`)
+      data.setEventReload(true);
+      handleClose();
     }
 
 
-  }
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => { setBlogTitle(e.target.value); };
   const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };

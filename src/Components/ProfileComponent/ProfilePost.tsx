@@ -44,7 +44,6 @@ export default function ProfilePost(props: pictureprops) {
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
     }
     data.setShouldReload(false);

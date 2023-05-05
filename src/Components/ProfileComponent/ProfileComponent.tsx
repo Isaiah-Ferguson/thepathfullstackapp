@@ -33,7 +33,6 @@ export default function ProfileComponent() {
   const purpleBelt = require('../../assets/BJJPURPLE.png')
   const brownBelt = require('../../assets/BJJBrown.png')
   const [blogId, setBlogId] = useState(0);
-  const [postDescription, setPostDescription] = useState("");
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
   const [userNum, setUserNum] = useState(0);

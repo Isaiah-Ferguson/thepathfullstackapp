@@ -9,7 +9,7 @@ import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 
 export default function ModalComponent() {
-  const picture = useContext(UserContext);
+  const data = useContext<any>(UserContext);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState("");
@@ -20,7 +20,6 @@ export default function ModalComponent() {
   const [blogItems, setBlogItems] = useState([]);
   const [blogId, setBlogId] = useState(0);
   const [blogUserId, setBlogUserId] = useState(0);
-  const [eventAddress, setEventAddress] = useState("");
   const [academy, setAcademy] = useState("");
   const [viewable, setViewable] = useState("Select Privacy");
 
@@ -39,10 +38,9 @@ export default function ModalComponent() {
   const Event = require("../../assets/EventIcon.png");
 
 
-  const handleOpenMat = () => {
-    const testing = async () => {
-      const academyQ = await GetAcademyList(academy);
 
+    const handleOpenMat = async () => {
+      const academyQ = await GetAcademyList(academy);
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
@@ -65,11 +63,11 @@ export default function ModalComponent() {
       }
 
       
-      createOpenEvent(eventData);
+      await createOpenEvent(eventData);
+      data.setEventReload(true);
+      handleClose();
     }
-    testing();
-    handleClose();
-  }
+ 
 
   const createOpenEvent = async (event: object) => {
     let result = await eventBlogItem(event);

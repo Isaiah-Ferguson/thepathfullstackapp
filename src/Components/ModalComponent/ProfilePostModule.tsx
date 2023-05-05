@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { loggedInData, getUserInfoByID, updateBlogItem, addBlogItem } from '../../DataServices/DataServices';
+import { loggedInData, getUserInfoByID, addBlogItem } from '../../DataServices/DataServices';
 import { Form } from 'react-bootstrap';
 import UserContext from '../../UserContext/UserContext';
 

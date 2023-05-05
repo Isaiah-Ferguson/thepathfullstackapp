@@ -9,27 +9,8 @@ import MainFeedPostComponent from "./MainFeedPostComponent";
 export default function MainFeedComponent() {
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
-  const profileIMG = require("../../assets/DefaultProfilePicture.png");
-  const locationIMG = require("../../assets/Location.png");
-  const BJJWhite = require("../../assets/WhiteBeltIcon.png");
-
-  const [academy, setAcademy ] = useState('');
-  const [blogItems, setBlogItems ] = useState('')
-  const [blogUserId, setBlogUserId ] = useState(0)
 
 
-
-  const createPost = async (event: object) => {
-    let result = await addBlogItem(event);
-
-    if (result) {
-      let userBlogItems = await getEventItemsByUserId(blogUserId);
-      console.log(userBlogItems);
-      setBlogItems(userBlogItems);
-    } else {
-      alert(`Blog item was not not updated`)
-    }
-  }
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 993);

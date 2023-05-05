@@ -9,7 +9,7 @@ export default function LoginComponent() {
   let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-      const data = useContext<any>(UserContext);
+    const data = useContext<any>(UserContext);
 
 
     const handleSubmit = async () => {

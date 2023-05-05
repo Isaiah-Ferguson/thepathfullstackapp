@@ -19,7 +19,6 @@ interface UserInfo {
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
-
   const data = useContext<any>(UserContext);
 
 
@@ -50,7 +49,7 @@ export default function ProfileFriendComponent() {
         <Col key={key}>
           <Container className="friendDiv">
             <img className="friendProfile" src={userInfo.image} />
-            <p className="friendName">{userInfo.publishedName}</p>
+            <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>
       ))}
