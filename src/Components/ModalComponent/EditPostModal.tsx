@@ -59,6 +59,7 @@ type ChildProps = {
       }
       await deletePost(blogData);
       data.setShouldReload(true);
+      handleClose();
     }
 
 
