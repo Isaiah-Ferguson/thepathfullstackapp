@@ -84,7 +84,8 @@ export default function ProfileComponent() {
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
-  }, []);
+    data.setShouldReload(false);
+  }, [data.shouldReload]);
 
 
   return (

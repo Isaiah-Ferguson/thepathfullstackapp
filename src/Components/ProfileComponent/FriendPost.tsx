@@ -43,7 +43,7 @@ export default function FriendPost(props: pictureprops) {
         // Get user Data and blog Items
         getLoggedInData();
 
-    }, []);
+    }, [data.name]);
     return (
         <>
         {blogItems.length > 0 ?

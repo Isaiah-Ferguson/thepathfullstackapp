@@ -58,15 +58,7 @@ type ChildProps = {
         image: userInfoItems.image
       }
       const deletePost = async (item: object) => {
-        let result = await updateBlogItem(item);
-    
-        if(result){
-          let userBlogItems = await getBlogItemsByUserId(blogUserId);
-          console.log(userBlogItems);
-          setBlogItems(userBlogItems);
-        }else{
-          alert(`Blog item was not not updated`)
-        }
+         updateBlogItem(item);
       }
       deletePost(blogData)
     }

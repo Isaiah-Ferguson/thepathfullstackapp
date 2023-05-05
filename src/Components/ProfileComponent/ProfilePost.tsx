@@ -1,9 +1,11 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { checkToken, loggedInData, GetPublishedBlogItem } from "../../DataServices/DataServices";
 import EditPostModal from "../ModalComponent/EditPostModal";
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../UserContext/UserContext';
+
 
 interface BlogItem {
   date: string;
@@ -26,6 +28,7 @@ export default function ProfilePost(props: pictureprops) {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
+  const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
 
@@ -44,7 +47,8 @@ export default function ProfilePost(props: pictureprops) {
       // Get user Data and blog Items
       getLoggedInData();
     }
-  }, []);
+    data.setShouldReload(false);
+  }, [data.shouldReload]);
 
   return (
     <>

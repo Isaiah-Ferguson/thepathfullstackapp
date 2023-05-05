@@ -6,6 +6,7 @@ export default function UserHooks() {
   const [ userId, setUserId ] = useState<number>(0);
   const [ myId, setMyId ] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
+  const [shouldReload, setShouldReload] = useState<boolean>(false);
 
-  return { picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
+  return { shouldReload, setShouldReload, picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
 }

@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { loggedInData, getUserInfoByID, updateBlogItem, addBlogItem } from '../../DataServices/DataServices';
 import { Form } from 'react-bootstrap';
+import UserContext from '../../UserContext/UserContext';
 
 
 
@@ -28,7 +29,7 @@ interface UserInfo {
   const handleShow = () => setShow(true);
   const [blogId, setBlogId] = useState(0);
   const [postDescription, setPostDescription] = useState("");
-
+  const data = useContext<any>(UserContext);
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
@@ -55,6 +56,7 @@ interface UserInfo {
       addBlogItem(blogData);
     }
     testing();
+    data.setShouldReload(true);
     handleClose();
   }
 
