@@ -25,6 +25,7 @@ export default function SearchUserFriend() {
 
 
   useEffect(() => {
+    setAllUserInfo([])
     async function fetchUserInfo(id: number) {
       const userInfo = await getUserInfoByID(id);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
@@ -36,16 +37,19 @@ export default function SearchUserFriend() {
 
   useEffect(() => {
     const getAllUserData = async () => {
+      
       const allUserData = await getMyFriendsList(data.name.userId);
+      console.log(allUserData)
       setFriendInfo(allUserData);
     }
     getAllUserData();
-  }, [])
+  }, [data.name.userId])
 
 
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
+        
         <Col key={key}>
           <Container className="friendDiv">
             <img className="friendProfile" src={userInfo.image} />

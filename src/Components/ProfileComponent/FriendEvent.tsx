@@ -20,9 +20,11 @@ interface EventItem {
   isDeleted: false,
   image: string
 }
+type pictureprops = {
+  picture: string;
+}
 
-
-export default function FriendEvent() {
+export default function FriendEvent(props: pictureprops) {
     const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
     const profile = require('../../assets/DefaultProfilePicture.png');
     const [blogUserId, setBlogUserId] = useState<number | null>(null);
@@ -39,7 +41,8 @@ export default function FriendEvent() {
         setMyEventItems(userEventItems);
       };
         getLoggedInData();
-    }, []);
+    }, [data.name]);
+
     return (
       <>
         {myEventItems.length > 0 ? (
@@ -47,7 +50,7 @@ export default function FriendEvent() {
             .map((item: EventItem, idx: number) => (
               <Row style={{ marginTop: 10 }} key={idx}>
                 <Col lg={3} xs={3}>
-                  <img className="smallProfileIMG" src={item.image} alt={item.publishedName} />
+                  <img className="smallProfileIMG" src={props.picture} alt={item.publishedName} />
                 </Col>
                 <Col lg={9} xs={9}>
                   <div className="eventTextArea">

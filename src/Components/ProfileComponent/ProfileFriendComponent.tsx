@@ -32,17 +32,17 @@ export default function ProfileFriendComponent() {
     friendInfo.forEach((item: number) => {
       fetchUserInfo(item);
     });
-  }, [data.userId, friendInfo]);
+  }, [data.name, friendInfo]);
 
   useEffect(() => {
     const getAllUserData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
-      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
     }
     getAllUserData()
-  }, [])
+  }, [data.name])
 
 
   return (

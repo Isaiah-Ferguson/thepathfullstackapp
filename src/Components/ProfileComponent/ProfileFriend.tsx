@@ -133,7 +133,7 @@ export default function ProfileFriend() {
               <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
               <Container className="eventScrollDiv">
     
-                <FriendEvent/>
+                <FriendEvent  picture={userInfo.image}/>
               </Container>
     
     
