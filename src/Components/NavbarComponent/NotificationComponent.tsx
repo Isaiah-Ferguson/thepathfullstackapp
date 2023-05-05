@@ -53,7 +53,7 @@ export default function NotificationComponent() {
 
       setfriendlistID(id);
     }
-
+console.log(friendInfo)
 
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);

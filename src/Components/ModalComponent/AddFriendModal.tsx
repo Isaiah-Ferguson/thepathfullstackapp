@@ -2,7 +2,7 @@ import UserContext from '../../UserContext/UserContext';
 import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { AddFriend } from '../../DataServices/DataServices';
+import { AddFriend, getFriendsList } from '../../DataServices/DataServices';
 
 type username = {
   username: string;
@@ -23,26 +23,50 @@ export default function AddFriendModal(props: username) {
   const handleShow = () => setShow(true);
 
 
-  const handleFriendRequest  = () =>{
-console.log(data.userId, data.name.userId)
-   const testing = async () => {
-    
-      AddFriend(data.userId, data.name.userId)
-      handleClose()
+  const handleFriendRequest = async () => {
+    console.log(data.userId, data.name.userId);
+  
+    // Check if friend request already sent
+    const friendRequests = await getFriendsList();
+    const isRequestSent = friendRequests.some(
+      (request: any) =>
+        request.userId === data.userId && request.friendUserId === data.name.userId
+    );
+    if (isRequestSent) {
+      console.log('Friend request already sent');
+      return;
     }
-    testing();
-  } 
+  
+    // Check if users are already friends
+    const friends = await getFriendsList();
+    const areFriends = friends.some(
+      (friend: any) =>
+        (friend.userId === data.userId && friend.friendUserId === data.name.userId) ||
+        (friend.userId === data.name.userId && friend.friendUserId === data.userId)
+    );
+    if (areFriends) {
+      console.log('Users are already friends');
+      return;
+    }
+  
+    // Add friend request
+    AddFriend(data.userId, data.name.userId);
+    handleClose();
+  };
+  
 
-  // const handleFriendRequest  = () =>{
-  //   console.log(data.userId, data.name.userId)
-  //      const testing = async () => {
-    // const isAccepted = false;
-    // const isDeleted = false;
-  //         AddFriend(data.userId, data.name.userId, isAccepted, isDeleted);
-  //         handleClose();
-  //       }
-  //       testing();
-  //     } 
+
+//   const handleFriendRequest  = () =>{
+//     const allUserData = await getFriendsList();
+
+// console.log(data.userId, data.name.userId)
+//    const testing = async () => {
+//       AddFriend(data.userId, data.name.userId)
+//       handleClose()
+//     }
+//     testing();
+//   } 
+
 
   return (
     <>
