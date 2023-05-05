@@ -9,7 +9,7 @@ export default function LoginComponent() {
   let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-      const data = useContext<any>(UserContext);
+    const data = useContext<any>(UserContext);
 
 
     const handleSubmit = async () => {
@@ -18,11 +18,11 @@ export default function LoginComponent() {
             Password: password
         }
         let token = await login(userData);
-
         if(token.token != null){
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
           const loggedIn = loggedInData();
+          sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
           data.setUserId(loggedIn.userId);
           navigate("/profile");
         }

@@ -33,7 +33,6 @@ export default function ProfileComponent() {
   const purpleBelt = require('../../assets/BJJPURPLE.png')
   const brownBelt = require('../../assets/BJJBrown.png')
   const [blogId, setBlogId] = useState(0);
-  const [postDescription, setPostDescription] = useState("");
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
   const [userNum, setUserNum] = useState(0);
@@ -74,14 +73,18 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      // const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
-  }, []);
+    data.setShouldReload(false);
+  }, [data.shouldReload]);
 
 
   return (

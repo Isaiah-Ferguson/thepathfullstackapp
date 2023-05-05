@@ -19,9 +19,7 @@ interface UserInfo {
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
-
   const data = useContext<any>(UserContext);
-
 
 
   useEffect(() => {
@@ -32,15 +30,17 @@ export default function ProfileFriendComponent() {
     friendInfo.forEach((item: number) => {
       fetchUserInfo(item);
     });
-  }, [data.userId, friendInfo]);
+  }, [data.name, friendInfo]);
 
   useEffect(() => {
     const getAllUserData = async () => {
-      const allUserData = await getMyFriendsList(data.userId);
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : data;
+      const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
     }
     getAllUserData()
-  }, [])
+  }, [data.name])
 
 
   return (
@@ -49,7 +49,7 @@ export default function ProfileFriendComponent() {
         <Col key={key}>
           <Container className="friendDiv">
             <img className="friendProfile" src={userInfo.image} />
-            <p className="friendName">{userInfo.publishedName}</p>
+            <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>
       ))}

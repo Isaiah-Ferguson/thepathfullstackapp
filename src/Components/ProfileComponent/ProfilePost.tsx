@@ -1,9 +1,11 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { checkToken, loggedInData, GetPublishedBlogItem } from "../../DataServices/DataServices";
 import EditPostModal from "../ModalComponent/EditPostModal";
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../UserContext/UserContext';
+
 
 interface BlogItem {
   date: string;
@@ -26,12 +28,14 @@ export default function ProfilePost(props: pictureprops) {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
+  const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
@@ -40,15 +44,15 @@ export default function ProfilePost(props: pictureprops) {
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
     }
-  }, []);
+    data.setShouldReload(false);
+  }, [data.shouldReload]);
 
   return (
     <>
       {blogItems.length > 0 ?
-        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
+        blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).reverse().map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
           return (

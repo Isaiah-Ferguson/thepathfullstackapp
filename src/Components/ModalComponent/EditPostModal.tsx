@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { loggedInData, getUserInfoByID, updateBlogItem, getBlogItemsByUserId } from '../../DataServices/DataServices';
+import { loggedInData, getUserInfoByID, updateBlogItem } from '../../DataServices/DataServices';
+import UserContext from '../../UserContext/UserContext';
 
 type ChildProps = {
   blogId: number;
@@ -10,17 +11,15 @@ type ChildProps = {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const edit = require('../../assets/draw.png')
   const [postDescription, setPostDescription] = useState("");
-  const [blogUserId, setBlogUserId] = useState(0);
-  const [BlogItems, setBlogItems] = useState(false);
+  const data = useContext<any>(UserContext);
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
   }
 
-  const EditPost = () => {
-    const testing = async () => {
+
+    const EditPost = async () => {
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
@@ -35,15 +34,13 @@ type ChildProps = {
         isDeleted: false,
         image: userInfoItems.image
       }
-      updateBlogItem(blogData);
-
+      await updateBlogItem(blogData);
+      data.setShouldReload(true);
+      handleClose();
     }
-    testing();
-    
-  }
 
-  const handleDelete = () => {
-    const testing = async () => {
+
+    const handleDelete = async () => {
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       const blogData = {
@@ -58,20 +55,12 @@ type ChildProps = {
         image: userInfoItems.image
       }
       const deletePost = async (item: object) => {
-        let result = await updateBlogItem(item);
-    
-        if(result){
-          let userBlogItems = await getBlogItemsByUserId(blogUserId);
-          console.log(userBlogItems);
-          setBlogItems(userBlogItems);
-        }else{
-          alert(`Blog item was not not updated`)
-        }
+         updateBlogItem(item);
       }
-      deletePost(blogData)
+      await deletePost(blogData);
+      data.setShouldReload(true);
     }
-    testing();
-  }
+
 
 
 

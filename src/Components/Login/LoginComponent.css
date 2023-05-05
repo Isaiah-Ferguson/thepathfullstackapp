@@ -22,12 +22,21 @@
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    color: aliceblue;
 }
 
 .form-box h2 {
     font-size: 2em;
-    color: #162938;
+    color: #ffffff;
     text-align: center;
+}
+.form-box h1 {
+    font-size: 3em;
+    color: #ffffff;
+    text-align: center;
+}
+.form-box h4 {
+    color: #ffffff;
 }
 
 .input-box {

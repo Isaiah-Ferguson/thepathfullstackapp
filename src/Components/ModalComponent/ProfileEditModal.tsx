@@ -1,8 +1,9 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
 import { updateUserInfo } from '../../DataServices/DataServices';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { loggedInData } from '../../DataServices/DataServices';
+import UserContext from '../../UserContext/UserContext';
 
 
 export default function ProfileEditModal() {
@@ -15,6 +16,7 @@ export default function ProfileEditModal() {
     const [description, setDescription] = useState<string>("");
     const [userID, setUserID ] = useState<number>(0);
     const [username, setUsername ] = useState<string>("");
+    const data = useContext<any>(UserContext);
 
 
 
@@ -56,7 +58,7 @@ export default function ProfileEditModal() {
   }
  //---------------------------------------------------------------//
 
-function handleEditProfile() {
+const  handleEditProfile = async () =>{
   const loggedIn = loggedInData();
   const testID = loggedIn.userId;
   const testName = loggedIn.publisherName;
@@ -72,8 +74,8 @@ function handleEditProfile() {
     belt: belt
   };
 
-updateUserInfo(item, testID);
-
+await updateUserInfo(item, testID);
+data.setShouldReload(true);
   handleClose();
 }
 

@@ -17,17 +17,10 @@ interface BlogItem {
   // Other properties of a BlogItem
 }
 
-type pictureprops = {
-  picture: string;
-}
-
 export default function MainFeedPostComponent() {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
-  const profileIMG = require("../../assets/DefaultProfilePicture.png");
-  const locationIMG = require("../../assets/Location.png");
   const BJJWhite = require("../../assets/WhiteBeltIcon.png");
   let navigate = useNavigate();
 
@@ -42,7 +35,6 @@ export default function MainFeedPostComponent() {
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
     }
   }, []);

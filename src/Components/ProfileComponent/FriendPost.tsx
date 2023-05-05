@@ -39,11 +39,9 @@ export default function FriendPost(props: pictureprops) {
         let userBlogItems = await GetPublishedBlogItem();
         setBlogItems(userBlogItems);
       };
-
-        // Get user Data and blog Items
         getLoggedInData();
-
-    }, []);
+    }, [data.name]);
+    
     return (
         <>
         {blogItems.length > 0 ?

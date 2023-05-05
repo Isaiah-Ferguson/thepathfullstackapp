@@ -1,7 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import UserContext from '../../UserContext/UserContext';
 import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
 interface EventItem {
@@ -25,6 +26,7 @@ type pictureprops = {
 }
 
 export default function ProfileEventPost(props: pictureprops) {
+  const data = useContext<any>(UserContext);
 
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
@@ -35,7 +37,8 @@ export default function ProfileEventPost(props: pictureprops) {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
@@ -45,11 +48,9 @@ export default function ProfileEventPost(props: pictureprops) {
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
-
     }
-  }, []);
+  }, [data.eventReload]);
 
   function handleClick() {
     setJoined(prevJoined => !prevJoined);

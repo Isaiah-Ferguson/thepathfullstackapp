@@ -19,12 +19,12 @@ interface UserInfo {
 export default function SearchUserFriend() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
-
   const data = useContext<any>(UserContext);
 
 
 
   useEffect(() => {
+    setAllUserInfo([])
     async function fetchUserInfo(id: number) {
       const userInfo = await getUserInfoByID(id);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
@@ -32,6 +32,7 @@ export default function SearchUserFriend() {
     friendInfo.forEach((item: number) => {
       fetchUserInfo(item);
     });
+
   }, [data.userId, friendInfo]);
 
   useEffect(() => {
@@ -39,8 +40,8 @@ export default function SearchUserFriend() {
       const allUserData = await getMyFriendsList(data.name.userId);
       setFriendInfo(allUserData);
     }
-    getAllUserData()
-  }, [])
+    getAllUserData();
+  }, [data.name.userId]);
 
 
   return (
@@ -49,7 +50,7 @@ export default function SearchUserFriend() {
         <Col key={key}>
           <Container className="friendDiv">
             <img className="friendProfile" src={userInfo.image} />
-            <p className="friendName">{userInfo.publishedName}</p>
+            <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>
       ))}

@@ -21,7 +21,6 @@ interface EventItem {
 }
 
 export default function MainFeedEventComponent() {
-  const locationIMG = require("../../assets/Location.png");
 
   const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
