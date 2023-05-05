@@ -22,9 +22,7 @@ export default function LoginComponent() {
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
           const loggedIn = loggedInData();
-          console.log(loggedIn);
           sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
-
           data.setUserId(loggedIn.userId);
           navigate("/profile");
         }

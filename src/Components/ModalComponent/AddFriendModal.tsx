@@ -53,19 +53,6 @@ export default function AddFriendModal(props: username) {
     AddFriend(data.userId, data.name.userId);
     handleClose();
   };
-  
-
-
-//   const handleFriendRequest  = () =>{
-//     const allUserData = await getFriendsList();
-
-// console.log(data.userId, data.name.userId)
-//    const testing = async () => {
-//       AddFriend(data.userId, data.name.userId)
-//       handleClose()
-//     }
-//     testing();
-//   } 
 
 
   return (

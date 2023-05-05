@@ -3,8 +3,6 @@ import { Col, Row, Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
-import ProfileFriendComponent from "./ProfileFriendComponent";
-import ProfileEventPost from "./ProfileEventPost";
 import { getUserInfoByID } from "../../DataServices/DataServices";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
@@ -73,7 +71,6 @@ export default function ProfileFriend() {
 
       useEffect(() => {
         const getLoggedInData = async () => {
-            console.log(data.name.userId)
           setUserNum(data.name.userId);
           setUsername(data.name.publisherName);
           let userInfoItems = await getUserInfoByID(data.name.userId);

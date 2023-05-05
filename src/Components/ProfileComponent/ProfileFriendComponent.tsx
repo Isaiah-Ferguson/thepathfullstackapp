@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList, loggedInData } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
@@ -21,7 +21,6 @@ export default function ProfileFriendComponent() {
   const [friendInfo, setFriendInfo] = useState([]);
 
   const data = useContext<any>(UserContext);
-
 
 
   useEffect(() => {

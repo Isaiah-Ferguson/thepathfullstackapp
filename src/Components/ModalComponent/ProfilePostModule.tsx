@@ -37,28 +37,25 @@ interface UserInfo {
 
 
 
-  const createPost = () => {
-    const testing = async () => {
-
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const blogData = {
-        Id: blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        title: userNames.publisherName,
-        publishedName: userNames.publisherName,
-        description: postDescription,
-        isPublish: true,
-        isDeleted: false,
-        image: userInfoItems.image
-      }
-      addBlogItem(blogData);
+  const createPost = async () => {
+    const userNames = loggedInData();
+    let userInfoItems = await getUserInfoByID(userNames.userId);
+    const blogData = {
+      Id: blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      title: userNames.publisherName,
+      publishedName: userNames.publisherName,
+      description: postDescription,
+      isPublish: true,
+      isDeleted: false,
+      image: userInfoItems.image
     }
-    testing();
+    await addBlogItem(blogData);
     data.setShouldReload(true);
     handleClose();
   }
+  
 
 
   return (

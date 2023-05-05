@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Row, Col, Button, ToastContainer} from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-import { AddFriend, getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 interface UserInfo {
   aboutMe: string;
@@ -23,17 +23,13 @@ interface FriendInfo {
 }
 
 export default function NotificationComponent() {
-
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
-
   const [friendlistID, setfriendlistID ] = useState(0);
 
   const data = useContext<any>(UserContext);
-  // const toggleShowA = () => setShowA(!showA);
-  // const toggleShowB = () => setShowB(!showB);
 
   useEffect(() => {
     const getAllUserData = async () => {
@@ -50,10 +46,8 @@ export default function NotificationComponent() {
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
     }
     async function fetchfriendlistId( id: number) {
-
       setfriendlistID(id);
     }
-console.log(friendInfo)
 
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);
@@ -62,11 +56,6 @@ console.log(friendInfo)
       fetchUserInfo(item.userId);
     });
   }, [data.userId, friendInfo]);
-
-
-  // const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-  //   AddFriendResponse(friendlistID, value, data.userId);
-  // }
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);

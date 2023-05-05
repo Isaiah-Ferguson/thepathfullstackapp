@@ -12,8 +12,6 @@ import UserContext from "../../UserContext/UserContext";
 import NotificationComponent from "./NotificationComponent";
 
 
-
-
 export default function NavbarComponent() {
   const logo = require("../../assets/Logo.png");
   const [search, setSearch] = useState('');
