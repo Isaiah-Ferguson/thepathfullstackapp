@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, getFriendsList } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
@@ -15,6 +15,13 @@ interface UserInfo {
   belt: string;
 }
 
+interface FriendList{
+  friendUserId: number,
+  id: number,
+  isAccepted: boolean,
+  isDenied: false,
+  userId: number
+}
 
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
@@ -38,9 +45,11 @@ export default function ProfileFriendComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
+
     }
     getAllUserData()
   }, [data.name])
+  
 
 
   return (
