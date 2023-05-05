@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, getFriendsList } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 interface UserInfo {
@@ -16,6 +16,7 @@ interface UserInfo {
 }
 
 
+
 export default function SearchUserFriend() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
@@ -24,23 +25,17 @@ export default function SearchUserFriend() {
 
 
   useEffect(() => {
-    setAllUserInfo([])
-    async function fetchUserInfo(id: number) {
-      const userInfo = await getUserInfoByID(id);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-    }
-    friendInfo.forEach((item: number) => {
-      fetchUserInfo(item);
-    });
+    const fetchData = async () => {
 
-  }, [data.userId, friendInfo]);
-
-  useEffect(() => {
-    const getAllUserData = async () => {
+      // Get the list of friends
       const allUserData = await getMyFriendsList(data.name.userId);
       setFriendInfo(allUserData);
-    }
-    getAllUserData();
+      // Fetch the user info for each friend
+      const promises = allUserData.map((item: number) => getUserInfoByID(item));
+      const allUserInfo = await Promise.all(promises);
+      setAllUserInfo(allUserInfo);
+    };
+    fetchData();
   }, [data.name.userId]);
 
 
