@@ -36,13 +36,13 @@ export default function AddFriendModal(props: username) {
       console.log('Friend request already sent');
       return;
     }
-  
+
     // Check if users are already friends
     const friends = await getFriendsList();
     const areFriends = friends.some(
       (friend: any) =>
-        (friend.userId === data.userId && friend.friendUserId === data.name.userId) ||
-        (friend.userId === data.name.userId && friend.friendUserId === data.userId)
+        (friend.userId === data.userId && friend.friendUserId === data.name.userId && friend.isAccepted === true) ||
+        (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isAccepted === true)
     );
     if (areFriends) {
       console.log('Users are already friends');
