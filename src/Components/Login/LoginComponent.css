@@ -114,8 +114,19 @@
     border-bottom-left-radius: 15px;
 }
 
+.toast{
+    position: absolute;
+    top: 42%;
+}
+
 @media screen and (max-width: 500px) {
     .wrapper{
         width: 100%;
     }
+
+    .toast{
+        left: 7px;
+    }
 }
+
+
