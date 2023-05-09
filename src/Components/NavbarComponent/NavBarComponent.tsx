@@ -5,16 +5,19 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import './NavBarComponent.css'
 import { useNavigate } from 'react-router-dom';
 import { searchUser } from "../../DataServices/DataServices";
 import { useContext } from "react";
 import UserContext from "../../UserContext/UserContext";
 import NotificationComponent from "./NotificationComponent";
+import { Badge } from "react-bootstrap";
 
 
 export default function NavbarComponent() {
   const logo = require("../../assets/Logo.png");
   const [search, setSearch] = useState('');
+  // const [notificationCount, setNotificationCount] = useState(0);
   const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
@@ -41,8 +44,9 @@ export default function NavbarComponent() {
   return (
     <>
     <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">
-          {" "}
-          {data.NotificationCount}
+          {""}
+              {/* {data.NotificationCount} */}
+          {/* {data.NotificationCount} */}
         </span>
     <Navbar expand="lg" className="navBarTest">
       
