@@ -10,7 +10,6 @@ import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 export default function ModalComponent() {
   const data = useContext<any>(UserContext);
-  const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -57,8 +56,8 @@ export default function ModalComponent() {
         isDeleted: false,
         image: userInfoItems.image
       }
-      data.setEventReload(true);
       await eventBlogItem(eventData);
+      data.setEventReload(true);
       handleClose();
     }
  

@@ -50,6 +50,7 @@ export default function ProfileEventPost(props: pictureprops) {
     } else {
       getLoggedInData();
     }
+    data.setShouldReload(false);
   }, [data.eventReload]);
 
   function handleClick() {

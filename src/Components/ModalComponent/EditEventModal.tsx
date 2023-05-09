@@ -56,7 +56,7 @@ export default function EditEventModal(props: ChildProps) {
         isDeleted: false,
         image: userInfoItems.image
       }
-      updateEventItem(eventData);
+      await updateEventItem(eventData);
       data.setEventReload(true);
       handleClose();
     }
