@@ -70,6 +70,7 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
+  
   }
   
   return (

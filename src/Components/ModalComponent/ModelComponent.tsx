@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
+import { eventBlogItem } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
@@ -10,16 +10,12 @@ import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 export default function ModalComponent() {
   const data = useContext<any>(UserContext);
-  const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
 
-  const [blogTitle, setBlogTitle] = useState('');
   const [blogDiscription, setBlogDescription] = useState('');
-  const [blogItems, setBlogItems] = useState([]);
   const [blogId, setBlogId] = useState(0);
-  const [blogUserId, setBlogUserId] = useState(0);
   const [academy, setAcademy] = useState("");
   const [viewable, setViewable] = useState("Select Privacy");
 
@@ -44,8 +40,7 @@ export default function ModalComponent() {
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
-      setSelectedDate(selectedDay + ", " + selectedMonth);
-      console.log(selectedDay, selectedMonth)
+      const eventdate = selectedDay + ", " + selectedMonth;
       const eventData = {
         Id: blogId,
         UserId: userNames.userId,
@@ -53,7 +48,7 @@ export default function ModalComponent() {
         publishedName: userNames.publisherName,
         academyName: academyQ.name,
         time: selectedHour,
-        eventDate: selectedDate,
+        eventDate: eventdate,
         address: academyQ.address,
         description: blogDiscription,
         type: viewable,
@@ -61,32 +56,14 @@ export default function ModalComponent() {
         isDeleted: false,
         image: userInfoItems.image
       }
-
-      
-      await createOpenEvent(eventData);
+      await eventBlogItem(eventData);
       data.setEventReload(true);
       handleClose();
     }
  
 
-  const createOpenEvent = async (event: object) => {
-    let result = await eventBlogItem(event);
-
-
-    if (result) {
-      let userBlogItems = await getEventItemsByUserId(blogUserId);
-      console.log(userBlogItems);
-      setBlogItems(userBlogItems);
-    } else {
-      alert(`Blog item was not not updated`)
-    }
-
-
-  }
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => { setBlogTitle(e.target.value); };
   const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };
-  const handleDate = (e: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDate(e.target.value); };
   const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };

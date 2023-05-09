@@ -56,6 +56,7 @@ export default function MainFeedEventComponent() {
   }
 
   const myEventItemsOrder = myEventItems.reverse();
+  
   return (
     <>
       {myEventItems.length > 0 ? (

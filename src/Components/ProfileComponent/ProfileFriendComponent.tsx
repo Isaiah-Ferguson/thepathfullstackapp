@@ -45,9 +45,9 @@ export default function ProfileFriendComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
-
+      console.log(allUserData)
     }
-    getAllUserData()
+    getAllUserData();
   }, [data.name])
   
 

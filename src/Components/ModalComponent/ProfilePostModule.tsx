@@ -7,19 +7,6 @@ import { Form } from 'react-bootstrap';
 import UserContext from '../../UserContext/UserContext';
 
 
-
-interface UserInfo {
-    aboutMe: string;
-    id: number;
-    image: string;
-    academyName: string;
-    firstName: string;
-    lastName: string;
-    publishedName: string;
-    username: string;
-    belt: string;
-  }
-
   type pictureprops = {
   picture: string;
 }

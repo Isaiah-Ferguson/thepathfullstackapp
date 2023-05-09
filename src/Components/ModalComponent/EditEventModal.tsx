@@ -39,8 +39,7 @@ export default function EditEventModal(props: ChildProps) {
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
-      setSelectedDate(selectedDay + ", " + selectedMonth);
-      console.log(selectedDay, selectedMonth);
+      const eventdate = selectedDay + ", " + selectedMonth;
       const eventData = {
         Id: props.blogId,
         UserId: userNames.userId,
@@ -48,7 +47,7 @@ export default function EditEventModal(props: ChildProps) {
         publishedName: userNames.publisherName,
         academyName: academyQ.name,
         time: selectedHour,
-        eventDate: selectedDate,
+        eventDate: eventdate,
         address: academyQ.address,
         description: blogDiscription,
         type: viewable,
@@ -56,7 +55,7 @@ export default function EditEventModal(props: ChildProps) {
         isDeleted: false,
         image: userInfoItems.image
       }
-      updateEventItem(eventData);
+      await updateEventItem(eventData);
       data.setEventReload(true);
       handleClose();
     }
