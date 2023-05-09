@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../UserContext/UserContext';
-import { loggedInData, getEventItemsByUserId, checkToken, getUserInfoByID, updateEventItem } from '../../DataServices/DataServices';
+import { loggedInData, getEventItemsByUserId, checkToken} from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
 interface EventItem {
   id: number,
@@ -28,10 +28,8 @@ type pictureprops = {
 export default function ProfileEventPost(props: pictureprops) {
   const data = useContext<any>(UserContext);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
-  const [blogId, setBlogId] = useState<number | null>(null);
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const [blogPublisherName, setBlogPublisherName] = useState('');
-  const [joined, setJoined] = useState(false);
 
   let navigate = useNavigate();
 
@@ -52,21 +50,6 @@ export default function ProfileEventPost(props: pictureprops) {
     }
     data.setShouldReload(false);
   }, [data.eventReload]);
-
-  const handleClick =  async () => {
-    setJoined(prevJoined => !prevJoined);
-
-    const userNames = loggedInData();
-    let userInfoItems = await getUserInfoByID(userNames.userId);
-
-    const eventData = {
-      Id: blogId,
-      userId: data.Id
-      
-    }
-    await updateEventItem(eventData);
-    data.setEventReload(true);
-  }
 
   const myEventItemsOrder = myEventItems.reverse();
 

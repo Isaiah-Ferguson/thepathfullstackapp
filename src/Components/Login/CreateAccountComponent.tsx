@@ -16,6 +16,7 @@ export default function CreateAccountComponent() {
             Username : username,
             Password: password
         }
+        
         createAccount(userData);
         navigate("/");
     }
