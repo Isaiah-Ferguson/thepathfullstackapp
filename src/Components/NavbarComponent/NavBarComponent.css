@@ -62,7 +62,7 @@
     border-bottom: 2px solid;
     border-top: 2px solid;
     margin-bottom: 10px;
-    opacity: 90%;
+    background-color: #eccbcb;
 }
 
 .NotificationImg{
@@ -114,12 +114,12 @@ height: 100%;
 .NotificationDiv{
     /* border: 2px; */
     top: 55px;
-    background-color: rgb(221, 210, 210);
+    background-color: rgba(221, 210, 210, 0.6);
     position: absolute;
     height: 300px;
     width: 300px;
     z-index: 2;
-    opacity: 0px;
+    border-radius: 5px;
     /* overflow-x: hidden; */
     /* overflow-y: auto; */
 }
@@ -159,7 +159,7 @@ height: 100%;
         border: 2px solid;
         top: 75px;
         left: 25px;
-        background-color: rgb(221, 210, 210);
+        background-color: rgba(221, 210, 210, 0.6);
         position: absolute;
         height: 300px;
         width: 300px;

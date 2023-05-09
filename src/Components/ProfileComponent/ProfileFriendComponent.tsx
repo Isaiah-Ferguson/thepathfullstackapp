@@ -41,10 +41,6 @@ export default function ProfileFriendComponent() {
 
   useEffect(() => {
     const getAllUserData = async () => {
-      const friendsList = await getFriendsList();
-      // console.log(friendsList);
-      const acceptedFriends = friendsList.filter((friend: FriendList) => friend.isAccepted === true && friend.friendUserId === data.userId).map((friend: FriendList) => friend.userId);
-      console.log(acceptedFriends);
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);

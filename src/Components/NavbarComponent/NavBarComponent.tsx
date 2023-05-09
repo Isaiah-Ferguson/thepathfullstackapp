@@ -50,7 +50,7 @@ export default function NavbarComponent() {
         <img className="NavLogo" onClick={(e) => { setIsNotificationVisible(!isNotificationVisible); }} src={logo} />
         
           
-          {isNotificationVisible && <div className="NotificationDiv container-fluid opacity-75">
+          {isNotificationVisible && <div className="NotificationDiv container-fluid">
     <NotificationComponent/>
           </div>}
 
