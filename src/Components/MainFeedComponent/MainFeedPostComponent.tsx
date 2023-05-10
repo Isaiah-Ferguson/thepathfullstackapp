@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { checkToken, loggedInData, GetPublishedBlogItem } from "../../DataServices/DataServices";
+import { checkToken, loggedInData, GetPublishedBlogItem, getUserInfoByID } from "../../DataServices/DataServices";
 import { useNavigate, } from 'react-router-dom';
 
 interface BlogItem {
@@ -23,6 +23,12 @@ export default function MainFeedPostComponent() {
   const [blogPublisherName, setBlogPublisherName] = useState('');
   const BJJWhite = require("../../assets/WhiteBeltIcon.png");
   let navigate = useNavigate();
+
+  const blackBelt = require('../../assets/BJJBlack.png');
+  const whiteBelt = require('../../assets/BJJWhite.png');
+  const blueBelt = require('../../assets/BJJBlue.png');
+  const purpleBelt = require('../../assets/BJJPURPLE.png');
+  const brownBelt = require('../../assets/BJJBrown.png');
 
   useEffect(() => {
     const getLoggedInData = async () => {
@@ -47,6 +53,7 @@ export default function MainFeedPostComponent() {
       blogItemsOrder.filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
+
           return (
             <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
               <Col lg={12} className="mainPostDiv">
@@ -55,11 +62,8 @@ export default function MainFeedPostComponent() {
                     <Row>
                       <img className="mainFeedImg" src={item.image} />
                     </Row>
-                    <p style={{ marginLeft:'25px 0 2px',}}>{item.publishedName}</p>
-                    <Row>
-                      <img className="beltImg" src={BJJWhite} />
-                    </Row>
-                    <p>{formattedDate}</p>
+                    <p className="text-center" style={{ marginLeft:'25px 0 2px',}}>{item.publishedName}</p>
+                    <p>Posted {formattedDate}</p>
                   </Col>
                   <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#b79ced'}}>
                     <p>{item.description}</p>

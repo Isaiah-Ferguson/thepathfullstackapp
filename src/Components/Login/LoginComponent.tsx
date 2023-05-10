@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState, useContext } from 'react'
 import { login, GetLoggedInUserData, loggedInData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ export default function LoginComponent() {
   let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [userToast, setUserToast] = useState(false);
+    const [showA, setShowA] = useState(true);
     const data = useContext<any>(UserContext);
 
 
@@ -18,7 +20,9 @@ export default function LoginComponent() {
             Password: password
         }
         let token = await login(userData);
+        console.log(token)
         if(token.token != null){
+          setUserToast(true);
           localStorage.setItem("Token", token.token);
           await GetLoggedInUserData(username);
           const loggedIn = loggedInData();
@@ -29,8 +33,29 @@ export default function LoginComponent() {
     }
 
 
+
   return (
     <div className='loginBg'>
+                   {userToast && (
+                <div className='Loading-Div'>
+                  <div className="load-wrapp">
+        <div className="load-6">
+          <div className="letter-holder">
+            <div className="l-1 letter">L</div>
+            <div className="l-2 letter">o</div>
+            <div className="l-3 letter">a</div>
+            <div className="l-4 letter">d</div>
+            <div className="l-5 letter">i</div>
+            <div className="l-6 letter">n</div>
+            <div className="l-7 letter">g</div>
+            <div className="l-8 letter">.</div>
+            <div className="l-9 letter">.</div>
+            <div className="l-10 letter">.</div>
+          </div>
+        </div>
+      </div>
+                </div>
+              )}
     <Container className='d-flex justify-content-center mobileContainer' style={{paddingTop: 200}}>
         <Row className='wrapper' >
             <Col className='form-box'>
@@ -47,7 +72,7 @@ export default function LoginComponent() {
         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       </Form.Group>
       <p className='pColor' >Forgot <span className='register' onClick={() => navigate("/ForgotPasswordComponent")} >Password?</span></p>
-     
+
       <Button className='Buttons' onClick={handleSubmit} >
         Login
       </Button>

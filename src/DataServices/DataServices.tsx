@@ -47,12 +47,6 @@ const url = 'https://thepathapi.azurewebsites.net';
       return userData;
   }
 
-  async function CreateAccCheck(username: string) {
-    let res = await fetch( url + `/User/userbyusername/${username}`)
-    let data = await res.json();
-    return data.publisherName;
-}
-
   async function searchUser(username: string) {
     let res = await fetch( url + `/User/userbyusername/${username}`)
     let data = await res.json();
@@ -259,4 +253,4 @@ async function denyFriendResponse( id:number, myId: number, OtherId: (number | s
     return eventData;
 }
 
-  export { CreateAccCheck, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+  export { getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

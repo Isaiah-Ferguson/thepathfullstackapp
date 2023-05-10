@@ -41,7 +41,6 @@ export default function MainFeedEventComponent() {
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       setMyEventItems(userEventItems);
-
     };
 
     if (!checkToken()) {

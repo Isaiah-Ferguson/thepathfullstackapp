@@ -1,13 +1,8 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState } from 'react'
-import { CreateAccCheck, createAccount } from '../../DataServices/DataServices';
+import { createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
-
-interface check {
-  userId: number,
-  publisherName: string
-}
 
 export default function CreateAccountComponent() {
   let navigate = useNavigate();
