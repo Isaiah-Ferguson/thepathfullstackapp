@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button } from 'react-bootstrap'
 import { useState, useContext } from 'react'
 import { login, GetLoggedInUserData, loggedInData } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,6 @@ export default function LoginComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [userToast, setUserToast] = useState(false);
-  const [showA, setShowA] = useState(true);
   const data = useContext<any>(UserContext);
 
 
@@ -20,7 +19,6 @@ export default function LoginComponent() {
       Password: password
     }
     let token = await login(userData);
-    console.log(token)
     if (token.token != null) {
       setUserToast(true);
       localStorage.setItem("Token", token.token);

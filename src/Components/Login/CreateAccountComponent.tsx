@@ -10,6 +10,7 @@ export default function CreateAccountComponent() {
   const [password, setPassword] = useState('');
   const backBTN = require('../../assets/Back.png')
   const [userToast, setUserToast] = useState(false);
+  const [passwordTaost, setPasswordToast] = useState(false);
   const [showA, setShowA] = useState(true);
 
   const handleSubmit = async () => {
@@ -23,7 +24,10 @@ export default function CreateAccountComponent() {
     const test = await createAccount(userData);
     if (test === false) {
       setUserToast(true);
-    } else {
+    } else if(userData.Password ===""){
+      setPasswordToast(true)
+    }
+    else{
       navigate("/");
     }
   }
@@ -32,13 +36,17 @@ export default function CreateAccountComponent() {
     setUserToast(false);
   };
 
+  const toggleShowB = () => {
+    setShowA(!showA);
+    setPasswordToast(false);
+  };
+
 
   return (
     <div className='loginBg'>
       <Container className='d-flex justify-content-center mobileContainer' style={{ paddingTop: 200 }}>
         <Row className='wrapperRegistration' >
           <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
-
           <Col className='form-box'>
             <h1 className='d-flex justify-content-center'>The Path</h1>
             <h4 className='d-flex justify-content-center'>New Account Registration</h4>
@@ -55,6 +63,11 @@ export default function CreateAccountComponent() {
               {userToast && (
                 <Toast  onClick={toggleShowA}>
                   <Toast.Body style={{ color: 'black' }}>User Name already Exists</Toast.Body>
+                </Toast>
+              )}
+              {passwordTaost && (
+                <Toast  onClick={toggleShowB}>
+                  <Toast.Body style={{ color: 'black' }}>Please enter a Password</Toast.Body>
                 </Toast>
               )}
 

@@ -41,14 +41,17 @@ export default function ProfileFriendComponent() {
 
   useEffect(() => {
     const getAllUserData = async () => {
+  
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
       console.log(allUserData)
+      data.setFriendsReload(false);
+
     }
     getAllUserData();
-  }, [data.name])
+  }, [data.friendsReload])
   
 
 

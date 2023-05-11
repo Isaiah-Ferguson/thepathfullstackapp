@@ -36,7 +36,7 @@ export default function NotificationComponent() {
       const allUserData = await getFriendsList();
       setFriendInfo(allUserData)
     }
-    getAllUserData()
+    getAllUserData();
   }, [])
 
 
@@ -70,7 +70,7 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
-  
+    data.setFriendsReload(true);
   }
   
   return (

@@ -10,13 +10,13 @@ import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 export default function ModalComponent() {
   const data = useContext<any>(UserContext);
-  const [selectedHour, setSelectedHour] = useState<string>('');
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
+  const [selectedDay, setSelectedDay] = useState("1");
+  const [selectedMonth, setSelectedMonth] = useState("January");
 
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogId, setBlogId] = useState(0);
-  const [academy, setAcademy] = useState("");
+  const [academy, setAcademy] = useState("TEAM CAMA");
   const [viewable, setViewable] = useState("Select Privacy");
 
   const [show, setShow] = useState(false);
