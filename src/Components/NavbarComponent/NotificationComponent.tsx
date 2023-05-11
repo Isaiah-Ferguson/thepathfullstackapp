@@ -69,7 +69,7 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
-    // setNotificationCount(prevCount => prevCount - 1);
+    setNotificationCount(prevCount => prevCount - 1);
   }
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
@@ -78,17 +78,17 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
-    setNotificationCount(prevCount => prevCount + 1);
+    setNotificationCount(prevCount => prevCount - 1);
   }
   
   return (
     <>
-      <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition"> 
+      {/* <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">  */}
               {/* {data.notificationCount} */}
-          {data.NotificationCount}
-         </span> 
+          {/* {data.NotificationCount}
+         </span>  */}
 
-        {/* <Badge> {notificationCount}</Badge> */}
+        <Badge> {notificationCount}</Badge>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         
         <Row key={key} className="NotificationDiv2">

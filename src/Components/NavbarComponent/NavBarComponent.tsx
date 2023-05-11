@@ -24,6 +24,7 @@ export default function NavbarComponent() {
 
   const handleNotificationClick = () => {
     setIsNotificationVisible(!isNotificationVisible);
+    
   };
 
   function ProfileNavigate() {
