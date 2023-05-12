@@ -11,16 +11,13 @@ type ChildProps = {
   }
 
 export default function EditEventModal(props: ChildProps) {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedHour, setSelectedHour] = useState<string>('');
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
   const data = useContext<any>(UserContext);
-
-  const [blogTitle, setBlogTitle] = useState('');;
+  const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
+  const [selectedDay, setSelectedDay] = useState("1");
+  const [selectedMonth, setSelectedMonth] = useState("January");
   const [blogDiscription, setBlogDescription] = useState('');
-  const [academy, setAcademy] = useState("");
-  const [viewable, setViewable] = useState("Select Privacy");
+  const [academy, setAcademy] = useState("TEAM CAMA");
+  const [viewable, setViewable] = useState("Private");
 
   const [show, setShow] = useState(false);
 
@@ -89,9 +86,7 @@ export default function EditEventModal(props: ChildProps) {
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => { setBlogTitle(e.target.value); };
   const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };
-  const handleDate = (e: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDate(e.target.value); };
   const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
@@ -159,8 +154,8 @@ export default function EditEventModal(props: ChildProps) {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="In House Open Mat">In House Open Mat</option>
-                <option value="public">Public Open Mat</option>
+                <option value="Private">In House Open Mat</option>
+                <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>
           </Row>
