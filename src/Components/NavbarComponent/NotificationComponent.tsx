@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Row, Col, Button, ToastContainer} from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-import { getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, AddFriendResponse, denyFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 interface UserInfo {
   aboutMe: string;
@@ -35,7 +35,6 @@ export default function NotificationComponent() {
     const getAllUserData = async () => {
       const allUserData = await getFriendsList();
       setFriendInfo(allUserData)
-
     }
     getAllUserData();
   }, [])
@@ -44,8 +43,11 @@ export default function NotificationComponent() {
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-        data.setCount(allUserInfo.length);
+      setAllUserInfo(prevUserInfo => {
+        const newUserInfo = [...prevUserInfo, userInfo];
+        data.setCount(newUserInfo.length);
+        return newUserInfo;
+      });
     }
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);
@@ -62,6 +64,7 @@ export default function NotificationComponent() {
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
+    denyFriendResponse(friendlistID, value, data.userId);
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
@@ -74,7 +77,6 @@ export default function NotificationComponent() {
     data.setFriendsReload(true);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
-
   }
 
   
