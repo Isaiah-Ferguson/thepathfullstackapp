@@ -61,6 +61,7 @@ export default function MainFeedEventComponent() {
     }
   }
 
+
   // const handleClick =  async () => {
   //   setJoined(prevJoined => !prevJoined);
 

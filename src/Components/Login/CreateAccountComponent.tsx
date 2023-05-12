@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 import { Console } from 'console';
+import'../Login/CreateAccountComponent.css'
 
 export default function CreateAccountComponent() {
   let navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function CreateAccountComponent() {
 
   return (
     <div className='loginBg'>
-      <Container className='d-flex justify-content-center mobileContainer' style={{ paddingTop: 200 }}>
+      <Container className='d-flex justify-content-center createPage mobileContainer'>
         <Row className='wrapperRegistration' >
           <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
           <Col className='form-box'>
