@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Row, Col,ToastContainer} from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
+import { Row, Col, Button, ToastContainer} from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-import './NavBarComponent.css';
 import { getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
-import { Badge } from 'react-bootstrap';
 interface UserInfo {
   aboutMe: string;
   id: number;
@@ -25,13 +22,13 @@ interface FriendInfo {
   isAccepted: boolean
 }
 
-
 export default function NotificationComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [friendlistID, setfriendlistID ] = useState(0);
+
   const [notificationCount, setNotificationCount] = useState(0);
 
   const data = useContext<any>(UserContext);
@@ -49,17 +46,15 @@ export default function NotificationComponent() {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-      // setNotificationCount(prevCount => prevCount + 1);
     }
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);
     }
 
-    const pendingFriendRequests = friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted);
-    setNotificationCount(pendingFriendRequests.length);
-
-    pendingFriendRequests.forEach((item: FriendInfo) => {
-      fetchfriendlistId(item.id);
+ friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+  fetchfriendlistId(item.id);
+    });
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
       fetchUserInfo(item.userId);
     });
 
@@ -70,28 +65,21 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
-    setNotificationCount(prevCount => prevCount - 1); // Decrement the count by 1
-  };
+  }
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
-  
+
     setShowToast(true);
     setToastMessage('Friend request accepted!');
     data.setFriendsReload(true);
-    setNotificationCount(prevCount => prevCount - 1); // Decrement the count by 1
-  };
+  }
+
   
   return (
     <>
-      {/* <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">  */}
-              {/* {data.notificationCount} */}
-          {/* {data.NotificationCount}
-         </span>  */}
-
-        <Badge> {notificationCount}</Badge>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
@@ -112,4 +100,4 @@ export default function NotificationComponent() {
     </>
   );
 
-}
+      }
