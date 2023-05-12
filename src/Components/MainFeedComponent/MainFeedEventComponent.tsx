@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, loggedInData, getEventItemsByUserId, getUserInfoByID, updateEventItem  } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId, updateEventItem  } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 
@@ -23,7 +23,7 @@ interface EventItem {
 
 export default function MainFeedEventComponent() {
   const data = useContext<any>(UserContext);
-
+  const [friendInfo, setFriendInfo] = useState<number[]>([]);
   const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const profile = require('../../assets/DefaultProfilePicture.png');
@@ -36,11 +36,15 @@ export default function MainFeedEventComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : data;
+      const allUserData = await getMyFriendsList(loggedIn.userId);
+      setFriendInfo(allUserData);
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      setMyEventItems(userEventItems);
+      console.log(userEventItems)
+      setMyEventItems(userEventItems.reverse());
     };
 
     if (!checkToken()) {
@@ -69,12 +73,12 @@ export default function MainFeedEventComponent() {
   //   data.setEventReload(true);
   // }
 
-  const myEventItemsOrder = myEventItems.reverse();
+
   
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItemsOrder.map((item: EventItem, idx: number) => (
+        myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type ==='Private' && friendInfo.includes(item.userId)  || item.userId === data.userId)).map((item: EventItem, idx: number) => (
           <Row className="eventMainPageDiv" key={idx}>
             <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
               <h6>{item.eventDate}</h6>

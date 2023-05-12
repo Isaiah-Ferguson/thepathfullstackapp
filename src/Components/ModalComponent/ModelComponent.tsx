@@ -17,7 +17,7 @@ export default function ModalComponent() {
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogId, setBlogId] = useState(0);
   const [academy, setAcademy] = useState("TEAM CAMA");
-  const [viewable, setViewable] = useState("Select Privacy");
+  const [viewable, setViewable] = useState("Private");
 
   const [show, setShow] = useState(false);
 
@@ -130,8 +130,8 @@ export default function ModalComponent() {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="In House Open Mat">In House Open Mat</option>
-                <option value="public">Public Open Mat</option>
+                <option value="Private">In House Open Mat</option>
+                <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>
           </Row>

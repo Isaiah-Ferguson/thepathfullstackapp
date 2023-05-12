@@ -69,10 +69,10 @@ export default function NotificationComponent() {
     AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
-
+    data.setFriendsReload(true);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
-    data.setFriendsReload(true);
+
   }
 
   

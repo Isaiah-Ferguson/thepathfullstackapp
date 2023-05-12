@@ -20,6 +20,7 @@ interface UserInfo {
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
+  const [test, setTest] = useState(false)
   const data = useContext<any>(UserContext);
   let navigate = useNavigate();
 
@@ -33,8 +34,7 @@ export default function ProfileFriendComponent() {
       fetchUserInfo(item);
     });
     
-  }, [data.name, friendInfo]);
-
+  }, [friendInfo]);
 
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function ProfileFriendComponent() {
       setFriendInfo(allUserData);
     }
     getAllUserData();
-  }, [data.friendsReload]);
+  }, []);
   
 
   const profileClick = async (publisherName: string) => {

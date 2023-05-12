@@ -42,8 +42,6 @@ export default function MainFeedPostComponent() {
       setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
       const blogItemsOrder = userBlogItems.reverse();
-      console.log(blogItemsOrder);
-      console.log(data.userId)
       setBlogItems(blogItemsOrder);
     };
     if (!checkToken()) {
