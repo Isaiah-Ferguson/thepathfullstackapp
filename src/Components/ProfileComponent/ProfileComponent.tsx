@@ -27,12 +27,11 @@ interface UserInfo {
 
 
 export default function ProfileComponent() {
-  const blackBelt = require('../../assets/BJJBlack.png');
-  const whiteBelt = require('../../assets/BJJWhite.png');
-  const blueBelt = require('../../assets/BJJBlue.png')
-  const purpleBelt = require('../../assets/BJJPURPLE.png')
-  const brownBelt = require('../../assets/BJJBrown.png')
-  const [blogId, setBlogId] = useState(0);
+  const blackBelt = require('../../assets/BlackBeltIcon.png');
+  const whiteBelt = require('../../assets/WhiteBeltIcon.png');
+  const blueBelt = require('../../assets/BlueBeltIcon.png')
+  const purpleBelt = require('../../assets/PurpleBeltIcon.png')
+  const brownBelt = require('../../assets/BrownBeltIcon.png')
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
   const [userNum, setUserNum] = useState(0);
@@ -65,7 +64,6 @@ export default function ProfileComponent() {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 993);
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -73,10 +71,8 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      // const loggedIn = loggedInData();
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
-
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
@@ -124,8 +120,6 @@ export default function ProfileComponent() {
       
         {(!isMobile || selectedSection === 'post') && (
         <Col lg={4} className='post'>
-          { /* I have a feeling that theres something wrong with our end points, and that's the reason why We couldn't post */}
-          {/* Firing a new folder to test and Add new Dependency to test!  */}
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
           <Container>
 
@@ -144,19 +138,10 @@ export default function ProfileComponent() {
           <Container className="eventScrollDiv">
             <ProfileEventPost  picture={userInfo.image}/>
           </Container>
-
-
         </Col>)}
 
       </Row>
 
-      <Row className={`bottomProfileBG ${isMobile ? 'mobileDiv' : ''}`}>
-
-        {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
-
-        
-
-      </Row>
       <Col lg={12} xs={12} className='friends'>
             <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
             <div style={{marginTop: -55}}>

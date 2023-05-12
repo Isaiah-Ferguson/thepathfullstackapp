@@ -15,7 +15,7 @@ import UserContext from "./UserContext/UserContext";
 import ProfileFriend from './Components/ProfileComponent/ProfileFriend';
 import './Components/Login/LoginComponent.css';
 import ForgotPasswordComponent from './Components/Login/ForgotPasswordComponent';
-
+import './Components/ProfileComponent/Loading.css'
 // import { browserRouter } from ''
 function App() {
 

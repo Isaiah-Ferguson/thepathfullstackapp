@@ -41,7 +41,7 @@ export default function NotificationComponent() {
       const allUserData = await getFriendsList();
       setFriendInfo(allUserData)
     }
-    getAllUserData()
+    getAllUserData();
   }, [])
 
 
@@ -62,6 +62,7 @@ export default function NotificationComponent() {
       fetchfriendlistId(item.id);
       fetchUserInfo(item.userId);
     });
+
   }, [data.userId, friendInfo]);
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
@@ -76,10 +77,13 @@ export default function NotificationComponent() {
     AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
+
     setShowToast(true);
     setToastMessage('Friend request accepted!');
+    data.setFriendsReload(true);
     setNotificationCount(prevCount => prevCount - 1);
   }
+
   
   return (
     <>
@@ -90,7 +94,6 @@ export default function NotificationComponent() {
 
         <Badge> {notificationCount}</Badge>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
-        
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
             <img className="NotificationImg" src={userInfo.image} />

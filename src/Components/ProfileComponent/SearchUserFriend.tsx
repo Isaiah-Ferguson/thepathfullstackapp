@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList, getFriendsList } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, searchUser } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 interface UserInfo {
   aboutMe: string;
@@ -21,6 +22,7 @@ export default function SearchUserFriend() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
   const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
 
 
@@ -38,13 +40,18 @@ export default function SearchUserFriend() {
     fetchData();
   }, [data.name.userId]);
 
+  const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
 
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         <Col key={key}>
           <Container className="friendDiv">
-            <img className="friendProfile" src={userInfo.image} />
+            <img onClick={() => profileClick(userInfo.username)} className="friendProfile searchclick" src={userInfo.image} />
             <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Modal, Row, Button, Form, Col, FloatingLabel  } from 'react-bootstrap';
+import { Modal, Row, Button, Form, Col, FloatingLabel, Toast  } from 'react-bootstrap';
 import { updateUserInfo } from '../../DataServices/DataServices';
 import { useState, useContext } from 'react';
 import { loggedInData } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
+
 
 
 export default function ProfileEditModal() {
@@ -17,6 +18,7 @@ export default function ProfileEditModal() {
     const [userID, setUserID ] = useState<number>(0);
     const [username, setUsername ] = useState<string>("");
     const data = useContext<any>(UserContext);
+    const [toast, setToast] = useState(false)
 
 
 
@@ -58,12 +60,21 @@ export default function ProfileEditModal() {
   }
  //---------------------------------------------------------------//
 
+ const toggleShowA = () => {
+  setToast(false);
+};
+
 const  handleEditProfile = async () =>{
   const loggedIn = loggedInData();
   const testID = loggedIn.userId;
   const testName = loggedIn.publisherName;
   setUserID(loggedIn.userId);
   setUsername(loggedIn.publisherName);
+
+  if (firstName === "" || lastName === "" || description === "" || academy === "" || belt === "") {
+    setToast(true);
+    return;
+  }
   const item = {
     username: testName,
     FirstName: firstName,
@@ -170,6 +181,11 @@ data.setShouldReload(true);
         <Row><Col><textarea  style={{ width: '100%', height: '200px' }} onChange={handleDecription}/></Col></Row>
         <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
+        {toast && (
+                <Toast  onClick={toggleShowA}>
+                  <Toast.Body style={{ color: 'black' }}>Please fill out all information</Toast.Body>
+                </Toast>
+              )}
   </Modal>
   </div>
   )

@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../UserContext/UserContext';
-import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
+import { loggedInData, getEventItemsByUserId, checkToken} from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
 interface EventItem {
   id: number,
@@ -27,11 +27,9 @@ type pictureprops = {
 
 export default function ProfileEventPost(props: pictureprops) {
   const data = useContext<any>(UserContext);
-
-  const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
+  const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const [blogPublisherName, setBlogPublisherName] = useState('');
-  const [joined, setJoined] = useState(false);
 
   let navigate = useNavigate();
 
@@ -42,6 +40,7 @@ export default function ProfileEventPost(props: pictureprops) {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
+      userEventItems.reverse()
       setMyEventItems(userEventItems);
     };
 
@@ -50,18 +49,14 @@ export default function ProfileEventPost(props: pictureprops) {
     } else {
       getLoggedInData();
     }
+    data.setShouldReload(false);
   }, [data.eventReload]);
 
-  function handleClick() {
-    setJoined(prevJoined => !prevJoined);
-  }
-
-  const myEventItemsOrder = myEventItems.reverse();
 
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItemsOrder.filter((item) => item.userId === blogUserId)
+        myEventItems.filter((item) => item.userId === blogUserId)
           .map((item: EventItem, idx: number) => {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
@@ -95,7 +90,25 @@ export default function ProfileEventPost(props: pictureprops) {
             )
           })
       ) : (
-        <div>Loading...</div>
+        <div className='Loading-DivPost'>
+        <div className="load-wrapp2">
+          <div className="load-6">
+            <div className="letter-holder2">
+              <div className="l-1 letter">L</div>
+              <div className="l-2 letter">o</div>
+              <div className="l-3 letter">a</div>
+              <div className="l-4 letter">d</div>
+              <div className="l-5 letter">i</div>
+              <div className="l-6 letter">n</div>
+              <div className="l-7 letter">g</div>
+              <div className="l-8 letter">.</div>
+              <div className="l-9 letter">.</div>
+              <div className="l-10 letter">.</div>
+            </div>
+          </div>
+        </div>
+        <div className="clear"></div>
+      </div>
       )}
     </>
   );

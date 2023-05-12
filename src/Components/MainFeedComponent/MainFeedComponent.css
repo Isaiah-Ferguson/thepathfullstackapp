@@ -1,8 +1,8 @@
 .mainFeedImg{
     margin-top: 10px;
     height: 100px;
-    width: 135px;
-    
+    width: 100%;
+    object-fit: cover;
 }
 
 .eventMainPageDiv{

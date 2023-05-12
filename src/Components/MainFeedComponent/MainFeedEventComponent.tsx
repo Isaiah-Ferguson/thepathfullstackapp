@@ -1,8 +1,9 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { checkToken, loggedInData, getEventItemsByUserId } from "../../DataServices/DataServices";
+import { Button, Col, Row } from "react-bootstrap";
+import { useState, useEffect, useContext } from "react";
+import { checkToken, loggedInData, getEventItemsByUserId, getUserInfoByID, updateEventItem  } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
+import UserContext from "../../UserContext/UserContext";
 
 interface EventItem {
   Id: number,
@@ -21,12 +22,15 @@ interface EventItem {
 }
 
 export default function MainFeedEventComponent() {
+  const data = useContext<any>(UserContext);
 
   const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
+  const [joined, setJoined] = useState(false);
+  const [blogId, setBlogId] = useState<number | null>(null);
 
   let navigate = useNavigate();
 
@@ -37,7 +41,6 @@ export default function MainFeedEventComponent() {
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       setMyEventItems(userEventItems);
-
     };
 
     if (!checkToken()) {
@@ -47,15 +50,27 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
-  function Joined(e: any) {
-    if (e.target.value === "Joined") {
-      setJoin("join");
-    } else {
+  function handleClick(e :any) {
+    if (join === "join") {
       setJoin("Joined");
+    } else {
+      setJoin("join");
     }
   }
 
+  // const handleClick =  async () => {
+  //   setJoined(prevJoined => !prevJoined);
+
+  //   const eventData = {
+  //     Id: blogId,
+  //     other: data.Id
+  //   }
+  //   await updateEventItem(eventData);
+  //   data.setEventReload(true);
+  // }
+
   const myEventItemsOrder = myEventItems.reverse();
+  
   return (
     <>
       {myEventItems.length > 0 ? (
@@ -72,9 +87,31 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
+              <Button onClick={handleClick}>{join}</Button>
             </Col>
           </Row>
-        ))) : (<div>Loading...</div>)
+        ))) : (<>
+        <div className="Loading-MainFeed">
+        <div className="load-wrapp2">
+      <div className="load-6">
+        <div className="letter-holder2">
+          <div className="l-1 letter">L</div>
+          <div className="l-2 letter">o</div>
+          <div className="l-3 letter">a</div>
+          <div className="l-4 letter">d</div>
+          <div className="l-5 letter">i</div>
+          <div className="l-6 letter">n</div>
+          <div className="l-7 letter">g</div>
+          <div className="l-8 letter">.</div>
+          <div className="l-9 letter">.</div>
+          <div className="l-10 letter">.</div>
+        </div>
+      </div>
+    </div>
+  
+  <div className="clear"></div>
+        </div>
+</>)
       }
     </>
   );
