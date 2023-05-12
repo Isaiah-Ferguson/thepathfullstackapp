@@ -6,6 +6,7 @@ import { loggedInData } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 
+
 export default function ProfileEditModal() {
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');

@@ -40,7 +40,7 @@ export default function MainFeedComponent() {
         
         <Row>
         {(!isMobile || selectedSection === 'post') && (
-          <Col lg={8} xs={12}>
+          <Col lg={8} xs={12} style={{height: '88vh'}}>
             {/* <ProfilePostModule picture={blogItems.image} /> */}
            <MainFeedPostComponent/>
           </Col>

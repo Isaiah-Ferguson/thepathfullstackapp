@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, loggedInData, GetPublishedBlogItem, searchUser } from "../../DataServices/DataServices";
+import { checkToken, loggedInData, GetPublishedBlogItem, searchUser, getMyFriendsList } from "../../DataServices/DataServices";
 import { useNavigate, } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 interface BlogItem {
@@ -21,7 +21,7 @@ export default function MainFeedPostComponent() {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
-  const BJJWhite = require("../../assets/WhiteBeltIcon.png");
+  const [friendInfo, setFriendInfo] = useState<number[]>([]);
   let navigate = useNavigate();
   const data = useContext<any>(UserContext);
 
@@ -34,11 +34,17 @@ export default function MainFeedPostComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      const loggedIn = loggedInData();
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : data;
+      const allUserData = await getMyFriendsList(loggedIn.userId);
+      setFriendInfo(allUserData);
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
-      setBlogItems(userBlogItems);
+      const blogItemsOrder = userBlogItems.reverse();
+      console.log(blogItemsOrder);
+      console.log(data.userId)
+      setBlogItems(blogItemsOrder);
     };
     if (!checkToken()) {
       navigate('/Login');
@@ -46,6 +52,7 @@ export default function MainFeedPostComponent() {
       getLoggedInData();
     }
   }, []);
+
 
     const profileClick = async (publisherName: string) => {
     const searchName = await searchUser(publisherName);
@@ -58,12 +65,11 @@ export default function MainFeedPostComponent() {
     }
   }
 
-  const blogItemsOrder = blogItems.reverse();
   return (
     <>
       {blogItems.length > 0 ?
       
-      blogItemsOrder.filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
+      blogItems.filter((item: BlogItem) => item.isPublish && friendInfo.includes(item.userid)  || item.userid === data.userId).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
 

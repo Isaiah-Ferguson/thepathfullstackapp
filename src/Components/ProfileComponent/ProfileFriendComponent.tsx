@@ -21,7 +21,6 @@ export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
   const data = useContext<any>(UserContext);
-  const [search, setSearch] = useState('')
   let navigate = useNavigate();
 
 
