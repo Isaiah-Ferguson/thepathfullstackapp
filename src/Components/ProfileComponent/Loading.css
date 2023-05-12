@@ -34,6 +34,16 @@
   }
   
   .letter-holder2 {
+    height: 100%;
+    width: 100%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .letter-holder3 {
+    height: 90vh;
     width: 100%;
     font-size: 30px;
     display: flex;

@@ -14,21 +14,22 @@ export default function LoginComponent() {
 
 
   const handleSubmit = async () => {
-    let userData = {
-      Username: username,
-      Password: password
-    }
-    let token = await login(userData);
     setUserToast(true);
-    if (token.token != null) {
-      localStorage.setItem("Token", token.token);
-      await GetLoggedInUserData(username);
-      const loggedIn = loggedInData();
-      sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
-      data.setUserId(loggedIn.userId);
-      navigate("/profile");
-    }
-  }
+
+      let userData = {
+        Username: username,
+        Password: password
+      }
+      let token = await login(userData);
+      if (token.token != null) {
+        localStorage.setItem("Token", token.token);
+        await GetLoggedInUserData(username);
+        const loggedIn = loggedInData();
+        sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
+        data.setUserId(loggedIn.userId);
+        navigate("/profile");
+      }
+  };
 
 
 
@@ -36,9 +37,9 @@ export default function LoginComponent() {
     <div className='loginBg'>
       {userToast && (
         <div className='Loading-Div'>
-          <div className="load-wrapp">
+          <div className="load-wrapp2">
             <div className="load-6">
-              <div className="letter-holder">
+              <div className="letter-holder3">
                 <div className="l-1 letter">L</div>
                 <div className="l-2 letter">o</div>
                 <div className="l-3 letter">a</div>
@@ -65,19 +66,16 @@ export default function LoginComponent() {
                 <Form.Label className='pColor'>Username</Form.Label>
                 <Form.Control type="text" placeholder="Enter Username" onChange={({ target: { value } }) => setUsername(value)} />
               </Form.Group>
-
               <Form.Group className="mb-3 input-box" controlId="Password">
                 <Form.Label className='pColor'>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
               </Form.Group>
               <p className='pColor' >Forgot <span className='register' onClick={() => navigate("/ForgotPasswordComponent")} >Password?</span></p>
-
               <Button className='Buttons' onClick={handleSubmit} >
                 Login
               </Button>
               <p style={{ display: "inline-block", marginTop: 20 }}>Not a member? <span className='register' onClick={() => navigate("/Create")} >Register</span></p>
               <div className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
-
             </Form>
           </Col>
         </Row>
