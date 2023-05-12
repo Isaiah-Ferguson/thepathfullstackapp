@@ -70,20 +70,19 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
-    setNotificationCount(prevCount => prevCount - 1);
-  }
+    setNotificationCount(prevCount => prevCount - 1); // Decrement the count by 1
+  };
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
-
+  
     setShowToast(true);
     setToastMessage('Friend request accepted!');
     data.setFriendsReload(true);
-    setNotificationCount(prevCount => prevCount - 1);
-  }
-
+    setNotificationCount(prevCount => prevCount - 1); // Decrement the count by 1
+  };
   
   return (
     <>
