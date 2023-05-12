@@ -6,19 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 
 interface EventItem {
-  Id: number,
-  userId: number,
-  Date: string,
-  publishedName: string,
-  academyName: string,
-  time: string,
-  eventDate: string,
-  address: string,
-  description: string,
-  type: string,
-  isPublish: true,
-  isDeleted: false,
-  image: string
+  participants: any;
+  Id: number;
+  userId: number;
+  Date: string;
+  publishedName: string;
+  academyName: string;
+  time: string;
+  eventDate: string;
+  address: string;
+  description: string;
+  type: string;
+  isPublish: true;
+  isDeleted: false;
+  image: string;
 }
 
 export default function MainFeedEventComponent() {
@@ -54,35 +55,46 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
-  function handleClick(e :any) {
-    if (join === "join") {
+  function handleClick(e: any) {
+    if (join === "Join") {
       setJoin("Joined");
+      // Add both the current user's ID and the event owner's ID to the event's participants list
+      const updatedEventItems = myEventItems.map((item) => {
+        if (item.Id === blogId) {
+          return {
+            ...item,
+            participants: [item.userId, data.userId],
+          };
+        }
+        return item;
+      });
+      setMyEventItems(updatedEventItems);
     } else {
-      setJoin("join");
+      setJoin("Join");
+      // Remove both the current user's ID and the event owner's ID from the event's participants list
+      const updatedEventItems = myEventItems.map((item) => {
+        if (item.Id === blogId) {
+          return {
+            ...item,
+            participants: item.participants.filter((participantId: number) => participantId !== item.userId && participantId !== data.userId),
+          };
+        }
+        return item;
+      });
+      setMyEventItems(updatedEventItems);
     }
   }
 
-  // const handleClick =  async () => {
-  //   setJoined(prevJoined => !prevJoined);
-
-  //   const eventData = {
-  //     Id: blogId,
-  //     other: data.Id
-  //   }
-  //   await updateEventItem(eventData);
-  //   data.setEventReload(true);
-  // }
-
-
-  
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type ==='Private' && friendInfo.includes(item.userId)  || item.userId === data.userId)).map((item: EventItem, idx: number) => (
-          <Row className="eventMainPageDiv" key={idx}>
-            <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
-              <h6>{item.eventDate}</h6>
-              <h6>{item.time}</h6>
+        myEventItems
+          .filter((item: EventItem) => item.type === 'Public' || (item.type === 'Private' && (friendInfo.includes(item.userId) || item.userId === data.userId)))
+          .map((item: EventItem, idx: number) => (
+            <Row className="eventMainPageDiv" key={idx}>
+              <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
+                <h6>{item.eventDate}</h6>
+                <h6>{item.time}</h6>
             </Col>
             <Col md={9} sm={9} xs={9}>
               <h6>{item.publishedName}</h6>
