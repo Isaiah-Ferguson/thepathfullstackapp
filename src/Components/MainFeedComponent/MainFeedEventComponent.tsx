@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { checkToken, loggedInData, getEventItemsByUserId, getUserInfoByID, updateEventItem  } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
@@ -50,24 +50,24 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
-  function Joined(e: any) {
-    if (e.target.value === "Joined") {
-      setJoin("join");
-    } else {
+  function handleClick(e :any) {
+    if (join === "join") {
       setJoin("Joined");
+    } else {
+      setJoin("join");
     }
   }
 
-  const handleClick =  async () => {
-    setJoined(prevJoined => !prevJoined);
+  // const handleClick =  async () => {
+  //   setJoined(prevJoined => !prevJoined);
 
-    const eventData = {
-      Id: blogId,
-      other: data.Id
-    }
-    await updateEventItem(eventData);
-    data.setEventReload(true);
-  }
+  //   const eventData = {
+  //     Id: blogId,
+  //     other: data.Id
+  //   }
+  //   await updateEventItem(eventData);
+  //   data.setEventReload(true);
+  // }
 
   const myEventItemsOrder = myEventItems.reverse();
   
@@ -87,6 +87,7 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
+              <Button onClick={handleClick}>{join}</Button>
             </Col>
           </Row>
         ))) : (<>
