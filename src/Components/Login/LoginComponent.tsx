@@ -14,13 +14,15 @@ export default function LoginComponent() {
 
 
   const handleSubmit = async () => {
-    setUserToast(true);
+
 
       let userData = {
         Username: username,
         Password: password
       }
       let token = await login(userData);
+      console.log(token)
+      setUserToast(true);
       if (token.token != null) {
         localStorage.setItem("Token", token.token);
         await GetLoggedInUserData(username);
