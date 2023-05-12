@@ -80,7 +80,7 @@ export default function ProfileComponent() {
     };
     getLoggedInData();
     data.setShouldReload(false);
-  }, [data.shouldReload]);
+  }, [data.shouldReload, data.friendsReload]);
 
 
   return (

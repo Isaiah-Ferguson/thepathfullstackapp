@@ -35,6 +35,7 @@ export default function NotificationComponent() {
     const getAllUserData = async () => {
       const allUserData = await getFriendsList();
       setFriendInfo(allUserData)
+
     }
     getAllUserData();
   }, [])
@@ -44,6 +45,7 @@ export default function NotificationComponent() {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
       setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
+        data.setCount(allUserInfo.length);
     }
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);

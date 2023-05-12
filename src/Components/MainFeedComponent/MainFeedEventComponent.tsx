@@ -43,7 +43,6 @@ export default function MainFeedEventComponent() {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      console.log(userEventItems)
       setMyEventItems(userEventItems.reverse());
     };
 

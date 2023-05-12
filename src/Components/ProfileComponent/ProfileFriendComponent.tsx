@@ -20,21 +20,8 @@ interface UserInfo {
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
-  const [test, setTest] = useState(false)
   const data = useContext<any>(UserContext);
   let navigate = useNavigate();
-
-
-  useEffect(() => {
-    async function fetchUserInfo(id: number) {
-      const userInfo = await getUserInfoByID(id);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-    }
-    friendInfo.forEach((item: number) => {
-      fetchUserInfo(item);
-    });
-    
-  }, [friendInfo]);
 
 
   useEffect(() => {
@@ -42,10 +29,16 @@ export default function ProfileFriendComponent() {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
+      const userInfoPromises = allUserData.map(async (item: number) => {
+        const userInfo = await getUserInfoByID(item);
+        return userInfo;
+      });
+      const allUserInfos = await Promise.all(userInfoPromises);
       setFriendInfo(allUserData);
-    }
+      setAllUserInfo(allUserInfos);
+    };
     getAllUserData();
-  }, []);
+  }, [data.friendsReload]);
   
 
   const profileClick = async (publisherName: string) => {

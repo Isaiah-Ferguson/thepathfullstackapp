@@ -11,5 +11,6 @@ export default function UserHooks() {
   const [eventReload, setEventReload] = useState<boolean>(false);
   const [friendsReload, setFriendsReload] = useState<boolean>(false);
 
-  return { friendsReload, setFriendsReload, eventReload, setEventReload, shouldReload, setShouldReload, picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
+
+  return {friendsReload, setFriendsReload, eventReload, setEventReload, shouldReload, setShouldReload, picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
 }

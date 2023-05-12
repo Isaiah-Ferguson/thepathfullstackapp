@@ -42,7 +42,7 @@ export default function NavbarComponent() {
     <>
     <span className="translate-middle badge rounded-pill bg-danger NotificationBadge iconPosition">
           {" "}
-          {data.NotificationCount}
+          {data.count}
         </span>
     <Navbar expand="lg" className="navBarTest">
       

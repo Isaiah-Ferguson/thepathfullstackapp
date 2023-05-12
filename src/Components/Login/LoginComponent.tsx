@@ -21,7 +21,6 @@ export default function LoginComponent() {
         Password: password
       }
       let token = await login(userData);
-      console.log(token)
       setUserToast(true);
       if (token.token != null) {
         localStorage.setItem("Token", token.token);
