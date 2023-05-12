@@ -73,10 +73,8 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      // const loggedIn = loggedInData();
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
-
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
@@ -124,8 +122,6 @@ export default function ProfileComponent() {
       
         {(!isMobile || selectedSection === 'post') && (
         <Col lg={4} className='post'>
-          { /* I have a feeling that theres something wrong with our end points, and that's the reason why We couldn't post */}
-          {/* Firing a new folder to test and Add new Dependency to test!  */}
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
           <Container>
 

@@ -37,7 +37,6 @@ export default function ModalComponent() {
 
     const handleOpenMat = async () => {
       const academyQ = await GetAcademyList(academy);
-
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       const eventdate = selectedDay + ", " + selectedMonth;

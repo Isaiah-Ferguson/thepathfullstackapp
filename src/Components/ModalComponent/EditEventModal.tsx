@@ -60,6 +60,33 @@ export default function EditEventModal(props: ChildProps) {
       handleClose();
     }
 
+    const handleDelete = async () => {
+      const academyQ = await GetAcademyList(academy);
+
+      const userNames = loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      const eventdate = selectedDay + ", " + selectedMonth;
+      const eventData = {
+        Id: props.blogId,
+        UserId: userNames.userId,
+        Date: new Date,
+        publishedName: userNames.publisherName,
+        academyName: academyQ.name,
+        time: selectedHour,
+        eventDate: eventdate,
+        address: academyQ.address,
+        description: blogDiscription,
+        type: viewable,
+        isPublish: false,
+        isDeleted: true,
+        image: userInfoItems.image
+      }
+      await updateEventItem(eventData);
+      data.setEventReload(true);
+      console.log(data.eventReload);
+      handleClose();
+    }
+
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => { setBlogTitle(e.target.value); };
@@ -141,11 +168,11 @@ export default function EditEventModal(props: ChildProps) {
 
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-evenly moduleBG'>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
+          <Button variant="secondary" onClick={handleDelete}>
+            Delete
           </Button>
           <Button variant="primary" onClick={handleOpenMat}>
-            Create Open Mat
+            Save Changes
           </Button>
 
         </Modal.Footer>

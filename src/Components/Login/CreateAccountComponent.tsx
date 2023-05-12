@@ -3,6 +3,7 @@ import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState } from 'react'
 import { createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
+import { Console } from 'console';
 
 export default function CreateAccountComponent() {
   let navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function CreateAccountComponent() {
       Username: username,
       Password: password
     }
-
+    console.log(userData)
     const test = await createAccount(userData);
     if (test === false) {
       setUserToast(true);

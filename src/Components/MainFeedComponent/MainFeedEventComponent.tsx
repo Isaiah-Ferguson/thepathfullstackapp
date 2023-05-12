@@ -90,9 +90,10 @@ export default function MainFeedEventComponent() {
             </Col>
           </Row>
         ))) : (<>
-        <div className="load-wrapp">
+        <div className="Loading-MainFeed">
+        <div className="load-wrapp2">
       <div className="load-6">
-        <div className="letter-holder">
+        <div className="letter-holder2">
           <div className="l-1 letter">L</div>
           <div className="l-2 letter">o</div>
           <div className="l-3 letter">a</div>
@@ -107,7 +108,9 @@ export default function MainFeedEventComponent() {
       </div>
     </div>
   
-  <div className="clear"></div></>)
+  <div className="clear"></div>
+        </div>
+</>)
       }
     </>
   );

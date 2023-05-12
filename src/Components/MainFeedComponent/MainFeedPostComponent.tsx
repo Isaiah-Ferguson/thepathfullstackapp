@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { checkToken, loggedInData, GetPublishedBlogItem, getUserInfoByID } from "../../DataServices/DataServices";
+import { useState, useEffect, useContext } from "react";
+import { checkToken, loggedInData, GetPublishedBlogItem, getUserInfoByID, searchUser } from "../../DataServices/DataServices";
 import { useNavigate, } from 'react-router-dom';
-
+import UserContext from "../../UserContext/UserContext";
 interface BlogItem {
   date: string;
   id: number;
@@ -23,6 +23,8 @@ export default function MainFeedPostComponent() {
   const [blogPublisherName, setBlogPublisherName] = useState('');
   const BJJWhite = require("../../assets/WhiteBeltIcon.png");
   let navigate = useNavigate();
+  const data = useContext<any>(UserContext);
+
 
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
@@ -45,6 +47,17 @@ export default function MainFeedPostComponent() {
     }
   }, []);
 
+    const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    console.log(data.myName, publisherName)
+    if(data.myName === publisherName){
+      navigate("/profile")
+    }else{
+    data.setName(searchName);
+    navigate("/friends");
+    }
+  }
+
   const blogItemsOrder = blogItems.reverse();
   return (
     <>
@@ -60,7 +73,7 @@ export default function MainFeedPostComponent() {
                 <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
                   <Col md={3} sm={3} xs={3} className=" eventDateDiv">
                     <Row>
-                      <img className="mainFeedImg" src={item.image} />
+                      <img onClick={() => profileClick(item.publishedName)} className="mainFeedImg searchclick" src={item.image} />
                     </Row>
                     <p className="text-center" style={{ marginLeft:'25px 0 2px',}}>{item.publishedName}</p>
                     <p>Posted {formattedDate}</p>
@@ -72,7 +85,7 @@ export default function MainFeedPostComponent() {
               </Col>
             </Row>
           )
-        }) :         <div className="load-wrapp">
+        }) :<div className="load-wrapp3">
         <div className="load-6">
           <div className="letter-holder">
             <div className="l-1 letter">L</div>

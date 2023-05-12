@@ -19,8 +19,8 @@ export default function LoginComponent() {
       Password: password
     }
     let token = await login(userData);
+    setUserToast(true);
     if (token.token != null) {
-      setUserToast(true);
       localStorage.setItem("Token", token.token);
       await GetLoggedInUserData(username);
       const loggedIn = loggedInData();
@@ -52,7 +52,6 @@ export default function LoginComponent() {
               </div>
             </div>
           </div>
-
           <div className="clear"></div>
         </div>
       )}
@@ -80,8 +79,6 @@ export default function LoginComponent() {
               <div className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
 
             </Form>
-
-
           </Col>
         </Row>
       </Container>

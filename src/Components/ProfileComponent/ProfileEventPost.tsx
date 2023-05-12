@@ -40,6 +40,7 @@ export default function ProfileEventPost(props: pictureprops) {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
+      userEventItems.reverse()
       setMyEventItems(userEventItems);
     };
 
@@ -51,12 +52,11 @@ export default function ProfileEventPost(props: pictureprops) {
     data.setShouldReload(false);
   }, [data.eventReload]);
 
-  const myEventItemsOrder = myEventItems.reverse();
 
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItemsOrder.filter((item) => item.userId === blogUserId)
+        myEventItems.filter((item) => item.userId === blogUserId)
           .map((item: EventItem, idx: number) => {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
