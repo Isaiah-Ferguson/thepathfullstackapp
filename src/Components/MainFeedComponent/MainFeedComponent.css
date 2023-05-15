@@ -58,6 +58,8 @@
     background-color: #C5FAD5 ;
 }
 
+
+
 @media screen and (max-width: 425px) {
     .mainFeedImg{
         height: 75px;
