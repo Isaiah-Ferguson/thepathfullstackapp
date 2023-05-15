@@ -48,7 +48,6 @@ useEffect(() => {
       if (prevUserInfo.some(info => info.id === userInfo.id)) {
         return prevUserInfo;
       }
-
       const newUserInfo = [...prevUserInfo, userInfo];
       return newUserInfo;
     });

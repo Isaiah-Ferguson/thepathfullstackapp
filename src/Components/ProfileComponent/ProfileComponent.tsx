@@ -76,6 +76,7 @@ export default function ProfileComponent() {
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
+      console.log(userInfoItems)
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
