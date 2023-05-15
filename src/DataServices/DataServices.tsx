@@ -252,4 +252,21 @@ async function denyFriendResponse( id:number, myId: number, OtherId: (number | s
     return eventData;
 }
 
-  export { getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+async function joinEvent(eventId: number, userId: number) {
+    const res = await fetch(url + `/JoinEvents/JoinEvent/${eventId}/${userId}`,{
+        method: "POST",
+        headers:{
+            'Content-Type':"application/json"
+        }
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+    //We are not writeing a return because this is a POST.
+}
+
+
+  export { getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId,joinEvent, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

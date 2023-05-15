@@ -73,6 +73,7 @@ export default function ProfileComponent() {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      console.log(loggedIn.userId);
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);

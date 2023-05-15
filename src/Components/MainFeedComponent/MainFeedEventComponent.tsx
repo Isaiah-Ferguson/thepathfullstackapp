@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, getMyFriendsList, getEventItemsByUserId, updateEventItem  } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId, updateEventItem, joinEvent  } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 
@@ -32,6 +32,7 @@ export default function MainFeedEventComponent() {
   const [blogPublisherName, setBlogPublisherName] = useState('');
   const [joined, setJoined] = useState(false);
   const [blogId, setBlogId] = useState<number | null>(null);
+  const [userId, setUserId] = useState(1);
 
   let navigate = useNavigate();
 
@@ -39,6 +40,7 @@ export default function MainFeedEventComponent() {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
+      setUserId(loggedIn.userId);
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
       setBlogUserId(loggedIn.userId);
@@ -55,8 +57,16 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
+  function handleJoin(eventId:number, userId:number) {
+    return (e:any) => {
+      console.log("wer");
+      joinEvent(eventId, userId).then((res)=>console.log(res));
+  }
+  }
+
   function handleClick(e: any) {
     if (join === "Join") {
+
       setJoin("Joined");
       // Add both the current user's ID and the event owner's ID to the event's participants list
       const updatedEventItems = myEventItems.map((item) => {
@@ -103,7 +113,8 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
-              <Button onClick={handleClick}>{join}</Button>
+              <Button onClick={handleJoin(item.Id, userId)}>{join}</Button>
+              {/* <Button onClick={()=>console.log(item[""])}>{join}</Button> */}
             </Col>
           </Row>
         ))) : (<>
