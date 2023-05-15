@@ -64,34 +64,26 @@ export default function MainFeedEventComponent() {
   }
   }
 
-  function handleClick(e: any) {
-    if (join === "Join") {
-
+  function handleClick(eventId:number, userId:number) {
+    if (join === "join") {
       setJoin("Joined");
-      // Add both the current user's ID and the event owner's ID to the event's participants list
-      const updatedEventItems = myEventItems.map((item) => {
-        if (item.Id === blogId) {
-          return {
-            ...item,
-            participants: [item.userId, data.userId],
-          };
-        }
-        return item;
-      });
-      setMyEventItems(updatedEventItems);
+      // Call the joinEvent function here to join the event
+      joinEvent(eventId, userId)
+        .then((data) => {
+          // Handle the successful join event response
+          console.log("Event joined successfully:", data);
+          // Perform any additional actions needed after joining the event
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error("Error joining event:", error);
+          // Perform any error handling logic, such as displaying an error message
+          setJoin("joined"); // Revert the join status if an error occurs
+        });
     } else {
-      setJoin("Join");
-      // Remove both the current user's ID and the event owner's ID from the event's participants list
-      const updatedEventItems = myEventItems.map((item) => {
-        if (item.Id === blogId) {
-          return {
-            ...item,
-            participants: item.participants.filter((participantId: number) => participantId !== item.userId && participantId !== data.userId),
-          };
-        }
-        return item;
-      });
-      setMyEventItems(updatedEventItems);
+      setJoin("joined");
+      // Call any additional function here to handle unjoining the event
+      // For example, you may want to call an unjoinEvent function
     }
   }
 
@@ -113,7 +105,7 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
-              <Button onClick={handleJoin(item.Id, userId)}>{join}</Button>
+              <Button onClick={ () => handleClick}>{join}</Button>
               {/* <Button onClick={()=>console.log(item[""])}>{join}</Button> */}
             </Col>
           </Row>
