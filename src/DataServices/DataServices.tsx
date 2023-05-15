@@ -39,6 +39,13 @@ const url = 'https://thepathapi.azurewebsites.net';
       //We are not writeing a return because this is a POST.
       return data;
   }
+
+  async function GetAllJoinedEvents() {
+    let res = await fetch( url + `/joinevent/GetAllEventsJoined`)
+    let data = await res.json();
+    return data;
+}
+
   
   async function GetLoggedInUserData(username: string) {
       let res = await fetch( url + `/User/userbyusername/${username}`)
@@ -133,6 +140,22 @@ async function GetAllUsers() {
             'Content-Type':"application/json"
         },
         body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+}
+
+async function joinEventItem(EventId : number, UserId: any) {
+    const res = await fetch( url + `/joinevent/joinevent/${EventId}/${UserId}`,{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(EventId, UserId)
     });
     if(!res.ok){
         const message = `An Error has Occured  ${res.status}`;
@@ -252,4 +275,6 @@ async function denyFriendResponse( id:number, myId: number, OtherId: (number | s
     return eventData;
 }
 
-  export { getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+
+
+  export { GetAllJoinedEvents, joinEventItem, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

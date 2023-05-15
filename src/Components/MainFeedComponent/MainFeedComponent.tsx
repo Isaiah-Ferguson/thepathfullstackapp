@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import MainFeedEventComponent from "./MainFeedEventComponent";
-import { getEventItemsByUserId, addBlogItem } from '../../DataServices/DataServices';
+import { getEventItemsByUserId, addBlogItem, GetAllJoinedEvents } from '../../DataServices/DataServices';
 import NavBar from "../NavbarComponent/NavBarComponent"
 import MainFeedPostComponent from "./MainFeedPostComponent";
 
@@ -29,7 +29,7 @@ export default function MainFeedComponent() {
       <br />
       <br />
       
-      <Container>
+      <div className="custom-container">
       {(isMobile) && (
              <Col lg={12}>
             <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
@@ -40,23 +40,25 @@ export default function MainFeedComponent() {
         
         <Row>
         {(!isMobile || selectedSection === 'post') && (
-          <Col lg={8} xs={12} style={{height: '88vh'}}>
+          <Col lg={7} xs={12} style={{height: '88vh'}}>
             {/* <ProfilePostModule picture={blogItems.image} /> */}
            <MainFeedPostComponent/>
           </Col>
         )}
           {(!isMobile || selectedSection === 'event') &&  (
-          <Col lg={4} className="d-flex justify-content-end">
-            <Container className="eventmainPageBg ">
+          <Col lg={5} className="d-flex justify-content-end">
+            <div className="eventmainPageBg custom-container">
               <Row className="text-center">
                 <h1>Event Calander</h1>
-              </Row>
+              </Row><div>
               <MainFeedEventComponent/>
-            </Container>
+
+              </div>
+            </div>
           </Col>
           )}
         </Row>
-      </Container>
+      </div>
     </div>
   );
 }

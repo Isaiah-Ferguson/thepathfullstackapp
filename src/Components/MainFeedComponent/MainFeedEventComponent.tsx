@@ -1,12 +1,14 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, getMyFriendsList, getEventItemsByUserId, updateEventItem  } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId, updateEventItem, GetAllJoinedEvents  } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
+import JoinEventModal from "../ModalComponent/JoinEventModal";
+import JoinedPersonList from "../ModalComponent/JoinPersonListModal";
 
 interface EventItem {
-  Id: number,
+  id: number,
   userId: number,
   Date: string,
   publishedName: string,
@@ -26,7 +28,6 @@ export default function MainFeedEventComponent() {
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
   const [join, setJoin] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
-  const profile = require('../../assets/DefaultProfilePicture.png');
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [blogPublisherName, setBlogPublisherName] = useState('');
   const [joined, setJoined] = useState(false);
@@ -44,6 +45,8 @@ export default function MainFeedEventComponent() {
       setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       setMyEventItems(userEventItems.reverse());
+      let joinedEventvar = await GetAllJoinedEvents();
+      console.log(joinedEventvar)
     };
 
     if (!checkToken()) {
@@ -61,19 +64,6 @@ export default function MainFeedEventComponent() {
     }
   }
 
-  // const handleClick =  async () => {
-  //   setJoined(prevJoined => !prevJoined);
-
-  //   const eventData = {
-  //     Id: blogId,
-  //     other: data.Id
-  //   }
-  //   await updateEventItem(eventData);
-  //   data.setEventReload(true);
-  // }
-
-
-  
   return (
     <>
       {myEventItems.length > 0 ? (
@@ -90,8 +80,13 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
-              <Button onClick={handleClick}>{join}</Button>
+              <Row style={{}}>
+              <Col><JoinEventModal id={item.id}/></Col>
+              <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id}/></Col>
+              </Row>
+    
             </Col>
+            {}
           </Row>
         ))) : (<>
         <div className="Loading-MainFeed">

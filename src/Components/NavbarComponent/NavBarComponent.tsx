@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -13,22 +13,29 @@ import NotificationComponent from "./NotificationComponent";
 
 
 export default function NavbarComponent() {
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const logo = require("../../assets/Logo.png");
   const [search, setSearch] = useState('');
   const data = useContext<any>(UserContext);
-
   let navigate = useNavigate();
 
+  useEffect(() => {
+    setIsNotificationVisible(true);
+  },[]);
+
   
+  useEffect(() => {
+    setTimeout(() => {
+      setIsNotificationVisible(false);
+    }, 250);
+  },[])
 
   function ProfileNavigate() { navigate("/profile"); };
   function MainFeedNavigate() { navigate("/MainFeedComponent"); };
-
   function LoginNavigate() {
     localStorage.removeItem('Token');
     navigate("/");
   };
-
 
   const handleSearch = async () => {
     const searchName = await searchUser(search);
@@ -36,7 +43,6 @@ export default function NavbarComponent() {
     navigate("/friends");
   }
 
-  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
   return (
     <>
@@ -45,7 +51,6 @@ export default function NavbarComponent() {
           {data.count}
         </span>
     <Navbar expand="lg" className="navBarTest">
-      
       <Container fluid>
         <img className="NavLogo" onClick={(e) => { setIsNotificationVisible(!isNotificationVisible); }} src={logo} />
         

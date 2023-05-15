@@ -68,6 +68,8 @@ export default function NotificationComponent() {
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
+    data.setCount(data.count - 1);
+
   }
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
@@ -77,6 +79,8 @@ export default function NotificationComponent() {
     data.setFriendsReload(true);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
+    data.setCount(data.count - 1);
+
   }
 
   

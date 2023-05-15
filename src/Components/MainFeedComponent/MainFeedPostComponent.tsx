@@ -54,7 +54,6 @@ export default function MainFeedPostComponent() {
 
     const profileClick = async (publisherName: string) => {
     const searchName = await searchUser(publisherName);
-    console.log(data.myName, publisherName)
     if(data.myName === publisherName){
       navigate("/profile")
     }else{
