@@ -39,7 +39,6 @@ export default function ProfilePost(props: pictureprops) {
       setBlogUserId(loggedIn.userId);
       setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
-      console.log(userBlogItems)
       setBlogItems(userBlogItems);
     };
     if (!checkToken()) {

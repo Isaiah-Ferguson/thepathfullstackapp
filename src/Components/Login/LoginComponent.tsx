@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button } from 'react-bootstrap'
 import { useState, useContext } from 'react'
-import { login, GetLoggedInUserData, loggedInData } from '../../DataServices/DataServices';
+import { login, GetLoggedInUserData, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext/UserContext';
 
@@ -28,6 +28,12 @@ export default function LoginComponent() {
         const loggedIn = loggedInData();
         sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
         data.setUserId(loggedIn.userId);
+        let userInfoItems = await getUserInfoByID(loggedIn.userId);
+
+          if (userInfoItems.firstName == null) {
+            data.setNewUser(true);
+          }
+
         navigate("/profile");
       }
   };

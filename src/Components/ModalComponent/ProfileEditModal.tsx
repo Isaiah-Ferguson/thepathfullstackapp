@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel, Toast  } from 'react-bootstrap';
 import { updateUserInfo } from '../../DataServices/DataServices';
 import { useState, useContext } from 'react';
@@ -7,7 +7,7 @@ import UserContext from '../../UserContext/UserContext';
 
 
 
-export default function ProfileEditModal() {
+export default function ProfileEditModal(props: any) {
   const EditProfile = require('../../assets/EditProfile.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
     const [academy, setAcademy] = useState<string>("");
@@ -21,10 +21,15 @@ export default function ProfileEditModal() {
     const [toast, setToast] = useState(false)
 
 
-
-    const [lgShow, setLgShow] = useState(false);
+useEffect(() => {
+console.log(props.newuser)
+},[])
+    const [lgShow, setLgShow] = useState(props.newuser);
     const [picture, setPicture] = useState(profile);
-    const handleClose = () => setLgShow(false);
+    const handleClose = () => {
+      setLgShow(false);
+      data.setNewUser(false);
+    }
 
     //----------------HANDLE FUNCTIONS-------------------------//
 
@@ -102,7 +107,10 @@ data.setShouldReload(true);
   <Modal
     size="lg"
     show={lgShow}
-    onHide={() => setLgShow(false)}
+    onHide={() =>{
+      setLgShow(false)
+      handleClose();
+    }}
     aria-labelledby="example-modal-sizes-title-lg"
   >
 
@@ -178,7 +186,7 @@ data.setShouldReload(true);
         </FloatingLabel></Col>
         </Row>
         <br/>
-        <Row><Col><textarea  style={{ width: '100%', height: '200px' }} onChange={handleDecription}/></Col></Row>
+        <Row><Col><textarea placeholder='Enter a Discriptions' style={{ width: '100%', height: '200px' }} onChange={handleDecription}/></Col></Row>
         <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
         {toast && (

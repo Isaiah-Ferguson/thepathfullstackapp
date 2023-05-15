@@ -35,7 +35,9 @@ export default function ProfileComponent() {
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
   const [userNum, setUserNum] = useState(0);
+  const [isNewUser, setIsNewUser] = useState(false);
   const data = useContext<any>(UserContext);
+  const [username, setUsername] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
     id: 0,
@@ -53,7 +55,6 @@ export default function ProfileComponent() {
         userInfo.belt === "Brown Belt" ? brownBelt :
           userInfo.belt === "Black Belt" ? blackBelt :
             "";
-  const [username, setUsername] = useState('');
   
 
 
@@ -76,12 +77,11 @@ export default function ProfileComponent() {
       setUserNum(loggedIn.userId);
       setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
-      console.log(userInfoItems)
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
     data.setShouldReload(false);
-  }, [data.shouldReload, data.friendsReload]);
+  }, [data.shouldReload]);
 
 
   return (
@@ -104,7 +104,7 @@ export default function ProfileComponent() {
           </Row>
           
           <Row style={{marginBottom: 25}}>
-            <Col className="text-center" lg={6} xs={7}><ProfileEditModal /></Col>
+            <Col className="text-center" lg={6} xs={7}><ProfileEditModal newuser={data.newUser}/></Col>
             <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>
           </Row>
         </Col>
