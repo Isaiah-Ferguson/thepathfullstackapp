@@ -81,18 +81,12 @@ export default function MainFeedEventComponent() {
 
       // Close the modal popup
       handleClose();
+      joinEvent(userId, eventId );
     } catch (error) {
       console.error('Error joining event:', error);
       // Handle the error case, display an error message, etc.
     }
   };
-
-
-
-
-
-
-
 
 
 
@@ -118,39 +112,9 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
-  // function handleJoin(eventId: number, userId: number) {
-  //   return (e: any) => {
-  //     console.log("wer");
-  //     setSmShow(true)
-  //     joinEvent(eventId, userId).then((res) => console.log(res));
-  //   };
 
 
 
-
-
-  // function handleClick(eventId: number, userId: number) {
-  //   if (join === "join") {
-  //     setJoin("Joined");
-  //     // Call the joinEvent function here to join the event
-  //     joinEvent(eventId, userId)
-  //       .then((data) => {
-  //         // Handle the successful join event response
-  //         console.log("Event joined successfully:", data);
-  //         // Perform any additional actions needed after joining the event
-  //       })
-  //       .catch((error) => {
-  //         // Handle the error
-  //         console.error("Error joining event:", error);
-  //         // Perform any error handling logic, such as displaying an error message
-  //         setJoin("joined"); // Revert the join status if an error occurs
-  //       });
-  //   } else {
-  //     setJoin("joined");
-  //     // Call any additional function here to handle unjoining the event
-  //     // For example, you may want to call an unjoinEvent function
-  //   }
-  // }
 
   return (
     <>
