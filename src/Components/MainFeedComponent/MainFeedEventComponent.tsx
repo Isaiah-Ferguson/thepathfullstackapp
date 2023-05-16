@@ -32,7 +32,7 @@ interface EventItem {
 export default function MainFeedEventComponent() {
   const data = useContext<any>(UserContext);
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
-  const [join, setJoin] = useState("Join");
+  const [prevJoinedUsers, setJoinedUsers] = useState("Join");
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
   const profile = require("../../assets/DefaultProfilePicture.png");
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
@@ -42,6 +42,11 @@ export default function MainFeedEventComponent() {
   const [userId, setUserId] = useState(1);
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+const toggleModal = () => {
+  setShowModal(!showModal);
+};
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -51,8 +56,46 @@ export default function MainFeedEventComponent() {
   // const [isOpen, setIsOpen] = useState(false);
 
   // function toggleModal() {
-  //   setIsOpen(!isOpen);
-  // }
+  //     setIsOpen(!isOpen);
+  //   }
+
+  const handleJoin = async (eventId: number, otherUserId: number) => {
+    try {
+      // Make a fetch request to join the event
+      const response = await fetch(`https://thepathapi.azurewebsites.net/joinevent/joinevent/${eventId}/${otherUserId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: data.userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to join the event.');
+      }
+
+      // Add the joined user IDs to the array of joinedUsers
+      const joinedUserIds: any = [data.userId, otherUserId];
+
+      setJoinedUsers(prevJoinedUsers => prevJoinedUsers.concat(joinedUserIds));
+
+      // Close the modal popup
+      handleClose();
+    } catch (error) {
+      console.error('Error joining event:', error);
+      // Handle the error case, display an error message, etc.
+    }
+  };
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const getLoggedInData = async () => {
@@ -75,12 +118,16 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
-  function handleJoin(eventId: number, userId: number) {
-    return (e: any) => {
-      console.log("wer");
-      joinEvent(eventId, userId).then((res) => console.log(res));
-    };
-  }
+  // function handleJoin(eventId: number, userId: number) {
+  //   return (e: any) => {
+  //     console.log("wer");
+  //     setSmShow(true)
+  //     joinEvent(eventId, userId).then((res) => console.log(res));
+  //   };
+
+
+
+
 
   // function handleClick(eventId: number, userId: number) {
   //   if (join === "join") {
@@ -121,14 +168,6 @@ export default function MainFeedEventComponent() {
               <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
                 <h6>{item.eventDate}</h6>
                 <h6>{item.time}</h6>
-                {/* <NavDropdown title="more.." id="nav-dropdown">
-        <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
-      </NavDropdown> */}
-
               </Col>
               <Col md={9} sm={9} xs={9}>
                 <h6>{item.publishedName}</h6>
@@ -140,42 +179,43 @@ export default function MainFeedEventComponent() {
                 <Button variant="primary" onClick={handleShow}>
                   +
                 </Button>
+                <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Do you want to join? </Modal.Title>
+        </Modal.Header>
+        <Modal.Body></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
                 <div style={{ float: 'right', border: 'none' }}>
-                  <button style={{outline: 'none', border: 'none', backgroundColor:'bisque', textDecorationLine: 'underline',}} onClick={() => setSmShow(true)}>
+                  <button
+                    onClick={toggleModal}
+                    style={{ outline: 'none', border: 'none', backgroundColor: 'bisque', textDecorationLine: 'underline' }}
+                  >
                     Joined Users
                   </button>
 
-                  <Modal
-                    size="sm"
-                    show={smShow}
-                    onHide={() => setSmShow(false)}
-                    aria-labelledby="example-modal-sizes-title-sm"
-                  >
+                  <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
-                      <Modal.Title id="example-modal-sizes-title-sm">
-                        People who've joined.. 
-                      </Modal.Title>
+                      <Modal.Title>Joined Event</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>...</Modal.Body>
+                    <Modal.Body>
+               
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
                   </Modal>
-
                 </div>
-
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>Would you like to join event?</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      No
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                      Yes
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
                 {/* <Button onClick={()=>console.log(item[""])}>{join}</Button> */}
               </Col>
 
@@ -207,4 +247,5 @@ export default function MainFeedEventComponent() {
       )}
     </>
   );
+
 }
