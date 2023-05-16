@@ -6,14 +6,36 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
-import { searchUser } from "../../DataServices/DataServices";
+import { searchUser, getUserInfoByID } from "../../DataServices/DataServices";
 import { useContext } from "react";
 import UserContext from "../../UserContext/UserContext";
 import NotificationComponent from "./NotificationComponent";
 
+interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
+
+
+interface FriendInfo {
+  id: number,
+  userId: number,
+  friendUserId: number,
+  isAccepted: boolean
+}
 
 export default function NavbarComponent() {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
+  const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
+  const [friendlistID, setfriendlistID ] = useState(0);
   const logo = require("../../assets/Logo.png");
   const [search, setSearch] = useState('');
   const data = useContext<any>(UserContext);
@@ -42,6 +64,28 @@ export default function NavbarComponent() {
     data.setName(searchName);
     navigate("/friends");
   }
+
+  useEffect(() => {
+    async function fetchUserInfo(userId: number) {
+      const userInfo = await getUserInfoByID(userId);
+      setAllUserInfo(prevUserInfo => {
+        const newUserInfo = [...prevUserInfo, userInfo];
+        data.setCount(newUserInfo.length);
+        return newUserInfo;
+      });
+    }
+    async function fetchfriendlistId( id: number) {
+      setfriendlistID(id);
+    }
+
+ friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+  fetchfriendlistId(item.id);
+    });
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
+      fetchUserInfo(item.userId);
+    });
+
+  }, [data.userId, friendInfo]);
 
 
   return (

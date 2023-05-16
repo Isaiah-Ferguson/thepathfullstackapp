@@ -80,7 +80,6 @@ export default function NotificationComponent() {
     setShowToast(true);
     setToastMessage('Friend request accepted!');
     data.setCount(data.count - 1);
-
   }
 
   
@@ -98,7 +97,7 @@ export default function NotificationComponent() {
           </Col>
         </Row>
       ))}
-      <ToastContainer>
+      <ToastContainer style={{width: '90%'}}>
         <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
           <Toast.Body style={{ justifyContent: 'center'}}>{toastMessage}</Toast.Body>
         </Toast>

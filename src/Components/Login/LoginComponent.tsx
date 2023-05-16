@@ -33,7 +33,6 @@ export default function LoginComponent() {
           if (userInfoItems.firstName == null) {
             data.setNewUser(true);
           }
-
         navigate("/profile");
       }
   };

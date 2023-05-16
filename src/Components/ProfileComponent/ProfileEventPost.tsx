@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import UserContext from '../../UserContext/UserContext';
 import { loggedInData, getEventItemsByUserId, checkToken} from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
+import JoinedPersonList from '../ModalComponent/JoinPersonListModal';
 interface EventItem {
   id: number,
   userId: number,
@@ -74,16 +75,18 @@ export default function ProfileEventPost(props: pictureprops) {
                   <div className="eventTextArea">
                     <Row>
                       <Col lg={12} className="d-flex justify-content-start">
-                        <p className="profileFontPadding">{item.publishedName} Created an Open mat {item.eventDate} at {item.time}</p>
+                        <p className="profileFontPadding">Open mat {item.eventDate} at {item.time}</p>
                       </Col>
                       <Col className="d-flex justify-content-start">
                         <p className="profileFontPadding">  </p>
                       </Col>
                     </Row>
                     <Row className="text-center">
-                      <p title={item.address}>{item.academyName}</p>
-                      <p></p>
+                        <p>{item.academyName}</p>
+                        <p>{item.address}</p>
                     </Row>
+                    <JoinedPersonList id={item.id} />
+
                   </div>
                 </Col>
               </Row>
