@@ -44,9 +44,9 @@ export default function MainFeedEventComponent() {
   const [smShow, setSmShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-const toggleModal = () => {
-  setShowModal(!showModal);
-};
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -180,19 +180,19 @@ const toggleModal = () => {
                   +
                 </Button>
                 <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Do you want to join? </Modal.Title>
-        </Modal.Header>
-        <Modal.Body></Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Do you want to join? </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body></Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
                 <div style={{ float: 'right', border: 'none' }}>
                   <button
@@ -207,7 +207,7 @@ const toggleModal = () => {
                       <Modal.Title>Joined Event</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-               
+
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={() => setShowModal(false)}>
