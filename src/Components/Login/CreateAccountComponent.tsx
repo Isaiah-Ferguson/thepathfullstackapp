@@ -44,7 +44,7 @@ export default function CreateAccountComponent() {
 
   return (
     <div className='loginBg'>
-      <Container className='d-flex justify-content-center createPage mobileContainer'>
+      <Container className='d-flex justify-content-center createPage mobileContainer' style={{ paddingTop: 200 }}>
         <Row className='wrapperRegistration' >
           <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
           <Col className='form-box'>
