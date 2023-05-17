@@ -8,7 +8,7 @@ import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent";
-import React from 'react';
+import React, { useEffect } from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
 import UserHooks from './Hooks/UserHooks';
 import UserContext from "./UserContext/UserContext";
@@ -18,6 +18,10 @@ import ForgotPasswordComponent from './Components/Login/ForgotPasswordComponent'
 import './Components/ProfileComponent/Loading.css'
 // import { browserRouter } from ''
 function App() {
+
+  useEffect(() => {
+    document.body.style.backgroundColor = '#e4e5f9';
+  }, [])
 
   // const userHooks = UserHooks();
 
