@@ -20,7 +20,6 @@ export default function AddFriendModal(props: username) {
 
 
   const handleFriendRequest = async () => {
-    console.log(data.userId, data.name.userId);
   
     // Check if friend request already sent
     const friendRequests = await getFriendsList();
@@ -29,7 +28,6 @@ export default function AddFriendModal(props: username) {
         request.userId === data.userId && request.friendUserId === data.name.userId
     );
     if (isRequestSent) {
-      console.log('Friend request already sent');
       return;
     }
 

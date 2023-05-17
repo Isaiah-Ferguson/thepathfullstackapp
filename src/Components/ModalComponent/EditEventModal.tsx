@@ -99,7 +99,7 @@ export default function EditEventModal(props: ChildProps) {
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton className='moduleBG'>
-          <Modal.Title >Create Open Mat</Modal.Title>
+          <Modal.Title >Edit Open Mat</Modal.Title>
         </Modal.Header >
         <Modal.Body className='moduleBG'>
           <Row>
