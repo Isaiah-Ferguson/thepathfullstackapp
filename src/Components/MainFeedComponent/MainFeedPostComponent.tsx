@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, loggedInData, GetPublishedBlogItem, searchUser, getMyFriendsList } from "../../DataServices/DataServices";
+import { checkToken, GetPublishedBlogItem, searchUser, getMyFriendsList } from "../../DataServices/DataServices";
 import { useNavigate, } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 interface BlogItem {
@@ -14,23 +14,19 @@ interface BlogItem {
   description: string;
   title: string;
   userid: number;
-  // Other properties of a BlogItem
 }
 
 export default function MainFeedPostComponent() {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-  const [blogUserId, setBlogUserId] = useState<number | null>(null);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
-  let navigate = useNavigate();
   const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
-
-  const blackBelt = require('../../assets/BJJBlack.png');
-  const whiteBelt = require('../../assets/BJJWhite.png');
-  const blueBelt = require('../../assets/BJJBlue.png');
-  const purpleBelt = require('../../assets/BJJPURPLE.png');
-  const brownBelt = require('../../assets/BJJBrown.png');
+  // const blackBelt = require('../../assets/BJJBlack.png');
+  // const whiteBelt = require('../../assets/BJJWhite.png');
+  // const blueBelt = require('../../assets/BJJBlue.png');
+  // const purpleBelt = require('../../assets/BJJPURPLE.png');
+  // const brownBelt = require('../../assets/BJJBrown.png');
 
   useEffect(() => {
     const getLoggedInData = async () => {
@@ -38,8 +34,6 @@ export default function MainFeedPostComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
-      setBlogUserId(loggedIn.userId);
-      setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
       const blogItemsOrder = userBlogItems.reverse();
       setBlogItems(blogItemsOrder);
@@ -54,7 +48,6 @@ export default function MainFeedPostComponent() {
 
     const profileClick = async (publisherName: string) => {
     const searchName = await searchUser(publisherName);
-    console.log(data.myName, publisherName)
     if(data.myName === publisherName){
       navigate("/profile")
     }else{
@@ -75,12 +68,12 @@ export default function MainFeedPostComponent() {
             <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
               <Col lg={12} className="mainPostDiv">
                 <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
-                  <Col md={3} sm={3} xs={3} className=" eventDateDiv">
+                  <Col md={4} sm={4} xs={4} className=" eventDateDiv">
                     <Row>
                       <img onClick={() => profileClick(item.publishedName)} className="mainFeedImg searchclick" src={item.image} />
                     </Row>
-                    <p className="text-center" style={{ marginLeft:'25px 0 2px',}}>{item.publishedName}</p>
-                    <p>Posted {formattedDate}</p>
+                    <h3 className="text-center">{item.publishedName}</h3>
+                    <p className="row">Posted {formattedDate}</p>
                   </Col>
                   <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#b79ced'}}>
                     <p>{item.description}</p>

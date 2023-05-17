@@ -23,11 +23,8 @@ interface BlogItem {
   }
 
 export default function FriendPost(props: pictureprops) {
-
     const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-    const profile = require('../../assets/DefaultProfilePicture.png');
     const [blogUserId, setBlogUserId] = useState<number | null>(null);
-    const [blogPublisherName, setBlogPublisherName] = useState('');
     const data = useContext<any>(UserContext);
 
   
@@ -35,7 +32,6 @@ export default function FriendPost(props: pictureprops) {
       const getLoggedInData = async () => {
         const loggedIn = data;
         setBlogUserId(loggedIn.name.userId);
-        setBlogPublisherName(loggedIn.publisherName);
         let userBlogItems = await GetPublishedBlogItem();
         setBlogItems(userBlogItems);
       };
@@ -57,25 +53,35 @@ export default function FriendPost(props: pictureprops) {
                       <div style={{fontWeight: 600}}>{item.publishedName}</div>
                     <div>{formattedDate}</div>
                       </Col>
-                      <Col lg={1} sm={2} xs={2} style={{ height: 40 }} >
-                    
-                </Col>
                   </Row>
                 </Col>
-  
                 <Col lg={8} sm={9} xs={7}><Row>
                 <Col  lg={12} xs={12} className="d-flex justify-content-end">
                   <div className="textArea ">{item.description}</div>
                 </Col>
                 </Row></Col>
-                
-                
               </Row>
             )
-          }) : <div>Loading...</div>
+          }) :  <div className='Loading-DivPost'>
+          <div className="load-wrapp2">
+            <div className="load-6">
+              <div className="letter-holder2">
+                <div className="l-1 letter">L</div>
+                <div className="l-2 letter">o</div>
+                <div className="l-3 letter">a</div>
+                <div className="l-4 letter">d</div>
+                <div className="l-5 letter">i</div>
+                <div className="l-6 letter">n</div>
+                <div className="l-7 letter">g</div>
+                <div className="l-8 letter">.</div>
+                <div className="l-9 letter">.</div>
+                <div className="l-10 letter">.</div>
+              </div>
+            </div>
+          </div>
+          <div className="clear"></div>
+        </div>
         }
-  
-  
       </>
     );
     

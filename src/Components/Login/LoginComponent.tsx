@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button } from 'react-bootstrap'
 import { useState, useContext } from 'react'
-import { login, GetLoggedInUserData, loggedInData } from '../../DataServices/DataServices';
+import { login, GetLoggedInUserData, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext/UserContext';
 
@@ -16,22 +16,26 @@ export default function LoginComponent() {
 
   const handleSubmit = async () => {
 
+    let userData = {
+      Username: username,
+      Password: password
+    }
 
-      let userData = {
-        Username: username,
-        Password: password
+    let token = await login(userData);
+    setUserToast(true);
+    if (token.token != null) {
+      localStorage.setItem("Token", token.token);
+      await GetLoggedInUserData(username);
+      const loggedIn = loggedInData();
+      sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
+      data.setUserId(loggedIn.userId);
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
+
+      if (userInfoItems.firstName == null) {
+        data.setNewUser(true);
       }
-      let token = await login(userData);
-      console.log(token)
-      setUserToast(true);
-      if (token.token != null) {
-        localStorage.setItem("Token", token.token);
-        await GetLoggedInUserData(username);
-        const loggedIn = loggedInData();
-        sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
-        data.setUserId(loggedIn.userId);
-        navigate("/profile");
-      }
+      navigate("/profile");
+    }
   };
 
 

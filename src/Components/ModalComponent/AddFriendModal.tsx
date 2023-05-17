@@ -9,10 +9,6 @@ type username = {
   myID: number;
   theirID: number
 }
-type userIds = {
-  myID: number;
-  theirID: number
-}
 
 export default function AddFriendModal(props: username) {
   const [show, setShow] = useState(false);
@@ -60,7 +56,6 @@ export default function AddFriendModal(props: username) {
       <Button variant="primary" onClick={handleShow}>
         <img className='addFriend' src={add}/>
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Would you like to add {props.username}</Modal.Title>

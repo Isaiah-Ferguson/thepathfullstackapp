@@ -20,7 +20,6 @@ type ChildProps = {
 
 
     const EditPost = async () => {
-
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       const blogData = {
