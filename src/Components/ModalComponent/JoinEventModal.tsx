@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Toast } from 'react-bootstrap';
 import { joinEventItem } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
@@ -13,10 +13,16 @@ export default function JoinEventModal(props: eventID) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [showToast, setShowToast] = useState(false);
+  const [smShow, setSmShow] = useState(false);
+  const [position] = useState('top-start');
+
+
   const handleJoin = async () => {
     const storedValue = sessionStorage.getItem('loggedIn');
     const loggedIn = storedValue ? JSON.parse(storedValue) : data;
     await joinEventItem(props.id, loggedIn.userId);
+    setShowToast(true);
     handleClose();
   }
 
@@ -38,6 +44,9 @@ export default function JoinEventModal(props: eventID) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toast className="joinToast" show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
+        <Toast.Body style={{ color: 'black' }}>You've joined an event!</Toast.Body>
+      </Toast>
     </>
   );
 }
