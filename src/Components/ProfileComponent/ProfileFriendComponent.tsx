@@ -36,6 +36,8 @@ export default function ProfileFriendComponent() {
       setAllUserInfo(allUserInfos);
     };
     getAllUserData();
+        data.setFriendsReload(false);
+
   }, [data.friendsReload]);
   
 
