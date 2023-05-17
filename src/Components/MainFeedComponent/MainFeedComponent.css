@@ -85,3 +85,12 @@
         max-width: 100%;
     }
   }
+
+  .joinToast {
+    /* max-height: 50px; */
+    max-width: 200px;
+    position: fixed;
+    top: 20px !important;
+    right: 20px !important;
+    zIndex: 9999; 
+  }
