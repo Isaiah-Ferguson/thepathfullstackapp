@@ -2,14 +2,10 @@ import UserContext from '../../UserContext/UserContext';
 import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { AddFriend } from '../../DataServices/DataServices';
+import { AddFriend, getFriendsList } from '../../DataServices/DataServices';
 
 type username = {
   username: string;
-  myID: number;
-  theirID: number
-}
-type userIds = {
   myID: number;
   theirID: number
 }
@@ -23,33 +19,43 @@ export default function AddFriendModal(props: username) {
   const handleShow = () => setShow(true);
 
 
-  const handleFriendRequest  = () =>{
-console.log(data.userId, data.name.userId)
-   const testing = async () => {
-    
-      AddFriend(data.userId, data.name.userId)
-      handleClose()
+  const handleFriendRequest = async () => {
+    console.log(data.userId, data.name.userId);
+  
+    // Check if friend request already sent
+    const friendRequests = await getFriendsList();
+    const isRequestSent = friendRequests.some(
+      (request: any) =>
+        request.userId === data.userId && request.friendUserId === data.name.userId
+    );
+    if (isRequestSent) {
+      console.log('Friend request already sent');
+      return;
     }
-    testing();
-  } 
 
-  // const handleFriendRequest  = () =>{
-  //   console.log(data.userId, data.name.userId)
-  //      const testing = async () => {
-    // const isAccepted = false;
-    // const isDeleted = false;
-  //         AddFriend(data.userId, data.name.userId, isAccepted, isDeleted);
-  //         handleClose();
-  //       }
-  //       testing();
-  //     } 
+    // Check if users are already friends
+    const friends = await getFriendsList();
+    const areFriends = friends.some(
+      (friend: any) =>
+        (friend.userId === data.userId && friend.friendUserId === data.name.userId && friend.isAccepted === true) ||
+        (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isAccepted === true)
+    );
+    if (areFriends) {
+      console.log('Users are already friends');
+      return;
+    }
+  
+    // Add friend request
+    AddFriend(data.userId, data.name.userId);
+    handleClose();
+  };
+
 
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         <img className='addFriend' src={add}/>
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Would you like to add {props.username}</Modal.Title>

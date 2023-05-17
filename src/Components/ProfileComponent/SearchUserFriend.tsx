@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, searchUser } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 interface UserInfo {
   aboutMe: string;
@@ -16,40 +17,42 @@ interface UserInfo {
 }
 
 
+
 export default function SearchUserFriend() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState([]);
-
   const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
 
 
   useEffect(() => {
-    async function fetchUserInfo(id: number) {
-      const userInfo = await getUserInfoByID(id);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-    }
-    friendInfo.forEach((item: number) => {
-      fetchUserInfo(item);
-    });
-  }, [data.userId, friendInfo]);
+    const fetchData = async () => {
 
-  useEffect(() => {
-    const getAllUserData = async () => {
+      // Get the list of friends
       const allUserData = await getMyFriendsList(data.name.userId);
       setFriendInfo(allUserData);
-    }
-    getAllUserData();
-  }, [])
+      // Fetch the user info for each friend
+      const promises = allUserData.map((item: number) => getUserInfoByID(item));
+      const allUserInfo = await Promise.all(promises);
+      setAllUserInfo(allUserInfo);
+    };
+    fetchData();
+  }, [data.name.userId]);
 
+  const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
 
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         <Col key={key}>
           <Container className="friendDiv">
-            <img className="friendProfile" src={userInfo.image} />
-            <p className="friendName">{userInfo.publishedName}</p>
+            <img onClick={() => profileClick(userInfo.username)} className="friendProfile searchclick" src={userInfo.image} />
+            <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>
       ))}

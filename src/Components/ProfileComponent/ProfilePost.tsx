@@ -27,7 +27,6 @@ type pictureprops = {
 export default function ProfilePost(props: pictureprops) {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
   const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
@@ -37,14 +36,12 @@ export default function ProfilePost(props: pictureprops) {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
-      setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
       setBlogItems(userBlogItems);
     };
     if (!checkToken()) {
       navigate('/Login');
     } else {
-      // Get user Data and blog Items
       getLoggedInData();
     }
     data.setShouldReload(false);
@@ -75,10 +72,26 @@ export default function ProfilePost(props: pictureprops) {
               </Row></Col>
             </Row>
           )
-        }) : <div>Loading...</div>
+        }) :       <div className='Loading-DivPost'>
+        <div className="load-wrapp2">
+          <div className="load-6">
+            <div className="letter-holder2">
+              <div className="l-1 letter">L</div>
+              <div className="l-2 letter">o</div>
+              <div className="l-3 letter">a</div>
+              <div className="l-4 letter">d</div>
+              <div className="l-5 letter">i</div>
+              <div className="l-6 letter">n</div>
+              <div className="l-7 letter">g</div>
+              <div className="l-8 letter">.</div>
+              <div className="l-9 letter">.</div>
+              <div className="l-10 letter">.</div>
+            </div>
+          </div>
+        </div>
+        <div className="clear"></div>
+      </div>
       }
-
-
     </>
   );
 }

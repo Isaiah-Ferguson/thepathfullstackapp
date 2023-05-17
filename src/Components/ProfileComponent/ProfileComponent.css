@@ -1,196 +1,317 @@
-.topProfileBG{
-    background-color: #e4e5f9;
+.topProfileBG {
+  background-color: #e4e5f9;
 }
 
-.bottomProfileBG{
-    background-color: #FFDCD1;
+.bottomProfileBG {
+  background-color: #FFDCD1;
 }
 
-.ensoBG{
-    background-image: url('../../assets/Logo.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    height: 330px;
+.ensoBG {
+  background-image: url('../../assets/Logo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 330px;
 }
 
-.aboutMeText{
-    color: white;
-    font-size: 52px;
-    font-weight: 700
+.aboutMeText {
+  color: white;
+  font-size: 52px;
+  font-weight: 700
 }
 
-.profileHeaderText{
-    font-size: 26px;
+.profileHeaderText {
+  font-size: 26px;
 }
 
-.discText{
-    font-size: 24px;
+.discText {
+  font-size: 24px;
 }
 
-.profileIMG{
-    margin-top: 50px;
-    border-radius: 150px;
-    height: 225px;
-    width: 225px;
+.profileIMG {
+  margin-top: 50px;
+  border-radius: 150px;
+  height: 225px;
+  width: 225px;
 
 }
 
-.Logo{
-    height: 400px;
+.Logo {
+  height: 400px;
 }
 
-.eventButton{
-    height: 40px;
+.eventButton {
+  height: 40px;
 }
 
-.profilePostButton{
-   background-color: white;
-   border-radius: 10px;
-   border-width: 1px;
+.profilePostButton {
+  background-color: white;
+  border-radius: 10px;
+  border-width: 1px;
 }
 
-.textArea{
-    border-radius: 5px;
-    min-height: 100px;
-    width: 100%;
-    background-color: white;
+.textArea {
+  text-align: start;
+  padding: 5px;
+  border-radius: 5px;
+  min-height: 100px;
+  width: 100%;
+  background-color: white;
 }
 
-.scrollDiv{
-    height: 500px;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align: center;
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 30px rgba(130, 126, 207, 0.5);
+.scrollDiv {
+  height: 500px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 30px rgba(130, 126, 207, 0.5);
 }
 
-.profileFontPadding{
-    padding-left: 20px;
+.profileFontPadding {
+  padding-left: 20px;
 }
 
-.eventScrollDiv{
-    height: 625px;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align: center;
-    border-radius: 15px;
+.eventScrollDiv {
+  height: 625px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  border-radius: 15px;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 
-.eventTextArea{
-    border-radius: 5px;
-    width: 100%;
-    background-color: #9AFAB5;
-    box-shadow: inset;
+.eventTextArea {
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #9AFAB5;
+  box-shadow: inset;
 }
 
-.friendProfile{
-    margin-top: 10px;
-    border-radius: 150px;
-    height: 95px;
-    width: 95px;
+.friendProfile {
+  margin-top: 10px;
+  border-radius: 150px;
+  height: 95px;
+  width: 95px;
 }
 
-
-
-.friendName{
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 600;
+.friendName {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.Mobile{
-    color: #979BF2;
+.Mobile {
+  color: #979BF2;
 }
 
-.smallProfileIMG{
+.smallProfileIMG {
 
-    border-radius: 50px;
-    height: 70px;
-    width: 70px;
+  border-radius: 50px;
+  height: 70px;
+  width: 70px;
 }
 
-.smallProfileIMGPost{
-    border-radius: 50px;
-    height: 50px;
-    width: 50px;
+.smallProfileIMGPost {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
 }
 
-.containerStyle  {
-    max-width: 1200px;
-    padding-left:  20px;
-    padding-right:  20px;
-    margin-left:  auto;
-    margin-right:  auto;
-    display:  flex;
-    justify-content: center;
-    align-items: center;
-  };
+.containerStyle {
+  max-width: 1200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.postBG{
-    background-color: aliceblue;
-    background: transparent;
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
+;
+
+.postBG {
+  background-color: aliceblue;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
 
 }
 
-.post, .event, .friend {
-    display: block;
-  }
+.post,
+.event,
+.friend {
+  display: block;
+}
 
 @media screen and (max-width: 770px) {
-    .profileIMG{
-        left: 250px;
-    }
-
-    
-.Mobile{
-    color: #000000;
-}
+  .profileIMG {
+    left: 250px;
   }
+
+
+  .Mobile {
+    color: #000000;
+  }
+}
 
 @media screen and (max-width: 425px) {
-    .profileIMG{
-        left: 75px;
-    }
-    .smallProfileIMG{
-        height: 75px;
-        width: 75px;
-    }
+  .profileIMG {
+    left: 75px;
   }
 
-  .friendScrollDiv{
-        margin: 0 auto;
-        padding: 40px;
-        text-align: center;
-        width: 75%;
-        height: 235px;
-        overflow: scroll;
-        scrollbar-width: none;
+  .smallProfileIMG {
+    height: 75px;
+    width: 75px;
   }
-
-  .friendScrollDiv::-webkit-scrollbar {
-    display: none;
 }
 
-  .profileCard{
-    position: relative;
-    width: 400px;
-    height: 100%;
-    background: transparent;
-    border: 2px solid rgba(255, 225, 225, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+.friendScrollDiv {
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+  width: 75%;
+  height: 235px;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.friendScrollDiv::-webkit-scrollbar {
+  display: none;
+}
+
+
+.searchclick {
+  cursor: pointer;
+}
+
+.load-wrapp {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px 10px 0;
+  padding: 20px 20px 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.load-wrapp p {
+  padding: 0 0 20px;
+}
+
+.load-wrapp:last-child {
+  margin-right: 0;
+}
+
+.profileCard {
+  position: relative;
+  width: 400px;
+  height: 100%;
+  background: transparent;
+  border: 2px solid rgba(255, 225, 225, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+
+.load-wrapp {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px 10px 0;
+  padding: 20px 20px 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.letter-holder {
+  width: 100vw;
+  min-height: 100vh;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter {
+
+  color: #000000;
+}
+
+
+
+/* =Animate the stuff
+------------------------ */
+
+
+.load-6 .letter {
+  animation-name: loadingF;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-direction: linear;
+}
+
+.l-1 {
+  animation-delay: 0.48s;
+}
+
+.l-2 {
+  animation-delay: 0.6s;
+}
+
+.l-3 {
+  animation-delay: 0.72s;
+}
+
+.l-4 {
+  animation-delay: 0.84s;
+}
+
+.l-5 {
+  animation-delay: 0.96s;
+}
+
+.l-6 {
+  animation-delay: 1.08s;
+}
+
+.l-7 {
+  animation-delay: 1.2s;
+}
+
+.l-8 {
+  animation-delay: 1.32s;
+}
+
+.l-9 {
+  animation-delay: 1.44s;
+}
+
+.l-10 {
+  animation-delay: 1.56s;
+}
+
+
+
+
+
+@keyframes loadingF {
+  0% {
+    opacity: 0;
   }
+
+  100% {
+    opacity: 1;
+  }
+}

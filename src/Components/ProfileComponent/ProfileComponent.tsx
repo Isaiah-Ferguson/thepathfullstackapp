@@ -25,18 +25,16 @@ interface UserInfo {
   belt: string;
 }
 
-
 export default function ProfileComponent() {
-  const blackBelt = require('../../assets/BJJBlack.png');
-  const whiteBelt = require('../../assets/BJJWhite.png');
-  const blueBelt = require('../../assets/BJJBlue.png')
-  const purpleBelt = require('../../assets/BJJPURPLE.png')
-  const brownBelt = require('../../assets/BJJBrown.png')
-  const [blogId, setBlogId] = useState(0);
-  const [postDescription, setPostDescription] = useState("");
+  const blackBelt = require('../../assets/BlackBeltIcon.png');
+  const whiteBelt = require('../../assets/WhiteBeltIcon.png');
+  const blueBelt = require('../../assets/BlueBeltIcon.png');
+  const purpleBelt = require('../../assets/PurpleBeltIcon.png');
+  const brownBelt = require('../../assets/BrownBeltIcon.png');
+
+
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
-  const [userNum, setUserNum] = useState(0);
   const data = useContext<any>(UserContext);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
@@ -55,7 +53,6 @@ export default function ProfileComponent() {
         userInfo.belt === "Brown Belt" ? brownBelt :
           userInfo.belt === "Black Belt" ? blackBelt :
             "";
-  const [username, setUsername] = useState('');
   
 
 
@@ -66,7 +63,6 @@ export default function ProfileComponent() {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 993);
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -74,12 +70,8 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     const getLoggedInData = async () => {
-      // const loggedIn = loggedInData();
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
-
-      setUserNum(loggedIn.userId);
-      setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
     };
@@ -100,15 +92,13 @@ export default function ProfileComponent() {
             <Col>
               <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
               <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
-              
             </Col>
             <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
             <p className="discText">About Me</p>
             <p> {userInfo.aboutMe} </p>
           </Row>
-          
           <Row style={{marginBottom: 25}}>
-            <Col className="text-center" lg={6} xs={7}><ProfileEditModal /></Col>
+            <Col className="text-center" lg={6} xs={7}><ProfileEditModal newuser={data.newUser}/></Col>
             <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>
           </Row>
         </Col>
@@ -125,8 +115,6 @@ export default function ProfileComponent() {
       
         {(!isMobile || selectedSection === 'post') && (
         <Col lg={4} className='post'>
-          { /* I have a feeling that theres something wrong with our end points, and that's the reason why We couldn't post */}
-          {/* Firing a new folder to test and Add new Dependency to test!  */}
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
           <Container>
 
@@ -145,19 +133,10 @@ export default function ProfileComponent() {
           <Container className="eventScrollDiv">
             <ProfileEventPost  picture={userInfo.image}/>
           </Container>
-
-
         </Col>)}
 
       </Row>
 
-      <Row className={`bottomProfileBG ${isMobile ? 'mobileDiv' : ''}`}>
-
-        {/*--------------- BOTTOM HALF OF PROFILE PAGE -----------------------*/}
-
-        
-
-      </Row>
       <Col lg={12} xs={12} className='friends'>
             <Row className="d-flex justify-content-center profileHeaderText ">- Friends -</Row>
             <div style={{marginTop: -55}}>

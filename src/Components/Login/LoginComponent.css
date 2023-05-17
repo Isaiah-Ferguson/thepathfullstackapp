@@ -22,12 +22,21 @@
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    color: aliceblue;
 }
 
 .form-box h2 {
     font-size: 2em;
-    color: #162938;
+    color: #ffffff;
     text-align: center;
+}
+.form-box h1 {
+    font-size: 3em;
+    color: #ffffff;
+    text-align: center;
+}
+.form-box h4 {
+    color: #ffffff;
 }
 
 .input-box {
@@ -105,8 +114,31 @@
     border-bottom-left-radius: 15px;
 }
 
+.toast{
+    position: absolute;
+    top: 42%;
+}
+
 @media screen and (max-width: 500px) {
     .wrapper{
         width: 100%;
     }
+
+    .toast{
+        left: 7px;
+    }
 }
+
+
+.Loading-Div{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    z-index: 1;
+}
+

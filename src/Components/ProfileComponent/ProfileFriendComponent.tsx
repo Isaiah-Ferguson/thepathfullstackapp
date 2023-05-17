@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container } from 'react-bootstrap'
-import { getUserInfoByID, getMyFriendsList, loggedInData } from '../../DataServices/DataServices';
+import { getUserInfoByID, getMyFriendsList, getFriendsList, searchUser } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 interface UserInfo {
   aboutMe: string;
@@ -18,40 +19,39 @@ interface UserInfo {
 
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
-  const [friendInfo, setFriendInfo] = useState([]);
-
   const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
-
-
-  useEffect(() => {
-    async function fetchUserInfo(id: number) {
-      const userInfo = await getUserInfoByID(id);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
-    }
-    friendInfo.forEach((item: number) => {
-      fetchUserInfo(item);
-    });
-  }, [data.userId, friendInfo]);
 
   useEffect(() => {
     const getAllUserData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
-      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
-      setFriendInfo(allUserData);
-    }
-    getAllUserData()
-  }, [])
+      const userInfoPromises = allUserData.map(async (item: number) => {
+        const userInfo = await getUserInfoByID(item);
+        return userInfo;
+      });
+      const allUserInfos = await Promise.all(userInfoPromises);
+      setAllUserInfo(allUserInfos);
+    };
+    getAllUserData();
+  }, [data.friendsReload]);
+  
 
+  const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
 
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         <Col key={key}>
           <Container className="friendDiv">
-            <img className="friendProfile" src={userInfo.image} />
-            <p className="friendName">{userInfo.publishedName}</p>
+            <img title={userInfo.firstName} onClick={() => profileClick(userInfo.username)} className="friendProfile searchclick" src={userInfo.image} />
+            <p className="friendName">{userInfo.username}</p>
           </Container>
         </Col>
       ))}

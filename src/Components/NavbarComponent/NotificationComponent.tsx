@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Row, Col, Button, ToastContainer} from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-import { AddFriend, getFriendsList, getUserInfoByID, AddFriendResponse } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, AddFriendResponse, denyFriendResponse } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 interface UserInfo {
   aboutMe: string;
@@ -23,37 +23,35 @@ interface FriendInfo {
 }
 
 export default function NotificationComponent() {
-
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
   const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
-
   const [friendlistID, setfriendlistID ] = useState(0);
 
   const data = useContext<any>(UserContext);
-  // const toggleShowA = () => setShowA(!showA);
-  // const toggleShowB = () => setShowB(!showB);
 
   useEffect(() => {
     const getAllUserData = async () => {
       const allUserData = await getFriendsList();
       setFriendInfo(allUserData)
     }
-    getAllUserData()
+    getAllUserData();
   }, [])
 
 
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
-      setAllUserInfo(prevUserInfo => [...prevUserInfo, userInfo]);
+      setAllUserInfo(prevUserInfo => {
+        const newUserInfo = [...prevUserInfo, userInfo];
+        data.setCount(newUserInfo.length);
+        return newUserInfo;
+      });
     }
     async function fetchfriendlistId( id: number) {
-
       setfriendlistID(id);
     }
-
 
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);
@@ -61,32 +59,33 @@ export default function NotificationComponent() {
     friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
       fetchUserInfo(item.userId);
     });
+
   }, [data.userId, friendInfo]);
-
-
-  // const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
-  //   AddFriendResponse(friendlistID, value, data.userId);
-  // }
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
+    denyFriendResponse(friendlistID, value, data.userId);
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
+    data.setCount(data.count - 1);
+
   }
   
   const handleAccept = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     AddFriendResponse(friendlistID, value, data.userId);
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
     setAllUserInfo(updatedUserInfo);
+    data.setFriendsReload(true);
     setShowToast(true);
     setToastMessage('Friend request accepted!');
+    data.setCount(data.count - 1);
   }
+
   
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
-        
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
             <img className="NotificationImg" src={userInfo.image} />
@@ -98,7 +97,7 @@ export default function NotificationComponent() {
           </Col>
         </Row>
       ))}
-      <ToastContainer>
+      <ToastContainer style={{width: '90%'}}>
         <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
           <Toast.Body style={{ justifyContent: 'center'}}>{toastMessage}</Toast.Body>
         </Toast>

@@ -1,38 +1,25 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { eventBlogItem, getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID, updateEventItem } from '../../DataServices/DataServices';
-import { Dropdown, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
+import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 type ChildProps = {
     blogId: number;
   }
 
 export default function EditEventModal(props: ChildProps) {
-  const picture = useContext(UserContext);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedHour, setSelectedHour] = useState<string>('');
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
-
-  const [blogTitle, setBlogTitle] = useState('');
-  const [blogImage, setBlogImage] = useState('');
+  const data = useContext<any>(UserContext);
+  const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
+  const [selectedDay, setSelectedDay] = useState("1");
+  const [selectedMonth, setSelectedMonth] = useState("January");
   const [blogDiscription, setBlogDescription] = useState('');
-  const [blogItems, setBlogItems] = useState([]);
-  const [blogId, setBlogId] = useState(0);
-  const [blogUserId, setBlogUserId] = useState(0);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
-  const [eventAddress, setEventAddress] = useState("");
-  const [academy, setAcademy] = useState("");
-  const [viewable, setViewable] = useState("Select Privacy");
+  const [academy, setAcademy] = useState("TEAM CAMA");
+  const [viewable, setViewable] = useState("Private");
 
   const [show, setShow] = useState(false);
-  const [editBool, setEdit] = useState(false);
-  const [blogIsDeleted, setBlogIsDeleted] = useState(false);
-  const [blogIsPublish, setBlogIsPublished] = useState(false);
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -43,15 +30,13 @@ export default function EditEventModal(props: ChildProps) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleOpenMat = () => {
-
-    const testing = async () => {
+ 
+    const handleOpenMat = async () => {
       const academyQ = await GetAcademyList(academy);
 
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
-      setSelectedDate(selectedDay + ", " + selectedMonth);
-      console.log(selectedDay, selectedMonth);
+      const eventdate = selectedDay + ", " + selectedMonth;
       const eventData = {
         Id: props.blogId,
         UserId: userNames.userId,
@@ -59,7 +44,7 @@ export default function EditEventModal(props: ChildProps) {
         publishedName: userNames.publisherName,
         academyName: academyQ.name,
         time: selectedHour,
-        eventDate: selectedDate,
+        eventDate: eventdate,
         address: academyQ.address,
         description: blogDiscription,
         type: viewable,
@@ -67,29 +52,41 @@ export default function EditEventModal(props: ChildProps) {
         isDeleted: false,
         image: userInfoItems.image
       }
-      updateEventItem(eventData);
-    }
-    testing();
-    handleClose();
-  }
-
-  const createOpenEvent = async (event: object) => {
-    let result = await eventBlogItem(event);
-
-    if (result) {
-      let userBlogItems = await getEventItemsByUserId(blogUserId);
-      console.log(userBlogItems);
-      setBlogItems(userBlogItems);
-    } else {
-      alert(`Blog item was not not updated`)
+      await updateEventItem(eventData);
+      data.setEventReload(true);
+      handleClose();
     }
 
+    const handleDelete = async () => {
+      const academyQ = await GetAcademyList(academy);
 
-  }
+      const userNames = loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      const eventdate = selectedDay + ", " + selectedMonth;
+      const eventData = {
+        Id: props.blogId,
+        UserId: userNames.userId,
+        Date: new Date,
+        publishedName: userNames.publisherName,
+        academyName: academyQ.name,
+        time: selectedHour,
+        eventDate: eventdate,
+        address: academyQ.address,
+        description: blogDiscription,
+        type: viewable,
+        isPublish: false,
+        isDeleted: true,
+        image: userInfoItems.image
+      }
+      await updateEventItem(eventData);
+      data.setEventReload(true);
+      console.log(data.eventReload);
+      handleClose();
+    }
+
+
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => { setBlogTitle(e.target.value); };
   const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };
-  const handleDate = (e: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDate(e.target.value); };
   const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
@@ -157,8 +154,8 @@ export default function EditEventModal(props: ChildProps) {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="In House Open Mat">In House Open Mat</option>
-                <option value="public">Public Open Mat</option>
+                <option value="Private">In House Open Mat</option>
+                <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>
           </Row>
@@ -166,11 +163,11 @@ export default function EditEventModal(props: ChildProps) {
 
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-evenly moduleBG'>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
+          <Button variant="secondary" onClick={handleDelete}>
+            Delete
           </Button>
           <Button variant="primary" onClick={handleOpenMat}>
-            Create Open Mat
+            Save Changes
           </Button>
 
         </Modal.Footer>
