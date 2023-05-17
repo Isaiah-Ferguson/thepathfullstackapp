@@ -68,7 +68,7 @@ export default function MainFeedPostComponent() {
             <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
               <Col lg={12} className="mainPostDiv">
                 <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
-                  <Col md={3} sm={3} xs={3} className=" eventDateDiv">
+                  <Col md={4} sm={4} xs={4} className=" eventDateDiv">
                     <Row>
                       <img onClick={() => profileClick(item.publishedName)} className="mainFeedImg searchclick" src={item.image} />
                     </Row>
