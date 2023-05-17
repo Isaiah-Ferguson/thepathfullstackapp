@@ -10,11 +10,12 @@ import {
 } from "../../DataServices/DataServices";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../UserContext/UserContext";
+import JoinEvent from '../ModalComponent/EventJoin'
 
 
 interface EventItem {
   participants: any;
-  Id: number;
+  id: number;
   userId: number;
   Date: string;
   publishedName: string;
@@ -29,7 +30,7 @@ interface EventItem {
   image: string;
 }
 
-export default function MainFeedEventComponent() {
+export default function MainFeedEventComponent( ) {
   const data = useContext<any>(UserContext);
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
   const [prevJoinedUsers, setJoinedUsers] = useState("Join");
@@ -140,23 +141,7 @@ export default function MainFeedEventComponent() {
                     <u title={item.address}>{item.academyName}</u>
                   </b>
                 </h6>
-                <Button variant="primary" onClick={handleShow}>
-                  +
-                </Button>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Do you want to join? </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body></Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                      Save Changes
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+              <JoinEvent eventId = {item.id}/>
 
                 <div style={{ float: 'right', border: 'none' }}>
                   <button
