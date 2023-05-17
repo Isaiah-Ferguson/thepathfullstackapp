@@ -6,11 +6,10 @@ import { loggedInData, getUserInfoByID, addBlogItem } from '../../DataServices/D
 import { Form } from 'react-bootstrap';
 import UserContext from '../../UserContext/UserContext';
 
-
-  type pictureprops = {
+type pictureprops = {
   picture: string;
 }
- function ProfilePostModule(props: pictureprops) {
+function ProfilePostModule(props: pictureprops) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,8 +20,6 @@ import UserContext from '../../UserContext/UserContext';
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
   }
-
-
 
   const createPost = async () => {
     const userNames = loggedInData();
@@ -42,17 +39,15 @@ import UserContext from '../../UserContext/UserContext';
     data.setShouldReload(true);
     handleClose();
   }
-  
 
 
   return (
     <>
+      <div className="postTextDiv">
+        <img className="smallProfileIMGPost" src={props.picture} />
+        <Form.Control onClick={handleShow} type="text" placeholder="What is on your mind?" />
+      </div>
 
-<div className="postTextDiv">
-      <img className="smallProfileIMGPost" src={props.picture} />
-      <Form.Control onClick={handleShow} type="text" placeholder="What is on your mind?" />
-    </div>
-  
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Post</Modal.Title>

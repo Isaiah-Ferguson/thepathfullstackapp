@@ -15,26 +15,26 @@ export default function LoginComponent() {
 
   const handleSubmit = async () => {
 
+    let userData = {
+      Username: username,
+      Password: password
+    }
 
-      let userData = {
-        Username: username,
-        Password: password
-      }
-      let token = await login(userData);
-      setUserToast(true);
-      if (token.token != null) {
-        localStorage.setItem("Token", token.token);
-        await GetLoggedInUserData(username);
-        const loggedIn = loggedInData();
-        sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
-        data.setUserId(loggedIn.userId);
-        let userInfoItems = await getUserInfoByID(loggedIn.userId);
+    let token = await login(userData);
+    setUserToast(true);
+    if (token.token != null) {
+      localStorage.setItem("Token", token.token);
+      await GetLoggedInUserData(username);
+      const loggedIn = loggedInData();
+      sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
+      data.setUserId(loggedIn.userId);
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
 
-          if (userInfoItems.firstName == null) {
-            data.setNewUser(true);
-          }
-        navigate("/profile");
+      if (userInfoItems.firstName == null) {
+        data.setNewUser(true);
       }
+      navigate("/profile");
+    }
   };
 
 

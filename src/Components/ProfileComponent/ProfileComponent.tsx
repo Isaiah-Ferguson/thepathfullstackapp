@@ -25,30 +25,17 @@ interface UserInfo {
   belt: string;
 }
 
-
-interface FriendInfo {
-  id: number,
-  userId: number,
-  friendUserId: number,
-  isAccepted: boolean
-}
-
 export default function ProfileComponent() {
   const blackBelt = require('../../assets/BlackBeltIcon.png');
   const whiteBelt = require('../../assets/WhiteBeltIcon.png');
   const blueBelt = require('../../assets/BlueBeltIcon.png');
   const purpleBelt = require('../../assets/PurpleBeltIcon.png');
   const brownBelt = require('../../assets/BrownBeltIcon.png');
-  const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
-  const [friendInfo, setFriendInfo] = useState<FriendInfo[]>([]);
-  const [friendlistID, setfriendlistID ] = useState(0);
+
 
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
-  const [userNum, setUserNum] = useState(0);
-  const [isNewUser, setIsNewUser] = useState(false);
   const data = useContext<any>(UserContext);
-  const [username, setUsername] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
     id: 0,
@@ -85,37 +72,12 @@ export default function ProfileComponent() {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
-      setUserNum(loggedIn.userId);
-      setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
     data.setShouldReload(false);
   }, [data.shouldReload]);
-
-  
-  useEffect(() => {
-    async function fetchUserInfo(userId: number) {
-      const userInfo = await getUserInfoByID(userId);
-      setAllUserInfo(prevUserInfo => {
-        const newUserInfo = [...prevUserInfo, userInfo];
-        data.setCount(newUserInfo.length);
-        return newUserInfo;
-      });
-    }
-    async function fetchfriendlistId( id: number) {
-      setfriendlistID(id);
-    }
-
- friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
-  fetchfriendlistId(item.id);
-    });
-    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
-      fetchUserInfo(item.userId);
-    });
-
-  }, [data.userId, friendInfo]);
 
 
   return (
@@ -130,13 +92,11 @@ export default function ProfileComponent() {
             <Col>
               <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
               <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
-              
             </Col>
             <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
             <p className="discText">About Me</p>
             <p> {userInfo.aboutMe} </p>
           </Row>
-          
           <Row style={{marginBottom: 25}}>
             <Col className="text-center" lg={6} xs={7}><ProfileEditModal newuser={data.newUser}/></Col>
             <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>

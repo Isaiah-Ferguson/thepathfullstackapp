@@ -23,11 +23,8 @@ interface BlogItem {
   }
 
 export default function FriendPost(props: pictureprops) {
-
     const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-    const profile = require('../../assets/DefaultProfilePicture.png');
     const [blogUserId, setBlogUserId] = useState<number | null>(null);
-    const [blogPublisherName, setBlogPublisherName] = useState('');
     const data = useContext<any>(UserContext);
 
   
@@ -35,7 +32,6 @@ export default function FriendPost(props: pictureprops) {
       const getLoggedInData = async () => {
         const loggedIn = data;
         setBlogUserId(loggedIn.name.userId);
-        setBlogPublisherName(loggedIn.publisherName);
         let userBlogItems = await GetPublishedBlogItem();
         setBlogItems(userBlogItems);
       };
@@ -57,12 +53,8 @@ export default function FriendPost(props: pictureprops) {
                       <div style={{fontWeight: 600}}>{item.publishedName}</div>
                     <div>{formattedDate}</div>
                       </Col>
-                      <Col lg={1} sm={2} xs={2} style={{ height: 40 }} >
-                    
-                </Col>
                   </Row>
                 </Col>
-  
                 <Col lg={8} sm={9} xs={7}><Row>
                 <Col  lg={12} xs={12} className="d-flex justify-content-end">
                   <div className="textArea ">{item.description}</div>
@@ -90,8 +82,6 @@ export default function FriendPost(props: pictureprops) {
           <div className="clear"></div>
         </div>
         }
-  
-  
       </>
     );
     

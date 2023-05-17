@@ -5,7 +5,7 @@ import { eventBlogItem } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
-import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
+import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 
 export default function ModalComponent() {
@@ -27,39 +27,36 @@ export default function ModalComponent() {
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
 
-
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const Event = require("../../assets/EventIcon.png");
 
 
-
-    const handleOpenMat = async () => {
-      const academyQ = await GetAcademyList(academy);
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = selectedDay + ", " + selectedMonth;
-      const eventData = {
-        Id: blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        publishedName: userNames.publisherName,
-        academyName: academyQ.name,
-        time: selectedHour,
-        eventDate: eventdate,
-        address: academyQ.address,
-        description: blogDiscription,
-        type: viewable,
-        isPublish: true,
-        isDeleted: false,
-        image: userInfoItems.image
-      }
-      await eventBlogItem(eventData);
-      data.setEventReload(true);
-      handleClose();
+  const handleOpenMat = async () => {
+    const academyQ = await GetAcademyList(academy);
+    const userNames = loggedInData();
+    let userInfoItems = await getUserInfoByID(userNames.userId);
+    const eventdate = selectedDay + ", " + selectedMonth;
+    const eventData = {
+      Id: blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      publishedName: userNames.publisherName,
+      academyName: academyQ.name,
+      time: selectedHour,
+      eventDate: eventdate,
+      address: academyQ.address,
+      description: blogDiscription,
+      type: viewable,
+      isPublish: true,
+      isDeleted: false,
+      image: userInfoItems.image
     }
- 
+    await eventBlogItem(eventData);
+    data.setEventReload(true);
+    handleClose();
+  }
+
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
   const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };

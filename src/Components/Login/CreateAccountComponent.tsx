@@ -3,7 +3,6 @@ import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState } from 'react'
 import { createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
-import { Console } from 'console';
 
 export default function CreateAccountComponent() {
   let navigate = useNavigate();
@@ -21,17 +20,17 @@ export default function CreateAccountComponent() {
       Username: username,
       Password: password
     }
-    console.log(userData)
     const test = await createAccount(userData);
     if (test === false) {
       setUserToast(true);
-    } else if(userData.Password ===""){
+    } else if (userData.Password === "") {
       setPasswordToast(true)
     }
-    else{
+    else {
       navigate("/");
     }
   }
+
   const toggleShowA = () => {
     setShowA(!showA);
     setUserToast(false);
@@ -62,12 +61,12 @@ export default function CreateAccountComponent() {
                 <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
               </Form.Group>
               {userToast && (
-                <Toast  onClick={toggleShowA}>
+                <Toast onClick={toggleShowA}>
                   <Toast.Body style={{ color: 'black' }}>User Name already Exists</Toast.Body>
                 </Toast>
               )}
               {passwordTaost && (
-                <Toast  onClick={toggleShowB}>
+                <Toast onClick={toggleShowB}>
                   <Toast.Body style={{ color: 'black' }}>Please enter a Password</Toast.Body>
                 </Toast>
               )}

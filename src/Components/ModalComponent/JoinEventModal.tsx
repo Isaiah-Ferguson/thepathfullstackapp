@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { getUserInfoByID, joinEventItem, loggedInData } from '../../DataServices/DataServices';
+import { joinEventItem } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 type eventID = {
-    id: number
+  id: number
 }
 
 export default function JoinEventModal(props: eventID) {
   const [show, setShow] = useState(false);
-    const data = useContext(UserContext)
-
+  const data = useContext(UserContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -18,14 +17,12 @@ export default function JoinEventModal(props: eventID) {
     const storedValue = sessionStorage.getItem('loggedIn');
     const loggedIn = storedValue ? JSON.parse(storedValue) : data;
     await joinEventItem(props.id, loggedIn.userId);
-    handleClose()
+    handleClose();
   }
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-       +
-      </Button>
+      <Button variant="primary" onClick={handleShow}>+</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -27,17 +27,13 @@ type pictureprops = {
 
 export default function FriendEvent(props: pictureprops) {
     const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
-    const profile = require('../../assets/DefaultProfilePicture.png');
     const [blogUserId, setBlogUserId] = useState<number | null>(null);
-    const [blogPublisherName, setBlogPublisherName] = useState('');
     const data = useContext<any>(UserContext);
-
   
     useEffect(() => {
       const getLoggedInData = async () => {
         const loggedIn = data;
         setBlogUserId(loggedIn.name.userId);
-        setBlogPublisherName(loggedIn.publisherName);
         let userEventItems = await getEventItemsByUserId(loggedIn.userId);
         setMyEventItems(userEventItems);
       };

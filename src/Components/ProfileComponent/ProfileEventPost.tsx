@@ -30,7 +30,6 @@ export default function ProfileEventPost(props: pictureprops) {
   const data = useContext<any>(UserContext);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
 
   let navigate = useNavigate();
 
@@ -39,7 +38,6 @@ export default function ProfileEventPost(props: pictureprops) {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
-      setBlogPublisherName(loggedIn.publisherName);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
       userEventItems.reverse()
       setMyEventItems(userEventItems);
