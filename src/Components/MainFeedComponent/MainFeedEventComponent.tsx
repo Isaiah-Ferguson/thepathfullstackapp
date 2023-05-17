@@ -32,11 +32,6 @@ export default function MainFeedEventComponent() {
 
   let navigate = useNavigate();
 
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // function toggleModal() {
-  //   setIsOpen(!isOpen);
-  // }
 
   useEffect(() => {
     const getLoggedInData = async () => {
@@ -45,7 +40,6 @@ export default function MainFeedEventComponent() {
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
-      console.log(userEventItems);
       setMyEventItems(userEventItems.reverse());
     };
 
@@ -77,9 +71,7 @@ export default function MainFeedEventComponent() {
                 <Col><JoinEventModal id={item.id} /></Col>
                 <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id} /></Col>
               </Row>
-
             </Col>
-            { }
           </Row>
         ))) : (<>
           <div className="Loading-MainFeed">
