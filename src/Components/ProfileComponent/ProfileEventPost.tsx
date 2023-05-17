@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../UserContext/UserContext';
-import { loggedInData, getEventItemsByUserId, checkToken} from '../../DataServices/DataServices';
+import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
 import JoinedPersonList from '../ModalComponent/JoinPersonListModal';
 interface EventItem {
@@ -62,13 +62,13 @@ export default function ProfileEventPost(props: pictureprops) {
             return (
               <Row style={{ marginTop: 10 }} key={idx}>
                 <Col lg={3} xs={3}>
-                <div className='d-flex justify-content-end'>
-                  <EditEventModal blogId={item.id}/>
+                  <div className='d-flex justify-content-end'>
+                    <EditEventModal blogId={item.id} />
                   </div>
                   <img className="smallProfileIMG" src={props.picture} alt={item.publishedName} />
                   {formattedDate}
                 </Col>
-               
+
                 <Col lg={9} xs={9}>
                   <div className="eventTextArea">
                     <Row>
@@ -80,8 +80,8 @@ export default function ProfileEventPost(props: pictureprops) {
                       </Col>
                     </Row>
                     <Row className="text-center">
-                        <p>{item.academyName}</p>
-                        <p>{item.address}</p>
+                      <p>{item.academyName}</p>
+                      <p>{item.address}</p>
                     </Row>
                     <JoinedPersonList id={item.id} />
 
@@ -92,24 +92,24 @@ export default function ProfileEventPost(props: pictureprops) {
           })
       ) : (
         <div className='Loading-DivPost'>
-        <div className="load-wrapp2">
-          <div className="load-6">
-            <div className="letter-holder2">
-              <div className="l-1 letter">L</div>
-              <div className="l-2 letter">o</div>
-              <div className="l-3 letter">a</div>
-              <div className="l-4 letter">d</div>
-              <div className="l-5 letter">i</div>
-              <div className="l-6 letter">n</div>
-              <div className="l-7 letter">g</div>
-              <div className="l-8 letter">.</div>
-              <div className="l-9 letter">.</div>
-              <div className="l-10 letter">.</div>
+          <div className="load-wrapp2">
+            <div className="load-6">
+              <div className="letter-holder2">
+                <div className="l-1 letter">L</div>
+                <div className="l-2 letter">o</div>
+                <div className="l-3 letter">a</div>
+                <div className="l-4 letter">d</div>
+                <div className="l-5 letter">i</div>
+                <div className="l-6 letter">n</div>
+                <div className="l-7 letter">g</div>
+                <div className="l-8 letter">.</div>
+                <div className="l-9 letter">.</div>
+                <div className="l-10 letter">.</div>
+              </div>
             </div>
           </div>
+          <div className="clear"></div>
         </div>
-        <div className="clear"></div>
-      </div>
       )}
     </>
   );
