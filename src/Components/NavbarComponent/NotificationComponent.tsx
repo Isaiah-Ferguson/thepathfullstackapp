@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Row, Col, Button, ToastContainer} from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-import { getFriendsList, getUserInfoByID, AddFriendResponse, denyFriendResponse } from '../../DataServices/DataServices';
+import { getFriendsList, getUserInfoByID, AddFriendResponse, denyFriendResponse, searchUser } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
+import { useNavigate } from 'react-router';
 interface UserInfo {
   aboutMe: string;
   id: number;
@@ -28,6 +29,7 @@ export default function NotificationComponent() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [friendlistID, setfriendlistID ] = useState(0);
+  let navigate = useNavigate();
 
   const data = useContext<any>(UserContext);
 
@@ -43,6 +45,7 @@ export default function NotificationComponent() {
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
+      console.log(userInfo)
       setAllUserInfo(prevUserInfo => {
         const newUserInfo = [...prevUserInfo, userInfo];
         data.setCount(newUserInfo.length);
@@ -52,7 +55,7 @@ export default function NotificationComponent() {
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);
     }
-
+console.log(friendInfo)
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);
     });
@@ -82,13 +85,19 @@ export default function NotificationComponent() {
     data.setCount(data.count - 1);
   }
 
+    const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
+
   
   return (
     <>
       {allUserInfo.map((userInfo: UserInfo, key: number) => (
         <Row key={key} className="NotificationDiv2">
           <Col lg={4} xs={4}>
-            <img className="NotificationImg" src={userInfo.image} />
+            <img className="NotificationImg" onClick={() => profileClick(userInfo.username)}  src={userInfo.image} />
           </Col>
           <Col lg={8} xs={8}>
             <p>{userInfo.firstName} has sent a Friends request</p>
