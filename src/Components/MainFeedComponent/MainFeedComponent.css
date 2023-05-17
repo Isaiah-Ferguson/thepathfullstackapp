@@ -57,6 +57,14 @@
     /* trying to figure out which color combination looks good! */
     background-color: #C5FAD5 ;
 }
+.custom-container {
+    width: 100%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
 @media screen and (max-width: 425px) {
     .mainFeedImg{
@@ -68,5 +76,12 @@
     .beltImg{
         height: 50%;
         width: 100%;
+    }
+  }
+
+  
+@media screen and (max-width: 800px) {
+    .custom-container{
+        max-width: 100%;
     }
   }

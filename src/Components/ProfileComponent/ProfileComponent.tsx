@@ -25,16 +25,16 @@ interface UserInfo {
   belt: string;
 }
 
-
 export default function ProfileComponent() {
   const blackBelt = require('../../assets/BlackBeltIcon.png');
   const whiteBelt = require('../../assets/WhiteBeltIcon.png');
-  const blueBelt = require('../../assets/BlueBeltIcon.png')
-  const purpleBelt = require('../../assets/PurpleBeltIcon.png')
-  const brownBelt = require('../../assets/BrownBeltIcon.png')
+  const blueBelt = require('../../assets/BlueBeltIcon.png');
+  const purpleBelt = require('../../assets/PurpleBeltIcon.png');
+  const brownBelt = require('../../assets/BrownBeltIcon.png');
+
+
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
-  const [userNum, setUserNum] = useState(0);
   const data = useContext<any>(UserContext);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
@@ -53,7 +53,6 @@ export default function ProfileComponent() {
         userInfo.belt === "Brown Belt" ? brownBelt :
           userInfo.belt === "Black Belt" ? blackBelt :
             "";
-  const [username, setUsername] = useState('');
   
 
 
@@ -73,14 +72,12 @@ export default function ProfileComponent() {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
-      setUserNum(loggedIn.userId);
-      setUsername(loggedIn.publisherName);
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
     };
     getLoggedInData();
     data.setShouldReload(false);
-  }, [data.shouldReload, data.friendsReload]);
+  }, [data.shouldReload]);
 
 
   return (
@@ -95,15 +92,13 @@ export default function ProfileComponent() {
             <Col>
               <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
               <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
-              
             </Col>
             <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
             <p className="discText">About Me</p>
             <p> {userInfo.aboutMe} </p>
           </Row>
-          
           <Row style={{marginBottom: 25}}>
-            <Col className="text-center" lg={6} xs={7}><ProfileEditModal /></Col>
+            <Col className="text-center" lg={6} xs={7}><ProfileEditModal newuser={data.newUser}/></Col>
             <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>
           </Row>
         </Col>

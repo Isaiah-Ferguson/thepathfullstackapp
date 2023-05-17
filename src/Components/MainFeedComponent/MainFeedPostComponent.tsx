@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, loggedInData, GetPublishedBlogItem, searchUser, getMyFriendsList } from "../../DataServices/DataServices";
+import { checkToken, GetPublishedBlogItem, searchUser, getMyFriendsList } from "../../DataServices/DataServices";
 import { useNavigate, } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 interface BlogItem {
@@ -14,23 +14,19 @@ interface BlogItem {
   description: string;
   title: string;
   userid: number;
-  // Other properties of a BlogItem
 }
 
 export default function MainFeedPostComponent() {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
-  const [blogUserId, setBlogUserId] = useState<number | null>(null);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
-  let navigate = useNavigate();
   const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
-
-  const blackBelt = require('../../assets/BJJBlack.png');
-  const whiteBelt = require('../../assets/BJJWhite.png');
-  const blueBelt = require('../../assets/BJJBlue.png');
-  const purpleBelt = require('../../assets/BJJPURPLE.png');
-  const brownBelt = require('../../assets/BJJBrown.png');
+  // const blackBelt = require('../../assets/BJJBlack.png');
+  // const whiteBelt = require('../../assets/BJJWhite.png');
+  // const blueBelt = require('../../assets/BJJBlue.png');
+  // const purpleBelt = require('../../assets/BJJPURPLE.png');
+  // const brownBelt = require('../../assets/BJJBrown.png');
 
   useEffect(() => {
     const getLoggedInData = async () => {
@@ -38,8 +34,6 @@ export default function MainFeedPostComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
-      setBlogUserId(loggedIn.userId);
-      setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
       const blogItemsOrder = userBlogItems.reverse();
       setBlogItems(blogItemsOrder);
@@ -54,7 +48,6 @@ export default function MainFeedPostComponent() {
 
     const profileClick = async (publisherName: string) => {
     const searchName = await searchUser(publisherName);
-    console.log(data.myName, publisherName)
     if(data.myName === publisherName){
       navigate("/profile")
     }else{

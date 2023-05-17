@@ -19,7 +19,6 @@ interface UserInfo {
 
 export default function ProfileFriendComponent() {
   const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([]);
-  const [friendInfo, setFriendInfo] = useState([]);
   const data = useContext<any>(UserContext);
   let navigate = useNavigate();
 
@@ -34,7 +33,6 @@ export default function ProfileFriendComponent() {
         return userInfo;
       });
       const allUserInfos = await Promise.all(userInfoPromises);
-      setFriendInfo(allUserData);
       setAllUserInfo(allUserInfos);
     };
     getAllUserData();

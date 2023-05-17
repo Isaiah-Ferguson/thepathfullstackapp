@@ -5,7 +5,7 @@ import { eventBlogItem } from '../../DataServices/DataServices';
 import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
-import {  Row, Col, FloatingLabel, Form } from 'react-bootstrap';
+import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 
 export default function ModalComponent() {
@@ -27,43 +27,41 @@ export default function ModalComponent() {
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
 
-
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const Event = require("../../assets/EventIcon.png");
 
 
+  const handleOpenMat = async () => {
 
-    const handleOpenMat = async () => {
-      const academyQ = await GetAcademyList(academy);
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = selectedDay + ", " + selectedMonth;
-      const eventData = {
-        Id: blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        publishedName: userNames.publisherName,
-        academyName: academyQ.name,
-        time: selectedHour,
-        eventDate: eventdate,
-        address: academyQ.address,
-        description: blogDiscription,
-        type: viewable,
-        isPublish: true,
-        isDeleted: false,
-        image: userInfoItems.image
-      }
-      await eventBlogItem(eventData);
-      data.setEventReload(true);
-      handleClose();
+    const academyQ = await GetAcademyList(academy);
+    const userNames = loggedInData();
+    let userInfoItems = await getUserInfoByID(userNames.userId);
+    const eventdate = selectedDay + ", " + selectedMonth;
+    const eventData = {
+      Id: blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      publishedName: userNames.publisherName,
+      academyName: academyQ.name,
+      time: selectedHour,
+      eventDate: eventdate,
+      address: academyQ.address,
+      description: blogDiscription,
+      type: viewable,
+      isPublish: true,
+      isDeleted: false,
+      image: userInfoItems.image
     }
- 
+    await eventBlogItem(eventData);
+    data.setEventReload(true);
+    handleClose();
+  }
+
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };
-  const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
+  const handleAcademy = (event: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(event.target.value); };
+  const handleDecription = (event: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(event.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
   const handleHourChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedHour(event.target.value); };
@@ -103,7 +101,7 @@ export default function ModalComponent() {
           </Row>
           <Row>
             {/*--------------------- MONTH /  DATE DROPDOWN----------- */}
-            <Col lg={6}><Form.Group>
+            <Col lg={7}><Form.Group>
               <Form.Label>Select a date:</Form.Label>
               <div className="d-flex">
                 <Form.Select className="px-2" value={selectedMonth} onChange={handleMonthSelect}>
@@ -117,7 +115,7 @@ export default function ModalComponent() {
 
             {/*------------------ TIME DROPDOWN-------------- */}
 
-            <Col lg={6}><Form.Label>Select Time:</Form.Label>
+            <Col lg={5}><Form.Label>Select Time:</Form.Label>
               <Form.Select value={selectedHour} onChange={handleHourChange}>
                 {hours.map((hour) => (
                   <option key={hour} value={(hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM')} >
