@@ -55,11 +55,11 @@ export default function MainFeedEventComponent( ) {
       // Add the joined user IDs to the array of joinedUsers
       const joinedUserIds: any = [data.userId, otherUserId];
 
-      setJoinedUsers(prevJoinedUsers => prevJoinedUsers.concat(joinedUserIds));
+      // setJoinedUsers(prevJoinedUsers => prevJoinedUsers.concat(joinedUserIds));
 
       // Close the modal popup
-      handleClose();
-      joinEvent(userId, eventId );
+      // handleClose();
+      // joinEvent(userId, eventId );
     } catch (error) {
       console.error('Error joining event:', error);
       // Handle the error case, display an error message, etc.
@@ -73,7 +73,7 @@ export default function MainFeedEventComponent( ) {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem("loggedIn");
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
-      setUserId(loggedIn.userId);
+      // setUserId(loggedIn.userId);
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);

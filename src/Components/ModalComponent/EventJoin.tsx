@@ -7,7 +7,7 @@ import {
   getMyFriendsList,
   getEventItemsByUserId,
   updateEventItem,
-  joinEvent,
+  
 } from "../../DataServices/DataServices";
 
 interface EventItem {
