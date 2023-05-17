@@ -1,5 +1,6 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button, Toast, } from 'react-bootstrap'
+// import { Divider } from '@mui/material';
 import { useState } from 'react'
 import { createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -40,6 +41,9 @@ export default function CreateAccountComponent() {
     setShowA(!showA);
     setPasswordToast(false);
   };
+
+
+  
 
 
   return (
