@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, getMyFriendsList, getEventItemsByUserId, GetAllJoinedEvents } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 import JoinEventModal from "../ModalComponent/JoinEventModal";
