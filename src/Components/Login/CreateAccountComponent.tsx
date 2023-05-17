@@ -12,9 +12,9 @@ export default function CreateAccountComponent() {
   const [userToast, setUserToast] = useState(false);
   const [passwordTaost, setPasswordToast] = useState(false);
   const [showA, setShowA] = useState(true);
+  const [disableButton, setDisableButton] = useState(true)
 
   const handleSubmit = async () => {
-
     let userData = {
       id: 0,
       Username: username,
@@ -71,9 +71,9 @@ export default function CreateAccountComponent() {
                 </Toast>
               )}
 
-              <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit} >
+              {disableButton && <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit} >
                 Confirm Submission
-              </Button>
+              </Button>}
               <div style={{ marginTop: 45 }} className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
             </Form>
           </Col>

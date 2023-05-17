@@ -1,6 +1,6 @@
 .mainFeedImg{
     margin-top: 10px;
-    height: 100px;
+    height: 150px;
     width: 100%;
     object-fit: cover;
 }
@@ -84,4 +84,14 @@
     .custom-container{
         max-width: 100%;
     }
+  }
+
+  
+  .joinToast {
+    /* max-height: 50px; */
+    max-width: 200px;
+    position: fixed;
+    top: 30px !important;
+    right: 20px !important;
+    zIndex: 9999; 
   }

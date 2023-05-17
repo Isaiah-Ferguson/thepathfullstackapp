@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Container, Row, Form, Button } from 'react-bootstrap'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { forgotPassword } from '../../DataServices/DataServices';
 
 export default function ForgotPasswordComponent() {
   let navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function ForgotPasswordComponent() {
       Username: username,
       Password: password
     }
-    // createAccount(userData);
+    forgotPassword(userData);
     navigate("/");
   }
 

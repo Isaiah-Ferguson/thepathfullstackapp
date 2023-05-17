@@ -18,15 +18,6 @@ export default function NavbarComponent() {
   const data = useContext<any>(UserContext);
   let navigate = useNavigate();
 
-  useEffect(() => {
-    setIsNotificationVisible(true);
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsNotificationVisible(false);
-    }, 250);
-  }, []);
 
   function ProfileNavigate() { navigate("/profile"); };
   function MainFeedNavigate() { navigate("/MainFeedComponent"); };

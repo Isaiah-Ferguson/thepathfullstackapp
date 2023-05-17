@@ -27,7 +27,6 @@ type pictureprops = {
 export default function ProfilePost(props: pictureprops) {
   const [blogItems, setBlogItems] = useState<BlogItem[]>([]);
   const [blogUserId, setBlogUserId] = useState<number | null>(null);
-  const [blogPublisherName, setBlogPublisherName] = useState('');
   const data = useContext<any>(UserContext);
 
   let navigate = useNavigate();
@@ -37,7 +36,6 @@ export default function ProfilePost(props: pictureprops) {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       setBlogUserId(loggedIn.userId);
-      setBlogPublisherName(loggedIn.publisherName);
       let userBlogItems = await GetPublishedBlogItem();
       setBlogItems(userBlogItems);
     };

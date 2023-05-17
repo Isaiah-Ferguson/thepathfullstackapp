@@ -22,6 +22,24 @@ const url = 'https://thepathapi.azurewebsites.net';
       return data;
       //We are not writeing a return because this is a POST.
   }
+
+  async function forgotPassword(CreatedUser : object) {
+    //We want to target our User Controller
+    const res = await fetch(url + '/User/AddUser',{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(CreatedUser)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+    //We are not writeing a return because this is a POST.
+}
   
   async function login(loginUser : object) {
       const res = await fetch(url + '/User/Login',{
@@ -277,4 +295,4 @@ async function denyFriendResponse( id:number, myId: number, OtherId: (number | s
 
 
 
-  export { GetAllJoinedEvents, joinEventItem, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+  export { forgotPassword, GetAllJoinedEvents, joinEventItem, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
