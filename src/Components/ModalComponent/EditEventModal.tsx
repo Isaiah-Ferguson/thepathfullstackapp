@@ -80,7 +80,6 @@ export default function EditEventModal(props: ChildProps) {
       }
       await updateEventItem(eventData);
       data.setEventReload(true);
-      console.log(data.eventReload);
       handleClose();
     }
 
