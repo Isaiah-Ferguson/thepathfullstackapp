@@ -24,11 +24,11 @@ interface UserInfo {
 }
 
 export default function ProfileFriend() {
-  const blackBelt = require('../../assets/BlackBeltIcon.png');
-  const whiteBelt = require('../../assets/WhiteBeltIcon.png');
-  const blueBelt = require('../../assets/BlueBeltIcon.png');
-  const purpleBelt = require('../../assets/PurpleBeltIcon.png');
-  const brownBelt = require('../../assets/BrownBeltIcon.png');
+  const blackBelt = require('../../assets/BJJBlack.png');
+  const whiteBelt = require('../../assets/BJJWhite.png');
+  const blueBelt = require('../../assets/BJJBlue.png');
+  const purpleBelt = require('../../assets/BJJPurple.png');
+  const brownBelt = require('../../assets/BJJBrown.png');
 
   const data = useContext<any>(UserContext);
 

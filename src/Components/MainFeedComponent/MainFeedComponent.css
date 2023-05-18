@@ -6,8 +6,9 @@
 }
 
 .eventMainPageDiv{
+    padding: 5px;
     border: 2px, solid;
-    height: 100px;
+    height: auto;
     width: 100%;
     background-color: bisque;
     border: 2px solid;
