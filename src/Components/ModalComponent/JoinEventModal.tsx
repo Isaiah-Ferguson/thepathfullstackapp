@@ -39,7 +39,7 @@ export default function JoinEventModal(props: eventID) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>join event</Button>
+      <Button variant="primary" onClick={handleShow}>Join Event</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
