@@ -75,7 +75,7 @@ export default function MainFeedPostComponent() {
                     <h3 className="text-center">{item.publishedName}</h3>
                     <p className="row">Posted {formattedDate}</p>
                   </Col>
-                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#b79ced'}}>
+                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#FDF4F5'}}>
                     <p>{item.description}</p>
                   </Col>
                 </Row>

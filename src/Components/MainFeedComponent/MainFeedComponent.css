@@ -34,7 +34,7 @@
 .mainPostDiv{
     border: 2px, solid;
     width: 100%;
-    background-color: rgb(233, 233, 250);
+    background-color: #F0D9FF;
     border: 2px solid;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -56,7 +56,7 @@
 
 .newBgColor {
     /* trying to figure out which color combination looks good! */
-    background-color: #C5FAD5 ;
+    background-color: #F0D9FF;
 }
 .custom-container {
     width: 100%;
