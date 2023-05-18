@@ -16,27 +16,33 @@ function ProfilePostModule(props: pictureprops) {
   const [blogId, setBlogId] = useState(0);
   const [postDescription, setPostDescription] = useState("");
   const data = useContext<any>(UserContext);
+  const [disableButton, setDisableButton] = useState(true)
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
   }
 
-  const createPost = async () => {
-    const userNames = loggedInData();
-    let userInfoItems = await getUserInfoByID(userNames.userId);
-    const blogData = {
-      Id: blogId,
-      UserId: userNames.userId,
-      Date: new Date,
-      title: userNames.publisherName,
-      publishedName: userNames.publisherName,
-      description: postDescription,
-      isPublish: true,
-      isDeleted: false,
-      image: userInfoItems.image
+  const HandleSubmit = () => {
+    setDisableButton(false)
+    async function CreatePostFunction() {
+      const userNames = loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      const blogData = {
+        Id: blogId,
+        UserId: userNames.userId,
+        Date: new Date,
+        title: userNames.publisherName,
+        publishedName: userNames.publisherName,
+        description: postDescription,
+        isPublish: true,
+        isDeleted: false,
+        image: userInfoItems.image
+      }
+      await addBlogItem(blogData);
+      data.setShouldReload(true);
+      setDisableButton(true);
     }
-    await addBlogItem(blogData);
-    data.setShouldReload(true);
+    CreatePostFunction();
     handleClose();
   }
 
@@ -55,7 +61,7 @@ function ProfilePostModule(props: pictureprops) {
         <Modal.Body><textarea placeholder="What are your thoughts?" style={{ borderRadius: 5, height: 100, width: '100%' }} onChange={handlePost}></textarea>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={createPost}> Post </Button>
+          {disableButton && <Button variant="primary" onClick={HandleSubmit}> Post </Button>}
         </Modal.Footer>
       </Modal>
     </>

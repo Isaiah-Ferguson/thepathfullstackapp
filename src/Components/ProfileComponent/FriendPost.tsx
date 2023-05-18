@@ -46,7 +46,7 @@ export default function FriendPost(props: pictureprops) {
             const formattedDate = date.toLocaleDateString();
             return (
               <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
-                <Col lg={4} sm={3} xs={5}>
+                <Col lg={3} sm={2} xs={3}>
                   <Row >
                     <Col sm={8} xs={6}>
                       <img className="smallProfileIMG" src={props.picture} alt="profile" />
@@ -55,7 +55,7 @@ export default function FriendPost(props: pictureprops) {
                       </Col>
                   </Row>
                 </Col>
-                <Col lg={8} sm={9} xs={7}><Row>
+                <Col lg={9} sm={10} xs={9}><Row>
                 <Col  lg={12} xs={12} className="d-flex justify-content-end">
                   <div className="textArea ">{item.description}</div>
                 </Col>

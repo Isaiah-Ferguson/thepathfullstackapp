@@ -1,15 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Button, Toast } from 'react-bootstrap';
-import { joinEventItem } from '../../DataServices/DataServices';
+import { getEventItemsByUserId, joinEventItem } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 type eventID = {
-  id: number
+  id: number;
+  publishedName: string;
+  academyName: string
 }
+
 
 export default function JoinEventModal(props: eventID) {
   const [show, setShow] = useState(false);
-  const data = useContext(UserContext);
+  const data = useContext<any>(UserContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -23,8 +26,10 @@ export default function JoinEventModal(props: eventID) {
     const loggedIn = storedValue ? JSON.parse(storedValue) : data;
     await joinEventItem(props.id, loggedIn.userId);
     setShowToast(true);
+    data.setEventReload(true);
     handleClose();
   }
+
 
   return (
     <>
@@ -32,9 +37,9 @@ export default function JoinEventModal(props: eventID) {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{props.publishedName}'s event at {props.academyName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Would you like to join this event?</Modal.Body>
+        <Modal.Body>Would you like to join this Open Mat?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

@@ -54,13 +54,13 @@ export default function NotificationComponent() {
     async function fetchfriendlistId(id: number) {
       setfriendlistID(id);
     }
+ friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+  fetchfriendlistId(item.id);
+    });
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
+      fetchUserInfo(item.userId);
+    });
 
-    friendInfo
-      .filter((item) => item.friendUserId === data.userId)
-      .forEach((item: FriendInfo) => {
-        fetchfriendlistId(item.id);
-        fetchUserInfo(item.userId);
-      });
   }, [data.userId, friendInfo]);
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {

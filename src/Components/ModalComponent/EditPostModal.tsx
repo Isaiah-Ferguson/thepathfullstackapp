@@ -13,13 +13,16 @@ type ChildProps = {
   const handleShow = () => setShow(true);
   const [postDescription, setPostDescription] = useState("");
   const data = useContext<any>(UserContext);
+  const [disableButton, setDisableButton] = useState(true)
 
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
   }
 
 
-    const EditPost = async () => {
+  const HandleSubmit = () => {
+    setDisableButton(false)
+    async function EditPost() {
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
       const blogData = {
@@ -35,8 +38,11 @@ type ChildProps = {
       }
       await updateBlogItem(blogData);
       data.setShouldReload(true);
-      handleClose();
+      setDisableButton(true);
     }
+    EditPost();
+    handleClose();
+  }
 
 
     const handleDelete = async () => {
@@ -79,9 +85,7 @@ type ChildProps = {
           <Button variant="secondary" onClick={handleDelete}>
             Delete Post
           </Button>
-          <Button variant="primary" onClick={EditPost}>
-            Save Changes
-          </Button>
+          {disableButton && <Button variant="primary" onClick={HandleSubmit}> Post </Button>}
         </Modal.Footer>
       </Modal>
     </>

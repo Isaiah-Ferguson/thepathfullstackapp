@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { GetAllJoinedEvents, getUserInfoByID } from '../../DataServices/DataServices';
+import { GetAllJoinedEvents, getUserInfoByID, searchUser } from '../../DataServices/DataServices';
+import UserContext from '../../UserContext/UserContext';
+import { useNavigate } from 'react-router';
 
 interface UserInfo {
   aboutMe: string;
@@ -29,6 +31,8 @@ export default function JoinedPersonList(props: eventID) {
   const [allJoinedEvents, setAllJoinedEvents] = useState<EventJoin[]>([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const data = useContext<any>(UserContext);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const getjoinedData = async () => {
@@ -36,7 +40,7 @@ export default function JoinedPersonList(props: eventID) {
       setAllJoinedEvents(joinedEventvar);
     }
     getjoinedData()
-  }, []);
+  }, [ data.eventReload]);
 
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
@@ -47,6 +51,7 @@ export default function JoinedPersonList(props: eventID) {
           return prevUserInfo;
         }
         const newUserInfo = [...prevUserInfo, userInfo];
+    
         return newUserInfo;
       });
     }
@@ -56,7 +61,15 @@ export default function JoinedPersonList(props: eventID) {
       .forEach(item => {
         fetchUserInfo(item.userId);
       });
+      data.setEventReload(false);
   }, [allJoinedEvents, props.id]);
+
+  const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
+  
 
   return (
     <>
@@ -68,7 +81,7 @@ export default function JoinedPersonList(props: eventID) {
         </Modal.Header>
         <Modal.Body>
           {allUserInfo.map(userInfo => (
-            <ul key={userInfo.firstName}><li>{userInfo.firstName}</li></ul>
+            <ul onClick={() => profileClick(userInfo.username)} key={userInfo.firstName}><li>{userInfo.firstName} {userInfo.lastName}</li></ul>
           ))}
         </Modal.Body>
         <Modal.Footer>

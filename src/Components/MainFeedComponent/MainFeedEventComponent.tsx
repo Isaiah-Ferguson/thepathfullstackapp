@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, getMyFriendsList, getEventItemsByUserId } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId, searchUser } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 import JoinEventModal from "../ModalComponent/JoinEventModal";
@@ -50,6 +50,12 @@ export default function MainFeedEventComponent() {
     }
   }, []);
 
+  const profileClick = async (publisherName: string) => {
+    const searchName = await searchUser(publisherName);
+    data.setName(searchName);
+    navigate("/friends");
+  }
+
 
   return (
     <>
@@ -61,14 +67,14 @@ export default function MainFeedEventComponent() {
               <h6>{item.time}</h6>
             </Col>
             <Col md={9} sm={9} xs={9}>
-              <h6>{item.publishedName}</h6>
+              <h6 className="searchclick" onClick={() => profileClick(item.publishedName)}>{item.publishedName}</h6>
               <h6>
                 <b>
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
               <Row style={{}}>
-                <Col><JoinEventModal id={item.id} /></Col>
+                <Col><JoinEventModal id={item.id} publishedName={item.publishedName} academyName={item.academyName}/></Col>
                 <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id} /></Col>
               </Row>
             </Col>

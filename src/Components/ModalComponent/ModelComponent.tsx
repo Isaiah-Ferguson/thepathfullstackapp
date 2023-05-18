@@ -18,6 +18,7 @@ export default function ModalComponent() {
   const [blogId, setBlogId] = useState(0);
   const [academy, setAcademy] = useState("TEAM CAMA");
   const [viewable, setViewable] = useState("Private");
+  const [disableButton, setDisableButton] = useState(true)
 
   const [show, setShow] = useState(false);
 
@@ -32,29 +33,33 @@ export default function ModalComponent() {
   const Event = require("../../assets/EventIcon.png");
 
 
-  const handleOpenMat = async () => {
+  const handleSubmit = async () => {
+    async function handleOpenMat() {
+      const academyQ = await GetAcademyList(academy);
+      const userNames = loggedInData();
+      let userInfoItems = await getUserInfoByID(userNames.userId);
+      const eventdate = selectedDay + ", " + selectedMonth;
+      const eventData = {
+        Id: blogId,
+        UserId: userNames.userId,
+        Date: new Date,
+        publishedName: userNames.publisherName,
+        academyName: academyQ.name,
+        time: selectedHour,
+        eventDate: eventdate,
+        address: academyQ.address,
+        description: blogDiscription,
+        type: viewable,
+        isPublish: true,
+        isDeleted: false,
+        image: userInfoItems.image
+      }
+      await eventBlogItem(eventData);
+      data.setEventReload(true);
+      setDisableButton(true);
 
-    const academyQ = await GetAcademyList(academy);
-    const userNames = loggedInData();
-    let userInfoItems = await getUserInfoByID(userNames.userId);
-    const eventdate = selectedDay + ", " + selectedMonth;
-    const eventData = {
-      Id: blogId,
-      UserId: userNames.userId,
-      Date: new Date,
-      publishedName: userNames.publisherName,
-      academyName: academyQ.name,
-      time: selectedHour,
-      eventDate: eventdate,
-      address: academyQ.address,
-      description: blogDiscription,
-      type: viewable,
-      isPublish: true,
-      isDeleted: false,
-      image: userInfoItems.image
     }
-    await eventBlogItem(eventData);
-    data.setEventReload(true);
+    handleOpenMat();
     handleClose();
   }
 
@@ -140,9 +145,9 @@ export default function ModalComponent() {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleOpenMat}>
+          {disableButton &&<Button variant="primary" onClick={handleSubmit}>
             Create Open Mat
-          </Button>
+          </Button>}
 
         </Modal.Footer>
       </Modal>

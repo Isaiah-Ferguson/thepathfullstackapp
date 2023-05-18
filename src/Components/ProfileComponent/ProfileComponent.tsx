@@ -26,11 +26,11 @@ interface UserInfo {
 }
 
 export default function ProfileComponent() {
-  const blackBelt = require('../../assets/BlackBeltIcon.png');
-  const whiteBelt = require('../../assets/WhiteBeltIcon.png');
-  const blueBelt = require('../../assets/BlueBeltIcon.png');
-  const purpleBelt = require('../../assets/PurpleBeltIcon.png');
-  const brownBelt = require('../../assets/BrownBeltIcon.png');
+  const blackBelt = require('../../assets/BJJBlack.png');
+  const whiteBelt = require('../../assets/BJJWhite.png');
+  const blueBelt = require('../../assets/BJJBlue.png');
+  const purpleBelt = require('../../assets/BJJPURPLE.png');
+  const brownBelt = require('../../assets/BJJBrown.png');
 
 
   const [selectedSection, setSelectedSection] = useState('post');
@@ -93,7 +93,7 @@ export default function ProfileComponent() {
               <div className="text-center profileHeaderText">{userInfo.firstName} {userInfo.lastName}</div>
               <p style={{padding: 10}} className="profileHeaderText text-center">Academy - {userInfo.academyName}</p>
             </Col>
-            <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="BlackBelt" alt="Belt Rank" /></div>
+            <div className="d-flex justify-content-center"><img style={{ height: 40 }} src={imgSrc} title="Jiu Jitsu Belt" alt="Belt Rank" /></div>
             <p className="discText">About Me</p>
             <p> {userInfo.aboutMe} </p>
           </Row>
