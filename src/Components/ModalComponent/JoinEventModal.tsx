@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Modal, Button, Toast } from 'react-bootstrap';
-import { getEventItemsByUserId, joinEventItem } from '../../DataServices/DataServices';
+import { joinEventItem } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 type eventID = {
@@ -18,9 +18,6 @@ export default function JoinEventModal(props: eventID) {
   const handleShow = () => setShow(true);
 
   const [showToast, setShowToast] = useState(false);
-  const [smShow, setSmShow] = useState(false);
-  const [position] = useState('top-start');
-
 
   const handleJoin = async () => {
     const storedValue = sessionStorage.getItem('loggedIn');
