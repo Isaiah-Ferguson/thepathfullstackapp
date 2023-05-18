@@ -22,6 +22,8 @@
   font-weight: 700
 }
 
+
+
 .profileHeaderText {
   font-size: 26px;
 }
@@ -35,7 +37,6 @@
   border-radius: 150px;
   height: 225px;
   width: 225px;
-
 }
 
 .Logo {
@@ -89,6 +90,9 @@
   display: none;
 }
 
+.friendimgPost{
+  align-items: start;
+}
 
 .eventTextArea {
   padding: 5px;

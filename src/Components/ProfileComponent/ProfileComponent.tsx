@@ -29,7 +29,7 @@ export default function ProfileComponent() {
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
   const blueBelt = require('../../assets/BJJBlue.png');
-  const purpleBelt = require('../../assets/BJJPURPLE.png');
+  const purpleBelt = require('../../assets/BJJPurple.png');
   const brownBelt = require('../../assets/BJJBrown.png');
 
 
@@ -107,8 +107,8 @@ export default function ProfileComponent() {
           {(isMobile) && (
              <Col lg={12}>
             <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">Post</Button></Col>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">Events</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">View Post</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">View Events</Button></Col>
             </Row>  </Col>
           )}
 
