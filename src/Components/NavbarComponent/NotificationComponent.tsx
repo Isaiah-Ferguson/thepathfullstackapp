@@ -55,7 +55,6 @@ export default function NotificationComponent() {
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);
     }
-console.log(friendInfo)
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);
     });
