@@ -62,11 +62,11 @@ export default function MainFeedEventComponent() {
       {myEventItems.length > 0 ? (
         myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type === 'Private' && friendInfo.includes(item.userId) || item.userId === data.userId)).map((item: EventItem, idx: number) => (
           <Row className="eventMainPageDiv" key={idx}>
-            <Col md={3} sm={3} xs={3} className="text-center eventDateDiv">
+            <Col md={3} sm={3} xs={4} className="text-center eventDateDiv">
               <h6>{item.eventDate}</h6>
               <h6>{item.time}</h6>
             </Col>
-            <Col md={9} sm={9} xs={9}>
+            <Col md={9} sm={9} xs={8}>
               <h6 className="searchclick" onClick={() => profileClick(item.publishedName)}>{item.publishedName}</h6>
               <h6>
                 <b>
@@ -74,7 +74,7 @@ export default function MainFeedEventComponent() {
                 </b>
               </h6>
               <Row style={{}}>
-                <Col><JoinEventModal id={item.id} publishedName={item.publishedName} academyName={item.academyName}/></Col>
+                <Col><JoinEventModal id={item.id} publishedName={item.publishedName} academyName={item.academyName} address={item.address}/></Col>
                 <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id} /></Col>
               </Row>
             </Col>

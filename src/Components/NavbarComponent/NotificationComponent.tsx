@@ -44,7 +44,7 @@ export default function NotificationComponent() {
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
-      setAllUserInfo((prevUserInfo) => {
+      setAllUserInfo(prevUserInfo => {
         const newUserInfo = [...prevUserInfo, userInfo];
         data.setCount(newUserInfo.length);
         return newUserInfo;
