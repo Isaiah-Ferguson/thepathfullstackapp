@@ -64,7 +64,7 @@ export default function MainFeedComponent() {
       <div className="custom-container">
         {(isMobile) && (
           <Col lg={12}>
-            <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
+            <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30, marginBottom: 15 }}>
               <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">View Post</Button></Col>
               <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">View Events</Button></Col>
             </Row>  </Col>

@@ -2,11 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileComponent from './Components/ProfileComponent/ProfileComponent';
 import "./Components/ProfileComponent/ProfileComponent.css";
 import "./Components/ModalComponent/ModulCSS.css";
-import NavBar from "./Components/NavbarComponent/NavBarComponent"
 import LoginComponent from './Components/Login/LoginComponent';
 import "./Components/NavbarComponent/NavBarComponent.css";
 import "./Components/MainFeedComponent/MainFeedComponent.css";
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainFeedComponent from "./Components/MainFeedComponent/MainFeedComponent";
 import React, { useEffect } from 'react';
 import CreateAccountComponent from './Components/Login/CreateAccountComponent';
@@ -15,15 +14,13 @@ import UserContext from "./UserContext/UserContext";
 import ProfileFriend from './Components/ProfileComponent/ProfileFriend';
 import './Components/Login/LoginComponent.css';
 import ForgotPasswordComponent from './Components/Login/ForgotPasswordComponent';
-import './Components/ProfileComponent/Loading.css'
-// import { browserRouter } from ''
+import './Components/ProfileComponent/Loading.css';
+
 function App() {
 
   useEffect(() => {
     document.body.style.backgroundColor = '#e4e5f9';
   }, [])
-
-  // const userHooks = UserHooks();
 
   return (
     <UserContext.Provider value={UserHooks()}>

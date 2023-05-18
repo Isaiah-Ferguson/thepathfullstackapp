@@ -45,7 +45,6 @@ export default function NotificationComponent() {
   useEffect(() => {
     async function fetchUserInfo(userId: number) {
       const userInfo = await getUserInfoByID(userId);
-      console.log(userInfo)
       setAllUserInfo(prevUserInfo => {
         const newUserInfo = [...prevUserInfo, userInfo];
         data.setCount(newUserInfo.length);
@@ -55,7 +54,6 @@ export default function NotificationComponent() {
     async function fetchfriendlistId( id: number) {
       setfriendlistID(id);
     }
-console.log(friendInfo)
  friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
   fetchfriendlistId(item.id);
     });
