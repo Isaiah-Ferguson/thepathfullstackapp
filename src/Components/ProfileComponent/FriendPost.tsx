@@ -45,11 +45,11 @@ export default function FriendPost(props: pictureprops) {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
             return (
-              <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
+              <Row key={idx} style={{ marginTop: 20 }} className='d-flex postBG'>
                 <Col lg={3} sm={2} xs={3}>
-                  <Row >
+                  <Row className=' d-flex justify-content-center'>
                     <Col sm={8} xs={6}>
-                      <img className="smallProfileIMG" src={props.picture} alt="profile" />
+                      <img className="smallProfileIMG d-flex justify-content-center" src={props.picture} alt="profile" />
                       <div style={{fontWeight: 600}}>{item.publishedName}</div>
                     <div>{formattedDate}</div>
                       </Col>

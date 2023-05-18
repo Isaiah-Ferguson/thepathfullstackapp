@@ -43,7 +43,7 @@ export default function MainFeedPostComponent() {
     } else {
       getLoggedInData();
     }
-  }, []);
+  }, [data.shouldReload]);
 
 
     const profileClick = async (publisherName: string) => {

@@ -51,7 +51,7 @@ function ProfilePostModule(props: pictureprops) {
     <>
       <div className="postTextDiv">
         <img className="smallProfileIMGPost" src={props.picture} />
-        <Form.Control onClick={handleShow} type="text" placeholder="What is on your mind?" />
+        <Form.Control onClick={handleShow} type="text" placeholder="What is on your mind?" readOnly/>
       </div>
 
       <Modal show={show} onHide={handleClose}>
