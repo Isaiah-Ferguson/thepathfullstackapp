@@ -107,8 +107,8 @@ export default function ProfileComponent() {
           {(isMobile) && (
              <Col lg={12}>
             <Row className=" justify-content-around" style={{ flexWrap: "nowrap", marginTop: 30 }}>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">Post</Button></Col>
-              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">Events</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('post')}><Button variant="info">View Post</Button></Col>
+              <Col className="d-flex justify-content-center " xsm={1} onClick={() => handleButtonClick('event')}><Button variant="warning">View Events</Button></Col>
             </Row>  </Col>
           )}
 
