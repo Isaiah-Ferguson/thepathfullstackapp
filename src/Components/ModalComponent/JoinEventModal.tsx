@@ -33,10 +33,11 @@ export default function JoinEventModal(props: eventID) {
 
   }
 
+ 
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>Join Event</Button>
+      <Button  onClick={handleShow}><span style={{ backgroundColor: 'transparent'}} > Join event </span></Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
