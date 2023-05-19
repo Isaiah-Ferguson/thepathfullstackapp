@@ -60,7 +60,7 @@ export default function ChangePasswordComponent() {
           </Col>
         </Row>
         <ToastContainer style={{ width: '90%', alignItems: 'center', marginLeft: '20px' }}>
-          <Toast show={showToast} onClose={() => setShowToast(false)} delay={1000} autohide>
+          <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
             <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
           </Toast>
         </ToastContainer>
