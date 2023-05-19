@@ -25,7 +25,7 @@ const url = 'https://thepathapi.azurewebsites.net';
 
   async function forgotPassword(CreatedUser : object) {
     //We want to target our User Controller
-    const res = await fetch(url + '/User/AddUser',{
+    const res = await fetch(url + '/User/updatepassword',{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
