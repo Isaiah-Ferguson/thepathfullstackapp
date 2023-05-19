@@ -25,7 +25,7 @@ const url = 'https://thepathapi.azurewebsites.net';
 
   async function forgotPassword(CreatedUser : object) {
     //We want to target our User Controller
-    const res = await fetch(url + '/User/AddUser',{
+    const res = await fetch(url + '/User/updatepassword',{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
@@ -150,6 +150,22 @@ async function GetAllUsers() {
       const data = await res.json();
       return data;
   }
+
+  async function updatePassword(blogItem : object) {
+    const res = await fetch( url + '/blog/UpdateBlogitem',{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+}
 
   async function updateEventItem(blogItem : object) {
     const res = await fetch( url + '/AcademyEvents/UpdateEvent',{

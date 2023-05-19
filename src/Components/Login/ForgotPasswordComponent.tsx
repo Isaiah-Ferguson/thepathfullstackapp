@@ -1,55 +1,72 @@
-import React from 'react'
-import { Col, Container, Row, Form, Button } from 'react-bootstrap'
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { Col, Container, Row, Form, Button, ToastContainer, Toast } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../DataServices/DataServices';
 
-export default function ForgotPasswordComponent() {
+
+
+export default function ChangePasswordComponent() {
   let navigate = useNavigate();
+
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const backBTN = require('../../assets/Back.png')
+  const [password, setNewPassword] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const backBTN = require('../../assets/Back.png');
+
   const handleSubmit = () => {
 
-    let userData = {
-      id: 0,
+    const userData = {
       Username: username,
       Password: password
-    }
-    forgotPassword(userData);
-    navigate("/");
-  }
+    };
 
+    forgotPassword(userData);
+    setShowToast(true);
+
+    setToastMessage("Password Changed!")
+
+  }
 
   return (
     <div className='loginBg'>
       <Container className='d-flex justify-content-center mobileContainer' style={{ paddingTop: 200 }}>
-        <Row className='wrapperRegistration' >
-          <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
+        <Row className='wrapperRegistration'>
+          <div className='backIconDiv'>
+            <img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} alt="Back" />
+          </div>
 
           <Col className='form-box'>
             <h1 className='d-flex justify-content-center'>The Path</h1>
-            <h4 className='d-flex justify-content-center'>Forgot Password</h4>
+            <h4 className='d-flex justify-content-center'>Change Password</h4>
             <Form>
-              <Form.Group className="mb-3 input-box" controlId="Userame">
+              <Form.Group className='mb-3 input-box' controlId='Username'>
                 <Form.Label className='pColor'>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter Username" onChange={({ target: { value } }) => setUsername(value)} />
+                <Form.Control type='text' placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)} />
               </Form.Group>
 
-              <Form.Group className="mb-3 input-box" controlId="Password">
-                <Form.Label className='pColor'>Enter Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              <Form.Group className='mb-3 input-box' controlId='NewPassword'>
+                <Form.Label className='pColor'>New Password</Form.Label>
+                <Form.Control type='password' placeholder='New Password' onChange={(e) => setNewPassword(e.target.value)} />
               </Form.Group>
 
-              <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit} >
-                Confirm Password Change
+              <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit}>
+                Change Password
               </Button>
-              <div style={{ marginTop: 45 }} className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
+              <div style={{ marginTop: 45 }} className='text-center'>
+                <small>&copy; The Path. All Rights Reserved 2023.</small>
+              </div>
             </Form>
           </Col>
         </Row>
-      </Container>
-    </div>
-  )
+        <ToastContainer style={{ width: '90%', alignItems: 'center', marginLeft: '20px' }}>
+          <Toast show={showToast} onClose={() => setShowToast(false)} delay={1000} autohide>
+            <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
+          </Toast>
+        </ToastContainer>
 
+      </Container>
+
+    </div>
+  );
 }
