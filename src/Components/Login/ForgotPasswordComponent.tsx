@@ -9,6 +9,7 @@ export default function ForgotPasswordComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const backBTN = require('../../assets/Back.png')
+  
   const handleSubmit = () => {
 
     let userData = {

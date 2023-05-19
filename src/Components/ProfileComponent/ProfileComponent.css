@@ -37,6 +37,7 @@
   border-radius: 150px;
   height: 225px;
   width: 225px;
+  object-fit: fill;
 }
 
 .Logo {
