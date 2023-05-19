@@ -151,6 +151,22 @@ async function GetAllUsers() {
       return data;
   }
 
+  async function updatePassword(blogItem : object) {
+    const res = await fetch( url + '/blog/UpdateBlogitem',{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(blogItem)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const data = await res.json();
+    return data;
+}
+
   async function updateEventItem(blogItem : object) {
     const res = await fetch( url + '/AcademyEvents/UpdateEvent',{
         method:"PUT",
