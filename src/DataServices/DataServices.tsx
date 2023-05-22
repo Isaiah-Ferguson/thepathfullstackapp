@@ -276,8 +276,8 @@ async function RemoveFriend(myId: number, friendUserID: (number | string)[] ) {
 
 async function AddFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
     const iAccepted = true;
-    const isDeleted = false;
-    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
+    const isDenied = false;
+    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDenied}`,{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
@@ -294,8 +294,8 @@ async function AddFriendResponse( id:number, myId: number, OtherId: (number | st
 
 async function denyFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
     const iAccepted = false;
-    const isDeleted = true;
-    const res = await fetch( url + `/friends/addafriend/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
+    const isDenied = true;
+    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDenied}`,{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"

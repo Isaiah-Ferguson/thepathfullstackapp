@@ -32,11 +32,14 @@ export default function RemoveFriendModal(props: username) {
     const filteredlist = friendslist.filter((item : friendlist) => item.userId === data.userId && item.friendUserId === data.name.userId)
     if(filteredlist.length > 1){
         const friendId = filteredlist[0].id
+        console.log(friendId)
         RemoveFriend(data.userId, data.name.userId);
         denyFriendResponse(friendId, data.userId, data.name.userId)
     }else{
         const filteredlist = friendslist.filter((item : friendlist) => item.userId === data.name.userId && item.friendUserId === data.userId)
-        const friendId = filteredlist[0].id
+        const friendId = filteredlist[0].id;
+        console.log(friendId)
+
         RemoveFriend(data.name.userId, data.userId);
         denyFriendResponse(friendId, data.name.userId, data.userId)
     }
