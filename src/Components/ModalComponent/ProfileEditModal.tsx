@@ -1,11 +1,20 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel, Toast } from 'react-bootstrap';
-import { updateUserInfo } from '../../DataServices/DataServices';
-import { useState, useContext } from 'react';
-import { loggedInData } from '../../DataServices/DataServices';
+import { updateUserInfo, getUserInfoByID, loggedInData } from '../../DataServices/DataServices';
+import { useState, useContext, useEffect } from 'react';
 import UserContext from '../../UserContext/UserContext';
 
-
+interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
 
 export default function ProfileEditModal(props: any) {
   const EditProfile = require('../../assets/EditProfile.png');
@@ -21,6 +30,17 @@ export default function ProfileEditModal(props: any) {
 
   const [lgShow, setLgShow] = useState(props.newuser);
   const [picture, setPicture] = useState(profile);
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+    aboutMe: "",
+    id: 0,
+    image: "",
+    academyName: "",
+    firstName: "",
+    lastName: "",
+    publishedName: "",
+    username: "",
+    belt: ""
+  });
   const handleClose = () => {
     setLgShow(false);
     data.setNewUser(false);
@@ -93,6 +113,24 @@ export default function ProfileEditModal(props: any) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   }
+
+  useEffect(() => {
+
+      const getLoggedInData = async () => {
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
+      setFirstName(userInfoItems.firstName);
+      setLastName(userInfoItems.lastName);
+      setBelt(userInfoItems.belt);
+      setDescription(userInfoItems.aboutMe);
+      setAcademy(userInfoItems.academyName);
+      setPicture(userInfoItems.image);
+      setUserInfo(userInfoItems);
+    };
+    getLoggedInData();
+
+  },[]);
 
   return (
 
