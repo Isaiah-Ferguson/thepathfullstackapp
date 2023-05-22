@@ -21,6 +21,7 @@ interface FriendInfo {
   userId: number;
   friendUserId: number;
   isAccepted: boolean;
+  isDenied: false;
 }
 
 export default function NotificationComponent() {
@@ -57,7 +58,7 @@ export default function NotificationComponent() {
     friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
       fetchfriendlistId(item.id);
     });
-    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted && item.isDenied).forEach((item: FriendInfo) => {
       fetchUserInfo(item.userId);
     });
 
