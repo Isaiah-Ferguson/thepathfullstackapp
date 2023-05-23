@@ -103,6 +103,9 @@ export default function ProfileEditModal(props: any) {
       AcademyName: academy,
       belt: belt
     };
+    if(item.image === ""){
+      item.image = profile;
+    }
 
     await updateUserInfo(item, testID);
     data.setShouldReload(true);
@@ -125,8 +128,11 @@ export default function ProfileEditModal(props: any) {
       setBelt(userInfoItems.belt);
       setDescription(userInfoItems.aboutMe);
       setAcademy(userInfoItems.academyName);
-      setPicture(userInfoItems.image);
-      setUserInfo(userInfoItems);
+      if(userInfoItems.image === null){
+        setPicture(picture);
+      }else{
+        setPicture(userInfoItems.image);
+      }
     };
     getLoggedInData();
 
@@ -139,6 +145,8 @@ export default function ProfileEditModal(props: any) {
       <Modal
         size="lg"
         show={lgShow}
+        backdrop="static"
+        keyboard={false}
         onHide={() => {
           setLgShow(false);
           handleClose();
