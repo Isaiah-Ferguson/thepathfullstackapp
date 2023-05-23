@@ -273,10 +273,27 @@ async function AddFriend(myId: number, OtherId: (number | string)[] ) {
 }
 
 
+async function RemoveFriend(myId: number, friendUserID: (number | string)[] ) {
+    const res = await fetch( url + `/friends/deletefriend/${myId}/${friendUserID}`,{
+        method:"PUT",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(myId, friendUserID)
+    });
+    if(!res.ok){
+        const message = `An Error has Occured  ${res.status}`;
+        throw new Error(message);
+    }
+    const eventData = await res.json();
+    return eventData;
+}
+
+
 async function AddFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
     const iAccepted = true;
-    const isDeleted = false;
-    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
+    const isDenied = false;
+    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDenied}`,{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
@@ -293,8 +310,8 @@ async function AddFriendResponse( id:number, myId: number, OtherId: (number | st
 
 async function denyFriendResponse( id:number, myId: number, OtherId: (number | string)[]) {
     const iAccepted = false;
-    const isDeleted = true;
-    const res = await fetch( url + `/friends/addafriend/${id}/${myId}/${OtherId}/${iAccepted}/${isDeleted}`,{
+    const isDenied = true;
+    const res = await fetch( url + `/friends/friendupdate/${id}/${myId}/${OtherId}/${iAccepted}/${isDenied}`,{
         method:"PUT",
         headers:{
             'Content-Type':"application/json"
@@ -311,4 +328,4 @@ async function denyFriendResponse( id:number, myId: number, OtherId: (number | s
 
 
 
-  export { forgotPassword, GetAllJoinedEvents, joinEventItem, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }
+  export { RemoveFriend, forgotPassword, GetAllJoinedEvents, joinEventItem, getMyFriendsList, denyFriendResponse, AddFriendResponse, updateEventItem, getFriendsList, AddFriend, createAccount, login ,GetLoggedInUserData, GetPublishedBlogItem, checkToken, loggedInData, addBlogItem, getBlogItemsByUserId, updateBlogItem, updateUserInfo, eventBlogItem, getEventItemsByUserId, GetAcademyList, getUserInfoByID, searchUser, GetAllUsers }

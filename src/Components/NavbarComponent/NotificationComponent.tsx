@@ -21,6 +21,7 @@ interface FriendInfo {
   userId: number;
   friendUserId: number;
   isAccepted: boolean;
+  isDenied: boolean;
 }
 
 export default function NotificationComponent() {
@@ -54,10 +55,10 @@ export default function NotificationComponent() {
     async function fetchfriendlistId(id: number) {
       setfriendlistID(id);
     }
- friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
-  fetchfriendlistId(item.id);
+    friendInfo.filter((item) => item.friendUserId === data.userId).forEach((item: FriendInfo) => {
+      fetchfriendlistId(item.id);
     });
-    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted).forEach((item: FriendInfo) => {
+    friendInfo.filter((item) => item.friendUserId === data.userId && !item.isAccepted && item.isDenied === false).forEach((item: FriendInfo) => {
       fetchUserInfo(item.userId);
     });
 
@@ -89,10 +90,6 @@ export default function NotificationComponent() {
   };
 
 
-
-
-
-
   return (
     <>
 
@@ -103,30 +100,30 @@ export default function NotificationComponent() {
               className="NotificationImg"
               onClick={() => profileClick(userInfo.username)}
               src={userInfo.image}
-              />
-              </Col>
-              <Col lg={8} xs={8}>
-              <p>{userInfo.firstName} has sent a Friends request</p>
-              <Button onClick={(e) => handleAccept(e, userInfo.id)} style={{ marginRight: 20 }}>
+            />
+          </Col>
+          <Col lg={8} xs={8}>
+            <p>{userInfo.firstName} has sent a Friends request</p>
+            <Button onClick={(e) => handleAccept(e, userInfo.id)} style={{ marginRight: 20 }}>
               Accept
-              </Button>
-              <Button onClick={(e) => handleDenie(e, userInfo.id)} variant="danger">
+            </Button>
+            <Button onClick={(e) => handleDenie(e, userInfo.id)} variant="danger">
               Decline
-              </Button>
-              </Col>
-              </Row>
-              ))}
-              <ToastContainer style={{ width: '90%' }}>
-              <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
-              <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
-              </Toast>
-              </ToastContainer>
-              </>
-              );
-              }
-          
+            </Button>
+          </Col>
+        </Row>
+      ))}
+      <ToastContainer style={{ width: '90%' }}>
+        <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
+          <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
+        </Toast>
+      </ToastContainer>
+    </>
+  );
+}
 
-      
-          
 
-      
+
+
+
+

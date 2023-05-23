@@ -1,11 +1,20 @@
 import React from 'react'
 import { Modal, Row, Button, Form, Col, FloatingLabel, Toast } from 'react-bootstrap';
-import { updateUserInfo } from '../../DataServices/DataServices';
-import { useState, useContext } from 'react';
-import { loggedInData } from '../../DataServices/DataServices';
+import { updateUserInfo, getUserInfoByID, loggedInData } from '../../DataServices/DataServices';
+import { useState, useContext, useEffect } from 'react';
 import UserContext from '../../UserContext/UserContext';
 
-
+interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
 
 export default function ProfileEditModal(props: any) {
   const EditProfile = require('../../assets/EditProfile.png');
@@ -21,6 +30,7 @@ export default function ProfileEditModal(props: any) {
 
   const [lgShow, setLgShow] = useState(props.newuser);
   const [picture, setPicture] = useState(profile);
+
   const handleClose = () => {
     setLgShow(false);
     data.setNewUser(false);
@@ -83,6 +93,9 @@ export default function ProfileEditModal(props: any) {
       AcademyName: academy,
       belt: belt
     };
+    if(item.image === ""){
+      item.image = profile;
+    }
 
     await updateUserInfo(item, testID);
     data.setShouldReload(true);
@@ -94,6 +107,27 @@ export default function ProfileEditModal(props: any) {
     e.preventDefault();
   }
 
+  useEffect(() => {
+
+      const getLoggedInData = async () => {
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
+      setFirstName(userInfoItems.firstName);
+      setLastName(userInfoItems.lastName);
+      setBelt(userInfoItems.belt);
+      setDescription(userInfoItems.aboutMe);
+      setAcademy(userInfoItems.academyName);
+      if(userInfoItems.image === null){
+        setPicture(picture);
+      }else{
+        setPicture(userInfoItems.image);
+      }
+    };
+    getLoggedInData();
+
+  },[]);
+
   return (
 
     <div>
@@ -101,6 +135,8 @@ export default function ProfileEditModal(props: any) {
       <Modal
         size="lg"
         show={lgShow}
+        backdrop="static"
+        keyboard={false}
         onHide={() => {
           setLgShow(false);
           handleClose();

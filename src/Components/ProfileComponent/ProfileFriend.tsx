@@ -3,12 +3,13 @@ import { Col, Row, Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useContext } from 'react'
 import UserContext from '../../UserContext/UserContext';
-import { getUserInfoByID } from "../../DataServices/DataServices";
+import {  getFriendsList, getUserInfoByID } from "../../DataServices/DataServices";
 import AddFriendModal from "../ModalComponent/AddFriendModal";
 import FriendPost from './FriendPost';
 import NavbarComponent from "../NavbarComponent/NavBarComponent";
 import SearchUserFriend from "./SearchUserFriend";
 import FriendEvent from "./FriendEvent";
+import RemoveFriendModal from "../ModalComponent/RemoveFriendModal";
 
 
 interface UserInfo {
@@ -27,13 +28,14 @@ export default function ProfileFriend() {
   const blackBelt = require('../../assets/BJJBlack.png');
   const whiteBelt = require('../../assets/BJJWhite.png');
   const blueBelt = require('../../assets/BJJBlue.png');
-  const purpleBelt = require('../../assets/BJJPURPLE.png');
+  const purpleBelt = require('../../assets/BJJPurple.png');
   const brownBelt = require('../../assets/BJJBrown.png');
 
   const data = useContext<any>(UserContext);
 
   const [selectedSection, setSelectedSection] = useState('post');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 993);
+  const [isFriend, setIsFriend] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
     id: 0,
@@ -68,8 +70,20 @@ export default function ProfileFriend() {
     const getLoggedInData = async () => {
       let userInfoItems = await getUserInfoByID(data.name.userId);
       setUserInfo(userInfoItems);
+      const friendslist = await getFriendsList();
+      console.log(friendslist)
+      const friends = await getFriendsList();
+      const areFriends = friends.some(
+        (friend: any) =>
+          (friend.userId === data.userId && friend.friendUserId === data.name.userId && friend.isAccepted === true) ||
+          (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isAccepted === true)
+      );
+      if (areFriends) {
+        setIsFriend(true)
+      }
     };
     getLoggedInData();
+
   }, [data.name]);
   // ----------------------------------------------------------------------------
 
@@ -92,10 +106,8 @@ export default function ProfileFriend() {
             <p className="discText">About Me</p>
             <p> {userInfo.aboutMe} </p>
           </Row>
-
-
-          <AddFriendModal username={userInfo.firstName} myID={1} theirID={data.name.userId} />
-
+          { isFriend && <RemoveFriendModal username={userInfo.firstName} myID={1} theirID={data.name.userId} />}
+          { !isFriend && <AddFriendModal username={userInfo.firstName} myID={1} theirID={data.name.userId} />}
         </Col>
 
         {/*------------------------------------- Mobile Text---------------------------------------------- */}

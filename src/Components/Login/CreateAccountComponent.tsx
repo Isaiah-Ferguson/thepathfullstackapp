@@ -1,8 +1,21 @@
 import React from 'react'
 import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState } from 'react'
-import { createAccount } from '../../DataServices/DataServices';
+import { GetAllUsers, createAccount } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
+
+
+  interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
 
 export default function CreateAccountComponent() {
   let navigate = useNavigate();
@@ -12,24 +25,35 @@ export default function CreateAccountComponent() {
   const [userToast, setUserToast] = useState(false);
   const [passwordTaost, setPasswordToast] = useState(false);
   const [showA, setShowA] = useState(true);
-  const [disableButton, setDisableButton] = useState(true)
+  const [disableButton, setDisableButton] = useState(true);
 
-  const handleSubmit = async () => {
-    let userData = {
-      id: 0,
-      Username: username,
-      Password: password
+
+  const handleSubmit = () => {
+
+    async function CreateNewAccount() {
+
+      let userData = {
+        id: 0,
+        username: username,
+        password: password 
+      };
+
+      const isUser = await GetAllUsers();
+      const isUsernameTaken = isUser.some((user: UserInfo) => user.username === userData.username);
+    
+      if (isUsernameTaken) {
+        setUserToast(true)
+      } else if (userData.password === "") {
+        setPasswordToast(true);
+      } else {
+        await createAccount(userData);
+        navigate("/");
+      }
     }
-    const test = await createAccount(userData);
-    if (test === false) {
-      setUserToast(true);
-    } else if (userData.Password === "") {
-      setPasswordToast(true)
-    }
-    else {
-      navigate("/");
-    }
+    
+    CreateNewAccount();
   }
+
 
   const toggleShowA = () => {
     setShowA(!showA);

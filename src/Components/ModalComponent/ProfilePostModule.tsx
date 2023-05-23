@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { loggedInData, getUserInfoByID, addBlogItem } from '../../DataServices/DataServices';
@@ -21,6 +21,10 @@ function ProfilePostModule(props: pictureprops) {
   const handlePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostDescription(e.target.value)
   }
+
+  useEffect(() => {
+    setDisableButton(true)
+  },[disableButton])
 
   const HandleSubmit = () => {
     setDisableButton(false)
