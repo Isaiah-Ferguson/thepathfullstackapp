@@ -30,17 +30,7 @@ export default function ProfileEditModal(props: any) {
 
   const [lgShow, setLgShow] = useState(props.newuser);
   const [picture, setPicture] = useState(profile);
-    const [userInfo, setUserInfo] = useState<UserInfo>({
-    aboutMe: "",
-    id: 0,
-    image: "",
-    academyName: "",
-    firstName: "",
-    lastName: "",
-    publishedName: "",
-    username: "",
-    belt: ""
-  });
+
   const handleClose = () => {
     setLgShow(false);
     data.setNewUser(false);
