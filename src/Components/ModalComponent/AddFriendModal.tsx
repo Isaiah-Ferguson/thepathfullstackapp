@@ -38,13 +38,28 @@ export default function AddFriendModal(props: username) {
         (friend.userId === data.userId && friend.friendUserId === data.name.userId && friend.isAccepted === true) ||
         (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isAccepted === true)
     );
+    const areNotFriends = friends.some(
+      (friend: any) =>
+        (friend.userId === data.userId && friend.friendUserId === data.name.userId && friend.isDenied === true) ||
+        (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isDenied === true)
+    );
+
+    const alreadyFriends = friends.filter((friend : any ) => 
+    
+    
+    
+    );
+
+
     if (areFriends) {
       console.log('Users are already friends');
       return;
+    } else if (areFriends && areNotFriends){
+      // AddFriendResponse(data.name.userId, value, data.userId);
     }
-  
+    
     // Add friend request
-    AddFriend(data.userId, data.name.userId);
+    // AddFriend(data.userId, data.name.userId);
     handleClose();
   };
 
