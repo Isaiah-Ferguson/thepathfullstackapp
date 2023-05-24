@@ -61,6 +61,8 @@
   min-height: 100px;
   width: 100%;
   background-color: white;
+  word-wrap: break-word;
+
 }
 
 .scrollDiv {
@@ -228,6 +230,9 @@
   border-radius: 20px;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+.profileCard p{
+  word-wrap: break-word;
 }
 
 

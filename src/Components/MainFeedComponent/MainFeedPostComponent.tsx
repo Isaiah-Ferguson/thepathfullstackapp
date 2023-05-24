@@ -8,8 +8,8 @@ interface BlogItem {
   date: string;
   id: number;
   image: string;
-  isDeleted: false;
-  isPublish: false;
+  isDeleted: boolean;
+  isPublish: boolean;
   publishedName: string;
   description: string;
   title: string;
@@ -60,7 +60,7 @@ export default function MainFeedPostComponent() {
     <>
       {blogItems.length > 0 ?
       
-      blogItems.filter((item: BlogItem) => item.isPublish && friendInfo.includes(item.userid)  || item.userid === data.userId).map((item: BlogItem, idx: number) => {
+      blogItems.filter((item: BlogItem) => item.isPublish && friendInfo.includes(item.userid)  || item.isPublish && item.userid === data.userId).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
 
