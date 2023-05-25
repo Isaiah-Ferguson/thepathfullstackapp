@@ -6,26 +6,27 @@ import { GetAcademyList, loggedInData, getUserInfoByID, updateEventItem } from '
 import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
 type ChildProps = {
-    blogId: number;
-  }
+  blogId: number;
+}
 
-  interface UserInfo {
-    aboutMe: string;
-    id: number;
-    image: string;
-    academyName: string;
-    firstName: string;
-    lastName: string;
-    publishedName: string;
-    username: string;
-    belt: string;
-  }
+interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
 
 export default function EditEventModal(props: ChildProps) {
   const data = useContext<any>(UserContext);
   const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("January");
+  const [selectedYear, setSelectedYear] = useState("2023"); // Replace "2023" with your desired default year
   const [blogDiscription, setBlogDescription] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo>({
     aboutMe: "",
@@ -47,15 +48,16 @@ export default function EditEventModal(props: ChildProps) {
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const years = Array.from({ length: 10 }, (_, i) => (new Date().getFullYear() + i).toString()); // Adjust the range of years as needed
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
+
   useEffect(() => {
-    const getAcademy =async () => {
+    const getAcademy = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
@@ -64,58 +66,58 @@ export default function EditEventModal(props: ChildProps) {
     getAcademy()
   }, []);
 
- 
-    const handleOpenMat = async () => {
-      const academyQ = await GetAcademyList(academy);
 
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = selectedDay + ", " + selectedMonth;
-      const eventData = {
-        Id: props.blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        publishedName: userNames.publisherName,
-        academyName: academyQ.name,
-        time: selectedHour,
-        eventDate: eventdate,
-        address: academyQ.address,
-        description: blogDiscription,
-        type: viewable,
-        isPublish: true,
-        isDeleted: false,
-        image: userInfoItems.image
-      }
-      await updateEventItem(eventData);
-      data.setEventReload(true);
-      handleClose();
+  const handleOpenMat = async () => {
+    const academyQ = await GetAcademyList(academy);
+
+    const userNames = loggedInData();
+    let userInfoItems = await getUserInfoByID(userNames.userId);
+    const eventdate = `${selectedDay}, ${selectedMonth} ${selectedYear}`;
+    const eventData = {
+      Id: props.blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      publishedName: userNames.publisherName,
+      academyName: academyQ.name,
+      time: selectedHour,
+      eventDate: eventdate,
+      address: academyQ.address,
+      description: blogDiscription,
+      type: viewable,
+      isPublish: true,
+      isDeleted: false,
+      image: userInfoItems.image
     }
+    await updateEventItem(eventData);
+    data.setEventReload(true);
+    handleClose();
+  }
 
-    const handleDelete = async () => {
-      const academyQ = await GetAcademyList(academy);
+  const handleDelete = async () => {
+    const academyQ = await GetAcademyList(academy);
 
-      const userNames = loggedInData();
-      let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = selectedDay + ", " + selectedMonth;
-      const eventData = {
-        Id: props.blogId,
-        UserId: userNames.userId,
-        Date: new Date,
-        publishedName: userNames.publisherName,
-        academyName: academyQ.name,
-        time: selectedHour,
-        eventDate: eventdate,
-        address: academyQ.address,
-        description: blogDiscription,
-        type: viewable,
-        isPublish: false,
-        isDeleted: true,
-        image: userInfoItems.image
-      }
-      await updateEventItem(eventData);
-      data.setEventReload(true);
-      handleClose();
+    const userNames = loggedInData();
+    let userInfoItems = await getUserInfoByID(userNames.userId);
+    const eventdate = selectedDay + ", " + selectedMonth;
+    const eventData = {
+      Id: props.blogId,
+      UserId: userNames.userId,
+      Date: new Date,
+      publishedName: userNames.publisherName,
+      academyName: academyQ.name,
+      time: selectedHour,
+      eventDate: eventdate,
+      address: academyQ.address,
+      description: blogDiscription,
+      type: viewable,
+      isPublish: false,
+      isDeleted: true,
+      image: userInfoItems.image
     }
+    await updateEventItem(eventData);
+    data.setEventReload(true);
+    handleClose();
+  }
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
@@ -123,6 +125,9 @@ export default function EditEventModal(props: ChildProps) {
   const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
+  const handleYearSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedYear(event.target.value);
+  };
   const handleHourChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedHour(event.target.value); };
 
   return (
@@ -139,7 +144,7 @@ export default function EditEventModal(props: ChildProps) {
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
                 <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
-                <option value={userInfo.academyName}>{userInfo.academyName}</option>
+                  <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
           </Row>
@@ -153,6 +158,13 @@ export default function EditEventModal(props: ChildProps) {
                 </Form.Select>
                 <Form.Select value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
+                </Form.Select>
+                <Form.Select value={selectedYear} onChange={handleYearSelect}>
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
                 </Form.Select>
               </div>
             </Form.Group></Col>
