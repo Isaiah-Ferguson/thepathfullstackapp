@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -31,6 +31,8 @@ export default function NavbarComponent() {
     data.setName(searchName);
     navigate("/friends");
   }
+
+
 
   return (
     <>
