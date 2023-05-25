@@ -60,8 +60,8 @@ export default function ModalComponent() {
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
     }
-    getAcademy()
-  }, []);
+    getAcademy();
+  }, [data.shouldReload]);
 
   const handleSubmit = async () => {
     async function handleOpenMat() {
