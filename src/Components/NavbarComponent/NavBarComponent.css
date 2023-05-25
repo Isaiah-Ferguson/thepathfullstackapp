@@ -183,4 +183,16 @@ height: 100%;
         position: absolute;
     }
 
+    .textPosition {
+        content: '';
+    /* position: absolute; */
+    left: 92px;
+    bottom: -6px;
+    width: 31%;
+    height: 29px;
+    /* background-color: rgb(62, 44, 44); */
+    border-radius: 6px;
+    transform-origin: 0;
+    }
+
   }
