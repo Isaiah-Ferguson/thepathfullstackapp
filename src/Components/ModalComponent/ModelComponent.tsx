@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { eventBlogItem } from '../../DataServices/DataServices';
@@ -7,6 +7,17 @@ import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
 import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 
+interface UserInfo {
+  aboutMe: string;
+  id: number;
+  image: string;
+  academyName: string;
+  firstName: string;
+  lastName: string;
+  publishedName: string;
+  username: string;
+  belt: string;
+}
 
 export default function ModalComponent() {
   const data = useContext<any>(UserContext);
@@ -22,6 +33,18 @@ export default function ModalComponent() {
 
   const [show, setShow] = useState(false);
 
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    aboutMe: "",
+    id: 0,
+    image: "",
+    academyName: "",
+    firstName: "",
+    lastName: "",
+    publishedName: "",
+    username: "",
+    belt: ""
+  });
+
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -32,6 +55,15 @@ export default function ModalComponent() {
   const handleShow = () => setShow(true);
   const Event = require("../../assets/EventIcon.png");
 
+  useEffect(() => {
+    const getAcademy =async () => {
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
+      setUserInfo(userInfoItems);
+    }
+    getAcademy()
+  }, []);
 
   const handleSubmit = async () => {
     async function handleOpenMat() {
@@ -85,22 +117,7 @@ export default function ModalComponent() {
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
                 <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
-                  <option value="">Select Your Academy</option>
-                  <option value="Andre de Freitas Brazilian Jiu-Jitsu">Andre de Freitas Brazilian Jiu-Jitsu</option>
-                  <option value="Ares BJJ Stockton - Buffalo Black Brotherhood">Ares BJJ Stockton - Buffalo Black Brotherhood</option>
-                  <option value="VALOR Training Center">VALOR Training Center</option>
-                  <option value="Inside BJJ Academy">Inside BJJ Academy</option>
-                  <option value="Stockton JiuJitsu Academy">Stockton JiuJitsu Academy</option>
-                  <option value="Stockton Dominate MMA">Stockton Dominate MMA</option>
-                  <option value="Nick Diaz Academy">Nick Diaz Academy</option>
-                  <option value="10th Planet Stockton">10th Planet Stockton</option>
-                  <option value="TEAM CAMA">TEAM CAMA</option>
-                  <option value="Ronin Jiu Jitsu">Ronin Jiu Jitsu</option>
-                  <option value="Ernie Reyes West Coast Martial Arts">Ernie Reyes West Coast Martial Arts</option>
-                  <option value="Strive Jiu Jitsu & Fitness Academy">Strive Jiu Jitsu & Fitness Academy</option>
-                  <option value="JG ACADEMY - MANTECA">JG ACADEMY - MANTECA</option>
-                  <option value="JG ACADEMY - LODI">JG ACADEMY - LODI</option>
-                  <option value="Cortez Full Circle Martial Arts">Cortez Full Circle Martial Arts</option>
+                  <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
           </Row>
@@ -133,7 +150,7 @@ export default function ModalComponent() {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="Private">In House Open Mat</option>
+                <option value="Private">Private Open Mat (Friends Only)</option>
                 <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>

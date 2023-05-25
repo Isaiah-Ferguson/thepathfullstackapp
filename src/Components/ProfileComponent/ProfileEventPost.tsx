@@ -63,7 +63,7 @@ export default function ProfileEventPost(props: pictureprops) {
               <Row style={{ marginTop: 10 }} key={idx}>
                 <Col lg={3} xs={3}>
                   <div className='d-flex justify-content-end'>
-                    <EditEventModal blogId={item.id} />
+                    <EditEventModal  blogId={item.id} />
                   </div>
                   <img className="smallProfileIMG" src={props.picture} alt={item.publishedName} />
                   {formattedDate}

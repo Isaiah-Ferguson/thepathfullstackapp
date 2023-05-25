@@ -30,6 +30,10 @@ export default function CreateAccountComponent() {
 
   const handleSubmit = () => {
 
+    if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
+      return console.log('Password must contain at least one upperCase and one Number')
+    }
+
     async function CreateNewAccount() {
 
       let userData = {
@@ -48,6 +52,7 @@ export default function CreateAccountComponent() {
       } else {
         await createAccount(userData);
         navigate("/");
+        // account modal boolean here 
       }
     }
     

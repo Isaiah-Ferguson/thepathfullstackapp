@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useContext } from 'react';
 import UserContext from '../../UserContext/UserContext';
 import { GetAcademyList, loggedInData, getUserInfoByID, updateEventItem } from '../../DataServices/DataServices';
 import { Row, Col, FloatingLabel, Form } from 'react-bootstrap';
@@ -10,16 +9,40 @@ type ChildProps = {
     blogId: number;
   }
 
+  interface UserInfo {
+    aboutMe: string;
+    id: number;
+    image: string;
+    academyName: string;
+    firstName: string;
+    lastName: string;
+    publishedName: string;
+    username: string;
+    belt: string;
+  }
+
 export default function EditEventModal(props: ChildProps) {
   const data = useContext<any>(UserContext);
   const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [blogDiscription, setBlogDescription] = useState('');
-  const [academy, setAcademy] = useState("TEAM CAMA");
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    aboutMe: "",
+    id: 0,
+    image: "",
+    academyName: "",
+    firstName: "",
+    lastName: "",
+    publishedName: "",
+    username: "",
+    belt: ""
+  });
+  const [academy, setAcademy] = useState(userInfo.academyName);
   const [viewable, setViewable] = useState("Private");
 
   const [show, setShow] = useState(false);
+
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -29,6 +52,17 @@ export default function EditEventModal(props: ChildProps) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  
+  useEffect(() => {
+    const getAcademy =async () => {
+      const storedValue = sessionStorage.getItem('loggedIn');
+      const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
+      let userInfoItems = await getUserInfoByID(loggedIn.userId);
+      setUserInfo(userInfoItems);
+    }
+    getAcademy()
+  }, []);
 
  
     const handleOpenMat = async () => {
@@ -105,22 +139,7 @@ export default function EditEventModal(props: ChildProps) {
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
                 <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
-                  <option value="">Select Your Academy</option>
-                  <option value="Andre de Freitas Brazilian Jiu-Jitsu">Andre de Freitas Brazilian Jiu-Jitsu</option>
-                  <option value="Ares BJJ Stockton - Buffalo Black Brotherhood">Ares BJJ Stockton - Buffalo Black Brotherhood</option>
-                  <option value="VALOR Training Center">VALOR Training Center</option>
-                  <option value="Inside BJJ Academy">Inside BJJ Academy</option>
-                  <option value="Stockton JiuJitsu Academy">Stockton JiuJitsu Academy</option>
-                  <option value="Stockton Dominate MMA">Stockton Dominate MMA</option>
-                  <option value="Nick Diaz Academy">Nick Diaz Academy</option>
-                  <option value="10th Planet Stockton">10th Planet Stockton</option>
-                  <option value="TEAM CAMA">TEAM CAMA</option>
-                  <option value="Ronin Jiu Jitsu">Ronin Jiu Jitsu</option>
-                  <option value="Ernie Reyes West Coast Martial Arts">Ernie Reyes West Coast Martial Arts</option>
-                  <option value="Strive Jiu Jitsu & Fitness Academy">Strive Jiu Jitsu & Fitness Academy</option>
-                  <option value="JG ACADEMY - MANTECA">JG ACADEMY - MANTECA</option>
-                  <option value="JG ACADEMY - LODI">JG ACADEMY - LODI</option>
-                  <option value="Cortez Full Circle Martial Arts">Cortez Full Circle Martial Arts</option>
+                <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
           </Row>
