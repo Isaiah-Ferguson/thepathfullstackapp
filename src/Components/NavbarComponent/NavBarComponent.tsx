@@ -40,7 +40,7 @@ export default function NavbarComponent() {
           <img className="NavLogo" onClick={(e) => { setIsNotificationVisible(!isNotificationVisible); }} src={logo} />
 
           <div className={`${isNotificationVisible ? `NotificationDiv` : 'NotificationDivX'} container-fluid`}> <NotificationComponent /> </div>
-
+          
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav

@@ -24,13 +24,10 @@ export default function ModalComponent() {
   const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("January");
-
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogId, setBlogId] = useState(0);
-  const [academy, setAcademy] = useState("TEAM CAMA");
   const [viewable, setViewable] = useState("Private");
   const [disableButton, setDisableButton] = useState(true)
-
   const [show, setShow] = useState(false);
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -44,6 +41,7 @@ export default function ModalComponent() {
     username: "",
     belt: ""
   });
+  const [academy, setAcademy] = useState(userInfo.academyName);
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

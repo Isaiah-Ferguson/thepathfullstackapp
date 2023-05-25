@@ -103,7 +103,6 @@ export default function ProfileEditModal(props: any) {
       AcademyName: academy,
       belt: belt
     };
-    console.log(item)
     await updateUserInfo(item, testID);
     data.setShouldReload(true);
     handleClose();
