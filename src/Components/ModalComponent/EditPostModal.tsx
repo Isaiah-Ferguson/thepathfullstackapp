@@ -6,12 +6,13 @@ import UserContext from '../../UserContext/UserContext';
 
 type ChildProps = {
   blogId: number;
+  description: string;
 }
  function EditPostModal(props: ChildProps) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [postDescription, setPostDescription] = useState("");
+  const [postDescription, setPostDescription] = useState(props.description);
   const data = useContext<any>(UserContext);
   const [disableButton, setDisableButton] = useState(true)
 
@@ -80,7 +81,7 @@ type ChildProps = {
         <Modal.Header closeButton>
           <Modal.Title>Edit Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body><textarea placeholder="Regret what you posted? Lets change it!" style={{ borderRadius: 5, height: 100, width: '100%' }} onChange={handlePost}></textarea></Modal.Body>
+        <Modal.Body><textarea placeholder="Regret what you posted? Lets change it!" style={{ borderRadius: 5, height: 100, width: '100%' }} value={postDescription} onChange={handlePost}></textarea></Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleDelete}>
             Delete Post

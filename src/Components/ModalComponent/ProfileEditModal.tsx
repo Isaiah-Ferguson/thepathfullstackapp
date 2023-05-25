@@ -168,14 +168,14 @@ export default function ProfileEditModal(props: any) {
           <Row>
             {/* -----------------FIRST NAME LABEL--------------------------- */}
             <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter First Name" className="mb-3" onChange={handleFirstname}>
-              <Form.Control as="textarea" placeholder="First Name" />
+              <Form.Control as="textarea" placeholder="First Name" value={firstName} />
             </FloatingLabel></Col>
             {/* ----------------------------------------------------------------------- */}
 
             {/* -----------------LAST NAME LABEL--------------------------- */}
 
             <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Last Name" className="mb-3" onChange={handleLastname} >
-              <Form.Control as="textarea" placeholder="Last Name" />
+              <Form.Control as="textarea" placeholder="Last Name" value={lastName}  />
             </FloatingLabel></Col>
             {/* ----------------------------------------------------------------------- */}
 
@@ -207,7 +207,7 @@ export default function ProfileEditModal(props: any) {
             <Col md xs={12} className="mobileMargin"> <FloatingLabel controlId="floatingSelectGrid" label="Belt Rank">
 
               <Form.Select aria-label="Floating label select example" value={belt} onChange={handleBelt}>
-                <option value="">Select Your Belt Rank</option>
+                <option value="White Belt">Select Your Belt Rank</option>
                 <option value="White Belt">White Belt</option>
                 <option value="Blue Belt">Blue Belt</option>
                 <option value="Purple Belt">Purple Belt</option>
@@ -218,7 +218,7 @@ export default function ProfileEditModal(props: any) {
             </FloatingLabel></Col>
           </Row>
           <br />
-          <Row><Col><textarea placeholder='Enter a Description' style={{ width: '100%', height: '200px' }} onChange={handleDecription} /></Col></Row>
+          <Row><Col><textarea placeholder='Enter a Description' style={{ width: '100%', height: '200px' }} onChange={handleDecription} value={description}/></Col></Row>
           <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
         {toast && (

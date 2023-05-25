@@ -56,7 +56,7 @@ export default function ProfilePost(props: pictureprops) {
           return (
             <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
               <Col lg={3} sm={3} xs={4}>
-                <div className="d-flex justify-content-end"><EditPostModal blogId={item.id} /></div>
+                <div className="d-flex justify-content-end"><EditPostModal description={item.description}  blogId={item.id} /></div>
                 <Row >
                   <Col sm={12} xs={6}>
                     <img className="smallProfileIMG" src={props.picture} alt="profile" />

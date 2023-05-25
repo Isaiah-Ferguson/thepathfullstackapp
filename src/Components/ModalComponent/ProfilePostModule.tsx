@@ -27,7 +27,11 @@ function ProfilePostModule(props: pictureprops) {
   },[disableButton])
 
   const HandleSubmit = () => {
-    setDisableButton(false)
+    setDisableButton(false);
+    if(postDescription === ""){
+      console.log('test')
+      return
+    }
     async function CreatePostFunction() {
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
@@ -47,6 +51,7 @@ function ProfilePostModule(props: pictureprops) {
       setDisableButton(true);
     }
     CreatePostFunction();
+    setPostDescription("")
     handleClose();
   }
 
