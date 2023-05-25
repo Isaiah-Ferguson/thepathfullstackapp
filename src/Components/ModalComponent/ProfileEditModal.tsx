@@ -90,7 +90,7 @@ export default function ProfileEditModal(props: any) {
     const testName = loggedIn.publisherName;
 
 
-    if (firstName === "" || lastName === "" || description === "" || academy === "" || belt === "") {
+    if (firstName === "" || lastName === "" || description === "" || academy === "" || belt === "" || picture === null) {
       setToast(true);
       return;
     }
@@ -103,7 +103,7 @@ export default function ProfileEditModal(props: any) {
       AcademyName: academy,
       belt: belt
     };
-
+    console.log(item)
     await updateUserInfo(item, testID);
     data.setShouldReload(true);
     handleClose();
@@ -139,6 +139,8 @@ export default function ProfileEditModal(props: any) {
       <Modal
         size="lg"
         show={lgShow}
+        backdrop="static"
+        keyboard={false}
         onHide={() => {
           setLgShow(false);
           handleClose();
@@ -146,7 +148,7 @@ export default function ProfileEditModal(props: any) {
         aria-labelledby="example-modal-sizes-title-lg"
       >
 
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title id="example-modal-sizes-title-lg">
             Edit Profile
           </Modal.Title>
