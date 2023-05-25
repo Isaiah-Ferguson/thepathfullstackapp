@@ -73,8 +73,8 @@ export default function MainFeedEventComponent() {
                   <u title={item.address}>{item.academyName}</u>
                 </b>
               </h6>
-              <Row style={{}}>
-                <Col><JoinEventModal id={item.id} publishedName={item.publishedName} academyName={item.academyName} address={item.address}/></Col>
+              <Row>
+                <Col><JoinEventModal description={item.description} id={item.id} publishedName={item.publishedName} academyName={item.academyName} address={item.address}/></Col>
                 <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id} /></Col>
               </Row>
             </Col>

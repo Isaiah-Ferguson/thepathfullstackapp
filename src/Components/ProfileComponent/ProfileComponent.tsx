@@ -116,7 +116,7 @@ export default function ProfileComponent() {
         {(!isMobile || selectedSection === 'post') && (
         <Col lg={4} className='post'>
           <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Posts -</Row>
-          <Container>
+          <div>
 
               <Row style={{ marginTop: 10, marginBottom: 30 }}>
                 <Col lg={12} xs={12} style={{ display: "inline-block" }}><ProfilePostModule picture={userInfo.image}/> </Col>
@@ -125,7 +125,7 @@ export default function ProfileComponent() {
               {/*--------------------------------- Profile Post Div--------------------------------------------- */}
               <div className="scrollDiv">  <ProfilePost picture={userInfo.image}/> </div>
 
-            </Container>
+            </div>
           </Col>)}
 
           {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
