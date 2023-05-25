@@ -26,12 +26,14 @@ export default function CreateAccountComponent() {
   const [passwordTaost, setPasswordToast] = useState(false);
   const [showA, setShowA] = useState(true);
   const [disableButton, setDisableButton] = useState(true);
-
+const [createAccountToast, setCreatAccountToast] = useState(false);
 
   const handleSubmit = () => {
 
     if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
-      return console.log('Password must contain at least one upperCase and one Number')
+      setPasswordToast(true);
+return
+      
     }
 
     async function CreateNewAccount() {
@@ -50,9 +52,8 @@ export default function CreateAccountComponent() {
       } else if (userData.password === "") {
         setPasswordToast(true);
       } else {
+        setCreatAccountToast(true);
         await createAccount(userData);
-        navigate("/");
-        // account modal boolean here 
       }
     }
     
@@ -68,6 +69,11 @@ export default function CreateAccountComponent() {
   const toggleShowB = () => {
     setShowA(!showA);
     setPasswordToast(false);
+  };
+
+  const toggleShowC = () => {
+    setShowA(!showA);
+    setCreatAccountToast(false);
   };
 
 
@@ -96,7 +102,13 @@ export default function CreateAccountComponent() {
               )}
               {passwordTaost && (
                 <Toast onClick={toggleShowB}>
-                  <Toast.Body style={{ color: 'black' }}>Please enter a Password</Toast.Body>
+                  <Toast.Body style={{ color: 'black' }}>Password must contain at least one upperCase and one Number</Toast.Body>
+                </Toast>
+              )}
+
+              {createAccountToast && (
+                <Toast onClick={toggleShowC}>
+                  <Toast.Body style={{ color: 'black' }}>Account Successfully Created</Toast.Body>
                 </Toast>
               )}
 
