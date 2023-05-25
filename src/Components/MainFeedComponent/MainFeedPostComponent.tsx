@@ -8,8 +8,8 @@ interface BlogItem {
   date: string;
   id: number;
   image: string;
-  isDeleted: false;
-  isPublish: false;
+  isDeleted: boolean;
+  isPublish: boolean;
   publishedName: string;
   description: string;
   title: string;
@@ -60,7 +60,7 @@ export default function MainFeedPostComponent() {
     <>
       {blogItems.length > 0 ?
       
-      blogItems.filter((item: BlogItem) => item.isPublish && friendInfo.includes(item.userid)  || item.userid === data.userId).map((item: BlogItem, idx: number) => {
+      blogItems.filter((item: BlogItem) => item.isPublish && friendInfo.includes(item.userid)  || item.isPublish && item.userid === data.userId).map((item: BlogItem, idx: number) => {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
 
@@ -75,7 +75,7 @@ export default function MainFeedPostComponent() {
                     <h3 className="text-center">{item.publishedName}</h3>
                     <p className="row">Posted {formattedDate}</p>
                   </Col>
-                  <Col md={8} sm={8} xs={8} style={{ backgroundColor: '#FDF4F5'}}>
+                  <Col md={8} sm={8} xs={8} className="mainpostBg">
                     <p>{item.description}</p>
                   </Col>
                 </Row>

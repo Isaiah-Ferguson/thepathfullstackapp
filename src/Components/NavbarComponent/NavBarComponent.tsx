@@ -55,7 +55,7 @@ export default function NavbarComponent() {
             <Form className="d-flex">
               <Form.Control
                 type="search"
-                placeholder="Search..."
+                placeholder="Search Users..."
                 className="me-2 searchbar"
                 aria-label="Search"
                 onChange={({ target: { value } }) => setSearch(value)}

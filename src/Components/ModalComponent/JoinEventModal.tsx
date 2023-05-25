@@ -8,6 +8,7 @@ type eventID = {
   publishedName: string;
   academyName: string;
   address: string;
+  description: string;
 }
 
 
@@ -38,12 +39,14 @@ export default function JoinEventModal(props: eventID) {
   return (
     <>
       <Button  onClick={handleShow}><span style={{ backgroundColor: 'transparent'}} > Join event </span></Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.publishedName}'s event at {props.academyName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Would you like to join this Open Mat?</Modal.Body>
+        <Modal.Body><p>Would you like to join this Open Mat?</p>
+          <br/>
+          <p>{props.description}</p>
+        </Modal.Body>
         <Modal.Footer className='d-flex justify-content-between'>
           <p>{props.address}</p>
           <Button variant="primary" onClick={handleJoin}>

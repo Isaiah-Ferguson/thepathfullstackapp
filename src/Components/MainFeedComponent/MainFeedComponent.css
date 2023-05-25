@@ -16,6 +16,14 @@
     margin-bottom: 15px;
 }
 
+.mainpostBg{
+    background-color: #FDF4F5;
+}
+
+.mainpostBg p{
+word-wrap: break-word;
+}
+
 .eventDateDiv{
     border-right: 2px solid;
 }
