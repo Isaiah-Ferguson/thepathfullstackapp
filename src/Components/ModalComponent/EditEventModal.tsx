@@ -171,7 +171,7 @@ export default function EditEventModal(props: ChildProps) {
 
             {/*------------------ TIME DROPDOWN-------------- */}
 
-            <Col lg={6}><Form.Label>Select Time:</Form.Label>
+            <Col lg={4} style={{ flex: 'end'}}><Form.Label>Select Time:</Form.Label>
               <Form.Select value={selectedHour} onChange={handleHourChange}>
                 {hours.map((hour) => (
                   <option key={hour} value={(hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM')} >
