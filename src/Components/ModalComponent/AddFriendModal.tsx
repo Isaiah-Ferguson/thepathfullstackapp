@@ -44,11 +44,11 @@ export default function AddFriendModal(props: username) {
         (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isDenied === true)
     );
 
-    const alreadyFriends = friends.filter((friend : any ) => 
+    // const alreadyFriends = friends.filter((friend : any ) => 
     
     
     
-    );
+    // );
 
 
     if (areFriends) {
