@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddFriend, getFriendsList } from '../../DataServices/DataServices';
+import { Toast } from 'react-bootstrap';
 
 type username = {
   username: string;
@@ -67,6 +68,9 @@ export default function AddFriendModal(props: username) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toast className="joinToast" show={show} onClose={() => setShow(false)} delay={3000} autohide>
+        <Toast.Body style={{ color: 'black' }}>You've joined an event!</Toast.Body>
+      </Toast>
     </>
   );
 }
