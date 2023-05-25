@@ -32,15 +32,17 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
 
     if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
       setPasswordToast(true);
-return
-      
+      setTimeout(() => {
+        setPasswordToast(false);
+      }, 4000);
+       return
     }
 
     async function CreateNewAccount() {
 
       let userData = {
         id: 0,
-        username: username,
+        username: username.toLowerCase(),
         password: password 
       };
 
@@ -49,11 +51,20 @@ return
     
       if (isUsernameTaken) {
         setUserToast(true)
+                setTimeout(() => {
+                  setUserToast(false);
+        }, 4000);
       } else if (userData.password === "") {
         setPasswordToast(true);
+        setTimeout(() => {
+          setPasswordToast(false);
+        }, 4000);
       } else {
         setCreatAccountToast(true);
         await createAccount(userData);
+        setTimeout(() => {
+          setCreatAccountToast(false);
+        }, 4000);
       }
     }
     
@@ -64,6 +75,7 @@ return
   const toggleShowA = () => {
     setShowA(!showA);
     setUserToast(false);
+
   };
 
   const toggleShowB = () => {
@@ -74,12 +86,13 @@ return
   const toggleShowC = () => {
     setShowA(!showA);
     setCreatAccountToast(false);
+
   };
 
 
   return (
     <div className='loginBg'>
-      <Container className='d-flex justify-content-center createPage mobileContainer' style={{ paddingTop: 200 }}>
+      <Container className='d-flex justify-content-center' style={{ paddingTop: 200 }}>
         <Row className='wrapperRegistration' >
           <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
           <Col className='form-box'>
