@@ -81,7 +81,7 @@ export default function JoinedPersonList(props: eventID) {
         </Modal.Header>
         <Modal.Body>
           {allUserInfo.map(userInfo => (
-            <ul onClick={() => profileClick(userInfo.username)} key={userInfo.firstName}><li>{userInfo.firstName} {userInfo.lastName}</li></ul>
+            <ul onClick={() => profileClick(userInfo.username)} key={userInfo.firstName}><div><img src={userInfo.image} className='joinEvent uploadText'/><u style={{paddingLeft: 15}} className='uploadText'>{userInfo.firstName} {userInfo.lastName}</u></div></ul>
           ))}
         </Modal.Body>
         <Modal.Footer>

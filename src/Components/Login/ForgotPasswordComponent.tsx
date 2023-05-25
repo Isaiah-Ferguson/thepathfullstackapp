@@ -7,14 +7,23 @@ import { forgotPassword } from '../../DataServices/DataServices';
 
 export default function ChangePasswordComponent() {
   let navigate = useNavigate();
-
+  const [passwordTaost, setPasswordToast] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setNewPassword] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const backBTN = require('../../assets/Back.png');
+  const [showA, setShowA] = useState(true);
 
   const handleSubmit = () => {
+
+    if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
+      setPasswordToast(true);
+      setTimeout(() => {
+        setPasswordToast(false);
+      }, 4000);
+       return
+    }
 
     const userData = {
       Username: username,
@@ -27,6 +36,11 @@ export default function ChangePasswordComponent() {
     setToastMessage("Password Changed!")
 
   }
+
+  const toggleShowB = () => {
+    setShowA(!showA);
+    setPasswordToast(false);
+  };
 
   return (
     <div className='loginBg'>
@@ -64,7 +78,11 @@ export default function ChangePasswordComponent() {
             <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
           </Toast>
         </ToastContainer>
-
+        {passwordTaost && (
+                <Toast onClick={toggleShowB}>
+                  <Toast.Body style={{ color: 'black' }}>Password must contain at least one upperCase and one Number</Toast.Body>
+                </Toast>
+              )}
       </Container>
 
     </div>
