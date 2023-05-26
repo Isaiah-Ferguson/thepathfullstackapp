@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -26,7 +26,8 @@ export default function NavbarComponent() {
     navigate("/");
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent the default form submission
     const searchName = await searchUser(search);
     data.setName(searchName);
     navigate("/friends");
@@ -55,16 +56,16 @@ export default function NavbarComponent() {
               <Nav.Link onClick={MainFeedNavigate}>Main Feed</Nav.Link>
 
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search Users..."
-                className="me-2 searchbar"
-                aria-label="Search"
-                onChange={({ target: { value } }) => setSearch(value)}
-              />
-              <Button onClick={handleSearch}>Search</Button>
-            </Form>
+            <Form className="d-flex" onSubmit={handleSearch}>
+    <Form.Control
+      type="search"
+      placeholder="Search Users..."
+      className="me-2 searchbar"
+      aria-label="Search"
+      onChange={({ target: { value } }) => setSearch(value)}
+    />
+    <Button type="submit">Search</Button>
+  </Form>
             <button onClick={LoginNavigate} className="btnSignOut">Logout</button>
           </Navbar.Collapse>
         </Container>
