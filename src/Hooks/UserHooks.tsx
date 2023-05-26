@@ -13,5 +13,5 @@ export default function UserHooks() {
   const [newUser, setNewUser] = useState<boolean>(false);
 
 
-  return {newUser, setNewUser, friendsReload, setFriendsReload, eventReload, setEventReload, shouldReload, setShouldReload, picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
+  return {myName, setMyName, newUser, setNewUser, friendsReload, setFriendsReload, eventReload, setEventReload, shouldReload, setShouldReload, picture, setPicture, name, setName, userId, setUserId, count, setCount, myId, setMyId };
 }

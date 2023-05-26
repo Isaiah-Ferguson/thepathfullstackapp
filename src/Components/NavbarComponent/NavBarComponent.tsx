@@ -28,9 +28,13 @@ export default function NavbarComponent() {
 
   const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent the default form submission
-    const searchName = await searchUser(search);
-    data.setName(searchName);
-    navigate("/friends");
+    if(search === data.myName){
+      navigate("/profile");
+    }else{
+      const searchName = await searchUser(search);
+      data.setName(searchName);
+      navigate("/friends");
+    }
   }
 
 

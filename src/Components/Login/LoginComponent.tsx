@@ -29,6 +29,7 @@ export default function LoginComponent() {
       const loggedIn = loggedInData();
       sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
       data.setUserId(loggedIn.userId);
+      data.setMyName(loggedIn.publisherName)
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
 
       if (userInfoItems.firstName == null) {
