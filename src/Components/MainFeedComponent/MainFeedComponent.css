@@ -17,7 +17,7 @@
 }
 
 .mainpostBg{
-    background-color: #FDF4F5;
+    background-color: bisque !important;
 }
 
 .mainpostBg p{
@@ -42,7 +42,7 @@ word-wrap: break-word;
 .mainPostDiv{
     border: 2px, solid;
     width: 100%;
-    background-color: #F0D9FF;
+    background-color: bisque !important;
     border: 2px solid;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -64,7 +64,7 @@ word-wrap: break-word;
 
 .newBgColor {
     /* trying to figure out which color combination looks good! */
-    background-color: #F0D9FF;
+    background-color: bisque;
 }
 .custom-container {
     width: 100%;
@@ -102,5 +102,5 @@ word-wrap: break-word;
     position: fixed;
     top: 30px !important;
     right: 20px !important;
-    zIndex: 9999; 
+    z-Index: 9999; 
   }
