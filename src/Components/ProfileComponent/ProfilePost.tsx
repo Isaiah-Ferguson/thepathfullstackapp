@@ -58,9 +58,9 @@ export default function ProfilePost(props: pictureprops) {
               <Col lg={3} sm={3} xs={4}>
                 <div className="d-flex justify-content-end"><EditPostModal description={item.description}  blogId={item.id} /></div>
                 <Row >
-                  <Col sm={12} xs={6}>
+                  <Col sm={12} xs={12}>
                     <img className="smallProfileIMG" src={props.picture} alt="profile" />
-                    <div style={{fontWeight: 600}}>{item.publishedName}</div>
+                    <div className="text-center" style={{fontWeight: 600}}>{item.publishedName}</div>
                   <div>{formattedDate}</div>
                     </Col>
                 </Row>

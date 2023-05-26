@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddFriend, getFriendsList } from '../../DataServices/DataServices';
+import { Toast } from 'react-bootstrap';
 
 type username = {
   username: string;
@@ -14,6 +15,7 @@ export default function AddFriendModal(props: username) {
   const [show, setShow] = useState(false);
   const add = require('../../assets/Add.png')
   const data = useContext<any>(UserContext);
+  const [toastMessage, setToastMessage] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,17 +23,16 @@ export default function AddFriendModal(props: username) {
 
   const handleFriendRequest = async () => {
   
-    // Check if friend request already sent
     const friendRequests = await getFriendsList();
     const isRequestSent = friendRequests.some(
       (request: any) =>
         request.userId === data.userId && request.friendUserId === data.name.userId
     );
     if (isRequestSent) {
+      setToastMessage(true)
       return;
     }
 
-    // Check if users are already friends
     const friends = await getFriendsList();
     const areFriends = friends.some(
       (friend: any) =>
@@ -52,14 +53,13 @@ export default function AddFriendModal(props: username) {
 
 
     if (areFriends) {
-      console.log('Users are already friends');
+      setToastMessage(true)
       return;
     } else if (areFriends && areNotFriends){
       // AddFriendResponse(data.name.userId, value, data.userId);
     }
-    
-    // Add friend request
-    // AddFriend(data.userId, data.name.userId);
+  
+    AddFriend(data.userId, data.name.userId);
     handleClose();
   };
 
@@ -73,6 +73,9 @@ export default function AddFriendModal(props: username) {
         <Modal.Header closeButton>
           <Modal.Title>Would you like to add {props.username}</Modal.Title>
         </Modal.Header>
+        {toastMessage && <Modal.Body>
+    You are already Friends
+      </Modal.Body>}
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
@@ -82,6 +85,7 @@ export default function AddFriendModal(props: username) {
           </Button>
         </Modal.Footer>
       </Modal>
+
     </>
   );
 }

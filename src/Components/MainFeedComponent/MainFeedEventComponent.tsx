@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { checkToken, getMyFriendsList, getEventItemsByUserId, searchUser } from "../../DataServices/DataServices";
+import { checkToken, getMyFriendsList, getEventItemsByUserId, searchUser, eventBlogItem, getUserInfoByID } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 import JoinEventModal from "../ModalComponent/JoinEventModal";
@@ -28,7 +28,7 @@ export default function MainFeedEventComponent() {
   const data = useContext<any>(UserContext);
   const [friendInfo, setFriendInfo] = useState<number[]>([]);
   const [myEventItems, setMyEventItems] = useState<EventItem[]>([]);
-
+  const [academyName, setAcademyName] = useState("")
 
   let navigate = useNavigate();
 
@@ -39,7 +39,9 @@ export default function MainFeedEventComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : data;
       const allUserData = await getMyFriendsList(loggedIn.userId);
       setFriendInfo(allUserData);
+      const info = await getUserInfoByID(loggedIn.userId)
       let userEventItems = await getEventItemsByUserId(loggedIn.userId);
+      setAcademyName(info.academyName)
       setMyEventItems(userEventItems.reverse());
     };
 
@@ -60,7 +62,7 @@ export default function MainFeedEventComponent() {
   return (
     <>
       {myEventItems.length > 0 ? (
-        myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type === 'Private' && friendInfo.includes(item.userId) || item.userId === data.userId)).map((item: EventItem, idx: number) => (
+        myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type === 'Private' && friendInfo.includes(item.userId) || item.userId === data.userId || item.academyName === academyName)).map((item: EventItem, idx: number) => (
           <Row className="eventMainPageDiv" key={idx}>
             <Col md={3} sm={3} xs={4} className="text-center eventDateDiv">
               <h6>{item.eventDate}</h6>

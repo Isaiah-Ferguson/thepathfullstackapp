@@ -28,10 +28,8 @@ export default function ModalComponent() {
 
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogId, setBlogId] = useState(0);
-  const [academy, setAcademy] = useState("TEAM CAMA");
   const [viewable, setViewable] = useState("Private");
   const [disableButton, setDisableButton] = useState(true)
-
   const [show, setShow] = useState(false);
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -45,6 +43,7 @@ export default function ModalComponent() {
     username: "",
     belt: ""
   });
+  const [academy, setAcademy] = useState(userInfo.academyName);
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -63,9 +62,10 @@ export default function ModalComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
+      setAcademy(userInfoItems.academyName)
     }
-    getAcademy()
-  }, []);
+    getAcademy();
+  }, [data.shouldReload]);
 
   const handleSubmit = async () => {
     async function handleOpenMat() {
@@ -78,7 +78,7 @@ export default function ModalComponent() {
         UserId: userNames.userId,
         Date: new Date,
         publishedName: userNames.publisherName,
-        academyName: academyQ.name,
+        academyName: academy,
         time: selectedHour,
         eventDate: eventdate,
         address: academyQ.address,
@@ -99,7 +99,6 @@ export default function ModalComponent() {
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleAcademy = (event: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(event.target.value); };
   const handleDecription = (event: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(event.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
@@ -121,35 +120,36 @@ export default function ModalComponent() {
           <Row>
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
-                <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
+                <Form.Select aria-label="Floating label select example" value={academy}>
                   <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
           </Row>
           <Row>
             {/*--------------------- MONTH /  DATE DROPDOWN----------- */}
-            <Col lg={7}><Form.Group>
+            <Col lg={8} md={8} sm={8} xs={12}><Form.Group>
               <Form.Label>Select a date:</Form.Label>
               <div className="d-flex">
-                <Form.Select className="px-4" value={selectedMonth} onChange={handleMonthSelect}>
+                <Form.Select className="" value={selectedMonth} onChange={handleMonthSelect}>
                   {months.map((month) => (<option key={month} value={month}>{month}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedDay} onChange={handleDaySelect}>
+                <Form.Select style={{width: '35%'}} value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedYear} onChange={handleYearSelect}>
+                <Form.Select style={{width: '50%'}} value={selectedYear} onChange={handleYearSelect}>
                   {years.map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>
                   ))}
                 </Form.Select>
+                
               </div>
             </Form.Group></Col>
 
             {/*------------------ TIME DROPDOWN-------------- */}
 
-            <Col lg={5}><Form.Label>Select Time:</Form.Label>
+            <Col lg={4} md={4} sm={4} xs={12}><Form.Label>Select Time:</Form.Label>
               <Form.Select value={selectedHour} onChange={handleHourChange}>
                 {hours.map((hour) => (
                   <option key={hour} value={(hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM')} >
@@ -162,7 +162,7 @@ export default function ModalComponent() {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="Private">Private Open Mat (Friends Only)</option>
+                <option value="Private">Private Open Mat (Friends & Team Mates)</option>
                 <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>

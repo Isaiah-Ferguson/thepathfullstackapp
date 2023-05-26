@@ -26,33 +26,49 @@ export default function CreateAccountComponent() {
   const [passwordTaost, setPasswordToast] = useState(false);
   const [showA, setShowA] = useState(true);
   const [disableButton, setDisableButton] = useState(true);
-
+const [createAccountToast, setCreatAccountToast] = useState(false);
 
   const handleSubmit = () => {
 
     if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
-      return console.log('Password must contain at least one upperCase and one Number')
+      setPasswordToast(true);
+      setTimeout(() => {
+        setPasswordToast(false);
+      }, 4000);
+       return
     }
 
     async function CreateNewAccount() {
 
       let userData = {
         id: 0,
-        username: username,
+        username: username.toLowerCase(),
         password: password 
       };
 
       const isUser = await GetAllUsers();
+      if(/\s/.test(username)){
+        setUserToast(true)
+        return
+      }
       const isUsernameTaken = isUser.some((user: UserInfo) => user.username === userData.username);
     
       if (isUsernameTaken) {
         setUserToast(true)
+                setTimeout(() => {
+                  setUserToast(false);
+        }, 4000);
       } else if (userData.password === "") {
         setPasswordToast(true);
+        setTimeout(() => {
+          setPasswordToast(false);
+        }, 4000);
       } else {
+        setCreatAccountToast(true);
         await createAccount(userData);
-        navigate("/");
-        // account modal boolean here 
+        setTimeout(() => {
+          setCreatAccountToast(false);
+        }, 4000);
       }
     }
     
@@ -63,6 +79,7 @@ export default function CreateAccountComponent() {
   const toggleShowA = () => {
     setShowA(!showA);
     setUserToast(false);
+
   };
 
   const toggleShowB = () => {
@@ -70,10 +87,16 @@ export default function CreateAccountComponent() {
     setPasswordToast(false);
   };
 
+  const toggleShowC = () => {
+    setShowA(!showA);
+    setCreatAccountToast(false);
+
+  };
+
 
   return (
     <div className='loginBg'>
-      <Container className='d-flex justify-content-center createPage mobileContainer' style={{ paddingTop: 200 }}>
+      <Container className='d-flex justify-content-center' style={{ paddingTop: 200 }}>
         <Row className='wrapperRegistration' >
           <div className='backIconDiv'><img className='backIcon' onClick={(e) => navigate('/')} src={backBTN} /></div>
           <Col className='form-box'>
@@ -91,12 +114,18 @@ export default function CreateAccountComponent() {
               </Form.Group>
               {userToast && (
                 <Toast onClick={toggleShowA}>
-                  <Toast.Body style={{ color: 'black' }}>User Name already Exists</Toast.Body>
+                  <Toast.Body style={{ color: 'black' }}>User Name already Exists or Username cannot have blank spaces</Toast.Body>
                 </Toast>
               )}
               {passwordTaost && (
                 <Toast onClick={toggleShowB}>
-                  <Toast.Body style={{ color: 'black' }}>Please enter a Password</Toast.Body>
+                  <Toast.Body style={{ color: 'black' }}>Password must contain at least one upperCase and one Number</Toast.Body>
+                </Toast>
+              )}
+
+              {createAccountToast && (
+                <Toast onClick={toggleShowC}>
+                  <Toast.Body style={{ color: 'black' }}>Account Successfully Created</Toast.Body>
                 </Toast>
               )}
 
