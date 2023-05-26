@@ -112,7 +112,7 @@ height: 100%;
 }
 
 .NotificationDiv{
-    /* border: 2px; */
+    border: 2px;
     top: 55px;
     background-color: rgba(221, 210, 210, 0.6);
     position: absolute;
@@ -125,7 +125,7 @@ height: 100%;
 }
 
 .NotificationDivX{
-    /* border: 2px; */
+    border: 2px;
     top: 55px;
     background-color: rgba(221, 210, 210, 0.6);
     position: absolute;

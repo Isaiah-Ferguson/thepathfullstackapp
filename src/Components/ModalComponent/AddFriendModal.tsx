@@ -15,6 +15,7 @@ export default function AddFriendModal(props: username) {
   const [show, setShow] = useState(false);
   const add = require('../../assets/Add.png')
   const data = useContext<any>(UserContext);
+  const [toastMessage, setToastMessage] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,17 +23,16 @@ export default function AddFriendModal(props: username) {
 
   const handleFriendRequest = async () => {
   
-    // Check if friend request already sent
     const friendRequests = await getFriendsList();
     const isRequestSent = friendRequests.some(
       (request: any) =>
         request.userId === data.userId && request.friendUserId === data.name.userId
     );
     if (isRequestSent) {
+      setToastMessage(true)
       return;
     }
 
-    // Check if users are already friends
     const friends = await getFriendsList();
     const areFriends = friends.some(
       (friend: any) =>
@@ -40,11 +40,10 @@ export default function AddFriendModal(props: username) {
         (friend.userId === data.name.userId && friend.friendUserId === data.userId && friend.isAccepted === true)
     );
     if (areFriends) {
-      console.log('Users are already friends');
+      setToastMessage(true)
       return;
     }
   
-    // Add friend request
     AddFriend(data.userId, data.name.userId);
     handleClose();
   };
@@ -59,6 +58,9 @@ export default function AddFriendModal(props: username) {
         <Modal.Header closeButton>
           <Modal.Title>Would you like to add {props.username}</Modal.Title>
         </Modal.Header>
+        {toastMessage && <Modal.Body>
+    You are already Friends
+      </Modal.Body>}
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
@@ -68,9 +70,7 @@ export default function AddFriendModal(props: username) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Toast className="joinToast" show={show} onClose={() => setShow(false)} delay={3000} autohide>
-        <Toast.Body style={{ color: 'black' }}>You've joined an event!</Toast.Body>
-      </Toast>
+
     </>
   );
 }

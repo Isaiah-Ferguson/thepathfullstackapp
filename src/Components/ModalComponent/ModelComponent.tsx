@@ -65,7 +65,6 @@ export default function ModalComponent() {
   }, [data.shouldReload]);
 
   const handleSubmit = async () => {
-    console.log(academy)
     async function handleOpenMat() {
       const academyQ = await GetAcademyList(academy);
       const userNames = loggedInData();

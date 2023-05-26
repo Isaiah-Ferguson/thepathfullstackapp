@@ -40,7 +40,6 @@ export default function EditEventModal(props: ChildProps) {
   });
   const [academy, setAcademy] = useState(userInfo.academyName);
   const [viewable, setViewable] = useState("Private");
-
   const [show, setShow] = useState(false);
 
 
