@@ -127,28 +127,29 @@ export default function ModalComponent() {
           </Row>
           <Row>
             {/*--------------------- MONTH /  DATE DROPDOWN----------- */}
-            <Col lg={7}><Form.Group>
+            <Col lg={8} md={8} sm={8} xs={12}><Form.Group>
               <Form.Label>Select a date:</Form.Label>
               <div className="d-flex">
-                <Form.Select className="px-4" value={selectedMonth} onChange={handleMonthSelect}>
+                <Form.Select className="" value={selectedMonth} onChange={handleMonthSelect}>
                   {months.map((month) => (<option key={month} value={month}>{month}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedDay} onChange={handleDaySelect}>
+                <Form.Select style={{width: '35%'}} value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedYear} onChange={handleYearSelect}>
+                <Form.Select style={{width: '50%'}} value={selectedYear} onChange={handleYearSelect}>
                   {years.map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>
                   ))}
                 </Form.Select>
+                
               </div>
             </Form.Group></Col>
 
             {/*------------------ TIME DROPDOWN-------------- */}
 
-            <Col lg={5}><Form.Label>Select Time:</Form.Label>
+            <Col lg={4} md={4} sm={4} xs={12}><Form.Label>Select Time:</Form.Label>
               <Form.Select value={selectedHour} onChange={handleHourChange}>
                 {hours.map((hour) => (
                   <option key={hour} value={(hour % 12 || 12) + ':00 ' + (hour < 12 ? 'AM' : 'PM')} >
@@ -161,7 +162,7 @@ export default function ModalComponent() {
             <Form>
               <Form.Label>Select Privacy</Form.Label>
               <Form.Select value={viewable} onChange={handleChange}>
-                <option value="Private">Private Open Mat (Friends Only)</option>
+                <option value="Private">Private Open Mat (Friends & Team Mates)</option>
                 <option value="Public">Public Open Mat</option>
               </Form.Select>
             </Form>
