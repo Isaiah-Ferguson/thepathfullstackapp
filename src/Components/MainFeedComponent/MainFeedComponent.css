@@ -1,7 +1,8 @@
 .mainFeedImg{
+    border-radius: 15%;
     margin-top: 10px;
-    height: 150px;
-    width: 100%;
+    height: 50px;
+    width: auto;
     object-fit: fill;
 }
 
@@ -16,11 +17,9 @@
     margin-bottom: 15px;
 }
 
-.mainpostBg{
-    background-color: #FDF4F5;
-}
 
-.mainpostBg p{
+
+.wordbreak p{
 word-wrap: break-word;
 }
 
@@ -42,7 +41,7 @@ word-wrap: break-word;
 .mainPostDiv{
     border: 2px, solid;
     width: 100%;
-    background-color: #F0D9FF;
+    background-color: #efe2f7;
     border: 2px solid;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -63,8 +62,7 @@ word-wrap: break-word;
 }
 
 .newBgColor {
-    /* trying to figure out which color combination looks good! */
-    background-color: #F0D9FF;
+    background-color: #f7ebff;
 }
 .custom-container {
     width: 100%;

@@ -67,20 +67,48 @@ export default function MainFeedPostComponent() {
           return (
             <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
               <Col lg={12} className="mainPostDiv">
-                <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
-                  <Col md={4} sm={4} xs={4} className=" eventDateDiv">
+                <Row className="d-flex justify-content-center newBgColor">
+                  <Col md={12} sm={12} xs={12} style={{marginTop: 10}}>
                     <Row>
-                      <img onClick={() => profileClick(item.publishedName)} className="mainFeedImg searchclick" src={item.image} />
+                      <Col  md={1} sm={1} xs={2}>
+                      <img onClick={() => profileClick(item.publishedName)} className="smallProfileIMGPost searchclick" src={item.image} />
+
+                      </Col>
+
+                  
+                      <Col>
+                      <Row>
+                      <div>{item.publishedName}</div>
+                      <p >Posted {formattedDate}</p>
+
+                      </Row>
+
+                      </Col>
                     </Row>
-                    <h3 className="text-center">{item.publishedName}</h3>
-                    <p className="row">Posted {formattedDate}</p>
+
                   </Col>
-                  <Col md={8} sm={8} xs={8} className="mainpostBg">
+                  <Col md={12} sm={12} xs={12} className="wordbreak">
                     <p>{item.description}</p>
                   </Col>
                 </Row>
               </Col>
             </Row>
+                      //   <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
+                      //   <Col lg={12} className="mainPostDiv">
+                      //     <Row className="d-flex justify-content-center newBgColor" style={{border: '2mm ridge #dec0f1'}}>
+                      //       <Col md={4} sm={4} xs={4} className=" eventDateDiv">
+                      //         <Row>
+                      //           <img onClick={() => profileClick(item.publishedName)} className="mainFeedImg searchclick" src={item.image} />
+                      //         </Row>
+                      //         <h3 className="text-center">{item.publishedName}</h3>
+                      //         <p className="row">Posted {formattedDate}</p>
+                      //       </Col>
+                      //       <Col md={8} sm={8} xs={8} className="mainpostBg">
+                      //         <p>{item.description}</p>
+                      //       </Col>
+                      //     </Row>
+                      //   </Col>
+                      // </Row>
           )
         }) :<div className="Loading-MainFeed">
         <div className="load-wrapp2">

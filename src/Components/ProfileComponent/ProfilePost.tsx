@@ -55,7 +55,7 @@ export default function ProfilePost(props: pictureprops) {
           const formattedDate = date.toLocaleDateString();
           return (
             <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
-              <Col lg={3} sm={3} xs={4}>
+              <Col lg={3} sm={3} xs={4} className="">
                 <div className="d-flex justify-content-end"><EditPostModal description={item.description}  blogId={item.id} /></div>
                 <Row >
                   <Col sm={12} xs={12}>
