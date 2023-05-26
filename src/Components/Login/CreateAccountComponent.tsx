@@ -47,6 +47,10 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
       };
 
       const isUser = await GetAllUsers();
+      if(/\s/.test(username)){
+        setUserToast(true)
+        return
+      }
       const isUsernameTaken = isUser.some((user: UserInfo) => user.username === userData.username);
     
       if (isUsernameTaken) {
@@ -110,7 +114,7 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
               </Form.Group>
               {userToast && (
                 <Toast onClick={toggleShowA}>
-                  <Toast.Body style={{ color: 'black' }}>User Name already Exists</Toast.Body>
+                  <Toast.Body style={{ color: 'black' }}>User Name already Exists or Username cannot have blank spaces</Toast.Body>
                 </Toast>
               )}
               {passwordTaost && (
