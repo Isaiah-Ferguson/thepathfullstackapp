@@ -70,8 +70,6 @@ export default function ProfileFriend() {
     const getLoggedInData = async () => {
       let userInfoItems = await getUserInfoByID(data.name.userId);
       setUserInfo(userInfoItems);
-      const friendslist = await getFriendsList();
-      console.log(friendslist)
       const friends = await getFriendsList();
       const areFriends = friends.some(
         (friend: any) =>

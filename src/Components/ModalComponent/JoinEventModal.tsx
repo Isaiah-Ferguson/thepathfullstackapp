@@ -26,6 +26,8 @@ export default function JoinEventModal(props: eventID) {
     if (props.publishedName === loggedIn.publisherName){
       handleClose();
     }else{
+      // const eventUserInfo = await searchUser(props.publishedName)
+      // await joinEventNotification(props.id, loggedIn.userId, eventUserInfo.userId)
       await joinEventItem(props.id, loggedIn.userId);
       setShowToast(true);
       data.setEventReload(true);
