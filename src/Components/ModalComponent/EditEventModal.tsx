@@ -60,6 +60,7 @@ export default function EditEventModal(props: ChildProps) {
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
+      setAcademy(userInfoItems.academyName)
     }
     getAcademy()
   }, []);
@@ -119,7 +120,6 @@ export default function EditEventModal(props: ChildProps) {
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleAcademy = (e: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(e.target.value); };
   const handleDecription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(e.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
@@ -138,7 +138,7 @@ export default function EditEventModal(props: ChildProps) {
           <Row>
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
-                <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
+                <Form.Select aria-label="Floating label select example" value={academy}>
                 <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
