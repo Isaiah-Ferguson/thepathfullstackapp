@@ -59,11 +59,13 @@ export default function ModalComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
+      setAcademy(userInfoItems.academyName)
     }
     getAcademy();
   }, [data.shouldReload]);
 
   const handleSubmit = async () => {
+    console.log(academy)
     async function handleOpenMat() {
       const academyQ = await GetAcademyList(academy);
       const userNames = loggedInData();
@@ -74,7 +76,7 @@ export default function ModalComponent() {
         UserId: userNames.userId,
         Date: new Date,
         publishedName: userNames.publisherName,
-        academyName: academyQ.name,
+        academyName: academy,
         time: selectedHour,
         eventDate: eventdate,
         address: academyQ.address,
@@ -95,7 +97,6 @@ export default function ModalComponent() {
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setViewable(event.target.value) };
-  const handleAcademy = (event: React.ChangeEvent<HTMLSelectElement>) => { setAcademy(event.target.value); };
   const handleDecription = (event: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(event.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
@@ -114,7 +115,7 @@ export default function ModalComponent() {
           <Row>
             <Col md xs={12} className="mobileMargin">
               <FloatingLabel controlId="floatingSelectGrid" label="Select Location">
-                <Form.Select aria-label="Floating label select example" value={academy} onChange={handleAcademy}>
+                <Form.Select aria-label="Floating label select example" value={academy}>
                   <option value={userInfo.academyName}>{userInfo.academyName}</option>
                 </Form.Select>
               </FloatingLabel></Col>
