@@ -54,20 +54,20 @@ export default function ProfilePost(props: pictureprops) {
           const date = new Date(item.date);
           const formattedDate = date.toLocaleDateString();
           return (
-            <Row key={idx} style={{ marginTop: 20 }} className='d-flex  align-items-end postBG'>
-              <Col lg={3} sm={3} xs={4} className="">
-                <div className="d-flex justify-content-end"><EditPostModal description={item.description}  blogId={item.id} /></div>
-                <Row >
+            <Row key={idx} style={{ marginTop: 20 }}>
+              <Col lg={3} sm={3} xs={4} className="d-flex align-self-start">
                   <Col sm={12} xs={12}>
                     <img className="smallProfileIMG" src={props.picture} alt="profile" />
                     <div className="text-center" style={{fontWeight: 600}}>{item.publishedName}</div>
                   <div>{formattedDate}</div>
                     </Col>
-                </Row>
               </Col>
               <Col lg={8} sm={9} xs={8}><Row>
-              <Col  lg={12} xs={12} className="d-flex justify-content-end">
-                <div className="textArea ">{item.description}</div>
+              <Col  lg={12} xs={12} className="">
+                <div className="textArea"><div style={{marginBottom: 10}}><EditPostModal description={item.description}  blogId={item.id} /></div>
+{item.description}
+   
+                </div>
               </Col>
               </Row></Col>
             </Row>
