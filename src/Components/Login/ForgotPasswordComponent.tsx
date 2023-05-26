@@ -73,11 +73,11 @@ export default function ChangePasswordComponent() {
             </Form>
           </Col>
         </Row>
-        <ToastContainer style={{ width: '90%', alignItems: 'center', marginLeft: '20px' }}>
+
           <Toast show={showToast} onClose={() => setShowToast(false)} delay={3000} autohide>
             <Toast.Body style={{ justifyContent: 'center' }}>{toastMessage}</Toast.Body>
           </Toast>
-        </ToastContainer>
+
         {passwordTaost && (
                 <Toast onClick={toggleShowB}>
                   <Toast.Body style={{ color: 'black' }}>Password must contain at least one upperCase and one Number</Toast.Body>
