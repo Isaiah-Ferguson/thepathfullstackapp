@@ -24,6 +24,8 @@ export default function ModalComponent() {
   const [selectedHour, setSelectedHour] = useState<string>('12:00 AM');
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedMonth, setSelectedMonth] = useState("January");
+  const [selectedYear, setSelectedYear] = useState("2023"); // Replace "2023" with your desired default year
+
   const [blogDiscription, setBlogDescription] = useState('');
   const [blogId, setBlogId] = useState(0);
   const [viewable, setViewable] = useState("Private");
@@ -47,6 +49,7 @@ export default function ModalComponent() {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const hours = Array.from({ length: 24 }, (_, i) => i);
+  const years = Array.from({ length: 10 }, (_, i) => (new Date().getFullYear() + i).toString()); // Adjust the range of years as needed
 
 
   const handleClose = () => setShow(false);
@@ -69,7 +72,7 @@ export default function ModalComponent() {
       const academyQ = await GetAcademyList(academy);
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = selectedDay + ", " + selectedMonth;
+      const eventdate = `${selectedDay}, ${selectedMonth} ${selectedYear}`;
       const eventData = {
         Id: blogId,
         UserId: userNames.userId,
@@ -99,6 +102,9 @@ export default function ModalComponent() {
   const handleDecription = (event: React.ChangeEvent<HTMLTextAreaElement>) => { setBlogDescription(event.target.value); };
   const handleMonthSelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedMonth(event.target.value); };
   const handleDaySelect = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedDay(event.target.value); };
+  const handleYearSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedYear(event.target.value);
+  };
   const handleHourChange = (event: React.ChangeEvent<HTMLSelectElement>) => { setSelectedHour(event.target.value); };
 
   return (
@@ -124,11 +130,18 @@ export default function ModalComponent() {
             <Col lg={7}><Form.Group>
               <Form.Label>Select a date:</Form.Label>
               <div className="d-flex">
-                <Form.Select className="px-2" value={selectedMonth} onChange={handleMonthSelect}>
+                <Form.Select className="px-4" value={selectedMonth} onChange={handleMonthSelect}>
                   {months.map((month) => (<option key={month} value={month}>{month}</option>))}
                 </Form.Select>
                 <Form.Select value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
+                </Form.Select>
+                <Form.Select value={selectedYear} onChange={handleYearSelect}>
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
                 </Form.Select>
               </div>
             </Form.Group></Col>

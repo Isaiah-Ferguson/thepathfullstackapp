@@ -73,7 +73,7 @@ export default function JoinedPersonList(props: eventID) {
 
   return (
     <>
-      <div onClick={handleShow} className='postEditDev d-flex align-items-end'>See joined...</div>
+      <div onClick={handleShow} className='postEditDev d-flex align-items-end'><u>See joined... </u></div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

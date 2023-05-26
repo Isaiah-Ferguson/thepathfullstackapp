@@ -66,7 +66,7 @@ export default function NotificationComponent() {
 
   const handleDenie = async (e: React.MouseEvent<HTMLButtonElement>, value: number) => {
     const updatedUserInfo = allUserInfo.filter((userInfo) => userInfo.id !== value);
-    denyFriendResponse(friendlistID, value, data.userId);
+    denyFriendResponse(friendlistID, value, data.userId); // Assuming this function rejects the friend request
     setAllUserInfo(updatedUserInfo);
     setShowToast(true);
     setToastMessage('Friend request declined!');
