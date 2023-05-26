@@ -42,9 +42,13 @@ export default function ProfileFriendComponent() {
   
 
   const profileClick = async (publisherName: string) => {
-    const searchName = await searchUser(publisherName);
-    data.setName(searchName);
-    navigate("/friends");
+    if(publisherName === data.myName){
+      navigate("/profile");
+    }else{
+      const searchName = await searchUser(publisherName);
+      data.setName(searchName);
+      navigate("/friends");
+    }
   }
 
   return (
