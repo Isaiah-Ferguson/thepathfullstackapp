@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row, Form, Button } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button, Toast } from 'react-bootstrap'
 import { useState, useContext } from 'react'
 import { login, GetLoggedInUserData, loggedInData, getUserInfoByID } from '../../DataServices/DataServices';
 import { useNavigate } from 'react-router-dom';
@@ -11,10 +11,11 @@ export default function LoginComponent() {
   const [password, setPassword] = useState('');
   const [userToast, setUserToast] = useState(false);
   const data = useContext<any>(UserContext);
+  const [ showToast, setShowToast ] = useState(false);
 
 
   const handleSubmit = async () => {
-
+    try{
     let userData = {
       Username: username,
       Password: password
@@ -35,9 +36,12 @@ export default function LoginComponent() {
       }
       navigate("/profile");
     }
+  }catch (error) {
+      console.error('Error logging in:', error);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 4000);
+    }
   };
-
-
 
   return (
     <div className='loginBg'>
@@ -83,9 +87,13 @@ export default function LoginComponent() {
               <p style={{ display: "inline-block", marginTop: 20 }}>Not a member? <span className='register' onClick={() => navigate("/Create")} >Register</span></p>
               <div className='text-center'><small>&copy; The Path. All Rights Reserved 2023.</small></div>
             </Form>
+                <Toast show={showToast} onClose={() => setShowToast(false)}>
+                  <Toast.Body style={{ color: 'black' }}>Username and/or Password is incorrect.  Please try again.</Toast.Body>
+                </Toast>
           </Col>
         </Row>
       </Container>
+
     </div>
   )
 }
