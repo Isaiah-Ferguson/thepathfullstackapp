@@ -67,7 +67,7 @@ export default function LoginComponent() {
           <div className="clear"></div>
         </div>
       )}
-      <Container className='d-flex justify-content-center mobileContainer homepage'>
+      <Container className='d-flex justify-content-center  homepage'>
         <Row className='wrapper' >
           <Col className='form-box'>
             <h1 className='d-flex justify-content-center'>The Path</h1>

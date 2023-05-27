@@ -128,7 +128,9 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
                   <Toast.Body style={{ color: 'black' }}>Account Successfully Created</Toast.Body>
                 </Toast>
               )}
-
+              <p>Password Must Contain 
+                <span style={{ color: /[0-9]/.test(password) ? 'blue' : 'red' }}> Number</span>,{' '}
+                <span style={{ color: /[A-Z]/.test(password) ? 'blue' : 'red' }}>UpperCase</span></p>
               {disableButton && <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit} >
                 Confirm Submission
               </Button>}

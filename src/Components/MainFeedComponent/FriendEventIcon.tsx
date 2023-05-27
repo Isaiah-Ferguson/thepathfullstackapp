@@ -17,7 +17,6 @@ export default function FriendEventIcon(props: eventID) {
           const storedValue = sessionStorage.getItem("loggedIn");
           const loggedIn = storedValue ? JSON.parse(storedValue) : data;
           const allUserData = await getMyFriendsList(loggedIn.userId);
-          console.log(allUserData)
           const filteredList = allUserData.includes(props.userId)
         if(filteredList){
             setIsFriends(true)

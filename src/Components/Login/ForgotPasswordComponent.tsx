@@ -63,6 +63,9 @@ export default function ChangePasswordComponent() {
                 <Form.Label className='pColor'>New Password</Form.Label>
                 <Form.Control type='password' placeholder='New Password' onChange={(e) => setNewPassword(e.target.value)} />
               </Form.Group>
+              <p>Password Must Contain 
+                <span style={{ color: /[0-9]/.test(password) ? 'blue' : 'red' }}> Number</span>,{' '}
+                <span style={{ color: /[A-Z]/.test(password) ? 'blue' : 'red' }}>UpperCase</span></p>
 
               <Button className='Buttons' style={{ marginTop: 20 }} onClick={handleSubmit}>
                 Change Password
