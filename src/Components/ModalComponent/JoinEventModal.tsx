@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Button, Toast } from 'react-bootstrap';
-import { joinEventItem } from '../../DataServices/DataServices';
+import { joinEventItem, GetAllJoinedEvents } from '../../DataServices/DataServices';
 import UserContext from '../../UserContext/UserContext';
 
 type eventID = {
@@ -11,14 +11,35 @@ type eventID = {
   description: string;
 }
 
+interface EventJoin {
+  eventId: number;
+  id: number;
+  isJoined: boolean;
+  userId: number;
+}
 
 export default function JoinEventModal(props: eventID) {
   const [show, setShow] = useState(false);
   const data = useContext<any>(UserContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [joined, setJoined] = useState(false)
   const [showToast, setShowToast] = useState(false);
+  const check = require('../../assets/check.png')
+  const plus = require('../../assets/plus.png')
+
+  useEffect(()=> {
+    async function joined() {
+    const storedValue = sessionStorage.getItem('loggedIn');
+    const loggedIn = storedValue ? JSON.parse(storedValue) : data;
+    let joinedEventvar = await GetAllJoinedEvents();
+    const eventJoined = joinedEventvar.some((item: EventJoin) => item.eventId === props.id && item.userId === loggedIn.userId)
+    if(props.publishedName === loggedIn.publisherName || eventJoined){
+      setJoined(true)
+    }
+    }
+   joined() 
+  }, [data.eventReload])
 
   const handleJoin = async () => {
     const storedValue = sessionStorage.getItem('loggedIn');
@@ -40,14 +61,14 @@ export default function JoinEventModal(props: eventID) {
 
   return (
     <>
-      <Button  onClick={handleShow}><span style={{ backgroundColor: 'transparent'}} > Join event </span></Button>
+      <button className='circle-button' onClick={handleShow}>{joined ? <img src={check}/> : <img src={plus}/>}</button >
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.publishedName}'s event at {props.academyName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body><p>Would you like to join this Open Mat?</p>
+        <Modal.Body className='wordbreak'><p>Would you like to join this Open Mat?</p>
           <br/>
-          <p>{props.description}</p>
+          <p className='word-break'>{props.description}</p>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-between'>
           <p>{props.address}</p>

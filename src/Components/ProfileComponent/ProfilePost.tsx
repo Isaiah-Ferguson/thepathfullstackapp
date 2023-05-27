@@ -64,9 +64,8 @@ export default function ProfilePost(props: pictureprops) {
               </Col>
               <Col lg={8} sm={9} xs={8}><Row>
               <Col  lg={12} xs={12} className="">
-                <div className="textArea"><div style={{marginBottom: 10}}><EditPostModal description={item.description}  blogId={item.id} /></div>
-{item.description}
-   
+                <div className="textArea">{item.description}
+<div className="d-flex justify-content-end" style={{marginBottom: 10}}><EditPostModal description={item.description}  blogId={item.id} /></div>
                 </div>
               </Col>
               </Row></Col>

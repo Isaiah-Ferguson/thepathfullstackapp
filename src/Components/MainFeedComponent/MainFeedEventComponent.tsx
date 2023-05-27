@@ -1,11 +1,12 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { checkToken, getMyFriendsList, getEventItemsByUserId, searchUser, eventBlogItem, getUserInfoByID } from "../../DataServices/DataServices";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../UserContext/UserContext";
 import JoinEventModal from "../ModalComponent/JoinEventModal";
 import JoinedPersonList from "../ModalComponent/JoinPersonListModal";
+import FriendEventIcon from "./FriendEventIcon";
 
 
 interface EventItem {
@@ -63,24 +64,19 @@ export default function MainFeedEventComponent() {
     <>
       {myEventItems.length > 0 ? (
         myEventItems.filter((item: EventItem) => item.type === 'Public' || (item.type === 'Private' && friendInfo.includes(item.userId) || item.userId === data.userId || item.academyName === academyName)).map((item: EventItem, idx: number) => (
-          <Row className="eventMainPageDiv" key={idx}>
-            <Col md={3} sm={3} xs={4} className="text-center eventDateDiv">
-              <h6>{item.eventDate}</h6>
-              <h6>{item.time}</h6>
-            </Col>
-            <Col md={9} sm={9} xs={8}>
-              <h6 className="searchclick" onClick={() => profileClick(item.publishedName)}>{item.publishedName}</h6>
-              <h6>
-                <b>
-                  <u title={item.address}>{item.academyName}</u>
-                </b>
-              </h6>
-              <Row>
-                <Col><JoinEventModal description={item.description} id={item.id} publishedName={item.publishedName} academyName={item.academyName} address={item.address}/></Col>
-                <Col className="d-flex justify-content-end"><JoinedPersonList id={item.id} /></Col>
-              </Row>
-            </Col>
-          </Row>
+
+              <Card style={{marginTop: 10}}>
+              <Card.Header className="d-flex justify-content-between"><span className="searchclick" onClick={() => profileClick(item.publishedName)}>{item.publishedName} <FriendEventIcon userId={item.userId}/></span><span>{item.eventDate} {item.time}</span></Card.Header>
+              <Card.Body>
+                <Card.Title  title={item.address} >{item.academyName}</Card.Title>
+                <Card.Text>
+                {item.description}
+                </Card.Text>
+
+                <Col className="d-flex justify-content-between"><JoinEventModal description={item.description} id={item.id} publishedName={item.publishedName} academyName={item.academyName} address={item.address}/> <JoinedPersonList id={item.id} /></Col>
+              </Card.Body>
+            </Card>
+        
         ))) : (<>
           <div className="Loading-MainFeed">
             <div className="load-wrapp2">

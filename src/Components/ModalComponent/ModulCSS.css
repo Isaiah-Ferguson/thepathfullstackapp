@@ -48,7 +48,19 @@
   align-items: center;
 }
 
+.circle-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
 
+  .circle-button:hover{
+    background-color: #a9d1fb;
+  }
 
 @media screen and (max-width: 425px)  {
     .editProfileImg{
