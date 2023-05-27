@@ -81,7 +81,7 @@ export default function MainFeedComponent() {
             <Col lg={5} className="d-flex justify-content-end">
               <div className="eventmainPageBg custom-container">
                 <Row className="text-center">
-                  <h1>Event Calendar</h1>
+                  <h1 className="pColor">Event Calendar</h1>
                 </Row><div>
                   <MainFeedEventComponent />
 

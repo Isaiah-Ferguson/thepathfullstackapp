@@ -47,7 +47,7 @@ export default function ModalComponent() {
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const days = [  '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th',  '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th',  '20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th', '28th',  '29th', '30th', '31st']
   const hours = Array.from({ length: 24 }, (_, i) => i);
   const years = Array.from({ length: 10 }, (_, i) => (new Date().getFullYear() + i).toString()); // Adjust the range of years as needed
 
@@ -72,7 +72,7 @@ export default function ModalComponent() {
       const academyQ = await GetAcademyList(academy);
       const userNames = loggedInData();
       let userInfoItems = await getUserInfoByID(userNames.userId);
-      const eventdate = `${selectedDay}, ${selectedMonth} ${selectedYear}`;
+      const eventdate = `${selectedMonth} ${selectedDay},  ${selectedYear}`;
       const eventData = {
         Id: blogId,
         UserId: userNames.userId,
@@ -133,10 +133,10 @@ export default function ModalComponent() {
                 <Form.Select className="" value={selectedMonth} onChange={handleMonthSelect}>
                   {months.map((month) => (<option key={month} value={month}>{month}</option>))}
                 </Form.Select>
-                <Form.Select style={{width: '35%'}} value={selectedDay} onChange={handleDaySelect}>
+                <Form.Select style={{width: '55%'}} value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
                 </Form.Select>
-                <Form.Select style={{width: '50%'}} value={selectedYear} onChange={handleYearSelect}>
+                <Form.Select style={{width: '55%'}} value={selectedYear} onChange={handleYearSelect}>
                   {years.map((year) => (
                     <option key={year} value={year}>
                       {year}
