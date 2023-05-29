@@ -41,25 +41,32 @@ export default function FriendPost(props: pictureprops) {
     return (
         <>
         {blogItems.length > 0 ?
-          blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).map((item: BlogItem, idx: number) => {
+          blogItems.filter((item) => item.userid === blogUserId).filter((item) => item.isPublish).reverse().map((item: BlogItem, idx: number) => {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleDateString();
             return (
-              <Row key={idx} style={{ marginTop: 20 }} className='d-flex postBG'>
-                <Col lg={3} sm={2} xs={3}>
-                  <Row className=' d-flex justify-content-center'>
-                    <Col sm={8} xs={6}>
-                      <img className="smallProfileIMG d-flex justify-content-center" src={props.picture} alt="profile" />
-                      <div style={{fontWeight: 600}}>{item.publishedName}</div>
-                    <div>{formattedDate}</div>
-                      </Col>
+              <Row key={idx} style={{ marginTop: 10, marginBottom: 10 }}>
+                <Col lg={12} className="mainPostDiv">
+                  <Row className="d-flex justify-content-center newBgColor">
+                    <Col md={12} sm={12} xs={12} style={{ marginTop: 10 }}>
+                      <Row style={{paddingRight:15, paddingLeft: 15}}>
+                        <Col lg={1} md={1} sm={1} xs={2}>
+                          <img className="smallProfileIMGPost" src={item.image} />
+                        </Col>
+                        <Col lg={11} md={11} sm={11} xs={10}  className="postImgDivPadding">
+                          <Row>
+                            <div className="d-flex justify-content-between"><strong>{item.publishedName} </strong>
+                            </div>
+                            <p className="d-flex justify-content-start">{formattedDate}</p>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col md={12} sm={12} xs={12} className="wordbreak">
+                      <p className="profileDescription">{item.description}</p>
+                    </Col>
                   </Row>
                 </Col>
-                <Col lg={9} sm={10} xs={9}><Row>
-                <Col  lg={12} xs={12} className="d-flex justify-content-end">
-                  <div className="textArea ">{item.description}</div>
-                </Col>
-                </Row></Col>
               </Row>
             )
           }) :  <div className='Loading-DivPost'>

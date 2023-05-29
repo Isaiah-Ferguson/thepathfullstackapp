@@ -60,6 +60,7 @@ export default function AddFriendModal(props: username) {
     }
   
     AddFriend(data.userId, data.name.userId);
+    data.setShouldReload(true);
     handleClose();
   };
 

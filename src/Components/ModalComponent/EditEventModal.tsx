@@ -42,6 +42,7 @@ export default function EditEventModal(props: ChildProps) {
   const [academy, setAcademy] = useState(userInfo.academyName);
   const [viewable, setViewable] = useState("Private");
   const [show, setShow] = useState(false);
+  const EditProfile = require('../../assets/draw.png');
 
 
   // ---------------DATE and TIME Variables AND FUNCTIONS-------------------------
@@ -132,8 +133,7 @@ export default function EditEventModal(props: ChildProps) {
   return (
 
     <>
-      <div className='postEditDev' onClick={handleShow}>...</div>
-
+      <img onClick={handleShow} className="editEventIcon" src={EditProfile} alt="Edit Event Icon" />
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton className='moduleBG'>
           <Modal.Title >Edit Open Mat</Modal.Title>
@@ -149,22 +149,23 @@ export default function EditEventModal(props: ChildProps) {
           </Row>
           <Row>
             {/*--------------------- MONTH /  DATE DROPDOWN----------- */}
-            <Col lg={6}><Form.Group>
+            <Col lg={8} md={8} sm={8} xs={12}><Form.Group>
               <Form.Label>Select a date:</Form.Label>
               <div className="d-flex">
-                <Form.Select className="px-2" value={selectedMonth} onChange={handleMonthSelect}>
+                <Form.Select className="" value={selectedMonth} onChange={handleMonthSelect}>
                   {months.map((month) => (<option key={month} value={month}>{month}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedDay} onChange={handleDaySelect}>
+                <Form.Select style={{width: '55%'}} value={selectedDay} onChange={handleDaySelect}>
                   {days.map((day) => (<option key={day} value={day.toString()}>{day}</option>))}
                 </Form.Select>
-                <Form.Select value={selectedYear} onChange={handleYearSelect}>
+                <Form.Select style={{width: '55%'}} value={selectedYear} onChange={handleYearSelect}>
                   {years.map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>
                   ))}
                 </Form.Select>
+                
               </div>
             </Form.Group></Col>
 

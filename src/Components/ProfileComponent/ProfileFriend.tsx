@@ -82,7 +82,7 @@ export default function ProfileFriend() {
     };
     getLoggedInData();
 
-  }, [data.name]);
+  }, [data.name, data.shouldReload]);
   // ----------------------------------------------------------------------------
 
 

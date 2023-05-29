@@ -1,33 +1,34 @@
-.moduleBG{
+.moduleBG {
     background-color: #C1FED2;
 }
 
-.editProfileImg{
+.editProfileImg {
     height: 350px;
 }
 
-.mobileMargin{
+.mobileMargin {
     margin-top: 10px;
 }
 
-.hideUpload{
+.hideUpload {
     display: none;
 }
 
-.uploadText{
+.uploadText {
     font-size: 20px;
 }
-.uploadText:hover{
+
+.uploadText:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.editPostButton{
+.editPostButton {
     height: 15px;
     width: 15px;
 }
 
-.scrollDivtest{
+.scrollDivtest {
     height: 265px;
     width: 100%;
     overflow-x: hidden;
@@ -35,7 +36,18 @@
     text-align: center;
 }
 
-.editProfileButton{
+.editEventIcon {
+    height: 15px;
+    width: 15px;
+}
+
+.editEventIcon:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #f4d9d9;
+}
+
+.editProfileButton {
     height: 20px;
     padding-left: 10px;
 }
@@ -46,19 +58,19 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-  }
+}
 
-.addFriend{
+.addFriend {
     width: 50px;
 }
 
-.editProfileText{
+.editProfileText {
     font-size: 20px;
 }
 
-.postTextDiv{
+.postTextDiv {
     display: flex;
-  align-items: center;
+    align-items: center;
 }
 
 .circle-button {
@@ -69,25 +81,25 @@
     color: #fff;
     border: none;
     cursor: pointer;
-  }
+}
 
-  .circle-button:hover{
+.circle-button:hover {
     background-color: #a9d1fb;
-  }
+}
 
-@media screen and (max-width: 425px)  {
-    .editProfileImg{
+@media screen and (max-width: 425px) {
+    .editProfileImg {
         height: 250px;
     }
 }
 
-.joinEvent{
+.joinEvent {
     width: 50px;
     height: 50px;
     border-radius: 100%;
 }
 
-.postEditDev{
+.postEditDev {
     cursor: pointer;
     margin-bottom: -5px;
 }

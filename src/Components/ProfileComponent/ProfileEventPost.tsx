@@ -6,6 +6,7 @@ import UserContext from '../../UserContext/UserContext';
 import { loggedInData, getEventItemsByUserId, checkToken } from '../../DataServices/DataServices';
 import EditEventModal from '../ModalComponent/EditEventModal';
 import JoinedPersonList from '../ModalComponent/JoinPersonListModal';
+import EditPostModal from '../ModalComponent/EditPostModal';
 interface EventItem {
   id: number,
   userId: number,
@@ -61,7 +62,7 @@ export default function ProfileEventPost(props: pictureprops) {
             const formattedDate = date.toLocaleDateString();
             return (
               <Card style={{marginTop: 10}}>
-              <Card.Header className="d-flex justify-content-between"><span className="searchclick">{item.publishedName}</span><span>{item.eventDate} {item.time}</span></Card.Header>
+              <Card.Header className="d-flex justify-content-between"><span className="searchclick">{item.publishedName}</span><span>{item.eventDate} {item.time}  <EditEventModal blogId={item.id} /></span></Card.Header>
               <Card.Body>
                 <Card.Title  title={item.address} >{item.academyName}</Card.Title>
                 <Card.Text>

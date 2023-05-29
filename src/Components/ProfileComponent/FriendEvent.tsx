@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 import { useState, useEffect } from "react";
 import {  getEventItemsByUserId } from '../../DataServices/DataServices';
 import { useContext } from 'react'
@@ -9,7 +9,7 @@ import JoinedPersonList from '../ModalComponent/JoinPersonListModal';
 interface EventItem {
   id: number,
   userId: number,
-  Date: string,
+  date: string,
   publishedName: string,
   academyName: string,
   time: string,
@@ -45,29 +45,19 @@ export default function FriendEvent(props: pictureprops) {
         {myEventItems.length > 0 ? (
           myEventItems.filter((item) => item.userId === blogUserId && item.type === 'Public')
             .map((item: EventItem, idx: number) =>{
+              const date = new Date(item.date);
+              const formattedDate = date.toLocaleDateString();
               return (
-                <Row style={{ marginTop: 10 }} key={idx}>
-                  <Col lg={3} xs={3}>
-                    <img className="smallProfileIMG" src={props.picture} alt={item.publishedName} />
-                    <p>{item.publishedName}</p>
-                  </Col>
-                  <Col lg={9} xs={9}>
-                    <div className="eventTextArea">
-                      <Row>
-                        <Col lg={12} className="d-flex justify-content-start">
-                          <p className="profileFontPadding">
-                          Open mat {item.eventDate} at {item.time}
-                          </p>
-                        </Col>
-                      </Row>
-                      <Row className="text-center">
-                        <p>{item.academyName}</p>
-                        <p>{item.address}</p>
-                      </Row>
-                      <JoinedPersonList id={item.id} />
-                    </div>
-                  </Col>
-                </Row>
+                <Card style={{marginTop: 10}}>
+                <Card.Header className="d-flex justify-content-between"><span className="searchclick">{item.publishedName}</span><span>{item.eventDate} {item.time}</span></Card.Header>
+                <Card.Body>
+                  <Card.Title  title={item.address} >{item.academyName}</Card.Title>
+                  <Card.Text>
+                  {item.description}
+                  </Card.Text>
+                  <Col className="d-flex justify-content-between"> <JoinedPersonList id={item.id} /> <div>Posted {formattedDate}</div></Col>
+                </Card.Body>
+              </Card>
               )
                } ) 
             ): (
