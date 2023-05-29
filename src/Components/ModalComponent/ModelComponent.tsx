@@ -54,7 +54,7 @@ export default function ModalComponent() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const Event = require("../../assets/EventIcon.png");
+  const Event = require("../../assets/plus.png");
 
   useEffect(() => {
     const getAcademy =async () => {
@@ -62,7 +62,7 @@ export default function ModalComponent() {
       const loggedIn = storedValue ? JSON.parse(storedValue) : loggedInData();
       let userInfoItems = await getUserInfoByID(loggedIn.userId);
       setUserInfo(userInfoItems);
-      setAcademy(userInfoItems.academyName)
+      setAcademy(userInfoItems.academyName);
     }
     getAcademy();
   }, [data.shouldReload]);
@@ -110,7 +110,7 @@ export default function ModalComponent() {
   return (
 
     <>
-      <Button variant="warning" onClick={handleShow}><img className="eventButton" src={Event} /></Button>
+      <Button className='centered-button' variant="warning" onClick={handleShow}>Create Event<img className="eventButton" src={Event} /></Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton className='moduleBG'>

@@ -82,7 +82,7 @@ export default function MainFeedPostComponent() {
                     </Row>
                   </Col>
                   <Col md={12} sm={12} xs={12} className="wordbreak">
-                    <p>{item.description}</p>
+                    <p className="profileDescription">{item.description}</p>
                   </Col>
                 </Row>
               </Col>

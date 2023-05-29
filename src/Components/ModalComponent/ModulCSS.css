@@ -35,6 +35,19 @@
     text-align: center;
 }
 
+.editProfileButton{
+    height: 20px;
+    padding-left: 10px;
+}
+
+.centered-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
 .addFriend{
     width: 50px;
 }

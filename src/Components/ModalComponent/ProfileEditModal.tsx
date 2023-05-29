@@ -17,7 +17,7 @@ interface UserInfo {
 }
 
 export default function ProfileEditModal(props: any) {
-  const EditProfile = require('../../assets/EditProfile.png');
+  const EditProfile = require('../../assets/draw.png');
   const profile = require('../../assets/DefaultProfilePicture.png');
   const [academy, setAcademy] = useState<string>("");
   const [belt, setBelt] = useState<string>("");
@@ -131,7 +131,7 @@ export default function ProfileEditModal(props: any) {
   return (
 
     <div>
-      <Button className='editProfileText' onClick={() => setLgShow(true)}>Edit Profile<img className="eventButton" src={EditProfile} alt="Edit Profile Icon" /></Button>
+      <Button variant="light" className='editProfileText centered-button' onClick={() => setLgShow(true)}>Edit Profile <img className="editProfileButton" src={EditProfile} alt="Edit Profile Icon" /></Button>
       <Modal
         size="lg"
         show={lgShow}

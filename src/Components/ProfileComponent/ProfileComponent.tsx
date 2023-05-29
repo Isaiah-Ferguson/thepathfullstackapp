@@ -98,8 +98,8 @@ export default function ProfileComponent() {
             <p> {userInfo.aboutMe} </p>
           </Row>
           <Row style={{marginBottom: 25}}>
-            <Col className="text-center" lg={6} xs={7}><ProfileEditModal newuser={data.newUser}/></Col>
-            <Col className="text-center" lg={6} xs={5}><ModalComponent></ModalComponent></Col>
+            <Col className="text-center" lg={6} xs={6}><ProfileEditModal newuser={data.newUser}/></Col>
+            <Col className="text-center" lg={6} xs={6}><ModalComponent></ModalComponent></Col>
           </Row>
         </Col>
        
@@ -129,7 +129,7 @@ export default function ProfileComponent() {
           </Col>)}
 
           {(!isMobile || selectedSection === 'event') && (<Col lg={4} md={4} sm={12} className='event'>
-          <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- Events -</Row>
+          <Row className="d-flex justify-content-center profileHeaderText BottomHeaderText">- My Events -</Row>
           <Container className="eventScrollDiv">
             <ProfileEventPost  picture={userInfo.image}/>
           </Container>
