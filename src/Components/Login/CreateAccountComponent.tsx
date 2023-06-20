@@ -39,25 +39,25 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
     }
 
     const CreateNewAccount = async () => {
-      try{
       let userData = {
         id: 0,
         username: username.toLowerCase(),
         password: password 
       };
 
-        setCreatAccountToast(true);
-        await createAccount(userData);
-        setTimeout(() => {
-          setCreatAccountToast(false);
-        }, 4000);
-
-      }catch (error) {
-        setUserToast(true)
-                setTimeout(() => {
-                  setUserToast(false);
-        }, 4000);
-      }
+        let check = await createAccount(userData);
+        if(check){
+          setCreatAccountToast(true);     
+          setTimeout(() => {
+            setCreatAccountToast(false);
+          }, 4000);
+          
+        }else{
+          setUserToast(true)
+          setTimeout(() => {
+            setUserToast(false);
+  }, 4000);
+        }
     }
     
     CreateNewAccount();
