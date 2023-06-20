@@ -32,9 +32,7 @@ export default function ChangePasswordComponent() {
 
     forgotPassword(userData);
     setShowToast(true);
-
     setToastMessage("Password Changed!")
-
   }
 
   const toggleShowB = () => {

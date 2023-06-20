@@ -30,7 +30,7 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
 
   const handleSubmit = () => {
 
-    if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
+    if (!/[A-Z]/.test(password) || !/\d/.test(password) || password === "") {
       setPasswordToast(true);
       setTimeout(() => {
         setPasswordToast(false);
@@ -38,36 +38,24 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
        return
     }
 
-    async function CreateNewAccount() {
-
+    const CreateNewAccount = async () => {
+      try{
       let userData = {
         id: 0,
         username: username.toLowerCase(),
         password: password 
       };
 
-      const isUser = await GetAllUsers();
-      if(/\s/.test(username)){
-        setUserToast(true)
-        return
-      }
-      const isUsernameTaken = isUser.some((user: UserInfo) => user.username === userData.username);
-    
-      if (isUsernameTaken) {
-        setUserToast(true)
-                setTimeout(() => {
-                  setUserToast(false);
-        }, 4000);
-      } else if (userData.password === "") {
-        setPasswordToast(true);
-        setTimeout(() => {
-          setPasswordToast(false);
-        }, 4000);
-      } else {
         setCreatAccountToast(true);
         await createAccount(userData);
         setTimeout(() => {
           setCreatAccountToast(false);
+        }, 4000);
+
+      }catch (error) {
+        setUserToast(true)
+                setTimeout(() => {
+                  setUserToast(false);
         }, 4000);
       }
     }
@@ -75,11 +63,9 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
     CreateNewAccount();
   }
 
-
   const toggleShowA = () => {
     setShowA(!showA);
     setUserToast(false);
-
   };
 
   const toggleShowB = () => {
@@ -90,9 +76,7 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
   const toggleShowC = () => {
     setShowA(!showA);
     setCreatAccountToast(false);
-
   };
-
 
   return (
     <div className='loginBg'>
