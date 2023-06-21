@@ -46,12 +46,11 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
       };
 
         let check = await createAccount(userData);
-        if(check){
+        if(check === true){
           setCreatAccountToast(true);     
           setTimeout(() => {
             setCreatAccountToast(false);
           }, 4000);
-          
         }else{
           setUserToast(true)
           setTimeout(() => {
