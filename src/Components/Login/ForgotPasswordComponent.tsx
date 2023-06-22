@@ -59,7 +59,7 @@ export default function ChangePasswordComponent() {
 
               <Form.Group className='mb-3 input-box' controlId='NewPassword'>
                 <Form.Label className='pColor'>New Password</Form.Label>
-                <Form.Control type='password' placeholder='New Password' onChange={(e) => setNewPassword(e.target.value)} />
+                <Form.Control type='password' placeholder='New Password' minLength={5} maxLength={20} onChange={(e) => setNewPassword(e.target.value)} />
               </Form.Group>
               <p>Password Must Contain 
                 <span style={{ color: /[0-9]/.test(password) ? 'blue' : 'red' }}> Number</span>,{' '}

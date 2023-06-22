@@ -88,12 +88,12 @@ const [createAccountToast, setCreatAccountToast] = useState(false);
             <Form>
               <Form.Group className="mb-3 input-box" controlId="Userame">
                 <Form.Label className='pColor'>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter Username" onChange={({ target: { value } }) => setUsername(value)} />
+                <Form.Control type="text" placeholder="Enter Username" minLength={5} maxLength={20} onChange={({ target: { value } }) => setUsername(value)} />
               </Form.Group>
 
               <Form.Group className="mb-3 input-box" controlId="Password">
                 <Form.Label className='pColor'>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Password" minLength={8} maxLength={20} onChange={(e) => setPassword(e.target.value)} />
               </Form.Group>
               {userToast && (
                 <Toast onClick={toggleShowA}>
