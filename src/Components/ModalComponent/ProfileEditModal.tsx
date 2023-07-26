@@ -79,7 +79,6 @@ export default function ProfileEditModal(props: any) {
     const testID = loggedIn.userId;
     const testName = loggedIn.publisherName;
 
-    console.log(firstName, lastName, description, academy, belt)
     if (firstName === null || lastName === null || description === null || academy === null || belt === null || picture === null) {
       setToast(true);
       return;
