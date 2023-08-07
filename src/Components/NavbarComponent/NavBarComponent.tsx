@@ -66,6 +66,7 @@ export default function NavbarComponent() {
       placeholder="Search Users..."
       className="me-2 searchbar"
       aria-label="Search"
+      minLength={0} maxLength={30}
       onChange={({ target: { value } }) => setSearch(value)}
     />
     <Button type="submit">Search</Button>

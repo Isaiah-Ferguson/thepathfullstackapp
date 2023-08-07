@@ -167,7 +167,7 @@ export default function ModalComponent() {
               </Form.Select>
             </Form>
           </Row>
-          <textarea style={{ marginTop: '15px' }} className='textArea' placeholder='Enter Event Description' onChange={handleDecription}></textarea>
+          <textarea style={{ marginTop: '15px' }} minLength={0} maxLength={200} className='textArea' placeholder='Enter Event Description' onChange={handleDecription}></textarea>
 
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-evenly moduleBG'>

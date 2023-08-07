@@ -54,7 +54,7 @@ export default function ChangePasswordComponent() {
             <Form>
               <Form.Group className='mb-3 input-box' controlId='Username'>
                 <Form.Label className='pColor'>Username</Form.Label>
-                <Form.Control type='text' placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)} />
+                <Form.Control type='text' placeholder='Enter Username' minLength={5} maxLength={20} onChange={(e) => setUsername(e.target.value)} />
               </Form.Group>
 
               <Form.Group className='mb-3 input-box' controlId='NewPassword'>

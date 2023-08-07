@@ -67,7 +67,7 @@ function ProfilePostModule(props: pictureprops) {
         <Modal.Header closeButton style={{backgroundColor: '#F0D9FF'}}>
           <Modal.Title >Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: '#F0D9FF'}}><textarea placeholder="What are your thoughts?" style={{ borderRadius: 5, height: 100, width: '100%', backgroundColor: 'rgb(253, 244, 245)' }} onChange={handlePost}></textarea>
+        <Modal.Body style={{ backgroundColor: '#F0D9FF'}}><textarea placeholder="What are your thoughts?" minLength={0} maxLength={500} style={{ borderRadius: 5, height: 100, width: '100%', backgroundColor: 'rgb(253, 244, 245)' }} onChange={handlePost}></textarea>
         </Modal.Body>
         <Modal.Footer style={{ backgroundColor: '#F0D9FF'}}>
           {disableButton && <Button variant="primary" onClick={HandleSubmit}> Post </Button>}

@@ -165,14 +165,14 @@ export default function ProfileEditModal(props: any) {
           <Row>
             {/* -----------------FIRST NAME LABEL--------------------------- */}
             <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter First Name" className="mb-3" onChange={handleFirstname}>
-              <Form.Control as="textarea" placeholder="First Name" maxLength={15} value={firstName} />
+              <Form.Control as="textarea" placeholder="First Name" minLength={0} maxLength={15} value={firstName} />
             </FloatingLabel></Col>
             {/* ----------------------------------------------------------------------- */}
 
             {/* -----------------LAST NAME LABEL--------------------------- */}
 
             <Col md xs={6}> <FloatingLabel controlId="floatingTextarea" label="Enter Last Name" className="mb-3" onChange={handleLastname} >
-              <Form.Control as="textarea" placeholder="Last Name" maxLength={15} value={lastName}  />
+              <Form.Control as="textarea" placeholder="Last Name" minLength={0} maxLength={15} value={lastName}  />
             </FloatingLabel></Col>
             {/* ----------------------------------------------------------------------- */}
 
@@ -215,7 +215,7 @@ export default function ProfileEditModal(props: any) {
             </FloatingLabel></Col>
           </Row>
           <br />
-          <Row><Col><textarea maxLength={500} placeholder='Enter a Description' style={{ width: '100%', height: '200px' }} onChange={handleDecription} value={description}/></Col></Row>
+          <Row><Col><textarea minLength={0} maxLength={500} placeholder='Enter a Description' style={{ width: '100%', height: '200px' }} onChange={handleDecription} value={description}/></Col></Row>
           <Button variant="info" onClick={handleEditProfile}>Submit</Button>
         </Modal.Body>
         {toast && (
