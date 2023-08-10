@@ -22,12 +22,6 @@ export default function MainFeedPostComponent() {
   const data = useContext<any>(UserContext);
   let navigate = useNavigate();
 
-  // const blackBelt = require('../../assets/BJJBlack.png');
-  // const whiteBelt = require('../../assets/BJJWhite.png');
-  // const blueBelt = require('../../assets/BJJBlue.png');
-  // const purpleBelt = require('../../assets/BJJPURPLE.png');
-  // const brownBelt = require('../../assets/BJJBrown.png');
-
   useEffect(() => {
     const getLoggedInData = async () => {
       const storedValue = sessionStorage.getItem('loggedIn');
