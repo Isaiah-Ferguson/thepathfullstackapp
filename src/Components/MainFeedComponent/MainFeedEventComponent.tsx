@@ -47,7 +47,7 @@ export default function MainFeedEventComponent() {
     };
 
     if (!checkToken()) {
-      navigate("/Login");
+      navigate("/");
     } else {
       getLoggedInData();
     }

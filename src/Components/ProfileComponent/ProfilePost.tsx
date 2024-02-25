@@ -40,7 +40,7 @@ export default function ProfilePost(props: pictureprops) {
       setBlogItems(userBlogItems);
     };
     if (!checkToken()) {
-      navigate('/Login');
+      navigate('/');
     } else {
       getLoggedInData();
     }
